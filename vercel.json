@@ -7,6 +7,8 @@
     }
   ],
   "routes": [
+    { "src": "/services", "dest": "/services.html" },
+    { "src": "/locations", "dest": "/locations.html" },
     { "src": "/gallery", "dest": "/gallery.html" },
     { "src": "/process", "dest": "/process.html" },
     { "src": "/financing", "dest": "/financing.html" },
