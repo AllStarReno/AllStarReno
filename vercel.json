@@ -9,6 +9,10 @@
   "routes": [
     { "src": "/services", "dest": "/services.html" },
     { "src": "/locations", "dest": "/locations.html" },
+    { "src": "/walk-in-showers", "dest": "/walk-in-showers.html" },
+    { "src": "/tub-to-shower-conversions", "dest": "/tub-to-shower-conversions.html" },
+    { "src": "/walk-in-tubs", "dest": "/walk-in-tubs.html" },
+    { "src": "/aging-in-place-ada", "dest": "/aging-in-place-ada.html" },
     { "src": "/gallery", "dest": "/gallery.html" },
     { "src": "/process", "dest": "/process.html" },
     { "src": "/financing", "dest": "/financing.html" },
