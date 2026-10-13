@@ -1,36 +1,66 @@
 # robots.txt — allstarreno.com
 # Policy: ALLOW every AI search/citation bot for maximum AI-answer visibility (zero cost, drives qualified leads).
-# AI citation crawlers do NOT affect Google Search ranking algorithms.
+# AI citation crawlers do NOT affect Google Search rankings.
 
-User-agent: *
+# ---------- Core search engines (always allow) ----------
+User-agent: Googlebot
 Allow: /
-Disallow: /ads/
-Disallow: /admin/
-Disallow: /private/
 
-# Explicitly welcome AI citation bots
-User-agent: GPTBot
+User-agent: Bingbot
+Allow: /
+
+# ---------- AI citation & answer bots (ALLOW — these put your business inside AI answers) ----------
+# OpenAI: ChatGPT user-request fetches + SearchGPT index
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: ClaudeBot
+# OpenAI training crawler (safe to allow; switch to "Disallow: /" to opt out of training only)
+User-agent: GPTBot
 Allow: /
 
-User-agent: Claude-Web
-Allow: /
-
+# Perplexity: answer index + user-request fetches
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Perplexity-User
+Allow: /
+
+# Anthropic: Claude user-request fetches + search index + training
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-Search
+Allow: /
+
+# Google Gemini grounding (does NOT affect Google Search rankings)
 User-agent: Google-Extended
+Allow: /
+
+# Apple Intelligence / Siri
+User-agent: Applebot
 Allow: /
 
 User-agent: Applebot-Extended
 Allow: /
 
-User-agent: cohere-ai
+# Meta AI
+User-agent: meta-externalagent
 Allow: /
 
-Sitemap: https://allstarreno.com/sitemap.xml
+# Amazon (Alexa)
+User-agent: Amazonbot
+Allow: /
+
+# ---------- Standard protection ----------
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+Disallow: /?s=
+Disallow: /search/
+
+Sitemap: https://www.allstarreno.com/sitemap.xml

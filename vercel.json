@@ -1,26 +1,192 @@
 {
-  "version": 2,
-  "builds": [
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
     {
-      "src": "**/*",
-      "use": "@vercel/static"
+      "source": "/conway-ar",
+      "destination": "/service-areas/conway",
+      "permanent": true
+    },
+    {
+      "source": "/locations/conway-ar",
+      "destination": "/service-areas/conway",
+      "permanent": true
+    },
+    {
+      "source": "/conway",
+      "destination": "/service-areas/conway",
+      "permanent": true
+    },
+    {
+      "source": "/cabot-ar",
+      "destination": "/service-areas/cabot",
+      "permanent": true
+    },
+    {
+      "source": "/locations/cabot-ar",
+      "destination": "/service-areas/cabot",
+      "permanent": true
+    },
+    {
+      "source": "/cabot",
+      "destination": "/service-areas/cabot",
+      "permanent": true
+    },
+    {
+      "source": "/greenbrier-ar",
+      "destination": "/service-areas/greenbrier",
+      "permanent": true
+    },
+    {
+      "source": "/locations/greenbrier-ar",
+      "destination": "/service-areas/greenbrier",
+      "permanent": true
+    },
+    {
+      "source": "/greenbrier",
+      "destination": "/service-areas/greenbrier",
+      "permanent": true
+    },
+    {
+      "source": "/little-rock-ar",
+      "destination": "/service-areas/little-rock",
+      "permanent": true
+    },
+    {
+      "source": "/locations/little-rock-ar",
+      "destination": "/service-areas/little-rock",
+      "permanent": true
+    },
+    {
+      "source": "/little-rock",
+      "destination": "/service-areas/little-rock",
+      "permanent": true
+    },
+    {
+      "source": "/maumelle-ar",
+      "destination": "/service-areas/maumelle",
+      "permanent": true
+    },
+    {
+      "source": "/locations/maumelle-ar",
+      "destination": "/service-areas/maumelle",
+      "permanent": true
+    },
+    {
+      "source": "/maumelle",
+      "destination": "/service-areas/maumelle",
+      "permanent": true
+    },
+    {
+      "source": "/sherwood-ar",
+      "destination": "/service-areas/sherwood",
+      "permanent": true
+    },
+    {
+      "source": "/locations/sherwood-ar",
+      "destination": "/service-areas/sherwood",
+      "permanent": true
+    },
+    {
+      "source": "/sherwood",
+      "destination": "/service-areas/sherwood",
+      "permanent": true
+    },
+    {
+      "source": "/vilonia-ar",
+      "destination": "/service-areas/vilonia",
+      "permanent": true
+    },
+    {
+      "source": "/locations/vilonia-ar",
+      "destination": "/service-areas/vilonia",
+      "permanent": true
+    },
+    {
+      "source": "/vilonia",
+      "destination": "/service-areas/vilonia",
+      "permanent": true
+    },
+    {
+      "source": "/benton-ar",
+      "destination": "/service-areas/benton",
+      "permanent": true
+    },
+    {
+      "source": "/locations/benton-ar",
+      "destination": "/service-areas/benton",
+      "permanent": true
+    },
+    {
+      "source": "/benton",
+      "destination": "/service-areas/benton",
+      "permanent": true
+    },
+    {
+      "source": "/bryant-ar",
+      "destination": "/service-areas/bryant",
+      "permanent": true
+    },
+    {
+      "source": "/locations/bryant-ar",
+      "destination": "/service-areas/bryant",
+      "permanent": true
+    },
+    {
+      "source": "/bryant",
+      "destination": "/service-areas/bryant",
+      "permanent": true
+    },
+    {
+      "source": "/saline-county",
+      "destination": "/service-areas/saline-county",
+      "permanent": true
+    },
+    {
+      "source": "/saline-county-ar",
+      "destination": "/service-areas/saline-county",
+      "permanent": true
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy-policy",
+      "permanent": true
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms-and-conditions",
+      "permanent": true
+    },
+    {
+      "source": "/terms-conditions",
+      "destination": "/terms-and-conditions",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas",
+      "destination": "/locations",
+      "permanent": true
+    },
+    {
+      "source": "/pricing",
+      "destination": "/services-pricing",
+      "permanent": true
+    },
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
     }
   ],
-  "routes": [
-    { "src": "/services", "dest": "/services.html" },
-    { "src": "/locations", "dest": "/locations.html" },
-    { "src": "/walk-in-showers", "dest": "/walk-in-showers.html" },
-    { "src": "/tub-to-shower-conversions", "dest": "/tub-to-shower-conversions.html" },
-    { "src": "/walk-in-tubs", "dest": "/walk-in-tubs.html" },
-    { "src": "/aging-in-place-ada", "dest": "/aging-in-place-ada.html" },
-    { "src": "/gallery", "dest": "/gallery.html" },
-    { "src": "/process", "dest": "/process.html" },
-    { "src": "/financing", "dest": "/financing.html" },
-    { "src": "/testimonials", "dest": "/testimonials.html" },
-    { "src": "/about", "dest": "/about.html" },
-    { "src": "/faq", "dest": "/faq.html" },
-    { "src": "/(.*)", "dest": "/$1" }
-  ],
-  "cleanUrls": true,
-  "trailingSlash": false
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
+    }
+  ]
 }
