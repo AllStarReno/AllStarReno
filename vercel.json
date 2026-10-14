@@ -164,7 +164,7 @@
     },
     {
       "source": "/service-areas",
-      "destination": "/locations",
+      "destination": "/service-areas/conway",
       "permanent": true
     },
     {
@@ -174,6 +174,266 @@
     },
     {
       "source": "/home",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/aging-in-place-bathroom-checklist",
+      "destination": "/blog/aging-in-place-bathroom-design",
+      "permanent": true
+    },
+    {
+      "source": "/aging-in-place-bathroom-remodel-conway-ar",
+      "destination": "/blog/aging-in-place-bathroom-design",
+      "permanent": true
+    },
+    {
+      "source": "/ai-visibility",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling",
+      "destination": "/services-pricing",
+      "permanent": true
+    },
+    {
+      "source": "/best-walk-in-shower-conway-ar",
+      "destination": "/tub-to-shower-conversions",
+      "permanent": true
+    },
+    {
+      "source": "/best-walk-in-shower-for-seniors-conway-ar",
+      "destination": "/aging-in-place-ada",
+      "permanent": true
+    },
+    {
+      "source": "/blog/aging-in-place-bathroom-remodel-conway-ar",
+      "destination": "/blog/aging-in-place-bathroom-design",
+      "permanent": true
+    },
+    {
+      "source": "/blog/best-walk-in-shower-conway-ar",
+      "destination": "/tub-to-shower-conversions",
+      "permanent": true
+    },
+    {
+      "source": "/blog/best-walk-in-shower-for-seniors-conway-ar",
+      "destination": "/aging-in-place-ada",
+      "permanent": true
+    },
+    {
+      "source": "/blog/grout-free-showers-vs-traditional-tile-conway-ar",
+      "destination": "/blog/tub-to-shower-conversion-guide",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-long-does-a-bathroom-remodel-take-conway-ar",
+      "destination": "/blog/tub-to-shower-conversion-guide",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-much-does-a-bathroom-remodel-cost-conway-ar-2026",
+      "destination": "/blog/bathroom-remodeling-cost-guide",
+      "permanent": true
+    },
+    {
+      "source": "/blog/no-demo-shower-remodel-conway-ar",
+      "destination": "/tub-to-shower-conversions",
+      "permanent": true
+    },
+    {
+      "source": "/blog/walk-in-tub-vs-walk-in-shower-conway-ar",
+      "destination": "/blog/aging-in-place-bathroom-design",
+      "permanent": true
+    },
+    {
+      "source": "/blog/walk-in-tub-vs-walk-in-shower-which-is-right-for-you",
+      "destination": "/blog/aging-in-place-bathroom-design",
+      "permanent": true
+    },
+    {
+      "source": "/components/simple-3-tier-comparison",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/content/about",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/content/ai-visibility",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/content/faq",
+      "destination": "/services-pricing",
+      "permanent": true
+    },
+    {
+      "source": "/content/financing",
+      "destination": "/services-pricing",
+      "permanent": true
+    },
+    {
+      "source": "/content/gallery",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/content/testimonials",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/faq",
+      "destination": "/services-pricing",
+      "permanent": true
+    },
+    {
+      "source": "/financing",
+      "destination": "/services-pricing",
+      "permanent": true
+    },
+    {
+      "source": "/free-bathroom-remodel-guide",
+      "destination": "/guides",
+      "permanent": true
+    },
+    {
+      "source": "/gallery",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/grout-free-showers-vs-traditional-tile-conway-ar",
+      "destination": "/blog/tub-to-shower-conversion-guide",
+      "permanent": true
+    },
+    {
+      "source": "/how-long-does-a-bathroom-remodel-take-conway-ar",
+      "destination": "/blog/tub-to-shower-conversion-guide",
+      "permanent": true
+    },
+    {
+      "source": "/how-much-does-a-bathroom-remodel-cost-conway-ar-2026",
+      "destination": "/blog/bathroom-remodeling-cost-guide",
+      "permanent": true
+    },
+    {
+      "source": "/lead-magnets/aging-in-place-bathroom-checklist",
+      "destination": "/blog/aging-in-place-bathroom-design",
+      "permanent": true
+    },
+    {
+      "source": "/lead-magnets/free-bathroom-remodel-guide",
+      "destination": "/guides",
+      "permanent": true
+    },
+    {
+      "source": "/lead-magnets/shower-remodel-cost-guide",
+      "destination": "/blog/bathroom-remodeling-cost-guide",
+      "permanent": true
+    },
+    {
+      "source": "/locations",
+      "destination": "/service-areas/conway",
+      "permanent": true
+    },
+    {
+      "source": "/master-page-template",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/no-demo-shower-remodel-conway-ar",
+      "destination": "/tub-to-shower-conversions",
+      "permanent": true
+    },
+    {
+      "source": "/process",
+      "destination": "/tub-to-shower-conversions",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/services-pricing",
+      "permanent": true
+    },
+    {
+      "source": "/shower-remodel-cost-guide",
+      "destination": "/blog/bathroom-remodeling-cost-guide",
+      "permanent": true
+    },
+    {
+      "source": "/simple-3-tier-comparison",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/templates/master-page-template",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/testimonials",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-showers",
+      "destination": "/tub-to-shower-conversions",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-tub-vs-walk-in-shower-conway-ar",
+      "destination": "/blog/aging-in-place-bathroom-design",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-tub-vs-walk-in-shower-which-is-right-for-you",
+      "destination": "/blog/aging-in-place-bathroom-design",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-tubs",
+      "destination": "/aging-in-place-ada",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/guides",
+      "permanent": true
+    },
+    {
+      "source": "/content/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/templates/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/components/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/lead-magnets/:path*",
+      "destination": "/guides",
+      "permanent": true
+    },
+    {
+      "source": "/references/:path*",
       "destination": "/",
       "permanent": true
     }
