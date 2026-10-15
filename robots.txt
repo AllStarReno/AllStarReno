@@ -7,9 +7,10 @@
 # ==============================================================================
 User-agent: Googlebot
 Allow: /
-# Disallow isolated paid ad funnels from organic search crawlers to prevent
-# cannibalization of organic GEO ranking pages and preserve Ad Quality Score
-Disallow: /ads/
+# /ads/ pages are NOT disallowed for search engines on purpose: every /ads/ page
+# carries <meta name="robots" content="noindex,follow">, and a crawler can only
+# honor noindex if it is allowed to fetch the page. (AI crawlers below stay
+# disallowed because they do not reliably honor noindex.)
 Disallow: /wp-admin/
 Allow: /wp-admin/admin-ajax.php
 Disallow: /?s=
@@ -17,14 +18,12 @@ Disallow: /search/
 
 User-agent: Bingbot
 Allow: /
-Disallow: /ads/
 Disallow: /wp-admin/
 Disallow: /?s=
 Disallow: /search/
 
 User-agent: *
 Allow: /
-Disallow: /ads/
 Disallow: /wp-admin/
 Disallow: /?s=
 Disallow: /search/

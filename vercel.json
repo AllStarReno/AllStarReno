@@ -3,6 +3,17 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "allstarreno.com"
+        }
+      ],
+      "destination": "https://www.allstarreno.com/$1",
+      "permanent": true
+    },
+    {
       "source": "/conway-ar",
       "destination": "/service-areas/conway",
       "permanent": true
