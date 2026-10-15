@@ -174,22 +174,12 @@
       "permanent": true
     },
     {
-      "source": "/service-areas",
-      "destination": "/service-areas/conway",
-      "permanent": true
-    },
-    {
       "source": "/pricing",
       "destination": "/services-pricing",
       "permanent": true
     },
     {
       "source": "/home",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/about",
       "destination": "/",
       "permanent": true
     },
@@ -209,18 +199,13 @@
       "permanent": true
     },
     {
-      "source": "/bathroom-remodeling",
-      "destination": "/services-pricing",
-      "permanent": true
-    },
-    {
       "source": "/best-walk-in-shower-conway-ar",
-      "destination": "/tub-to-shower-conversions",
+      "destination": "/bathroom-remodeling/tub-to-shower-conversions",
       "permanent": true
     },
     {
       "source": "/best-walk-in-shower-for-seniors-conway-ar",
-      "destination": "/aging-in-place-ada",
+      "destination": "/bathroom-remodeling/aging-in-place-ada",
       "permanent": true
     },
     {
@@ -230,12 +215,12 @@
     },
     {
       "source": "/blog/best-walk-in-shower-conway-ar",
-      "destination": "/tub-to-shower-conversions",
+      "destination": "/bathroom-remodeling/tub-to-shower-conversions",
       "permanent": true
     },
     {
       "source": "/blog/best-walk-in-shower-for-seniors-conway-ar",
-      "destination": "/aging-in-place-ada",
+      "destination": "/bathroom-remodeling/aging-in-place-ada",
       "permanent": true
     },
     {
@@ -255,7 +240,7 @@
     },
     {
       "source": "/blog/no-demo-shower-remodel-conway-ar",
-      "destination": "/tub-to-shower-conversions",
+      "destination": "/bathroom-remodeling/tub-to-shower-conversions",
       "permanent": true
     },
     {
@@ -275,7 +260,7 @@
     },
     {
       "source": "/content/about",
-      "destination": "/",
+      "destination": "/about",
       "permanent": true
     },
     {
@@ -354,23 +339,18 @@
       "permanent": true
     },
     {
-      "source": "/locations",
-      "destination": "/service-areas/conway",
-      "permanent": true
-    },
-    {
       "source": "/master-page-template",
       "destination": "/",
       "permanent": true
     },
     {
       "source": "/no-demo-shower-remodel-conway-ar",
-      "destination": "/tub-to-shower-conversions",
+      "destination": "/bathroom-remodeling/tub-to-shower-conversions",
       "permanent": true
     },
     {
       "source": "/process",
-      "destination": "/tub-to-shower-conversions",
+      "destination": "/bathroom-remodeling/tub-to-shower-conversions",
       "permanent": true
     },
     {
@@ -400,7 +380,7 @@
     },
     {
       "source": "/walk-in-showers",
-      "destination": "/tub-to-shower-conversions",
+      "destination": "/bathroom-remodeling/walk-in-showers",
       "permanent": true
     },
     {
@@ -415,7 +395,7 @@
     },
     {
       "source": "/walk-in-tubs",
-      "destination": "/aging-in-place-ada",
+      "destination": "/bathroom-remodeling/walk-in-tubs",
       "permanent": true
     },
     {
@@ -446,6 +426,281 @@
     {
       "source": "/references/:path*",
       "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/tub-to-shower-conversions",
+      "destination": "/bathroom-remodeling/tub-to-shower-conversions",
+      "permanent": true
+    },
+    {
+      "source": "/aging-in-place-ada",
+      "destination": "/bathroom-remodeling/aging-in-place-ada",
+      "permanent": true
+    },
+    {
+      "source": "/locations",
+      "destination": "/service-areas",
+      "permanent": true
+    },
+    {
+      "source": "/about-us",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/about-thomas-pedersen",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-tub-installation",
+      "destination": "/bathroom-remodeling/walk-in-tubs",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-tub",
+      "destination": "/bathroom-remodeling/walk-in-tubs",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-shower",
+      "destination": "/bathroom-remodeling/walk-in-showers",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-shower-installation",
+      "destination": "/bathroom-remodeling/walk-in-showers",
+      "permanent": true
+    },
+    {
+      "source": "/all-star-shower-systems",
+      "destination": "/bathroom-remodeling/all-star-shower-systems",
+      "permanent": true
+    },
+    {
+      "source": "/shower-systems",
+      "destination": "/bathroom-remodeling/all-star-shower-systems",
+      "permanent": true
+    },
+    {
+      "source": "/tub-to-shower",
+      "destination": "/bathroom-remodeling/tub-to-shower-conversions",
+      "permanent": true
+    },
+    {
+      "source": "/aging-in-place",
+      "destination": "/bathroom-remodeling/aging-in-place-ada",
+      "permanent": true
+    },
+    {
+      "source": "/ada-bathrooms",
+      "destination": "/bathroom-remodeling/aging-in-place-ada",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen",
+      "destination": "/kitchen-remodeling",
+      "permanent": true
+    },
+    {
+      "source": "/kitchens",
+      "destination": "/kitchen-remodeling",
+      "permanent": true
+    },
+    {
+      "source": "/handyman",
+      "destination": "/handyman-services",
+      "permanent": true
+    },
+    {
+      "source": "/cabinet-renovations",
+      "destination": "/kitchen-remodeling/cabinet-renovations",
+      "permanent": true
+    },
+    {
+      "source": "/countertop-replacement",
+      "destination": "/kitchen-remodeling/countertop-replacement",
+      "permanent": true
+    },
+    {
+      "source": "/backsplash-installation",
+      "destination": "/kitchen-remodeling/backsplash-installation",
+      "permanent": true
+    },
+    {
+      "source": "/refacing-fixture-updates",
+      "destination": "/kitchen-remodeling/cabinet-refacing",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling/refacing-fixture-updates",
+      "destination": "/kitchen-remodeling/cabinet-refacing",
+      "permanent": true
+    },
+    {
+      "source": "/cabinet-refacing",
+      "destination": "/kitchen-remodeling/cabinet-refacing",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-refacing",
+      "destination": "/kitchen-remodeling/cabinet-refacing",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling/kitchen-refacing",
+      "destination": "/kitchen-remodeling/cabinet-refacing",
+      "permanent": true
+    },
+    {
+      "source": "/handyman-repairs",
+      "destination": "/handyman-services/repairs",
+      "permanent": true
+    },
+    {
+      "source": "/handyman-installation",
+      "destination": "/handyman-services/installation",
+      "permanent": true
+    },
+    {
+      "source": "/handyman-maintenance",
+      "destination": "/handyman-services/maintenance",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling/conway-ar",
+      "destination": "/kitchen-remodeling/conway",
+      "permanent": true
+    },
+    {
+      "source": "/handyman-services/conway-ar",
+      "destination": "/handyman-services/conway",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling-conway-ar",
+      "destination": "/kitchen-remodeling/conway",
+      "permanent": true
+    },
+    {
+      "source": "/handyman-services-conway-ar",
+      "destination": "/handyman-services/conway",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/conway-ar",
+      "destination": "/service-areas/conway",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/greenbrier-ar",
+      "destination": "/service-areas/greenbrier",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/vilonia-ar",
+      "destination": "/service-areas/vilonia",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/little-rock-ar",
+      "destination": "/service-areas/little-rock",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/maumelle-ar",
+      "destination": "/service-areas/maumelle",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/sherwood-ar",
+      "destination": "/service-areas/sherwood",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/benton-ar",
+      "destination": "/service-areas/benton",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/bryant-ar",
+      "destination": "/service-areas/bryant",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/cabot-ar",
+      "destination": "/service-areas/cabot",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/north-little-rock-ar",
+      "destination": "/service-areas/north-little-rock",
+      "permanent": true
+    },
+    {
+      "source": "/north-little-rock-ar",
+      "destination": "/service-areas/north-little-rock",
+      "permanent": true
+    },
+    {
+      "source": "/locations/north-little-rock-ar",
+      "destination": "/service-areas/north-little-rock",
+      "permanent": true
+    },
+    {
+      "source": "/north-little-rock",
+      "destination": "/service-areas/north-little-rock",
+      "permanent": true
+    },
+    {
+      "source": "/faulkner-county",
+      "destination": "/service-areas/faulkner-county",
+      "permanent": true
+    },
+    {
+      "source": "/faulkner-county-ar",
+      "destination": "/service-areas/faulkner-county",
+      "permanent": true
+    },
+    {
+      "source": "/pulaski-county",
+      "destination": "/service-areas/pulaski-county",
+      "permanent": true
+    },
+    {
+      "source": "/pulaski-county-ar",
+      "destination": "/service-areas/pulaski-county",
+      "permanent": true
+    },
+    {
+      "source": "/lonoke-county",
+      "destination": "/service-areas/lonoke-county",
+      "permanent": true
+    },
+    {
+      "source": "/lonoke-county-ar",
+      "destination": "/service-areas/lonoke-county",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/mayflower",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/mayflower",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/mayflower-ar",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/other-areas",
+      "destination": "/service-areas/other-areas",
       "permanent": true
     }
   ],
