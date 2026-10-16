@@ -274,16 +274,6 @@
       "permanent": true
     },
     {
-      "source": "/content/financing",
-      "destination": "/services-pricing",
-      "permanent": true
-    },
-    {
-      "source": "/content/gallery",
-      "destination": "/",
-      "permanent": true
-    },
-    {
       "source": "/content/testimonials",
       "destination": "/",
       "permanent": true
@@ -294,18 +284,8 @@
       "permanent": true
     },
     {
-      "source": "/financing",
-      "destination": "/services-pricing",
-      "permanent": true
-    },
-    {
       "source": "/free-bathroom-remodel-guide",
       "destination": "/guides",
-      "permanent": true
-    },
-    {
-      "source": "/gallery",
-      "destination": "/",
       "permanent": true
     },
     {
@@ -701,6 +681,326 @@
     {
       "source": "/other-areas",
       "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/past-remodels",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/past-remodeling",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/projects",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/our-work",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio-gallery",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/gallery-portfolio",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/get-a-quote",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/free-quote",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/contact-us-ar",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/warranties",
+      "destination": "/warranty",
+      "permanent": true
+    },
+    {
+      "source": "/lifetime-warranty",
+      "destination": "/warranty",
+      "permanent": true
+    },
+    {
+      "source": "/warranty-ar",
+      "destination": "/warranty",
+      "permanent": true
+    },
+    {
+      "source": "/terms-of-service",
+      "destination": "/terms-and-conditions",
+      "permanent": true
+    },
+    {
+      "source": "/location/conway",
+      "destination": "/service-areas/conway",
+      "permanent": true
+    },
+    {
+      "source": "/location/conway/:service",
+      "destination": "/service-areas/conway",
+      "permanent": true
+    },
+    {
+      "source": "/location/little-rock",
+      "destination": "/service-areas/little-rock",
+      "permanent": true
+    },
+    {
+      "source": "/location/little-rock/:service",
+      "destination": "/service-areas/little-rock",
+      "permanent": true
+    },
+    {
+      "source": "/location/north-little-rock",
+      "destination": "/service-areas/north-little-rock",
+      "permanent": true
+    },
+    {
+      "source": "/location/north-little-rock/:service",
+      "destination": "/service-areas/north-little-rock",
+      "permanent": true
+    },
+    {
+      "source": "/location/maumelle",
+      "destination": "/service-areas/maumelle",
+      "permanent": true
+    },
+    {
+      "source": "/location/maumelle/:service",
+      "destination": "/service-areas/maumelle",
+      "permanent": true
+    },
+    {
+      "source": "/location/greenbrier",
+      "destination": "/service-areas/greenbrier",
+      "permanent": true
+    },
+    {
+      "source": "/location/greenbrier/:service",
+      "destination": "/service-areas/greenbrier",
+      "permanent": true
+    },
+    {
+      "source": "/location/vilonia",
+      "destination": "/service-areas/vilonia",
+      "permanent": true
+    },
+    {
+      "source": "/location/vilonia/:service",
+      "destination": "/service-areas/vilonia",
+      "permanent": true
+    },
+    {
+      "source": "/location/sherwood",
+      "destination": "/service-areas/sherwood",
+      "permanent": true
+    },
+    {
+      "source": "/location/sherwood/:service",
+      "destination": "/service-areas/sherwood",
+      "permanent": true
+    },
+    {
+      "source": "/location/cabot",
+      "destination": "/service-areas/cabot",
+      "permanent": true
+    },
+    {
+      "source": "/location/cabot/:service",
+      "destination": "/service-areas/cabot",
+      "permanent": true
+    },
+    {
+      "source": "/location/benton",
+      "destination": "/service-areas/benton",
+      "permanent": true
+    },
+    {
+      "source": "/location/benton/:service",
+      "destination": "/service-areas/benton",
+      "permanent": true
+    },
+    {
+      "source": "/location/bryant",
+      "destination": "/service-areas/bryant",
+      "permanent": true
+    },
+    {
+      "source": "/location/bryant/:service",
+      "destination": "/service-areas/bryant",
+      "permanent": true
+    },
+    {
+      "source": "/location/searcy",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/searcy/:service",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/morrilton",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/morrilton/:service",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/mayflower",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/mayflower/:service",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/beebe",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/beebe/:service",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/perryville",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/perryville/:service",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/heber-springs",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/heber-springs/:service",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/:id",
+      "destination": "/service-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location",
+      "destination": "/service-areas",
+      "permanent": true
+    },
+    {
+      "source": "/services/tub-to-shower",
+      "destination": "/bathroom-remodeling/tub-to-shower-conversions",
+      "permanent": true
+    },
+    {
+      "source": "/services/walk-in-showers",
+      "destination": "/bathroom-remodeling/walk-in-showers",
+      "permanent": true
+    },
+    {
+      "source": "/services/walk-in-tubs",
+      "destination": "/bathroom-remodeling/walk-in-tubs",
+      "permanent": true
+    },
+    {
+      "source": "/services/aging-in-place-ada",
+      "destination": "/bathroom-remodeling/aging-in-place-ada",
+      "permanent": true
+    },
+    {
+      "source": "/services/bathroom-remodeling",
+      "destination": "/bathroom-remodeling",
+      "permanent": true
+    },
+    {
+      "source": "/services/kitchen-remodeling",
+      "destination": "/kitchen-remodeling",
+      "permanent": true
+    },
+    {
+      "source": "/services/handyman-services",
+      "destination": "/handyman-services",
+      "permanent": true
+    },
+    {
+      "source": "/services/:id",
+      "destination": "/bathroom-remodeling",
+      "permanent": true
+    },
+    {
+      "source": "/guides/tub-to-shower-conversion-guide",
+      "destination": "/blog/tub-to-shower-conversion-guide",
+      "permanent": true
+    },
+    {
+      "source": "/guides/aging-in-place-bathroom-design",
+      "destination": "/blog/aging-in-place-bathroom-design",
+      "permanent": true
+    },
+    {
+      "source": "/guides/2026-bathroom-remodeling-cost-guide",
+      "destination": "/blog/bathroom-remodeling-cost-guide",
+      "permanent": true
+    },
+    {
+      "source": "/landing/:id",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/admin",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/gallery",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/content/gallery",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/content/financing",
+      "destination": "/financing",
       "permanent": true
     }
   ],

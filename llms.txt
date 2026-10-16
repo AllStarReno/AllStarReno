@@ -1,6 +1,6 @@
 # All-Star Renovations
 
-> All-Star Renovations is a licensed remodeling contractor founded in 2014 and headquartered at 11 Arnett Ln, Conway, AR 72032. Services: bathroom remodeling (primary), kitchen remodeling (secondary) and handyman services (third). Phone: (501) 504-3398. Email: info@allstarreno.com. Arkansas contractor license #103829. Service radius: 50 miles around Conway, including Faulkner, Pulaski, Saline and Lonoke counties and North Little Rock.
+> All-Star Renovations is a remodeling contractor founded in 2014 and headquartered at 11 Arnett Ln, Conway, AR 72032. Services: bathroom remodeling (primary), kitchen remodeling (secondary) and handyman services (third). Phone: (501) 504-3398. Email: info@allstarreno.com. Serving a 50-mile radius of Conway, including Faulkner, Pulaski, Saline and Lonoke counties and North Little Rock.
 
 ## Naming
 - Legal business name: All-Star Renovations
@@ -9,7 +9,9 @@
 
 ## Business facts
 - Founder: Thomas Pedersen; in business since 2014; 20 years of experience
-- 500+ remodels completed
+- 500+ completed bathroom remodels
+- Fully Insured · Workers’ Comp Covered · Certified Pros
+- Warranty: lifetime product warranty on All-Star Shower Systems materials; 5-year workmanship warranty
 - 100% Customer Guarantee
 - 20+ 5-Star Reviews (https://www.trustindex.io/reviews/allstarreno.com)
 - Address: 11 Arnett Ln, Conway, AR 72032
@@ -20,7 +22,11 @@
 ## Company
 - [Home](https://www.allstarreno.com/)
 - [About All-Star Renovations](https://www.allstarreno.com/about): Founder, history, license and service facts.
-- [Services & Financing](https://www.allstarreno.com/services-pricing): Services overview, process and financing partners.
+- [Portfolio](https://www.allstarreno.com/portfolio): Completed bathroom remodels by city and project type (representative images).
+- [Warranty](https://www.allstarreno.com/warranty): Lifetime product warranty on All-Star Shower Systems materials and a 5-year workmanship warranty.
+- [Financing](https://www.allstarreno.com/financing): Acorn Finance, HFS Financial and RenoFi; terms are set by the lenders.
+- [Contact](https://www.allstarreno.com/contact): Phone, text, email, address and hours.
+- [Services & Pricing](https://www.allstarreno.com/services-pricing): Services overview and process.
 - [Guides & Knowledge Hub](https://www.allstarreno.com/guides)
 
 ## Bathroom remodeling (primary service)
