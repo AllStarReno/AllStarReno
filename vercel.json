@@ -989,21 +989,6 @@
       "permanent": true
     },
     {
-      "source": "/gallery",
-      "destination": "/portfolio",
-      "permanent": true
-    },
-    {
-      "source": "/content/gallery",
-      "destination": "/portfolio",
-      "permanent": true
-    },
-    {
-      "source": "/content/financing",
-      "destination": "/financing",
-      "permanent": true
-    },
-    {
       "source": "/location/roland",
       "destination": "/service-areas/other-areas",
       "permanent": true
@@ -1031,6 +1016,21 @@
     {
       "source": "/location/hot-springs-village/:service",
       "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/gallery",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/content/gallery",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/content/financing",
+      "destination": "/financing",
       "permanent": true
     }
   ],
