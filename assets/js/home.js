@@ -45,7 +45,18 @@ marks.forEach(function(m){m.addEventListener('click',function(){select(m.getAttr
 $$('.chip').forEach(function(b){b.addEventListener('click',function(){region=b.getAttribute('data-region');$$('.chip').forEach(function(x){var on=x===b;x.setAttribute('aria-pressed',on);x.classList.toggle('bg-white',on);x.classList.toggle('text-slate-900',on);x.classList.toggle('font-semibold',on);x.classList.toggle('bg-white/5',!on);x.classList.toggle('text-slate-200',!on)});render()})});
 $$('.sortb').forEach(function(b){b.addEventListener('click',function(){sort=b.getAttribute('data-sort');$$('.sortb').forEach(function(x){var on=x===b;x.setAttribute('aria-pressed',on);x.classList.toggle('bg-orange-700',on);x.classList.toggle('text-white',on);x.classList.toggle('bg-white/5',!on);x.classList.toggle('text-slate-200',!on)});render()})});
 var cs=$('#cs');if(cs)cs.addEventListener('input',function(){q=cs.value;render()});
-if(cards.length){render();select('conway')}
+if(cards.length){render();select('conway',false)}
+/* hub only (main.dk): reliable taps, visible feedback */
+if(document.querySelector('main.dk')&&marks.length){var _sel=select,mapEl=marks[0].parentElement,panel=$('#sp-name').closest('[aria-live]');
+panel.style.scrollMarginTop='112px';panel.style.scrollMarginBottom='84px';
+marks.forEach(function(m){m.setAttribute('aria-pressed','false')});
+select=function(id,fromTap){_sel(id);marks.forEach(function(m){m.setAttribute('aria-pressed',m.getAttribute('data-city')===id?'true':'false')});
+if(fromTap===false)return;var c=cards.filter(function(x){return x.getAttribute('data-city')===id})[0];
+if(c&&grid&&grid.scrollTo&&grid.scrollHeight>grid.clientHeight)grid.scrollTo({top:Math.max(0,c.offsetTop-grid.offsetTop-8),behavior:'smooth'});
+var r=panel.getBoundingClientRect();if(r.top<112||r.bottom>window.innerHeight-84)panel.scrollIntoView({block:'nearest',behavior:'smooth'})};
+marks.forEach(function(m){m.addEventListener('click',function(){select(m.getAttribute('data-city'))})});
+mapEl.addEventListener('click',function(e){if(!e.detail&&!e.clientX)return;var best=null,bd=1e9;marks.forEach(function(m){var r=m.querySelector('.dot').getBoundingClientRect(),d=Math.hypot(e.clientX-(r.left+r.width/2),e.clientY-(r.top+r.height/2));if(d<bd){bd=d;best=m}});if(best&&bd<30&&best.getAttribute('data-city')!==cur)select(best.getAttribute('data-city'))})}
+
 /* reviews */
 var rb=$('#rev-btn');if(rb)rb.addEventListener('click',function(){var m=$('#more-rev'),open=m.classList.toggle('hidden')===false;rb.setAttribute('aria-expanded',open);rb.textContent=open?'Show fewer reviews':'Show more reviews';$$('.reveal',m).forEach(function(x){x.classList.add('in')})})
 })();
