@@ -2,17 +2,15 @@
 var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
 /* reveal on scroll */
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -60px 0px'});$$('.reveal').forEach(function(el){io.observe(el)})}else{$$('.reveal').forEach(function(el){el.classList.add('in')})}
-/* instant estimate calculator (logic from the reference site's bundle); rough ballpark only */
-var SV={shower:[4800,7200,'Shower Replacement'],conversion:[5900,8500,'Tub-to-Shower Conversion'],walkin:[8500,12500,'Walk-In Safety Tub'],full_remodel:[9500,15500,'Full Bathroom Remodel']},MT={standard:[1,'Classic Durability'],deluxe:[1.2,'Signature Textures'],premium:[1.4,'Luxury Custom Spa']};
+/* project planner: builds a non-priced summary of the selections */
+var SV={shower:'Shower Replacement',conversion:'Tub-to-Shower Conversion',walkin:'Walk-In Safety Tub',full_remodel:'Full Bathroom Remodel'},MT={standard:'Classic Durability',deluxe:'Signature Textures',premium:'Luxury Custom Spa'};
 var plan={service:'shower',size:60,material:'standard'};
-function fmt(n){return '$'+n.toLocaleString('en-US')}
-function summary(){return SV[plan.service][2]+', about '+plan.size+' sq. ft., '+MT[plan.material][1]+' materials'}
-function upd(){var o=$('#plan-size-out');if(!o)return;var r=plan.size,L=r<50?.9:r<80?1+(r-60)*.005:r<120?1.1+(r-80)*.004:1.3+(r-120)*.003,sv=SV[plan.service],m=MT[plan.material][0];
-var lo=Math.round(sv[0]*L*m),hi=Math.round(sv[1]*L*m);o.textContent=r;$('#est-min').textContent=fmt(lo);$('#est-max').textContent=fmt(hi);$('#plan-service-line').textContent=summary();
-$('#plan-sms').href='sms:5015043398?&body='+encodeURIComponent("Hi! I used the Instant Estimate Calculator and got a rough estimate of "+fmt(lo)+" - "+fmt(hi)+" for a "+summary()+". I'd love to schedule a free in-home consultation to get a firm quote!")}
+function summary(){return SV[plan.service]+', about '+plan.size+' sq. ft., '+MT[plan.material]+' materials'}
+function upd(){var o=$('#plan-size-out');if(!o)return;o.textContent=plan.size;var e=$('#est-summary');if(e)e.textContent=SV[plan.service];$('#plan-service-line').textContent=summary();
+$('#plan-sms').href='sms:5015043398?&body='+encodeURIComponent("Hi! I used the Project Planner for a "+summary()+". I'd love to schedule a free in-home consultation.")}
 $$('.plan-opt').forEach(function(b){b.addEventListener('click',function(){var g=b.getAttribute('data-group');plan[g]=b.getAttribute('data-value');$$('.plan-opt[data-group="'+g+'"]').forEach(function(x){var on=x===b;x.setAttribute('aria-checked',on);x.classList.toggle('border-orange-500',on);x.classList.toggle('border-white/10',!on);var d=$('.plan-dot',x);d.classList.toggle('border-orange-500',on);d.classList.toggle('bg-orange-600',on);d.classList.toggle('border-white/30',!on)});upd()})});
 var ps=$('#plan-size');if(ps)ps.addEventListener('input',function(){plan.size=+ps.value;upd()});
-var sc=$('#plan-sched');if(sc)sc.addEventListener('click',function(){var t=$('#est-min').textContent+' - '+$('#est-max').textContent+' rough estimate: '+summary();try{navigator.clipboard.writeText(t)}catch(e){}$('#plan-note').textContent='Your selections: '+summary()+'. Copied so you can paste them in the scheduler.'});upd();
+var sc=$('#plan-sched');if(sc)sc.addEventListener('click',function(){var t='Project summary: '+summary();try{navigator.clipboard.writeText(t)}catch(e){}$('#plan-note').textContent='Your selections: '+summary()+'. Copied so you can paste them in the scheduler.'});upd();
 /* before/after slider: pointer events with touch-action:pan-y so vertical swipes still scroll the page */
 var ba=$('#ba');if(ba){var af=$('#ba-after'),hd=$('#ba-handle'),rg=$('#ba-range');
 function setPos(p){p=Math.max(0,Math.min(100,p));af.style.clipPath='inset(0 '+(100-p)+'% 0 0)';hd.style.left=p+'%';rg.value=p}
@@ -46,8 +44,8 @@ $$('.chip').forEach(function(b){b.addEventListener('click',function(){region=b.g
 $$('.sortb').forEach(function(b){b.addEventListener('click',function(){sort=b.getAttribute('data-sort');$$('.sortb').forEach(function(x){var on=x===b;x.setAttribute('aria-pressed',on);x.classList.toggle('bg-orange-700',on);x.classList.toggle('text-white',on);x.classList.toggle('bg-white/5',!on);x.classList.toggle('text-slate-200',!on)});render()})});
 var cs=$('#cs');if(cs)cs.addEventListener('input',function(){q=cs.value;render()});
 if(cards.length){render();select('conway',false)}
-/* hub only (main.dk): reliable taps, visible feedback */
-if(document.querySelector('main.dk')&&marks.length){var _sel=select,mapEl=marks[0].parentElement,panel=$('#sp-name').closest('[aria-live]');
+/* hub and home: reliable taps, visible feedback */
+if(marks.length){var _sel=select,mapEl=marks[0].parentElement,panel=$('#sp-name').closest('[aria-live]');
 panel.style.scrollMarginTop='112px';panel.style.scrollMarginBottom='84px';
 marks.forEach(function(m){m.setAttribute('aria-pressed','false')});
 select=function(id,fromTap){_sel(id);marks.forEach(function(m){m.setAttribute('aria-pressed',m.getAttribute('data-city')===id?'true':'false')});
@@ -55,7 +53,7 @@ if(fromTap===false)return;var c=cards.filter(function(x){return x.getAttribute('
 if(c&&grid&&grid.scrollTo&&grid.scrollHeight>grid.clientHeight)grid.scrollTo({top:Math.max(0,c.offsetTop-grid.offsetTop-8),behavior:'smooth'});
 var r=panel.getBoundingClientRect();if(r.top<112||r.bottom>window.innerHeight-84)panel.scrollIntoView({block:'nearest',behavior:'smooth'})};
 marks.forEach(function(m){m.addEventListener('click',function(){select(m.getAttribute('data-city'))})});
-mapEl.addEventListener('click',function(e){if(!e.detail&&!e.clientX)return;var best=null,bd=1e9;marks.forEach(function(m){var r=m.querySelector('.dot').getBoundingClientRect(),d=Math.hypot(e.clientX-(r.left+r.width/2),e.clientY-(r.top+r.height/2));if(d<bd){bd=d;best=m}});if(best&&bd<30&&best.getAttribute('data-city')!==cur)select(best.getAttribute('data-city'))})}
+mapEl.addEventListener('click',function(e){if(!e.detail&&!e.clientX)return;var best=null,bd=1e9;marks.forEach(function(m){var r=m.querySelector('.dot').getBoundingClientRect(),d=Math.hypot(e.clientX-(r.left+r.width/2),e.clientY-(r.top+r.height/2));if(d<bd){bd=d;best=m}});if(best&&bd<30&&best.getAttribute('data-city')!==cur)select(best.getAttribute('data-city'))});select(cur||'conway',false)}
 
 /* reviews */
 var rb=$('#rev-btn');if(rb)rb.addEventListener('click',function(){var m=$('#more-rev'),open=m.classList.toggle('hidden')===false;rb.setAttribute('aria-expanded',open);rb.textContent=open?'Show fewer reviews':'Show more reviews';$$('.reveal',m).forEach(function(x){x.classList.add('in')})})
