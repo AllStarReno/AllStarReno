@@ -1002,6 +1002,36 @@
       "source": "/content/financing",
       "destination": "/financing",
       "permanent": true
+    },
+    {
+      "source": "/location/roland",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/roland/:service",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/fairfield-bay",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/fairfield-bay/:service",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/hot-springs-village",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
+    },
+    {
+      "source": "/location/hot-springs-village/:service",
+      "destination": "/service-areas/other-areas",
+      "permanent": true
     }
   ],
   "headers": [
