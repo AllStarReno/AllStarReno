@@ -1,0 +1,24 @@
+<!-- Kitchen form (sub-services) -->
+<section class="max-w-lg mx-auto px-4 py-8">
+  <h2 class="text-xl font-bold mb-2">Request a Kitchen Estimate</h2>
+  <p class="text-sm text-slate-500 mb-4">All estimates are 100% free with no obligation.</p>
+  <form action="mailto:info@allstarreno.com" method="POST" enctype="text/plain" class="space-y-3">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <input type="text" name="First Name" placeholder="First Name" required class="w-full border rounded-lg px-3 py-3">
+      <input type="text" name="Last Name" placeholder="Last Name" required class="w-full border rounded-lg px-3 py-3">
+    </div>
+    <input type="email" name="Email" placeholder="Email" required class="w-full border rounded-lg px-3 py-3">
+    <input type="tel" name="Phone" placeholder="Phone" required class="w-full border rounded-lg px-3 py-3">
+    <select name="Service" class="w-full border rounded-lg px-3 py-3">
+      <option>Cabinet Renovations</option>
+      <option>Countertop Replacement</option>
+      <option>Backsplash Installation</option>
+      <option>Cabinet Refacing</option>
+      <option>Full Kitchen Remodel</option>
+      <option>Not Sure</option>
+    </select>
+    <input type="text" name="City" placeholder="City" class="w-full border rounded-lg px-3 py-3">
+    <textarea name="Details" placeholder="Project details" rows="3" class="w-full border rounded-lg px-3 py-3"></textarea>
+    <button type="submit" class="w-full bg-emerald-600 text-white font-semibold py-3 rounded-lg">Send Request</button>
+  </form>
+</section>
