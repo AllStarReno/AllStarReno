@@ -1,0 +1,2 @@
+Deploy trigger: markdown Accept header negotiation + Vary headers
+Timestamp: 2026-10-17
