@@ -1,0 +1,32 @@
+<!-- Non-service / Contact form (categories) -->
+<section class="max-w-lg mx-auto px-4 py-8" id="lead-form">
+  <h2 class="text-xl font-bold mb-2">Request a Free Estimate</h2>
+  <p class="text-sm text-slate-500 mb-4">All estimates are 100% free with no obligation.</p>
+  <form action="mailto:info@allstarreno.com" method="POST" enctype="text/plain" class="space-y-3">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <input type="text" name="First Name" placeholder="First Name" required class="w-full border rounded-lg px-3 py-3 text-base">
+      <input type="text" name="Last Name" placeholder="Last Name" required class="w-full border rounded-lg px-3 py-3 text-base">
+    </div>
+    <input type="email" name="Email" placeholder="Email" required class="w-full border rounded-lg px-3 py-3 text-base">
+    <input type="tel" name="Phone" placeholder="Phone" required class="w-full border rounded-lg px-3 py-3 text-base">
+    <select name="Service" class="w-full border rounded-lg px-3 py-3 text-base">
+      <option>Bathroom Remodeling</option>
+      <option>Kitchen Remodeling</option>
+      <option>Handyman Services</option>
+      <option>Not Sure</option>
+    </select>
+    <input type="text" name="City" placeholder="City" class="w-full border rounded-lg px-3 py-3 text-base">
+    <input type="date" name="Preferred Date" class="w-full border rounded-lg px-3 py-3 text-base">
+    <select name="Time Window" class="w-full border rounded-lg px-3 py-3 text-base">
+      <option>Flexible</option>
+      <option>Morning</option>
+      <option>Afternoon</option>
+      <option>Evening</option>
+    </select>
+    <textarea name="Details" placeholder="Project details" rows="3" class="w-full border rounded-lg px-3 py-3 text-base"></textarea>
+    <button type="submit" class="w-full bg-emerald-600 text-white font-semibold py-3 rounded-lg">Send Request</button>
+  </form>
+  <div class="mt-6">
+    <iframe src="https://client.swivl.tech/all-star-renovate-318dbc/scheduler?widget=scheduler" class="w-full h-[480px] rounded-lg border-0" title="Schedule"></iframe>
+  </div>
+</section>
