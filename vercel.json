@@ -7,10 +7,10 @@
       "has": [
         {
           "type": "host",
-          "value": "allstarreno.com"
+          "value": "www.allstarreno.com"
         }
       ],
-      "destination": "https://www.allstarreno.com/$1",
+      "destination": "https://allstarreno.com/$1",
       "permanent": true
     },
     {
