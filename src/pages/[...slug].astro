@@ -1,0 +1,22 @@
+---
+// Catch-all route: renders every original page at its original path.
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CallBar from '../components/CallBar.astro';
+import { loadPages } from '../lib/legacy.mjs';
+import { buildGraph, breadcrumbTrail } from '../lib/schema.mjs';
+export function getStaticPaths() {
+  return loadPages().filter((p) => p.slug !== '404').map((page) => ({ params: { slug: page.slug || undefined }, props: { page } }));
+}
+const { page } = Astro.props;
+const graph = buildGraph(page);
+// Breadcrumbs only where a content page lacks them (home & landing pages intentionally excluded).
+const needsCrumbs = !page.hasBreadcrumb && page.slug !== '' && page.indexable;
+const cut = needsCrumbs && page.body.includes('</header>') ? page.body.indexOf('</header>') + 9 : 0;
+const [before, after] = needsCrumbs ? [page.body.slice(0, cut), page.body.slice(cut)] : [page.body, ''];
+const needsCallBar = !/fixed bottom|data-contact="call"/.test(page.body);
+---
+<Layout page={page} graph={graph}>
+  {needsCrumbs ? <><Fragment set:html={before} /><Breadcrumbs items={breadcrumbTrail(page)} /><Fragment set:html={after} /></> : <Fragment set:html={page.body} />}
+  {needsCallBar && <CallBar />}
+</Layout>

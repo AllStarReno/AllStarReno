@@ -280,3 +280,15 @@ Just let me know and I'll build it for you.
 ---
 
 *Created for All-Star Renovations by Grok - July 2026*
+## Astro build (step 2)
+
+The site is built with [Astro](https://astro.build) as fully static output (`npm run build` → `dist/`).
+
+- `src/legacy/**.html` – original page bodies, rendered 1:1 at their original URLs by `src/pages/[...slug].astro`
+  (coverage map, ZIP/city search, city guides, estimate calculator, before/after slider and Swivl widgets are untouched).
+- `src/layouts/Layout.astro` – canonical, meta/OG, robots and one consolidated JSON-LD `@graph` per page (`src/lib/schema.mjs`).
+- `src/components/` – Breadcrumbs, QuickAnswer, FAQ, Image (alt required), CallBar.
+- `src/data/business.mjs` – NAP single source of truth. `src/data/llms.txt` – curated llms.txt.
+- `sitemap.xml`, `llms.txt`, `llms-full.txt` are generated at build time.
+- `scripts/check.mjs` runs after every build and fails it on broken internal links, missing alt text, invalid JSON-LD, wrong canonical/h1 counts.
+- `build.format: 'file'` + `cleanUrls` keep every existing path; redirects/headers remain in `vercel.json`.

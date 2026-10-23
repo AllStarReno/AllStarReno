@@ -1,0 +1,7 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { loadPages } from '../lib/legacy.mjs';
+import { buildGraph } from '../lib/schema.mjs';
+const page = loadPages().find((p) => p.slug === '404');
+---
+<Layout page={page} graph={buildGraph(page)}><Fragment set:html={page.body} /></Layout>

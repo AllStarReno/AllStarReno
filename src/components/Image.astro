@@ -1,0 +1,8 @@
+---
+// Image wrapper: alt is REQUIRED (use alt="" + decorative for purely decorative images).
+interface Props { src: string; alt: string; width: number; height: number; decorative?: boolean; priority?: boolean; class?: string; sizes?: string }
+const { src, alt, width, height, decorative = false, priority = false, sizes, class: cls } = Astro.props;
+if (alt === undefined || (!decorative && !alt.trim())) throw new Error(`<Image> missing alt text for ${src}`);
+---
+<img src={src} alt={decorative ? '' : alt} width={width} height={height} class={cls} sizes={sizes}
+  loading={priority ? 'eager' : 'lazy'} decoding={priority ? 'sync' : 'async'} fetchpriority={priority ? 'high' : 'auto'} />

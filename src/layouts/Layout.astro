@@ -1,0 +1,41 @@
+---
+// Site-wide <head>: canonical, meta/OG/Twitter, robots, and a single JSON-LD @graph.
+import '../styles/tokens.css';
+import { SITE } from '../data/business.mjs';
+interface Props { page: any; graph: any }
+const { page, graph } = Astro.props;
+const { _hasArticle, ...ld } = graph;
+const robots = page.indexable ? 'index,follow,max-image-preview:large,max-snippet:-1' : 'noindex,follow';
+const hasMain = page.body.includes('id="main"');
+const ogImage = page.ogImage || `${SITE}/assets/img/og-image.jpg`;
+---
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{page.title}</title>
+  <meta name="description" content={page.description} />
+  <meta name="robots" content={robots} />
+  {page.indexable && <link rel="canonical" href={page.url} />}
+  <meta name="theme-color" content="#0F2B48" />
+  <meta name="geo.region" content="US-AR" /><meta name="geo.placename" content="Conway" />
+  <meta property="og:site_name" content="All-Star Renovations" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content={_hasArticle ? 'article' : page.ogType} />
+  <meta property="og:title" content={page.title} />
+  <meta property="og:description" content={page.description} />
+  <meta property="og:url" content={page.url} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:alt" content={page.ogImageAlt || page.title} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@All_StarReno" />
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM summary" />
+  <Fragment set:html={page.assets.join('\n')} />
+  <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+</head>
+<body class={page.bodyClass}>
+  {hasMain && <a class="skip-link" href="#main">Skip to main content</a>}
+  <slot />
+</body>
+</html>

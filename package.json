@@ -1,0 +1,14 @@
+{
+  "name": "allstarreno",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/check.mjs",
+    "preview": "astro preview",
+    "check:site": "node scripts/check.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.0.0"
+  }
+}
