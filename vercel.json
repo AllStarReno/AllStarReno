@@ -1162,6 +1162,20 @@
           "value": "noindex"
         }
       ]
+    },
+    {
+      "source": "/(thank-you|api/.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
     }
-  ]
+  ],
+  "functions": {
+    "api/*.js": {
+      "maxDuration": 15
+    }
+  }
 }

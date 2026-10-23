@@ -3,20 +3,34 @@
 import Layout from '../layouts/Layout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import CallBar from '../components/CallBar.astro';
+import LeadForm from '../components/LeadForm.astro';
 import { loadPages } from '../lib/legacy.mjs';
 import { buildGraph, breadcrumbTrail } from '../lib/schema.mjs';
+import { formPlacement, addVisitCta } from '../lib/placement.mjs';
 export function getStaticPaths() {
   return loadPages().filter((p) => p.slug !== '404').map((page) => ({ params: { slug: page.slug || undefined }, props: { page } }));
 }
 const { page } = Astro.props;
 const graph = buildGraph(page);
+// Lead form (AI Studio Contact) placement: insert/replace range in the legacy body.
+const form = formPlacement(page);
 // Breadcrumbs only where a content page lacks them (home & landing pages intentionally excluded).
 const needsCrumbs = !page.hasBreadcrumb && page.slug !== '' && page.indexable;
-const cut = needsCrumbs && page.body.includes('</header>') ? page.body.indexOf('</header>') + 9 : 0;
-const [before, after] = needsCrumbs ? [page.body.slice(0, cut), page.body.slice(cut)] : [page.body, ''];
+const crumbAt = needsCrumbs && page.body.includes('</header>') ? page.body.indexOf('</header>') + 9 : -1;
+// Build ordered segments: html | crumbs | form.
+const cuts = [];
+if (crumbAt > -1) cuts.push({ at: crumbAt, end: crumbAt, kind: 'crumbs' });
+if (form) cuts.push({ ...form, kind: 'form' });
+cuts.sort((a, b) => a.at - b.at);
+const segs = []; let pos = 0;
+for (const c of cuts) { segs.push({ kind: 'html', html: page.body.slice(pos, c.at) }); segs.push(c); pos = c.end; }
+segs.push({ kind: 'html', html: page.body.slice(pos) });
+// "Request a visit" CTA next to the first Swivl scheduler button (once per page).
+const i = segs.findIndex((s) => s.kind === 'html' && /data-swivl="(scheduler|quote)"/.test(s.html));
+if (i > -1) segs[i] = { ...segs[i], html: addVisitCta(segs[i].html, !!form) };
 const needsCallBar = !/fixed bottom|data-contact="call"/.test(page.body);
 ---
 <Layout page={page} graph={graph}>
-  {needsCrumbs ? <><Fragment set:html={before} /><Breadcrumbs items={breadcrumbTrail(page)} /><Fragment set:html={after} /></> : <Fragment set:html={page.body} />}
+  {segs.map((s) => s.kind === 'html' ? <Fragment set:html={s.html} /> : s.kind === 'crumbs' ? <Breadcrumbs items={breadcrumbTrail(page)} /> : <LeadForm {...s.props} />)}
   {needsCallBar && <CallBar />}
 </Layout>

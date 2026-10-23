@@ -1,0 +1,133 @@
+---
+// AI Studio "Contact" lead form (navy card, orange submit, consent text, "Request Received!"),
+// rebuilt as accessible static HTML + progressive enhancement (public/assets/js/lead-form.js).
+// variant="full": two-column AI Studio section. variant="compact": card only, preset city/service.
+interface Props { variant?: 'full' | 'compact'; city?: string; service?: string; source?: string; heading?: string; pitch?: boolean; bare?: boolean }
+const { variant = 'full', city = 'Conway', service = 'Shower Replacement', source = 'contact_form', heading, pitch = true, bare = false } = Astro.props;
+const SERVICES = ['Shower Replacement', 'Tub-to-Shower Conversion', 'Walk-In Tub Installation', 'Full Bathroom Remodel', 'Aging-in-Place Renovation', 'Kitchen Remodeling', 'Handyman Services', 'Other / Not Sure'];
+const WINDOWS = [['morning', 'Morning (9:00 AM – 12:00 PM)'], ['early-afternoon', 'Early Afternoon (12:00 PM – 3:00 PM)'], ['late-afternoon', 'Late Afternoon (3:00 PM – 6:00 PM)'], ['evening', 'Evening (6:00 PM – 7:30 PM)'], ['flexible', 'Flexible / Any Time']];
+const TIMELINES = ['Immediate (1-2 Weeks)', 'Within 1 Month', '1 to 3 Months', 'Planning / Flexible'];
+const full = variant === 'full';
+const showPitch = full && pitch;
+---
+<section id="request-visit" class:list={['lf-wrap', showPitch ? 'lf-full' : 'lf-compact', bare && 'lf-bare']} aria-labelledby="lf-title">
+  <div class="lf-inner">
+    {showPitch && (
+      <div class="lf-pitch">
+        <span class="lf-chip">Get Started Today</span>
+        <h2 id="lf-title" class="lf-h">Request Your Free <span>In-Home Consultation</span></h2>
+        <p class="lf-lead">Schedule your free, no-obligation in-home estimate. Pick a day and time window below and our Central Arkansas remodeling specialists will confirm by call or text.</p>
+        <ul class="lf-touch">
+          <li><a href="tel:+15015043398" data-contact="call"><strong>Call Our Experts</strong><span>(501) 504-3398</span><small>Tap to dial</small></a></li>
+          <li><a href="sms:+15015043398?&body=Hi%20All-Star%20Renovations!%20I%20am%20interested%20in%20a%20free%20consultation." data-contact="sms"><strong>Text / SMS Support</strong><span>(501) 504-3398</span><small>Fast mobile response</small></a></li>
+          <li><a href="mailto:info@allstarreno.com?subject=Inquiry%20from%20Website"><strong>Email Office</strong><span>info@allstarreno.com</span><small>General questions</small></a></li>
+        </ul>
+      </div>
+    )}
+    <div class="lf-card" data-lead-card>
+      {!showPitch && <h2 id="lf-title" class="lf-h lf-h-sm">{heading || `Request a Free Consultation${city && city !== 'Conway' ? ` in ${city}` : ''}`}</h2>}
+      <form class="lf-form" action="/api/lead" method="post" novalidate data-lead-form data-variant={variant}>
+        <p class="lf-note"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>All estimates are 100% free with no obligation to purchase.</p>
+        <p class="lf-req">Fields marked <span aria-hidden="true">*</span><span class="sr">with an asterisk</span> are required.</p>
+        <div class="lf-err-summary" role="alert" tabindex="-1" hidden data-summary></div>
+        <div class="lf-grid">
+          <div class="lf-f"><label for="lf-first">First Name <span aria-hidden="true">*</span></label><input id="lf-first" name="firstName" required autocomplete="given-name" placeholder="John" aria-describedby="lf-first-e" maxlength="80" /><p id="lf-first-e" class="lf-e" data-err></p></div>
+          <div class="lf-f"><label for="lf-last">Last Name <span aria-hidden="true">*</span></label><input id="lf-last" name="lastName" required autocomplete="family-name" placeholder="Doe" aria-describedby="lf-last-e" maxlength="80" /><p id="lf-last-e" class="lf-e" data-err></p></div>
+          <div class="lf-f"><label for="lf-email">Email Address <span aria-hidden="true">*</span></label><input id="lf-email" name="email" type="email" required autocomplete="email" inputmode="email" placeholder="john@example.com" aria-describedby="lf-email-e" maxlength="160" /><p id="lf-email-e" class="lf-e" data-err></p></div>
+          <div class="lf-f"><label for="lf-phone">Phone Number <span aria-hidden="true">*</span></label><input id="lf-phone" name="phone" type="tel" required autocomplete="tel-national" inputmode="tel" placeholder="(501) 555-1234" aria-describedby="lf-phone-e" maxlength="40" /><p id="lf-phone-e" class="lf-e" data-err></p></div>
+          <div class="lf-f"><label for="lf-service">Service Interested In <span aria-hidden="true">*</span></label><select id="lf-service" name="service" required aria-describedby="lf-service-e">{SERVICES.map((s) => <option selected={s === service}>{s}</option>)}</select><p id="lf-service-e" class="lf-e" data-err></p></div>
+          <div class="lf-f"><label for="lf-city">Your City / Community <span aria-hidden="true">*</span></label><input id="lf-city" name="city" required autocomplete="address-level2" value={city} placeholder="e.g. Conway, Maumelle, Vilonia" aria-describedby="lf-city-e" maxlength="80" /><p id="lf-city-e" class="lf-e" data-err></p></div>
+        </div>
+        <fieldset class="lf-sched" data-scheduler aria-describedby="lf-sched-help">
+          <legend><svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Preferred In-Home Consultation Time</legend>
+          <p id="lf-sched-help" class="lf-help" data-sched-status>Choose a day (Mon–Sat, next 2 weeks) and a time window. Times are Central Time.</p>
+          <!-- No-JS fallback; lead-form.js replaces this with the live 14-day picker. -->
+          <div class="lf-grid lf-grid-tight" data-sched-fallback>
+            <div class="lf-f"><label for="lf-date">Preferred Date <span aria-hidden="true">*</span></label><input id="lf-date" name="date" type="date" required aria-describedby="lf-date-e" /><p id="lf-date-e" class="lf-e" data-err></p></div>
+            <div class="lf-f"><label for="lf-window">Preferred Time Window <span aria-hidden="true">*</span></label><select id="lf-window" name="window" required aria-describedby="lf-window-e">{WINDOWS.map(([v, l]) => <option value={v}>{l}</option>)}</select><p id="lf-window-e" class="lf-e" data-err></p></div>
+          </div>
+        </fieldset>
+        {full && <div class="lf-f"><label for="lf-timeline">Project Timeline <span class="lf-opt">(optional)</span></label><select id="lf-timeline" name="timeline"><option value="">Choose one</option>{TIMELINES.map((s) => <option>{s}</option>)}</select></div>}
+        <div class="lf-f"><label for="lf-msg">Additional details / notes <span class="lf-opt">(optional)</span></label><textarea id="lf-msg" name="message" rows={full ? 3 : 2} maxlength="2000" placeholder="Describe your project, layout details, or any special accessibility requirements..."></textarea></div>
+        <div class="lf-hp" aria-hidden="true"><label for="lf-company">Company (leave blank)</label><input id="lf-company" name="company" tabindex="-1" autocomplete="off" /></div>
+        <input type="hidden" name="t" value="" data-t />
+        <input type="hidden" name="source" value={source} />
+        <input type="hidden" name="page" value="" data-page />
+        <button type="submit" class="lf-submit">Request Free Consultation <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg></button>
+        <p class="lf-consent">By submitting this form, you provide express written consent for All-Star Renovations and our automated communication systems (including AI scheduling assistants and SMS notifications) to contact you at the phone number provided regarding your estimate, consultation booking, and project updates via phone calls and SMS/MMS. Consent is not a condition of purchase. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to cancel at any time, or HELP for help. View our <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms-and-conditions">Terms of Service</a>. We will never share or sell your phone number or opt-in data with third parties for marketing purposes.</p>
+      </form>
+      <div class="lf-done" data-done hidden tabindex="-1" role="status" aria-live="polite">
+        <div class="lf-check" aria-hidden="true"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3>Request Received!</h3>
+        <p>Thank you! One of our local design consultants will call or text you shortly to schedule your on-site quote.</p>
+        <dl class="lf-sum" data-sum></dl>
+        <div class="lf-fb" data-fb hidden><p data-fb-msg>To be safe, please also send us a copy:</p><a class="lf-btn" data-fb-mail href="mailto:info@allstarreno.com">Email a copy</a><a class="lf-btn" data-fb-sms href="sms:+15015043398">Text us</a><a class="lf-btn" href="tel:+15015043398">Call (501) 504-3398</a></div>
+        <button type="button" class="lf-again" data-again>Submit Another Lead Form</button>
+      </div>
+    </div>
+  </div>
+</section>
+<script is:inline src="/assets/js/lead-form.js?v=1" defer></script>
+<style is:global>
+.lf-wrap{--n1:#0e172a;--n2:#0b1329;--or:#c2410c;--or2:#ea580c;--ink:#cbd5e1;background:var(--n1);color:#fff;padding:4rem 1.25rem;font-family:var(--asr-font-body,Inter,system-ui,sans-serif);border-top:1px solid rgba(255,255,255,.05)}
+.lf-compact{padding:3rem 1.25rem;background:var(--n2)}
+.lf-inner{max-width:80rem;margin:0 auto;display:grid;gap:3rem;align-items:start}
+.lf-full .lf-inner{grid-template-columns:1fr}
+@media(min-width:1024px){.lf-full .lf-inner{grid-template-columns:5fr 7fr;gap:4rem}}
+.lf-compact .lf-inner{max-width:48rem}
+.lf-bare{padding:0;background:transparent;border:0;margin-bottom:2rem}.lf-bare .lf-inner{max-width:none}
+.lf-chip{display:inline-block;padding:.375rem 1rem;background:rgba(255,255,255,.1);color:#fdba74;border-radius:999px;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(255,255,255,.1);margin-bottom:1.25rem}
+.lf-h{font-family:Georgia,'Playfair Display',serif;font-weight:700;font-size:clamp(2rem,4vw,3.25rem);line-height:1.1;margin:0 0 1.25rem;color:#fff}
+.lf-h span{font-style:italic;color:#fdba74}.lf-h-sm{font-size:clamp(1.5rem,3vw,2rem)}
+.lf-lead{color:var(--ink);font-size:1.125rem;line-height:1.6;margin:0 0 2rem}
+.lf-touch{list-style:none;margin:0;padding:0;display:grid;gap:1rem}
+.lf-touch a{display:grid;gap:.125rem;padding:1rem 1.25rem;border-radius:1rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1);color:#fff;text-decoration:none;min-height:48px}
+.lf-touch a span,.lf-touch a strong{color:#fff;text-decoration:none}.lf-touch a:hover{background:rgba(255,255,255,.2)}.lf-touch strong{font-size:1.05rem}.lf-touch small{color:#fdba74;font-weight:700;font-size:.75rem}
+.lf-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:1.5rem;padding:1.5rem;box-shadow:0 25px 50px -12px rgba(0,0,0,.5)}
+@media(min-width:768px){.lf-card{padding:3rem}}
+.lf-form{display:grid;gap:1.25rem}.lf-form[hidden]{display:none}
+.lf-note{display:flex;gap:.5rem;align-items:center;font-size:.8rem;color:var(--ink);margin:0;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.1)}.lf-note svg{color:var(--or2);flex:none}
+.lf-req{margin:-.5rem 0 0;font-size:.75rem;color:#94a3b8}
+.lf-grid{display:grid;gap:1.25rem}@media(min-width:768px){.lf-grid{grid-template-columns:1fr 1fr}}
+.lf-f{display:grid;gap:.4rem;align-content:start}
+.lf-f label,.lf-sched legend{font-size:.75rem;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.05em}
+.lf-opt{text-transform:none;font-weight:500;color:#94a3b8}
+.lf-f input,.lf-f select,.lf-f textarea{width:100%;box-sizing:border-box;min-height:48px;padding:.75rem 1rem;border-radius:.75rem;background:var(--n2);border:1px solid rgba(255,255,255,.18);color:#fff;font:inherit;font-size:16px}
+.lf-f textarea{resize:vertical;min-height:88px}
+.lf-f input::placeholder,.lf-f textarea::placeholder{color:#8090a8}
+.lf-f select option{background:var(--n2);color:#fff}
+.lf-f input:focus,.lf-f select:focus,.lf-f textarea:focus{border-color:var(--or2);box-shadow:0 0 0 3px rgba(234,88,12,.25);outline:none}
+.lf-f [aria-invalid=true],.lf-sched[aria-invalid=true]{border-color:#f87171}
+.lf-e{margin:0;font-size:.8rem;color:#fca5a5;min-height:0}.lf-e:empty{display:none}
+.lf-sched{margin:0;padding:1rem;border-radius:1rem;background:rgba(11,19,41,.9);border:1px solid rgba(255,255,255,.1);display:grid;gap:.75rem;min-width:0}
+.lf-sched legend{display:flex;gap:.5rem;align-items:center;color:#fff;float:left;width:100%;padding:0}.lf-sched legend svg{color:var(--or2)}
+.lf-help{margin:0;font-size:.8rem;color:#94a3b8;clear:both}
+.lf-days{display:flex;gap:.5rem;overflow-x:auto;padding:.25rem .1rem .5rem;scroll-snap-type:x mandatory;margin:0;border:0}
+.lf-days label,.lf-wins label{position:relative;cursor:pointer}
+.lf-days input,.lf-wins input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.lf-day{display:grid;place-items:center;min-width:4.25rem;min-height:56px;padding:.5rem;border-radius:.75rem;background:var(--n1);border:1px solid rgba(255,255,255,.15);font-size:.8rem;line-height:1.25;text-align:center;scroll-snap-align:start}
+.lf-day b{font-size:1.05rem}
+.lf-wins{display:grid;gap:.5rem;margin:0;padding:0;border:0}@media(min-width:640px){.lf-wins{grid-template-columns:1fr 1fr}}
+.lf-win{display:flex;justify-content:space-between;gap:.5rem;align-items:center;min-height:48px;padding:.6rem .9rem;border-radius:.75rem;background:var(--n1);border:1px solid rgba(255,255,255,.15);font-size:.875rem}
+.lf-win em{font-style:normal;font-size:.7rem;font-weight:700;text-transform:uppercase;color:#94a3b8}
+input:checked+.lf-day,input:checked+.lf-win{border-color:var(--or2);background:rgba(234,88,12,.18);box-shadow:0 0 0 1px var(--or2)}
+input:focus-visible+.lf-day,input:focus-visible+.lf-win{outline:3px solid var(--asr-amber,#F5A524);outline-offset:2px}
+input:disabled+.lf-win{opacity:.45;text-decoration:line-through;cursor:not-allowed;background:transparent}
+.lf-day.lf-full-day{opacity:.5}
+.lf-submit{display:flex;gap:.5rem;justify-content:center;align-items:center;width:100%;min-height:52px;border:0;border-radius:.75rem;background:var(--or);color:#fff;font:inherit;font-weight:700;font-size:.95rem;cursor:pointer;box-shadow:0 10px 15px -3px rgba(234,88,12,.25)}
+.lf-submit:hover{background:#9a3412}.lf-submit[disabled]{opacity:.7;cursor:progress}
+.lf-consent{margin:0;font-size:.7rem;line-height:1.6;color:#94a3b8;text-align:center}.lf-consent a{color:#fdba74}
+.lf-hp{position:absolute!important;left:-10000px;width:1px;height:1px;overflow:hidden}
+.lf-err-summary{padding:.75rem 1rem;border-radius:.75rem;background:rgba(248,113,113,.12);border:1px solid #f87171;color:#fecaca;font-size:.875rem}
+.lf-done{text-align:center;display:grid;gap:1rem}.lf-done[hidden]{display:none}
+.lf-check{width:4rem;height:4rem;margin:0 auto;border-radius:999px;display:grid;place-items:center;background:rgba(34,197,94,.2);color:#4ade80}
+.lf-done h3{font-family:Georgia,serif;font-size:1.9rem;margin:0}.lf-done p{color:var(--ink);margin:0}
+.lf-sum{text-align:left;background:rgba(2,6,23,.8);border:1px solid rgba(255,255,255,.06);border-top:6px solid var(--or2);border-radius:1rem;padding:1.25rem;margin:0;font:13px/1.6 ui-monospace,monospace;color:var(--ink);display:grid;grid-template-columns:auto 1fr;gap:.2rem .75rem}
+.lf-sum dt{color:#fdba74;font-weight:700}.lf-sum dd{margin:0;word-break:break-word}
+.lf-fb{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}.lf-fb p{width:100%}
+.lf-btn,.lf-again{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.6rem 1.4rem;border-radius:999px;font:inherit;font-weight:700;font-size:.875rem;text-decoration:none;cursor:pointer}
+.lf-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff}
+.lf-again{background:var(--or);border:0;color:#fff;justify-self:center}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.asr-rv{scroll-margin-top:6rem}#request-visit{scroll-margin-top:5rem}
+</style>
