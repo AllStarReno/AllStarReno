@@ -2,10 +2,10 @@
 // AI Studio "Contact" lead form (navy card, orange submit, consent text, "Request Received!"),
 // rebuilt as accessible static HTML + progressive enhancement (public/assets/js/lead-form.js).
 // variant="full": two-column AI Studio section. variant="compact": card only, preset city/service.
-interface Props { variant?: 'full' | 'compact'; city?: string; service?: string; source?: string; heading?: string; pitch?: boolean; bare?: boolean }
-const { variant = 'full', city = 'Conway', service = 'Shower Replacement', source = 'contact_form', heading, pitch = true, bare = false } = Astro.props;
+interface Props { variant?: 'full' | 'compact'; city?: string; service?: string; source?: string; heading?: string; pitch?: boolean; bare?: boolean; defaultTab?: 'quote' | 'book' }
+const { variant = 'full', city = 'Conway', service = 'Shower Replacement', source = 'contact_form', heading, pitch = true, bare = false, defaultTab = 'quote' } = Astro.props;
 const SERVICES = ['Shower Replacement', 'Tub-to-Shower Conversion', 'Walk-In Tub Installation', 'Full Bathroom Remodel', 'Aging-in-Place Renovation', 'Kitchen Remodeling', 'Handyman Services', 'Other / Not Sure'];
-const WINDOWS = [['morning', 'Morning (9:00 AM – 12:00 PM)'], ['early-afternoon', 'Early Afternoon (12:00 PM – 3:00 PM)'], ['late-afternoon', 'Late Afternoon (3:00 PM – 6:00 PM)'], ['evening', 'Evening (6:00 PM – 7:30 PM)'], ['flexible', 'Flexible / Any Time']];
+const BOOKING_URL = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0ZRx4CfMx9hmkVVcZm7KSoe_jVz0t6PvVOoKPgbogD28yX4PjouFRxs54v6qmA-gPzzc3hVSfi?gv=true';
 const TIMELINES = ['Immediate (1-2 Weeks)', 'Within 1 Month', '1 to 3 Months', 'Planning / Flexible'];
 const full = variant === 'full';
 const showPitch = full && pitch;
@@ -16,7 +16,8 @@ const showPitch = full && pitch;
       <div class="lf-pitch">
         <span class="lf-chip">Get Started Today</span>
         <h2 id="lf-title" class="lf-h">Request Your Free <span>In-Home Consultation</span></h2>
-        <p class="lf-lead">Schedule your free, no-obligation in-home estimate. Pick a day and time window below and our Central Arkansas remodeling specialists will confirm by call or text.</p>
+        <p class="lf-lead">Schedule your free, no-obligation in-home estimate. Tell us about your project, then pick an in-home consultation time on our calendar. Our Central Arkansas remodeling specialists will confirm by call or text.</p>
+        <a class="lf-booktime" href="#book" data-book-time>Book a time on our calendar</a>
         <ul class="lf-touch">
           <li><a href="tel:+15015043398" data-contact="call"><strong>Call Our Experts</strong><span>(501) 504-3398</span><small>Tap to dial</small></a></li>
           <li><a href="sms:+15015043398?&body=Hi%20All-Star%20Renovations!%20I%20am%20interested%20in%20a%20free%20consultation." data-contact="sms"><strong>Text / SMS Support</strong><span>(501) 504-3398</span><small>Fast mobile response</small></a></li>
@@ -24,8 +25,13 @@ const showPitch = full && pitch;
         </ul>
       </div>
     )}
-    <div class="lf-card" data-lead-card>
+    <div class="lf-card" data-lead-card data-booking={BOOKING_URL} data-default-tab={defaultTab}>
       {!showPitch && <h2 id="lf-title" class="lf-h lf-h-sm">{heading || `Request a Free Consultation${city && city !== 'Conway' ? ` in ${city}` : ''}`}</h2>}
+      <div class="lf-tabs" role="tablist" aria-label="How would you like to start?" data-lf-tabs>
+        <button type="button" role="tab" id="lf-tab-quote" aria-controls="lf-panel-quote" aria-selected="true" class="lf-tab" data-tab="quote">Request a Quote</button>
+        <button type="button" role="tab" id="lf-tab-book" aria-controls="lf-panel-book" aria-selected="false" tabindex="-1" class="lf-tab" data-tab="book">Book a Time</button>
+      </div>
+      <div role="tabpanel" id="lf-panel-quote" aria-labelledby="lf-tab-quote" tabindex="0" class="lf-panel" data-lf-panel="quote">
       <form class="lf-form" action="/api/lead" method="post" novalidate data-lead-form data-variant={variant}>
         <p class="lf-note"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>All estimates are 100% free with no obligation to purchase.</p>
         <p class="lf-req">Fields marked <span aria-hidden="true">*</span><span class="sr">with an asterisk</span> are required.</p>
@@ -38,15 +44,6 @@ const showPitch = full && pitch;
           <div class="lf-f"><label for="lf-service">Service Interested In <span aria-hidden="true">*</span></label><select id="lf-service" name="service" required aria-describedby="lf-service-e">{SERVICES.map((s) => <option selected={s === service}>{s}</option>)}</select><p id="lf-service-e" class="lf-e" data-err></p></div>
           <div class="lf-f"><label for="lf-city">Your City / Community <span aria-hidden="true">*</span></label><input id="lf-city" name="city" required autocomplete="address-level2" value={city} placeholder="e.g. Conway, Maumelle, Vilonia" aria-describedby="lf-city-e" maxlength="80" /><p id="lf-city-e" class="lf-e" data-err></p></div>
         </div>
-        <fieldset class="lf-sched" data-scheduler aria-describedby="lf-sched-help">
-          <legend><svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Preferred In-Home Consultation Time</legend>
-          <p id="lf-sched-help" class="lf-help" data-sched-status>Choose a day (Mon–Sat, next 2 weeks) and a time window. Times are Central Time.</p>
-          <!-- No-JS fallback; lead-form.js replaces this with the live 14-day picker. -->
-          <div class="lf-grid lf-grid-tight" data-sched-fallback>
-            <div class="lf-f"><label for="lf-date">Preferred Date <span aria-hidden="true">*</span></label><input id="lf-date" name="date" type="date" required aria-describedby="lf-date-e" /><p id="lf-date-e" class="lf-e" data-err></p></div>
-            <div class="lf-f"><label for="lf-window">Preferred Time Window <span aria-hidden="true">*</span></label><select id="lf-window" name="window" required aria-describedby="lf-window-e">{WINDOWS.map(([v, l]) => <option value={v}>{l}</option>)}</select><p id="lf-window-e" class="lf-e" data-err></p></div>
-          </div>
-        </fieldset>
         {full && <div class="lf-f"><label for="lf-timeline">Project Timeline <span class="lf-opt">(optional)</span></label><select id="lf-timeline" name="timeline"><option value="">Choose one</option>{TIMELINES.map((s) => <option>{s}</option>)}</select></div>}
         <div class="lf-f"><label for="lf-msg">Additional details / notes <span class="lf-opt">(optional)</span></label><textarea id="lf-msg" name="message" rows={full ? 3 : 2} maxlength="2000" placeholder="Describe your project, layout details, or any special accessibility requirements..."></textarea></div>
         <div class="lf-hp" aria-hidden="true"><label for="lf-company">Company (leave blank)</label><input id="lf-company" name="company" tabindex="-1" autocomplete="off" /></div>
@@ -60,14 +57,25 @@ const showPitch = full && pitch;
         <div class="lf-check" aria-hidden="true"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
         <h3>Request Received!</h3>
         <p>Thank you! One of our local design consultants will call or text you shortly to schedule your on-site quote.</p>
-        <dl class="lf-sum" data-sum></dl>
+        <p class="lf-booklink">Want to pick a time now? <a href="#book" data-open-book>Book a visit</a></p>
+        <details class="lf-sumbox"><summary>Your request details</summary><dl class="lf-sum" data-sum></dl></details>
         <div class="lf-fb" data-fb hidden><p data-fb-msg>To be safe, please also send us a copy:</p><a class="lf-btn" data-fb-mail href="mailto:info@allstarreno.com">Email a copy</a><a class="lf-btn" data-fb-sms href="sms:+15015043398">Text us</a><a class="lf-btn" href="tel:+15015043398">Call (501) 504-3398</a></div>
         <button type="button" class="lf-again" data-again>Submit Another Lead Form</button>
+      </div>
+      </div>
+      <div role="tabpanel" id="lf-panel-book" aria-labelledby="lf-tab-book" tabindex="0" class="lf-panel" data-lf-panel="book" hidden>
+        <div class="lf-book">
+          <h3 class="lf-book-h"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Pick your in-home consultation time</h3>
+          <div class="lf-book-frame" data-book-frame></div>
+          <a class="lf-btn lf-book-open" href={BOOKING_URL} target="_blank" rel="noopener">Open the booking calendar in a new tab</a>
+          <a class="lf-skip" href="tel:+15015043398" data-contact="call">Prefer to talk? Call (501) 504-3398</a>
+        </div>
+        <noscript><iframe src={BOOKING_URL} title="Pick your in-home consultation time (Google Calendar booking)" loading="lazy" class="lf-ns-frame"></iframe></noscript>
       </div>
     </div>
   </div>
 </section>
-<script is:inline src="/assets/js/lead-form.js?v=1" defer></script>
+<script is:inline src="/assets/js/lead-form.js?v=3" defer></script>
 <style is:global>
 .lf-wrap{--n1:#0e172a;--n2:#0b1329;--or:#c2410c;--or2:#ea580c;--ink:#cbd5e1;background:var(--n1);color:#fff;padding:4rem 1.25rem;font-family:var(--asr-font-body,Inter,system-ui,sans-serif);border-top:1px solid rgba(255,255,255,.05)}
 .lf-compact{padding:3rem 1.25rem;background:var(--n2)}
@@ -90,30 +98,16 @@ const showPitch = full && pitch;
 .lf-req{margin:-.5rem 0 0;font-size:.75rem;color:#94a3b8}
 .lf-grid{display:grid;gap:1.25rem}@media(min-width:768px){.lf-grid{grid-template-columns:1fr 1fr}}
 .lf-f{display:grid;gap:.4rem;align-content:start}
-.lf-f label,.lf-sched legend{font-size:.75rem;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.05em}
+.lf-f label{font-size:.75rem;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.05em}
 .lf-opt{text-transform:none;font-weight:500;color:#94a3b8}
 .lf-f input,.lf-f select,.lf-f textarea{width:100%;box-sizing:border-box;min-height:48px;padding:.75rem 1rem;border-radius:.75rem;background:var(--n2);border:1px solid rgba(255,255,255,.18);color:#fff;font:inherit;font-size:16px}
 .lf-f textarea{resize:vertical;min-height:88px}
 .lf-f input::placeholder,.lf-f textarea::placeholder{color:#8090a8}
 .lf-f select option{background:var(--n2);color:#fff}
 .lf-f input:focus,.lf-f select:focus,.lf-f textarea:focus{border-color:var(--or2);box-shadow:0 0 0 3px rgba(234,88,12,.25);outline:none}
-.lf-f [aria-invalid=true],.lf-sched[aria-invalid=true]{border-color:#f87171}
+.lf-f [aria-invalid=true]{border-color:#f87171}
 .lf-e{margin:0;font-size:.8rem;color:#fca5a5;min-height:0}.lf-e:empty{display:none}
-.lf-sched{margin:0;padding:1rem;border-radius:1rem;background:rgba(11,19,41,.9);border:1px solid rgba(255,255,255,.1);display:grid;gap:.75rem;min-width:0}
-.lf-sched legend{display:flex;gap:.5rem;align-items:center;color:#fff;float:left;width:100%;padding:0}.lf-sched legend svg{color:var(--or2)}
 .lf-help{margin:0;font-size:.8rem;color:#94a3b8;clear:both}
-.lf-days{display:flex;gap:.5rem;overflow-x:auto;padding:.25rem .1rem .5rem;scroll-snap-type:x mandatory;margin:0;border:0}
-.lf-days label,.lf-wins label{position:relative;cursor:pointer}
-.lf-days input,.lf-wins input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
-.lf-day{display:grid;place-items:center;min-width:4.25rem;min-height:56px;padding:.5rem;border-radius:.75rem;background:var(--n1);border:1px solid rgba(255,255,255,.15);font-size:.8rem;line-height:1.25;text-align:center;scroll-snap-align:start}
-.lf-day b{font-size:1.05rem}
-.lf-wins{display:grid;gap:.5rem;margin:0;padding:0;border:0}@media(min-width:640px){.lf-wins{grid-template-columns:1fr 1fr}}
-.lf-win{display:flex;justify-content:space-between;gap:.5rem;align-items:center;min-height:48px;padding:.6rem .9rem;border-radius:.75rem;background:var(--n1);border:1px solid rgba(255,255,255,.15);font-size:.875rem}
-.lf-win em{font-style:normal;font-size:.7rem;font-weight:700;text-transform:uppercase;color:#94a3b8}
-input:checked+.lf-day,input:checked+.lf-win{border-color:var(--or2);background:rgba(234,88,12,.18);box-shadow:0 0 0 1px var(--or2)}
-input:focus-visible+.lf-day,input:focus-visible+.lf-win{outline:3px solid var(--asr-amber,#F5A524);outline-offset:2px}
-input:disabled+.lf-win{opacity:.45;text-decoration:line-through;cursor:not-allowed;background:transparent}
-.lf-day.lf-full-day{opacity:.5}
 .lf-submit{display:flex;gap:.5rem;justify-content:center;align-items:center;width:100%;min-height:52px;border:0;border-radius:.75rem;background:var(--or);color:#fff;font:inherit;font-weight:700;font-size:.95rem;cursor:pointer;box-shadow:0 10px 15px -3px rgba(234,88,12,.25)}
 .lf-submit:hover{background:#9a3412}.lf-submit[disabled]{opacity:.7;cursor:progress}
 .lf-consent{margin:0;font-size:.7rem;line-height:1.6;color:#94a3b8;text-align:center}.lf-consent a{color:#fdba74}
@@ -128,6 +122,18 @@ input:disabled+.lf-win{opacity:.45;text-decoration:line-through;cursor:not-allow
 .lf-btn,.lf-again{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.6rem 1.4rem;border-radius:999px;font:inherit;font-weight:700;font-size:.875rem;text-decoration:none;cursor:pointer}
 .lf-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff}
 .lf-again{background:var(--or);border:0;color:#fff;justify-self:center}
+.lf-book{display:grid;gap:.75rem;text-align:left;background:rgba(11,19,41,.9);border:1px solid rgba(255,255,255,.1);border-radius:1rem;padding:1rem}
+.lf-book-h{display:flex;gap:.5rem;align-items:center;margin:0;font-size:1.05rem;color:#fff}.lf-book-h svg{color:var(--or2)}
+.lf-book-frame:empty{display:none}.lf-book-frame iframe{display:block;width:100%;height:clamp(560px,80vh,760px);border:0;border-radius:.75rem;background:#fff}
+@media(max-width:640px){.lf-book{padding:0;background:transparent;border:0}.lf-book-frame iframe{height:min(85vh,900px)}.lf-card:has(.lf-panel[data-lf-panel=book]:not([hidden])){padding:1rem .75rem}}
+.lf-book-open{justify-self:center}.lf-skip{justify-self:center;color:#fdba74;font-weight:700;font-size:.9rem;padding:.75rem;min-height:44px}
+.lf-skip-msg{text-align:center}.lf-sumbox{text-align:left;color:var(--ink)}.lf-sumbox summary{cursor:pointer;font-weight:700;padding:.5rem 0}
+.lf-booktime{display:inline-flex;align-items:center;min-height:48px;padding:.6rem 1.4rem;margin:0 0 1.5rem;border-radius:999px;background:var(--or);color:#fff;font-weight:700;text-decoration:none}.lf-booktime:hover{background:#9a3412}
+.lf-tabs{display:grid;grid-template-columns:1fr 1fr;gap:.25rem;padding:.25rem;margin-bottom:1.5rem;border-radius:999px;background:var(--n2);border:1px solid rgba(255,255,255,.12)}
+.lf-tab{min-height:48px;border:0;border-radius:999px;background:transparent;color:var(--ink);font:inherit;font-weight:700;font-size:.9rem;cursor:pointer}
+.lf-tab[aria-selected=true]{background:var(--or);color:#fff}.lf-tab:focus-visible,.lf-panel:focus-visible{outline:3px solid var(--asr-amber,#F5A524);outline-offset:2px}
+.lf-panel[hidden]{display:none}.lf-booklink{text-align:center}.lf-booklink a{color:#fdba74;font-weight:700}
+.lf-ns-frame{display:block;width:100%;height:760px;border:0;border-radius:.75rem;background:#fff}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .asr-rv{scroll-margin-top:6rem}#request-visit{scroll-margin-top:5rem}
 </style>
