@@ -1,0 +1,13 @@
+---
+// Answer-first block (AEO/voice): 40–60 word direct answer, targeted by speakable.
+interface Props { question: string; answer: string }
+const { question, answer } = Astro.props;
+---
+<section data-quick-answer id="speakable-summary" class="qa-block" aria-labelledby="qa-q">
+  <h2 id="qa-q">{question}</h2>
+  <p>{answer}</p>
+</section>
+<style>
+  .qa-block { border-left: 4px solid var(--asr-amber); background: #fff; color: var(--asr-navy); padding: 1rem 1.25rem; border-radius: .75rem; }
+  .qa-block h2 { font-family: var(--asr-font-head); font-weight: 800; font-size: 1.125rem; margin: 0 0 .25rem; }
+</style>

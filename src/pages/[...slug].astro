@@ -1,0 +1,65 @@
+---
+// Catch-all route: renders every original page at its original path, wrapped in the
+// stage 1 global header, footer and "Ready to Transform" contact block (stage 2 rollout).
+import Layout from '../layouts/Layout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import CallBar from '../components/CallBar.astro';
+import LeadForm from '../components/LeadForm.astro';
+import SiteHeader from '../components/global/SiteHeader.astro';
+import SiteFooter from '../components/global/SiteFooter.astro';
+import ContactBlock from '../components/global/ContactBlock.astro';
+import TrustBadges from '../components/TrustBadges.astro';
+import '../styles/ui.css';
+import { loadPages } from '../lib/legacy.mjs';
+import { buildGraph, breadcrumbTrail } from '../lib/schema.mjs';
+import { formPlacement, addVisitCta } from '../lib/placement.mjs';
+import { SERVICE_PAGE_SLUGS } from '../data/service-pages.mjs';
+import { CITY_PAGE_SLUGS } from '../data/city-pages.mjs';
+export function getStaticPaths() {
+  const SKIP = new Set(['404', 'service-areas', ...SERVICE_PAGE_SLUGS, ...CITY_PAGE_SLUGS]);
+  return loadPages().filter((p) => !SKIP.has(p.slug)).map((page) => ({ params: { slug: page.slug || undefined }, props: { page } }));
+}
+const { page } = Astro.props;
+const graph = buildGraph(page);
+const s = page.slug;
+let b = page.body;
+// 1) Global header/footer: swap the legacy header (+ its mobile drawer) and footer for the shared components.
+// In-app legal pages (*-mobile) keep their own app-style chrome (their <h1> lives in that header).
+const APP = s.endsWith('-mobile');
+if (!APP) {
+const hEnd = b.indexOf('</header>');
+if (hEnd > -1) b = '<!--@HEADER-->' + b.slice(hEnd + 9);
+else b = '<!--@HEADER-->' + b;
+const fA = b.indexOf('<footer'), fB = b.lastIndexOf('</footer>');
+if (fA > -1 && fB > fA) b = b.slice(0, fA) + '<!--@FOOTER-->' + b.slice(fB + 9);
+else b = b + '<!--@FOOTER-->';
+// The new header is sticky, so drop the legacy fixed-header top padding on <main>.
+b = b.replace(/<main\b[^>]*>/, (t) => t.replace(/\s(?:sm:|md:|lg:)?pt-(?:\[[^\]]+\]|\d+)/g, ''));
+}
+// 2) Lead form / contact block.
+const OWN_FORM = new Set(['', 'estimate', 'contact']);
+const NO_CONTACT = new Set(['thank-you', 'estimate', 'contact', '', 'privacy-policy-mobile', 'terms-and-conditions-mobile']);
+let form = OWN_FORM.has(s) ? formPlacement({ ...page, body: b }) : null;
+if (form) b = b.slice(0, form.at) + '<!--@FORM-->' + b.slice(form.end);
+if (!NO_CONTACT.has(s)) { const m = b.lastIndexOf('</main>'); const at = m > -1 ? m : b.indexOf('<!--@FOOTER-->'); b = b.slice(0, at) + '<!--@CONTACT-->' + b.slice(at); }
+// 3) Breadcrumbs only where a content page lacks them.
+if (!page.hasBreadcrumb && s !== '' && page.indexable) { const m = b.match(/<main\b[^>]*>/); if (m) b = b.replace(m[0], m[0] + '<!--@CRUMBS-->'); }
+const segs = b.split(/(<!--@(?:HEADER|FOOTER|CONTACT|CRUMBS|FORM|BADGES)-->)/).filter(Boolean).map((x) => {
+  const k = x.match(/^<!--@(\w+)-->$/); return k ? { kind: k[1] } : { kind: 'html', html: x };
+});
+const hasForm = !!form || !NO_CONTACT.has(s);
+const i = segs.findIndex((x) => x.kind === 'html' && /data-swivl="(scheduler|quote)"/.test(x.html));
+if (i > -1) segs[i] = { ...segs[i], html: addVisitCta(segs[i].html, hasForm) };
+const needsCallBar = !/fixed bottom|data-contact="call"/.test(page.body);
+const current = s.split('/')[0];
+---
+<Layout page={page} graph={graph}>
+  {segs.map((x) => x.kind === 'html' ? <Fragment set:html={x.html} />
+    : x.kind === 'HEADER' ? <SiteHeader current={current} />
+    : x.kind === 'FOOTER' ? <SiteFooter />
+    : x.kind === 'CONTACT' ? <ContactBlock slug={s} source={`contact_block:${s}`} />
+    : x.kind === 'BADGES' ? <section class="ui" aria-label="Reviews, awards and verified profiles" style={s === 'about' ? 'background:#fff' : 'background:#0b1329'}><TrustBadges tone={s === 'about' ? 'light' : 'dark'} title={s === '' ? 'Rated & Recognized Across the Web' : s === 'about' ? 'Awards & Verified Profiles' : 'Find Us Across the Web'} note={s === 'about' ? 'Proud 2026 Nextdoor Fave Winner, voted by our Central Arkansas neighbors on Nextdoor.' : s === '' ? '2026 Nextdoor Fave Winner · Screened & Approved on HomeAdvisor · Featured Pro on Porch' : undefined} /></section>
+    : x.kind === 'CRUMBS' ? <Breadcrumbs items={breadcrumbTrail(page)} />
+    : <LeadForm slug={s} {...form.props} />)}
+  {needsCallBar && <CallBar />}
+</Layout>

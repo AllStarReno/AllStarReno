@@ -1,0 +1,20 @@
+---
+// Newo AI chat, loaded on demand. The client id is public (site-embed id), overridable via PUBLIC_NEWO_CLIENT_ID.
+const id = import.meta.env.PUBLIC_NEWO_CLIENT_ID || 'a5a9498a-b449-4a9e-8c83-9ff9d9a53012';
+---
+<button type="button" class="newo-launch" data-newo-launch data-newo-id={id} aria-label="Chat with All-Star Renovations (opens AI chat assistant)">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <span class="newo-launch-t">Chat with us</span>
+</button>
+<style is:global>
+  .newo-launch { position: fixed; right: 16px; bottom: calc(84px + env(safe-area-inset-bottom)); z-index: 70; display: inline-flex; align-items: center; gap: .5rem; height: 52px; padding: 0 1.1rem 0 .95rem; border-radius: 999px; border: 2px solid #fff; background: #c2410c; color: #fff; font: 800 15px/1 system-ui, sans-serif; box-shadow: 0 8px 24px rgba(11,19,41,.35); cursor: pointer; }
+  .newo-launch:hover { background: #9a3412; }
+  .newo-launch:focus-visible { outline: 3px solid #fbbf24; outline-offset: 3px; }
+  .newo-launch[data-state="loading"] { opacity: .8; cursor: progress; }
+  .newo-launch[data-state="ready"] { display: none; }
+  @media (max-width: 380px) { .newo-launch-t { display: none; } .newo-launch { padding: 0; width: 52px; justify-content: center; } }
+  @media (min-width: 1024px) { .newo-launch { bottom: 24px; } }
+  /* Keep Newo's own bubble above the sticky mobile call bar */
+  @media (max-width: 1023px) { .newo-chat-toggler { bottom: calc(84px + env(safe-area-inset-bottom)) !important; } }
+</style>
+<script is:inline src="/assets/js/newo-chat.js" defer></script>

@@ -1,4 +1,9 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "astro",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
@@ -1092,7 +1097,7 @@
         },
         {
           "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+          "value": "camera=(), microphone=(self), geolocation=(), interest-cohort=()"
         },
         {
           "key": "Strict-Transport-Security",
@@ -1157,6 +1162,42 @@
           "value": "noindex"
         }
       ]
+    },
+    {
+      "source": "/(thank-you|api/.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    }
+  ],
+  "functions": {
+    "api/*.js": {
+      "maxDuration": 15
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/_mintlify/:path*",
+      "destination": "https://all-starrenovations.mintlify.site/_mintlify/:path*"
+    },
+    {
+      "source": "/mintlify-assets/:path+",
+      "destination": "https://all-starrenovations.mintlify.site/mintlify-assets/:path+"
+    },
+    {
+      "source": "/api/request",
+      "destination": "https://all-starrenovations.mintlify.site/_mintlify/api/request"
+    },
+    {
+      "source": "/docs",
+      "destination": "https://all-starrenovations.mintlify.site/docs"
+    },
+    {
+      "source": "/docs/:path*",
+      "destination": "https://all-starrenovations.mintlify.site/docs/:path*"
     }
   ]
 }

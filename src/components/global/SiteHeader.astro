@@ -1,0 +1,53 @@
+---
+// AI Studio-style global header (Stitch Crafted Heritage). No JS: native <details> menus.
+import { CATEGORIES } from '../../data/services.mjs';
+import { CITIES } from '../../data/cities.mjs';
+import { BUSINESS } from '../../data/business.mjs';
+interface Props { current?: string }
+const { current = '' } = Astro.props;
+const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'page' : undefined;
+---
+<header class="ui sh">
+  <div class="wrap sh-in">
+    <a class="sh-brand" href="/">
+      <img src="/icon-192.png" alt="" width="44" height="44" />
+      <span><b>ALL-STAR RENOVATIONS</b><small>Central Arkansas · Conway</small></span>
+    </a>
+    <nav class="sh-nav" aria-label="Primary">
+      {CATEGORIES.map((c) => (
+        <details class="sh-dd">
+          <summary aria-current={cur(c.slug)}>{c.name.replace(' Services', '')}<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <div class="sh-menu">
+            <a href={`/${c.slug}`}><strong>All {c.name}</strong></a>
+            {c.subs.filter((s) => s.slug !== 'full-bathroom-remodel').map((s) => <a href={`/${c.slug}/${s.slug}`}>{s.name}</a>)}
+          </div>
+        </details>
+      ))}
+      <details class="sh-dd">
+        <summary aria-current={cur('service-areas')}>Service Areas<span class="ms" aria-hidden="true">expand_more</span></summary>
+        <div class="sh-menu">
+          <a href="/service-areas"><strong>City Directory &amp; Map</strong></a>
+          {CITIES.map((c) => <a href={`/service-areas/${c.slug}`}>{c.name}, AR</a>)}
+        </div>
+      </details>
+      <a href="/guides" aria-current={cur('guides')}>Guides</a>
+      <a href="/portfolio" aria-current={cur('portfolio')}>Gallery</a>
+      <a href="/financing" aria-current={cur('financing')}>Financing</a>
+      <a href="/docs">Docs</a>
+    </nav>
+    <a class="btn btn-amber sh-cta" href={`tel:${BUSINESS.tel}`} data-contact="call"><span class="ms" aria-hidden="true">call</span>{BUSINESS.phone}</a>
+    <details class="sh-mob">
+      <summary aria-label="Menu"><svg class="o" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span class="ms c" aria-hidden="true">close</span></summary>
+      <nav class="sh-mp" aria-label="Mobile">
+        {CATEGORIES.map((c) => (<>
+          <span class="lbl">{c.name}</span>
+          <a href={`/${c.slug}`}>All {c.name}</a>
+          {c.subs.filter((s) => s.slug !== 'full-bathroom-remodel').map((s) => <a href={`/${c.slug}/${s.slug}`}>{s.name}</a>)}
+        </>))}
+        <span class="lbl">Explore</span>
+        <a href="/service-areas">Service Areas</a><a href="/guides">Guides</a><a href="/portfolio">Gallery</a><a href="/financing">Financing</a><a href="/docs">Docs</a><a href="/contact">Contact</a>
+        <a class="btn btn-amber" href={`tel:${BUSINESS.tel}`} data-contact="call">Call {BUSINESS.phone}</a>
+      </nav>
+    </details>
+  </div>
+</header>

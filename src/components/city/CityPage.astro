@@ -1,0 +1,253 @@
+---
+// Stage 3: AI Studio LocationPage layout for city hubs (/service-areas/<city>), county hubs
+// (/service-areas/<county>) and category x city pages (/<category>/<city>). Stitch styling (ui.css).
+import Layout from '../../layouts/Layout.astro';
+import SiteHeader from '../global/SiteHeader.astro';
+import SiteFooter from '../global/SiteFooter.astro';
+import ContactBlock from '../global/ContactBlock.astro';
+import '../../styles/ui.css';
+import { loadPages } from '../../lib/legacy.mjs';
+import { buildGraph } from '../../lib/schema.mjs';
+import { CATEGORIES } from '../../data/services.mjs';
+import { CITIES, nearestCities } from '../../data/cities.mjs';
+import { LOCAL, COUNTY_INFO } from '../../data/city-guides.mjs';
+import { SERVICE_PAGES } from '../../data/service-pages.mjs';
+import { SITE, BUSINESS } from '../../data/business.mjs';
+interface Props { slug: string }
+const { slug } = Astro.props;
+import { NOINDEX_SLUGS } from '../../data/city-pages.mjs';
+const [first, key] = slug.split('/');
+const pages = loadPages();
+const legacy = pages.find((p) => p.slug === slug);
+const shell = pages.find((p) => p.slug === 'service-areas/conway');
+const county = first === 'service-areas' && COUNTY_INFO[key] ? { slug: key, ...COUNTY_INFO[key] } : null;
+const city = county ? null : CITIES.find((c) => c.slug === key);
+const cat = CATEGORIES.find((c) => c.slug === first) || null;
+const kind = county ? 'county' : cat ? 'cat' : 'hub';
+const url = `${SITE}/${slug}`;
+const tel = BUSINESS.tel;
+const local = city ? LOCAL[city.slug] : null;
+const countyCities = county ? CITIES.filter((c) => c.countySlug === county.slug) : [];
+const place = city ? `${city.name}, AR` : county ? `${county.name}, AR` : '';
+const miles = city ? city.milesFromHQ : 0;
+const dist = city ? (miles === 0 ? 'Home of our office' : `About ${miles} miles from our Conway office`) : `${countyCities.length} city hub${countyCities.length === 1 ? '' : 's'}`;
+const svcName = cat ? cat.name : 'Bathroom, Kitchen & Handyman Services';
+const subs = cat ? cat.subs.filter((s) => s.slug !== 'full-bathroom-remodel') : [];
+const subBlurb = cat ? (SERVICE_PAGES[cat.slug]?.subs || {}) : {};
+const catHref = (c, s) => `/${c}/${s}`;
+const ZIP = city ? city.zips.join(', ') : countyCities.flatMap((c) => c.zips).join(', ');
+
+// Copy
+const h1 = county ? ['Remodeling & Handyman Services in', `${county.name}, AR`] : cat ? [`${cat.name} in`, place] : ['Home Remodeling in', place];
+const title = county ? `${county.name}, AR Remodeling & Handyman Services | All-Star Renovations`
+  : cat ? `${cat.name} in ${place} | All-Star Renovations` : `Remodeling in ${place}: Bathroom, Kitchen & Handyman | All-Star Renovations`;
+const what = cat ? cat.name.toLowerCase() : 'bathroom remodeling, kitchen remodeling and handyman services';
+const q = county ? `Does All-Star Renovations serve ${county.name}, Arkansas?` : `Does All-Star Renovations offer ${what} in ${city.name}, AR?`;
+const a = county
+  ? `Yes. All-Star Renovations serves ${county.name} from our Conway office, including ${countyCities.map((c) => c.name).join(', ')}. We offer bathroom remodeling, kitchen remodeling and handyman services with free in-home estimates. Call ${BUSINESS.phone}.`
+  : `Yes. All-Star Renovations provides ${what} in ${city.name}, ${city.county}${miles ? `, about ${miles} miles from our Conway office` : ', where our office is based'}. We serve ZIP ${ZIP} with free in-home estimates, a 100% Customer Guarantee and a 5-year workmanship warranty. Call ${BUSINESS.phone}.`;
+const lead = county ? `${county.note} Pick your city below for local details, or request a free in-home quote.`
+  : cat ? `${city.name} homeowners in ${city.county} can book ${cat.name.toLowerCase()} from All-Star Renovations, a locally owned Conway, AR company. ${local.housing.split('. ')[0]}.`
+  : `${city.description} ${local.route}`;
+const description = (legacy && kind !== 'hub') ? legacy.description
+  : county ? `Bathroom remodeling, kitchen remodeling and handyman services in ${county.name}, AR from All-Star Renovations of Conway. Free in-home quotes. Call ${BUSINESS.phone}.`
+  : `${cat ? cat.name : 'Bathroom, kitchen and handyman services'} in ${place} from All-Star Renovations of Conway, ${miles ? `about ${miles} miles away` : 'our home base'}. Free in-home quote. Call ${BUSINESS.phone}.`;
+
+// FAQs: existing page FAQs + local, de-duplicated.
+const legacyFaq = (legacy?.jsonld || []).flatMap((n) => (n['@graph'] || [n])).filter((n) => [].concat(n['@type']).includes('FAQPage'))
+  .flatMap((n) => n.mainEntity || []).map((x) => ({ q: x.name, a: (x.acceptedAnswer?.text || '').replace(/\s+/g, ' ') }));
+const localFaq = county ? [
+  { q: `Which ${county.name} cities do you serve?`, a: `${countyCities.map((c) => `${c.name} (ZIP ${c.zips.join(', ')})`).join('; ')}. Nearby communities are usually covered too; call ${BUSINESS.phone} to confirm.` },
+  { q: `What services do you offer in ${county.name}?`, a: 'Bathroom remodeling (walk-in showers, tub-to-shower conversions, walk-in tubs, aging-in-place updates), kitchen remodeling (cabinets, countertops, backsplashes) and handyman repairs, installation and maintenance.' },
+] : [
+  { q: `How far is ${city.name} from your office?`, a: miles ? `${city.name} is about ${miles} miles from our Conway office. ${local.route}` : 'Our office is in Conway, so Conway homeowners are right in our backyard.' },
+  { q: `Which ZIP codes in ${city.name} do you serve?`, a: `We serve ZIP ${ZIP} and the surrounding ${city.county} area. If you are just outside town, call ${BUSINESS.phone} to confirm.` },
+  { q: `What kinds of homes do you work on in ${city.name}?`, a: local.housing },
+  ...(cat ? [{ q: `What ${cat.name.toLowerCase()} services can I get in ${city.name}?`, a: `${subs.map((s) => s.name).join(', ')}. Every project starts with a free in-home quote.` }]
+    : [{ q: `What services do you offer in ${city.name}?`, a: 'Bathroom remodeling, kitchen remodeling and handyman services. Use the links on this page to see each service for your city.' }]),
+  { q: 'Do you offer financing?', a: 'Yes. Financing is available through Acorn Finance, HFS Financial and RenoFi. Rates, terms and approval are set by each lender.' },
+];
+const faqs = [{ q, a }, ...localFaq, ...legacyFaq].filter((f, i, arr) => f.a && arr.findIndex((g) => g.q.toLowerCase() === f.q.toLowerCase()) === i).slice(0, 8);
+
+// Breadcrumbs
+const crumbs = [{ name: 'Home', url: `${SITE}/` }];
+if (cat) crumbs.push({ name: cat.name, url: `${SITE}/${cat.slug}` });
+else crumbs.push({ name: 'Service Areas', url: `${SITE}/service-areas` });
+if (city && !cat && city.countySlug) crumbs.push({ name: city.county, url: `${SITE}/service-areas/${city.countySlug}` });
+crumbs.push({ name: place, url });
+
+// Page + JSON-LD (sitewide nodes reused from the existing site; page nodes built here).
+const site = shell.jsonld.flatMap((n) => (n['@graph'] || [n])).filter((n) => /\/#/.test(n['@id'] || ''));
+const page = { ...shell, slug, url, title: legacy?.title && kind === 'cat' ? legacy.title : title, description, body: 'id="main"', robots: '', indexable: !NOINDEX_SLUGS.has(slug),
+  jsonld: [{ '@context': 'https://schema.org', '@graph': site }, { '@type': 'BreadcrumbList', itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: c.url })) }] };
+const g = buildGraph(page);
+const SVC = `${url}#service`, FAQ = `${url}#faq`, PAGE = `${url}#webpage`;
+g['@graph'] = g['@graph'].filter((n) => !['FAQPage', 'Service', 'City', 'AdministrativeArea'].some((t) => [].concat(n['@type']).includes(t)));
+const areaNode = city
+  ? { '@type': 'City', '@id': `${url}#place`, name: place, geo: { '@type': 'GeoCoordinates', ...city.geo }, containedInPlace: { '@type': 'AdministrativeArea', name: `${city.county}, Arkansas` } }
+  : { '@type': 'AdministrativeArea', '@id': `${url}#place`, name: `${county.name}, Arkansas`, containsPlace: countyCities.map((c) => ({ '@type': 'City', name: `${c.name}, AR`, url: `${SITE}/service-areas/${c.slug}` })) };
+g['@graph'].push(areaNode);
+g['@graph'].push({ '@type': 'Service', '@id': SVC, name: `${svcName} in ${place}`, serviceType: cat ? cat.name : CATEGORIES.map((c) => c.name), url,
+  description: a, provider: { '@id': `${SITE}/#business` }, areaServed: { '@id': `${url}#place` },
+  ...(cat ? { isPartOf: { '@id': `${SITE}/${cat.slug}#service` }, hasOfferCatalog: { '@type': 'OfferCatalog', name: `${cat.name} in ${place}`, itemListElement: subs.map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.name, url: `${SITE}/${cat.slug}/${s.slug}` } })) } } : {}),
+  termsOfService: `${SITE}/warranty` });
+g['@graph'].push({ '@type': 'FAQPage', '@id': FAQ, url, isPartOf: { '@id': PAGE }, mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
+for (const n of g['@graph']) if (n['@id'] === PAGE) { n.mainEntity = { '@id': SVC }; n.about = { '@id': `${url}#place` }; n.speakable = { '@type': 'SpeakableSpecification', cssSelector: ['h1', '#speakable-summary'] }; }
+
+const tabs = city ? [{ href: `/service-areas/${city.slug}`, label: 'All services' }, ...CATEGORIES.map((c) => ({ href: catHref(c.slug, city.slug), label: c.name }))] : [];
+const here = `/${slug}`;
+const near = city ? nearestCities(city.slug, 4) : [];
+const nearHref = (c) => cat ? catHref(cat.slug, c.slug) : `/service-areas/${c.slug}`;
+const topic = cat ? cat.name.split(' ')[0] : undefined;
+---
+<Layout page={page} graph={g}>
+  <SiteHeader current={cat ? cat.slug : 'service-areas'} />
+  <main id="main" class="dk ui sp lp" style="background:#0F2B48">
+    <section class="sp-hero" aria-labelledby="hero-h">
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Breadcrumb"><ol>{crumbs.map((c, i) => i < crumbs.length - 1 ? <li><a href={new URL(c.url).pathname}>{c.name}</a> <span aria-hidden="true">›</span></li> : <li aria-current="page">{c.name}</li>)}</ol></nav>
+        <div class="sp-grid">
+          <div>
+            <span class="pill"><span class="ms" aria-hidden="true">location_on</span>{city ? `${city.county} · ${dist}` : `Central Arkansas · ${dist}`}</span>
+            <h1 id="hero-h">{h1[0]} <em>{h1[1]}</em></h1>
+            <p class="sp-lead">{lead}</p>
+            <ul class="sp-badges">
+              <li><span class="ms" aria-hidden="true">home_pin</span>Locally owned in Conway, AR</li>
+              <li><span class="ms" aria-hidden="true">verified_user</span>100% Customer Guarantee</li>
+              <li><span class="ms" aria-hidden="true">workspace_premium</span>20 years of experience · In business since 2014</li>
+            </ul>
+            <div class="ctas">
+              <a class="btn btn-amber" href="#contact"><span class="ms" aria-hidden="true">event_available</span>Get Free In-Home Quote</a>
+              <a class="btn btn-ghost" href={`tel:${tel}`} data-contact="call"><span class="ms" aria-hidden="true">call</span>{BUSINESS.phone}</a>
+            </div>
+          </div>
+          <aside class="card sp-spec" aria-labelledby="spec-h">
+            <div class="sp-spec-b">
+              <h2 id="spec-h"><span class="ms" aria-hidden="true">map</span>{county ? `${county.name} at a Glance` : `Serving ${city.name} Homeowners`}</h2>
+              <dl>
+                {city && <div><dt>County</dt><dd>{city.county}</dd></div>}
+                {county && <div><dt>County seat</dt><dd>{county.seat}</dd></div>}
+                <div><dt>{county ? 'Cities we serve' : 'Distance'}</dt><dd>{county ? countyCities.length : (miles ? `About ${miles} mi from Conway` : 'Home base')}</dd></div>
+                <div><dt>ZIP codes</dt><dd>{ZIP}</dd></div>
+                <div><dt>Estimates</dt><dd class="ok">Free, in-home</dd></div>
+                <div><dt>Warranty</dt><dd>5-year workmanship</dd></div>
+                <div><dt>Hours</dt><dd class="am">Mon–Fri 7:30–5 · Sat 7–7 · Sun 9–3</dd></div>
+              </dl>
+              <a class="btn btn-amber sp-spec-cta" href="#contact">Schedule Your Estimate <span class="ms" aria-hidden="true">arrow_forward</span></a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    {tabs.length > 0 && (
+      <nav class="wrap lp-tabs" aria-label={`Services in ${city.name}`}>
+        {tabs.map((t) => <a href={t.href} aria-current={t.href === here ? 'page' : undefined}>{t.label}</a>)}
+      </nav>
+    )}
+
+    <section class="wrap sp-sec" aria-labelledby="ans-q">
+      <div class="ans" id="speakable-summary" data-quick-answer style="max-width:none;margin:0">
+        <span class="k"><span class="ms" aria-hidden="true">help</span>Quick answer: {place}</span>
+        <h2 id="ans-q">{q}</h2>
+        <p>{a}</p>
+      </div>
+    </section>
+
+    <section class="wrap sp-sec" aria-labelledby="svc-h">
+      <div class="sec-head"><span class="pill">{cat ? cat.name : 'Services'}</span><h2 id="svc-h">{cat ? `${cat.name.replace(' Services', '')} Services in ${place}` : `Services Available in ${place}`}</h2><p>Pick the project that fits, or call {BUSINESS.phone} and describe it.</p></div>
+      <div class="sp-subs">
+        {cat ? subs.map((s) => (
+          <a class="card" href={`/${cat.slug}/${s.slug}`}><h3>{s.name}</h3><p>{subBlurb[s.slug] || `${s.name} for ${city.name} homes.`}</p><span class="go">Learn more <span class="ms" aria-hidden="true">arrow_forward</span></span></a>
+        )) : CATEGORIES.map((c) => (
+          <a class="card" href={city ? catHref(c.slug, city.slug) : `/${c.slug}`}><h3>{c.name}{city ? ` in ${city.name}` : ''}</h3><p>{c.subs.slice(0, 4).map((s) => s.name).join(' · ')}</p><span class="go">{city ? `See ${c.name.split(' ')[0].toLowerCase()} in ${city.name}` : `Explore ${c.name.toLowerCase()}`} <span class="ms" aria-hidden="true">arrow_forward</span></span></a>
+        ))}
+      </div>
+    </section>
+
+    {local && (
+      <section class="wrap sp-sec" aria-labelledby="loc-h">
+        <div class="card lp-local">
+          <h2 class="sp-h2" id="loc-h">{city.slug === 'conway' ? 'Our Hometown: Conway' : `Remodeling in ${city.name}: Local Guide`}</h2>
+          <p>{local.housing}</p>
+          <div class="lp-cols">
+            <div><h3><span class="ms" aria-hidden="true">holiday_village</span>Neighborhoods &amp; areas we serve</h3><ul>{local.areas.map((x) => <li>{x}</li>)}</ul></div>
+            <div><h3><span class="ms" aria-hidden="true">pin_drop</span>Local landmarks</h3><ul>{local.landmarks.map((x) => <li>{x}</li>)}</ul></div>
+            <div><h3><span class="ms" aria-hidden="true">directions_car</span>Getting there from Conway</h3><p>{local.route}</p></div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    {county && (
+      <section class="wrap sp-sec" aria-labelledby="cc-h">
+        <div class="card sp-cities">
+          <div class="sec-head" style="margin-bottom:1.5rem"><span class="pill">City hubs</span><h2 id="cc-h">Cities We Serve in {county.name}</h2></div>
+          <ul>{countyCities.map((c) => <li><a href={`/service-areas/${c.slug}`}><b>{c.name}, AR</b><small>ZIP {c.zips.join(', ')}</small></a></li>)}</ul>
+        </div>
+      </section>
+    )}
+
+    <section class="wrap sp-sec" aria-labelledby="how-h">
+      <h2 class="sp-h2" id="how-h">How It Works</h2>
+      <ol class="sp-feat lp-steps">
+        <li class="card"><span class="ms" aria-hidden="true">call</span><span><b>Call or request a quote.</b> Tell us about your project{city ? ` in ${city.name}` : ''}.</span></li>
+        <li class="card"><span class="ms" aria-hidden="true">straighten</span><span><b>Free in-home estimate.</b> We measure, review options and give you a written quote.</span></li>
+        <li class="card"><span class="ms" aria-hidden="true">construction</span><span><b>Our crew does the work.</b> Most shower replacements and conversions take 1-2 days.</span></li>
+        <li class="card"><span class="ms" aria-hidden="true">verified</span><span><b>Backed by our guarantee.</b> 100% Customer Guarantee and a 5-year workmanship warranty.</span></li>
+      </ol>
+    </section>
+
+    {near.length > 0 && (
+      <section class="wrap sp-sec" aria-labelledby="near-h">
+        <div class="card sp-cities">
+          <div class="sec-head" style="margin-bottom:1.5rem"><span class="pill">Nearby</span><h2 id="near-h">{cat ? `${cat.name} Near ${city.name}` : `Cities Near ${city.name}`}</h2></div>
+          <ul>{near.map((c) => <li><a href={nearHref(c)}><b>{c.name}, AR</b><small>{c.county}</small></a></li>)}</ul>
+          <p class="more"><a href={city.countySlug ? `/service-areas/${city.countySlug}` : '/service-areas'}>All of {city.county} →</a> · <a href="/service-areas">Full service area map &amp; ZIP search →</a></p>
+        </div>
+      </section>
+    )}
+
+    <section class="wrap sp-sec" aria-labelledby="nap-h">
+      <div class="card" itemscope itemtype="https://schema.org/HomeAndConstructionBusiness">
+        <h2 class="sp-h2" id="nap-h" style="margin:0 0 .4rem">Contact All-Star Renovations</h2>
+        <p style="margin:0;line-height:1.7"><b itemprop="name">{BUSINESS.name}</b><br />
+          <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress"><span itemprop="streetAddress">{BUSINESS.address.streetAddress}</span>, <span itemprop="addressLocality">{BUSINESS.address.addressLocality}</span>, <span itemprop="addressRegion">{BUSINESS.address.addressRegion}</span> <span itemprop="postalCode">{BUSINESS.address.postalCode}</span></span><br />
+          <a href={`tel:${BUSINESS.tel}`} data-contact="call" itemprop="telephone">{BUSINESS.phone}</a></p>
+        <p style="margin:.4rem 0 0;font-size:.9rem;opacity:.85">20 years of experience · In business since 2014 · Serving {place} from our Conway office.</p>
+      </div>
+    </section>
+
+    <section class="wrap sp-sec" aria-labelledby="fin-h">
+      <div class="card sp-fin">
+        <div><h2 class="sp-h2" id="fin-h" style="margin:0 0 .4rem">Financing available</h2><p>Financing through Acorn Finance, HFS Financial and RenoFi. Rates, terms and approval are set by each lender.</p></div>
+        <a class="btn btn-ghost" href="/financing">See financing options</a>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="fq-h" style="background:#0a1e33">
+      <div class="wrap">
+        <div class="sec-head"><span class="pill">FAQs</span><h2 id="fq-h">Common Questions in {place}</h2></div>
+        <div class="fq">{faqs.map((f, i) => <details open={i === 0}><summary>{f.q}<span class="ms" aria-hidden="true">expand_more</span></summary><div class="a">{f.a}</div></details>)}</div>
+      </div>
+    </section>
+
+    <ContactBlock slug={slug} city={city ? city.name : undefined} source={`city_page:${slug}`} topic={topic} />
+  </main>
+  <SiteFooter />
+</Layout>
+<style is:global>
+.lp-tabs{display:flex;flex-wrap:wrap;gap:.5rem;padding-top:1.5rem}
+.lp-tabs a{padding:.55rem 1rem;border-radius:999px;border:1px solid rgba(255,255,255,.18);color:#dbe5ef;text-decoration:none;font-weight:700;font-size:.9rem}
+.lp-tabs a[aria-current="page"]{background:var(--amber);color:#0F2B48;border-color:var(--amber)}
+.lp-local{padding:1.5rem}
+.lp-local>p{color:#cbd6e2;line-height:1.7;margin:0 0 1.25rem}
+.lp-cols{display:grid;gap:1.25rem;grid-template-columns:1fr}
+@media(min-width:800px){.lp-cols{grid-template-columns:repeat(3,1fr)}}
+.lp-cols h3{display:flex;gap:.4rem;align-items:flex-start;min-width:0;font-size:1rem;font-weight:800;margin:0 0 .5rem}
+.lp-cols h3 .ms{color:var(--amber)}
+.lp-cols ul{margin:0;padding-left:1.1rem;color:#cbd6e2;line-height:1.7}
+.lp-cols p{margin:0;color:#cbd6e2;line-height:1.7}
+.lp-steps{counter-reset:none}
+.lp-steps b{color:#fff}
+</style>

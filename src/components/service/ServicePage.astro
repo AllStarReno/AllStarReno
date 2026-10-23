@@ -1,0 +1,159 @@
+---
+// Stage 2: AI Studio ServicePage layout (hero + "Service Summary & Specs" card, AEO quick answer,
+// "Included Standard" grid, comparison table, city hub grid, FAQ, contact block) in Stitch styling.
+import Layout from '../../layouts/Layout.astro';
+import SiteHeader from '../global/SiteHeader.astro';
+import SiteFooter from '../global/SiteFooter.astro';
+import ContactBlock from '../global/ContactBlock.astro';
+import '../../styles/ui.css';
+import { loadPages } from '../../lib/legacy.mjs';
+import { buildGraph, breadcrumbTrail } from '../../lib/schema.mjs';
+import { SERVICE_PAGES, SPEC } from '../../data/service-pages.mjs';
+import { CATEGORIES } from '../../data/services.mjs';
+import { CITIES } from '../../data/cities.mjs';
+import { SITE, BUSINESS } from '../../data/business.mjs';
+interface Props { slug: string }
+const { slug } = Astro.props;
+const d = SERVICE_PAGES[slug];
+const legacy = loadPages().find((p) => p.slug === slug);
+const cat = CATEGORIES.find((c) => c.slug === d.cat);
+const isCat = d.kind === 'category';
+const subName = isCat ? cat.name : cat.subs.find((s) => slug.endsWith('/' + s.slug))?.name;
+const url = `${SITE}/${slug}`;
+// FAQ: existing page FAQs (legacy JSON-LD) + any extra, de-duplicated by question.
+const legacyFaq = legacy.jsonld.flatMap((n) => (n['@graph'] || [n])).filter((n) => [].concat(n['@type']).includes('FAQPage'))
+  .flatMap((n) => n.mainEntity || []).map((q) => ({ q: q.name, a: q.acceptedAnswer?.text || '' }));
+const faqs = [{ q: d.q, a: d.a }, ...legacyFaq, ...(d.extraFaq || [])].filter((f, i, arr) => f.a && arr.findIndex((g) => g.q.toLowerCase() === f.q.toLowerCase()) === i).slice(0, 8);
+// Hero photo: first real photo on the original page, if any.
+const img = (legacy.body.slice(legacy.body.indexOf('<main')).match(/<img\b[^>]*src="(\/assets\/img\/[^"]+)"[^>]*>/) || [])[1];
+const imgAlt = img ? ((legacy.body.match(new RegExp(`<img\\b[^>]*src="${img.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*>`)) || [''])[0].match(/alt="([^"]*)"/) || [])[1] || `${subName} by All-Star Renovations` : '';
+const webp = img && /\.(jpe?g|png)$/.test(img) ? img.replace(/\.(jpe?g|png)$/, '.webp') : null;
+// City links: bathroom -> city hubs; kitchen/handyman -> /<category>/<city>.
+const cityHref = (c) => `/${d.cat}/${c.slug}`;
+const subsOf = cat.subs.filter((s) => s.slug !== 'full-bathroom-remodel');
+const related = isCat ? [] : subsOf.filter((s) => !slug.endsWith('/' + s.slug));
+const page = { ...legacy, body: 'id="main"', title: legacy.title, description: legacy.description };
+// JSON-LD: base graph, then Service (+ catalog on hubs), FAQPage, BreadcrumbList (from buildGraph), speakable.
+const g = buildGraph(page);
+const SVC = `${url}#service`, FAQ = `${url}#faq`, PAGE = `${url}#webpage`;
+g['@graph'] = g['@graph'].filter((n) => ![].concat(n['@type']).includes('FAQPage') && !([].concat(n['@type']).includes('Service')));
+g['@graph'].push({ '@type': 'Service', '@id': SVC, name: isCat ? cat.name : subName, serviceType: isCat ? cat.name : subName, description: d.lead, url,
+  provider: { '@id': `${SITE}/#business` }, areaServed: [{ '@id': `${SITE}/#service-radius-${d.cat}`, '@type': 'GeoCircle', geoMidpoint: { '@type': 'GeoCoordinates', ...BUSINESS.geo }, geoRadius: '80467', description: SPEC.AREA },
+    ...CITIES.map((c) => ({ '@type': 'City', name: `${c.name}, AR`, url: `${SITE}${cityHref(c)}` }))],
+  ...(isCat ? { hasOfferCatalog: { '@type': 'OfferCatalog', name: cat.name, itemListElement: subsOf.filter((s) => d.subs?.[s.slug]).map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.name, url: `${SITE}/${cat.slug}/${s.slug}` } })) } }
+    : { isPartOf: { '@id': `${SITE}/${cat.slug}#service` }, category: cat.name }),
+  termsOfService: `${SITE}/warranty` });
+g['@graph'].push({ '@type': 'FAQPage', '@id': FAQ, url, isPartOf: { '@id': PAGE }, mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
+for (const n of g['@graph']) if (n['@id'] === PAGE) { n.mainEntity = { '@id': SVC }; n.speakable = { '@type': 'SpeakableSpecification', cssSelector: ['h1', '#speakable-summary'] }; }
+const crumbs = breadcrumbTrail(page);
+const tel = BUSINESS.tel;
+---
+<Layout page={page} graph={g}>
+  <SiteHeader current={d.cat} />
+  <main id="main" class="dk ui sp" style="background:#0F2B48">
+    <section class="sp-hero" aria-labelledby="hero-h">
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Breadcrumb"><ol>{crumbs.map((c, i) => i < crumbs.length - 1 ? <li><a href={new URL(c.url).pathname}>{c.name}</a> <span aria-hidden="true">›</span></li> : <li aria-current="page">{c.name}</li>)}</ol></nav>
+        <div class="sp-grid">
+          <div>
+            <span class="pill"><span class="ms" aria-hidden="true">auto_awesome</span>{d.badge}</span>
+            <h1 id="hero-h">{d.h1[0]} <em>{d.h1[1]}</em></h1>
+            <p class="sp-lead">{d.lead}</p>
+            <ul class="sp-badges">
+              <li><span class="ms" aria-hidden="true">schedule</span>Timeline: {d.timeline}</li>
+              <li><span class="ms" aria-hidden="true">verified_user</span>100% Customer Guarantee</li>
+              <li><span class="ms" aria-hidden="true">workspace_premium</span>20 years of experience · In business since 2014</li>
+            </ul>
+            <div class="ctas">
+              <a class="btn btn-amber" href="#contact"><span class="ms" aria-hidden="true">event_available</span>Get Free In-Home Quote</a>
+              <a class="btn btn-ghost" href={`tel:${tel}`} data-contact="call"><span class="ms" aria-hidden="true">call</span>{BUSINESS.phone}</a>
+            </div>
+          </div>
+          <aside class="card sp-spec" aria-labelledby="spec-h">
+            {img && <picture>{webp && <source srcset={webp} type="image/webp" />}<img src={img} alt={imgAlt} width="640" height="360" loading="eager" fetchpriority="high" decoding="async" /></picture>}
+            <div class="sp-spec-b">
+              <h2 id="spec-h"><span class="ms" aria-hidden="true">military_tech</span>Service Summary &amp; Specs</h2>
+              <dl>
+                <div><dt>Pricing</dt><dd class="ok">{SPEC.QUOTE}</dd></div>
+                <div><dt>Install timeline</dt><dd>{d.timeline}</dd></div>
+                <div><dt>Category</dt><dd>{cat.name}</dd></div>
+                <div><dt>Financing</dt><dd class="am">{SPEC.FIN}</dd></div>
+                <div><dt>Warranty</dt><dd>5-year workmanship</dd></div>
+                <div><dt>Coverage</dt><dd>{SPEC.AREA}</dd></div>
+              </dl>
+              <a class="btn btn-amber sp-spec-cta" href="#contact">Schedule Your Estimate <span class="ms" aria-hidden="true">arrow_forward</span></a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap sp-sec" aria-labelledby="ans-q">
+      <div class="ans" id="speakable-summary" data-quick-answer style="max-width:none;margin:0">
+        <span class="k"><span class="ms" aria-hidden="true">help</span>Quick answer: {isCat ? cat.name : subName}</span>
+        <h2 id="ans-q">{d.q}</h2>
+        <p>{d.a}</p>
+      </div>
+    </section>
+
+    {isCat && (
+      <section class="wrap sp-sec" aria-labelledby="subs-h">
+        <div class="sec-head"><span class="pill">{cat.name}</span><h2 id="subs-h">{cat.name.replace(' Services', '')} Services We Offer</h2><p>Pick the project that fits, or call {BUSINESS.phone} and describe it.</p></div>
+        <div class="sp-subs">
+          {subsOf.filter((s) => d.subs[s.slug]).map((s) => (
+            <a class="card" href={`/${cat.slug}/${s.slug}`}><h3>{s.name}</h3><p>{d.subs[s.slug]}</p><span class="go">Learn more <span class="ms" aria-hidden="true">arrow_forward</span></span></a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="wrap sp-sec" aria-labelledby="feat-h">
+      <h2 class="sp-h2" id="feat-h">Included Standard in Every {d.short}</h2>
+      <ul class="sp-feat">{d.features.map((f) => <li class="card"><span class="ms" aria-hidden="true">check_circle</span>{f}</li>)}</ul>
+    </section>
+
+    <section class="wrap sp-sec" aria-labelledby="cmp-h">
+      <div class="card sp-cmp">
+        <h2 class="sp-h2" id="cmp-h">Typical Contractor vs. All-Star Renovations</h2>
+        <div class="sp-tbl" tabindex="0" role="region" aria-labelledby="cmp-h">
+          <table>
+            <thead><tr><th scope="col">Aspect</th><th scope="col">Typical contractor</th><th scope="col">All-Star Renovations</th></tr></thead>
+            <tbody>{d.compare.map((r) => <tr><th scope="row">{r[0]}</th><td>{r[1]}</td><td class="as">{r[2]}</td></tr>)}</tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap sp-sec" aria-labelledby="city-h">
+      <div class="card sp-cities">
+        <div class="sec-head" style="margin-bottom:1.5rem"><span class="pill">Local coverage</span><h2 id="city-h">Where We Install {isCat ? cat.name : subName} in Central Arkansas</h2><p>Pick your city for local details and a free on-site consultation.</p></div>
+        <ul>{CITIES.map((c) => <li><a href={cityHref(c)}><b>{c.name}, AR</b><small>{c.county}</small></a></li>)}</ul>
+        <p class="more"><a href="/service-areas">Full service area map &amp; ZIP search →</a></p>
+      </div>
+    </section>
+
+    {related.length > 0 && (
+      <section class="wrap sp-sec" aria-labelledby="rel-h">
+        <h2 class="sp-h2" id="rel-h">More {cat.name}</h2>
+        <div class="sp-rel"><a href={`/${cat.slug}`}>All {cat.name}</a>{related.map((s) => <a href={`/${cat.slug}/${s.slug}`}>{s.name}</a>)}</div>
+      </section>
+    )}
+
+    <section class="wrap sp-sec" aria-labelledby="fin-h">
+      <div class="card sp-fin">
+        <div><h2 class="sp-h2" id="fin-h" style="margin:0 0 .4rem">Financing available</h2><p>Financing through Acorn Finance, HFS Financial and RenoFi. Rates, terms and approval are set by each lender.</p></div>
+        <a class="btn btn-ghost" href="/financing">See financing options</a>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="fq-h" style="background:#0a1e33">
+      <div class="wrap">
+        <div class="sec-head"><span class="pill">Voice search FAQs</span><h2 id="fq-h">Common Questions About {isCat ? cat.name : subName}</h2></div>
+        <div class="fq">{faqs.map((f, i) => <details open={i === 0}><summary>{f.q}<span class="ms" aria-hidden="true">expand_more</span></summary><div class="a">{f.a}</div></details>)}</div>
+      </div>
+    </section>
+
+    <ContactBlock slug={slug} source={`service_page:${slug}`} topic={d.topic} />
+  </main>
+  <SiteFooter />
+</Layout>
