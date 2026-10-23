@@ -1,0 +1,122 @@
+---
+// Stage 1: /service-areas rebuilt in the AI Studio "Central Arkansas Service Coverage & City Directory" layout.
+// The interactive map + ZIP search section and the mobile sticky bar/Swivl modal/scripts are reused verbatim from the original page.
+import Layout from '../layouts/Layout.astro';
+import SiteHeader from '../components/global/SiteHeader.astro';
+import SiteFooter from '../components/global/SiteFooter.astro';
+import ContactBlock from '../components/global/ContactBlock.astro';
+import '../styles/ui.css';
+import { loadPages } from '../lib/legacy.mjs';
+import { buildGraph } from '../lib/schema.mjs';
+import { CITIES } from '../data/cities.mjs';
+import { ANSWER, COUNTIES, FAQS, HOURS } from '../data/service-areas-content.mjs';
+import { SITE, BUSINESS } from '../data/business.mjs';
+
+const legacy = loadPages().find((p) => p.slug === 'service-areas');
+const b = legacy.body;
+const coverage = b.slice(b.indexOf('<section id="service-area"'), b.indexOf('</section>', b.indexOf('id="cgrid"')) + 10);
+const tailAt = b.indexOf('<div id="asr-sticky"');
+const tail = b.slice(tailAt, b.indexOf('</body>') > -1 ? b.indexOf('</body>') : undefined);
+const page = { ...legacy, body: 'id="main"', title: 'Central Arkansas Service Coverage & City Directory | All-Star Renovations',
+  assets: [...legacy.assets, '<link rel="alternate" type="text/markdown" href="/service-areas.md" title="Markdown copy" />'] };
+
+// JSON-LD: base graph + geo/areaServed entity graph, city ItemList, FAQPage, speakable.
+const base = buildGraph(page);
+const PAGE = `${SITE}/service-areas#webpage`, BIZ = `${SITE}/#business`;
+const countyId = (s) => `${SITE}/service-areas/${s}#place`;
+const cityNodes = CITIES.map((c) => ({ '@type': 'City', '@id': `${SITE}/service-areas/${c.slug}#place`, name: `${c.name}, AR`, url: `${SITE}/service-areas/${c.slug}`,
+  geo: { '@type': 'GeoCoordinates', ...c.geo }, containedInPlace: { '@id': countyId(c.countySlug) },
+  ...(c.zips.length ? { address: { '@type': 'PostalAddress', addressLocality: c.name, addressRegion: 'AR', postalCode: c.zips[0], addressCountry: 'US' } } : {}) }));
+const countyNodes = COUNTIES.map((c) => ({ '@type': 'AdministrativeArea', '@id': countyId(c.slug), name: `${c.name}, AR`, url: `${SITE}/service-areas/${c.slug}`, containedInPlace: { '@type': 'State', name: 'Arkansas' } }));
+for (const n of base['@graph']) {
+  if (n['@id'] === BIZ) n.areaServed = [{ '@type': 'GeoCircle', '@id': `${SITE}/#service-radius`, geoMidpoint: { '@type': 'GeoCoordinates', ...BUSINESS.geo }, geoRadius: '80467', description: '50-mile radius of Conway, AR' },
+    ...countyNodes.map((c) => ({ '@id': c['@id'] })), ...cityNodes.map((c) => ({ '@id': c['@id'] }))];
+  if (n['@id'] === PAGE) Object.assign(n, { '@type': ['CollectionPage', 'FAQPage'], name: page.title, mainEntity: FAQS.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+    speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', '#speakable-summary'] }, hasPart: { '@id': `${SITE}/service-areas#cities` },
+    alternateName: undefined, encoding: { '@type': 'MediaObject', encodingFormat: 'text/markdown', contentUrl: `${SITE}/service-areas.md` } });
+}
+base['@graph'] = base['@graph'].filter((n) => !(n['@type'] === 'FAQPage' && n['@id'] !== PAGE));
+base['@graph'].push(...countyNodes, ...cityNodes, { '@type': 'ItemList', '@id': `${SITE}/service-areas#cities`, name: 'All-Star Renovations city directory', numberOfItems: CITIES.length,
+  itemListElement: CITIES.map((c, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE}/service-areas/${c.slug}`, name: `${c.name}, AR` })) });
+const tel = BUSINESS.tel;
+---
+<Layout page={page} graph={base}>
+  <SiteHeader current="service-areas" />
+  <main id="main" class="dk ui" style="background:#0F2B48">
+    <section class="sa-intro" aria-labelledby="hero-h">
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a> <span aria-hidden="true">›</span></li><li aria-current="page">Service Areas</li></ol></nav>
+        <div style="margin-top:1.5rem"><span class="pill"><span class="ms" aria-hidden="true">location_on</span>50-Mile Radius of Conway · Central Arkansas</span></div>
+        <h1 id="hero-h">Central Arkansas Service Coverage &amp; <em>City Directory</em></h1>
+        <p>All-Star Renovations works from our central Conway hub across a 50-mile radius, from Faulkner County to the Little Rock metro and beyond. Find your city below, then jump straight to the bathroom, kitchen or handyman page for your community.</p>
+        <div class="ctas">
+          <a class="btn btn-amber" href="#contact">Get Your Free Quote <span class="ms" aria-hidden="true">arrow_forward</span></a>
+          <a class="btn btn-ghost" href={`tel:${tel}`} data-contact="call"><span class="ms" aria-hidden="true">call</span>{BUSINESS.phone}</a>
+        </div>
+        <section class="ans" id="speakable-summary" data-quick-answer aria-labelledby="ans-q">
+          <span class="k"><span class="ms" aria-hidden="true">verified</span>Quick answer</span>
+          <h2 id="ans-q">{ANSWER.question}</h2>
+          <p>{ANSWER.answer}</p>
+          <ul><li><span class="ms" aria-hidden="true">check_circle</span>10 city hubs · 4 counties</li><li><span class="ms" aria-hidden="true">check_circle</span>Free in-home estimates</li><li><span class="ms" aria-hidden="true">check_circle</span>Many showers installed in 1–2 days</li></ul>
+        </section>
+      </div>
+    </section>
+
+    <Fragment set:html={coverage} />
+
+    <section class="sec cm" aria-labelledby="cm-h">
+      <div class="wrap" data-filter-root>
+        <div class="sec-head"><span class="pill">Complete Coverage Matrix</span><h2 id="cm-h">Select Your City &amp; Preferred Remodeling Service</h2><p>Every city hub links to its real bathroom, kitchen and handyman pages.</p></div>
+        <div class="cm-tools">
+          <div class="cm-chips" role="group" aria-label="Filter by county">
+            <button type="button" data-chip="county:all" aria-pressed="true">All counties</button>
+            {COUNTIES.map((c) => <button type="button" data-chip={`county:${c.slug}`} aria-pressed="false">{c.name}</button>)}
+          </div>
+          <label class="cm-search"><span class="ms" aria-hidden="true">location_on</span><span class="sr-only">Filter cities by name or ZIP</span><input type="search" data-search placeholder="City or ZIP (e.g. 72034)" /></label>
+        </div>
+        <p class="cm-count" aria-live="polite">Showing <span data-count>{CITIES.length}</span> city hubs</p>
+        <div class="cm-grid">
+          {CITIES.map((c) => (
+            <article class="card cc" data-item data-county={c.countySlug} data-text={`${c.name} ${c.county} ${c.zips.join(' ')}`}>
+              <div>
+                <div class="cc-top"><h3><span class="ms" aria-hidden="true">location_on</span>{c.name}, AR</h3><span class="county">{c.county}</span></div>
+                <p>{c.description}</p>
+                <span class="lbl">Available local services</span>
+                <div class="chips">{c.services.map((s) => <a href={s.href}>{s.label}</a>)}</div>
+              </div>
+              <div class="cc-foot"><span>ZIP {c.zips.join(', ')}</span><a href={`/service-areas/${c.slug}`} >View City Hub<span class="sr-only"> for {c.name}</span> <span class="ms" aria-hidden="true">arrow_forward</span></a></div>
+            </article>
+          ))}
+        </div>
+        <p class="cm-empty hidden" data-empty>No matching city. Call {BUSINESS.phone} and we will confirm coverage.</p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="cty-h" style="background:#0F2B48">
+      <div class="wrap">
+        <div class="sec-head"><span class="pill">Counties</span><h2 id="cty-h">Browse by County</h2></div>
+        <div class="cty">{COUNTIES.map((c) => <a class="card" href={`/service-areas/${c.slug}`}><b><span class="ms" aria-hidden="true">home_work</span>{c.name}</b><span>{c.cities}</span></a>)}</div>
+        <p class="more"><a href="/service-areas/other-areas">Other areas we serve →</a></p>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="fq-h" style="background:#0a1e33">
+      <div class="wrap">
+        <div class="sec-head"><span class="pill">FAQ</span><h2 id="fq-h">Service Area Questions</h2></div>
+        <div class="fq">{FAQS.map((f, i) => <details open={i === 0}><summary>{f.q}<span class="ms" aria-hidden="true">expand_more</span></summary><div class="a">{f.a}</div></details>)}</div>
+      </div>
+    </section>
+
+    <section class="sec ns" aria-labelledby="ns-h">
+      <div class="wrap">
+        <div class="sec-head" style="margin-bottom:0"><h2 id="ns-h">Not sure we serve your address?</h2><p>Request a free in-home quote online or call {BUSINESS.phone}. We will confirm coverage the same day.</p></div>
+        <div class="ctas"><a class="btn btn-amber" href="#contact">Free In-Home Quote <span class="ms" aria-hidden="true">arrow_forward</span></a><a class="btn btn-ghost" href={`tel:${tel}`} data-contact="call"><span class="ms" aria-hidden="true">call</span>{BUSINESS.phone}</a></div>
+        <p class="hrs"><span class="ms" aria-hidden="true">schedule</span> {HOURS}</p>
+      </div>
+    </section>
+
+    <ContactBlock slug="service-areas" source="service_areas_contact" />
+  </main>
+  <SiteFooter />
+  <Fragment set:html={tail} />
+</Layout>

@@ -307,3 +307,7 @@ Terms and conditions for using the All-Star Renovations website and services in 
 ## Warranty | All-Star Renovations
 URL: https://allstarreno.com/warranty
 All-Star Renovations warranty: lifetime product warranty on All-Star Shower Systems materials and a 5-year workmanship warranty. Questions? Call (501) 504-3398.
+
+## Docs
+
+- [All-Star Renovations Docs](https://allstarreno.com/docs): Help center and documentation (served from Mintlify at /docs; index at https://allstarreno.com/docs/llms.txt)

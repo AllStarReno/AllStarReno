@@ -7,7 +7,8 @@ const files = walk(DIST);
 const html = files.filter((f) => f.endsWith('.html'));
 const vercel = JSON.parse(fs.readFileSync('vercel.json', 'utf8'));
 const redirects = new Set(vercel.redirects.map((r) => r.source));
-const exists = (p) => {
+const PROXIED = /^\/(docs|_mintlify|mintlify-assets)(\/|$)/; // served by vercel.json rewrites (Mintlify)
+const exists = (p) => { if (PROXIED.test(p)) return true;
   p = decodeURI(p.split('#')[0].split('?')[0]); if (p === '/' || p === '') return true;
   if (redirects.has(p)) return true;
   const f = path.join(DIST, p);

@@ -1177,5 +1177,27 @@
     "api/*.js": {
       "maxDuration": 15
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/_mintlify/:path*",
+      "destination": "https://all-starrenovations.mintlify.site/_mintlify/:path*"
+    },
+    {
+      "source": "/mintlify-assets/:path+",
+      "destination": "https://all-starrenovations.mintlify.site/mintlify-assets/:path+"
+    },
+    {
+      "source": "/api/request",
+      "destination": "https://all-starrenovations.mintlify.site/_mintlify/api/request"
+    },
+    {
+      "source": "/docs",
+      "destination": "https://all-starrenovations.mintlify.site/docs"
+    },
+    {
+      "source": "/docs/:path*",
+      "destination": "https://all-starrenovations.mintlify.site/docs/:path*"
+    }
+  ]
 }

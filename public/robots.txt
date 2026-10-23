@@ -194,5 +194,7 @@ Disallow: /wp-admin/
 Disallow: /?s=
 Disallow: /search/
 
+Sitemap: https://allstarreno.com/sitemap-index.xml
 Sitemap: https://allstarreno.com/sitemap.xml
+Sitemap: https://allstarreno.com/docs/sitemap.xml
 # AI grounding documents: https://allstarreno.com/llms.txt and https://allstarreno.com/llms-full.txt

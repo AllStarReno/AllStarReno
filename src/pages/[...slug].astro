@@ -8,7 +8,7 @@ import { loadPages } from '../lib/legacy.mjs';
 import { buildGraph, breadcrumbTrail } from '../lib/schema.mjs';
 import { formPlacement, addVisitCta } from '../lib/placement.mjs';
 export function getStaticPaths() {
-  return loadPages().filter((p) => p.slug !== '404').map((page) => ({ params: { slug: page.slug || undefined }, props: { page } }));
+  return loadPages().filter((p) => p.slug !== '404' && p.slug !== 'service-areas').map((page) => ({ params: { slug: page.slug || undefined }, props: { page } }));
 }
 const { page } = Astro.props;
 const graph = buildGraph(page);

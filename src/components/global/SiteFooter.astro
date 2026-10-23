@@ -1,0 +1,37 @@
+---
+// AI Studio-style footer: brand + NAP (address appears here, in schema, and on /contact only), services, cities, guides/legal.
+import { CATEGORIES } from '../../data/services.mjs';
+import { CITIES } from '../../data/cities.mjs';
+import { BUSINESS } from '../../data/business.mjs';
+const a = BUSINESS.address;
+const SOCIAL = [['Google', 'https://g.page/r/CaWnV-VVVJEQEBM'], ['Facebook', 'https://www.facebook.com/allstarreno1/'], ['Instagram', 'https://www.instagram.com/allstarreno/'], ['YouTube', 'https://www.youtube.com/@all-starreno']];
+---
+<footer class="ui sf">
+  <div class="wrap">
+    <div class="sf-grid">
+      <div>
+        <a class="sh-brand" href="/"><img src="/icon-192.png" alt="" width="44" height="44" loading="lazy" /><span><b>ALL-STAR RENOVATIONS</b><small>Central Arkansas · Conway</small></span></a>
+        <p style="margin:1rem 0 0;line-height:1.65">Bathroom, kitchen and handyman remodeling for homeowners within 50 miles of Conway, Arkansas.</p>
+        <div class="nap">
+          <a href={`tel:${BUSINESS.tel}`} data-contact="call">{BUSINESS.phone}</a>
+          <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a>
+          <span>{a.streetAddress}, {a.addressLocality}, {a.addressRegion} {a.postalCode}</span>
+        </div>
+        <div class="soc">{SOCIAL.map(([n, u]) => <a href={u} rel="noopener me" target="_blank">{n}</a>)}</div>
+      </div>
+      <div><h3>Services</h3><ul>
+        {CATEGORIES.map((c) => <li><a href={`/${c.slug}`}>{c.name}</a></li>)}
+        {CATEGORIES[0].subs.filter((s) => s.slug !== 'full-bathroom-remodel').map((s) => <li><a href={`/${CATEGORIES[0].slug}/${s.slug}`}>{s.name}</a></li>)}
+      </ul></div>
+      <div><h3>Service Areas</h3><ul>
+        {CITIES.map((c) => <li><a href={`/service-areas/${c.slug}`}>{c.name}, AR</a></li>)}
+        <li><a href="/service-areas"><strong>All service areas →</strong></a></li>
+      </ul></div>
+      <div><h3>Guides &amp; Company</h3><ul>
+        <li><a href="/guides">Guides</a></li><li><a href="/docs">Docs &amp; Help Center</a></li><li><a href="/services-pricing">Services &amp; Pricing</a></li>
+        <li><a href="/financing">Financing</a></li><li><a href="/warranty">Warranty</a></li><li><a href="/portfolio">Gallery</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li>
+      </ul></div>
+    </div>
+    <div class="sf-bot"><span>© 2026 All-Star Renovations. All rights reserved.</span><span><a href="/privacy-policy">Privacy Policy</a> · <a href="/terms-and-conditions">Terms</a> · <a href="/llms.txt">llms.txt</a></span></div>
+  </div>
+</footer>
