@@ -16,6 +16,7 @@ import { SERVICE_PAGES } from '../../data/service-pages.mjs';
 import { SITE, BUSINESS } from '../../data/business.mjs';
 import { SUBS, ANGLES, parseSubCity, visitLine, SUB_CITY_NOINDEX } from '../../data/sub-locations.mjs';
 import { THIN_TOWNS } from '../../data/city-pages.mjs';
+import { guidesFor } from '../../data/guide-links.mjs';
 interface Props { slug: string }
 const { slug } = Astro.props;
 const { sub, city } = parseSubCity(slug);
@@ -70,7 +71,11 @@ for (const n of g['@graph']) if (n['@id'] === PAGE) { n.mainEntity = { '@id': SV
 const here = `/${slug}`;
 const tabs = [{ href: `/${cat.slug}/${city.slug}`, label: `All ${cat.name.replace(' Services', '').toLowerCase()}` }, ...cat.subs.filter((s) => SUBS.some((x) => x.slug === s.slug)).map((s) => ({ href: `/${cat.slug}/${s.slug}/${city.slug}`, label: s.name }))];
 const near = nearestCities(city.slug, 6).filter(okCity).slice(0, 4);
-const otherCats = SUBS.filter((s) => s.cat.slug !== cat.slug).filter((_, i) => i % 2 === 0).slice(0, 4);
+// Rotate cross-category links per city+sub so inbound links spread evenly across all location pages.
+const _pool = SUBS.filter((s) => s.cat.slug !== cat.slug);
+const _off = [...(city.slug + sub.slug)].reduce((a, ch) => a + ch.charCodeAt(0), 0) % _pool.length;
+const otherCats = [..._pool.slice(_off), ..._pool.slice(0, _off)].slice(0, 4);
+const guides = guidesFor(cat.slug, sub.slug);
 const tel = BUSINESS.tel;
 const timeline = /1-2 day/i.test(d.timeline) ? `${d.timeline}*` : d.timeline;
 ---
@@ -176,6 +181,7 @@ const timeline = /1-2 day/i.test(d.timeline) ? `${d.timeline}*` : d.timeline;
     <section class="wrap sp-sec" aria-labelledby="rel-h">
       <h2 class="sp-h2" id="rel-h">More Services in {city.name}</h2>
       <div class="sp-rel">{otherCats.map((s) => <a href={`/${s.cat.slug}/${s.slug}/${city.slug}`}>{s.name} in {city.name}</a>)}<a href="/financing">Financing</a><a href="/warranty">Warranty</a></div>
+      {guides.length > 0 && <div class="sp-rel" style="margin-top:.75rem">{guides.map((g) => <a href={g.href}>{g.title}</a>)}</div>}
     </section>
 
     <section class="sec" aria-labelledby="fq-h" style="background:#0a1e33">
