@@ -280,3 +280,12 @@ Just let me know and I'll build it for you.
 ---
 
 *Created for All-Star Renovations by Grok - July 2026*
+
+## IndexNow
+The IndexNow key file is `/6a39220f02001b770c0a334155fe232e.txt` (it contains the key). After a deploy, submit changed URLs to Bing, Yandex and other IndexNow engines with:
+
+```
+curl "https://api.indexnow.org/indexnow?url=https://allstarreno.com/&key=6a39220f02001b770c0a334155fe232e"
+```
+
+or POST a JSON list of URLs to https://api.indexnow.org/indexnow with `host`, `key` and `keyLocation`.
