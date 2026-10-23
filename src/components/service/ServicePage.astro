@@ -29,7 +29,7 @@ const img = (legacy.body.slice(legacy.body.indexOf('<main')).match(/<img\b[^>]*s
 const imgAlt = img ? ((legacy.body.match(new RegExp(`<img\\b[^>]*src="${img.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*>`)) || [''])[0].match(/alt="([^"]*)"/) || [])[1] || `${subName} by All-Star Renovations` : '';
 const webp = img && /\.(jpe?g|png)$/.test(img) ? img.replace(/\.(jpe?g|png)$/, '.webp') : null;
 // City links: bathroom -> city hubs; kitchen/handyman -> /<category>/<city>.
-const cityHref = (c) => d.cat === 'bathroom-remodeling' ? `/service-areas/${c.slug}` : `/${d.cat}/${c.slug}`;
+const cityHref = (c) => `/${d.cat}/${c.slug}`;
 const subsOf = cat.subs.filter((s) => s.slug !== 'full-bathroom-remodel');
 const related = isCat ? [] : subsOf.filter((s) => !slug.endsWith('/' + s.slug));
 const page = { ...legacy, body: 'id="main"', title: legacy.title, description: legacy.description };

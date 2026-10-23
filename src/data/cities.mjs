@@ -1,5 +1,6 @@
+import { NEW_CITIES } from './city-guides.mjs';
 // City directory data (service-areas hub). Seeded from the original city cards. No ratings: only real review data may be used.
-export const CITIES = [
+const BASE = [
   {
     "slug": "conway",
     "geo": { "latitude": 35.0887, "longitude": -92.4421 },
@@ -16,7 +17,7 @@ export const CITIES = [
     "services": [
       {
         "label": "Bathroom Remodeling",
-        "href": "/service-areas/conway"
+        "href": "/bathroom-remodeling/conway"
       },
       {
         "label": "Kitchen Remodeling",
@@ -42,7 +43,7 @@ export const CITIES = [
     "services": [
       {
         "label": "Bathroom Remodeling",
-        "href": "/service-areas/greenbrier"
+        "href": "/bathroom-remodeling/greenbrier"
       },
       {
         "label": "Kitchen Remodeling",
@@ -68,7 +69,7 @@ export const CITIES = [
     "services": [
       {
         "label": "Bathroom Remodeling",
-        "href": "/service-areas/vilonia"
+        "href": "/bathroom-remodeling/vilonia"
       },
       {
         "label": "Kitchen Remodeling",
@@ -94,7 +95,7 @@ export const CITIES = [
     "services": [
       {
         "label": "Bathroom Remodeling",
-        "href": "/service-areas/maumelle"
+        "href": "/bathroom-remodeling/maumelle"
       },
       {
         "label": "Kitchen Remodeling",
@@ -123,7 +124,7 @@ export const CITIES = [
     "services": [
       {
         "label": "Bathroom Remodeling",
-        "href": "/service-areas/north-little-rock"
+        "href": "/bathroom-remodeling/north-little-rock"
       },
       {
         "label": "Kitchen Remodeling",
@@ -154,7 +155,7 @@ export const CITIES = [
     "services": [
       {
         "label": "Bathroom Remodeling",
-        "href": "/service-areas/little-rock"
+        "href": "/bathroom-remodeling/little-rock"
       },
       {
         "label": "Kitchen Remodeling",
@@ -180,7 +181,7 @@ export const CITIES = [
     "services": [
       {
         "label": "Bathroom Remodeling",
-        "href": "/service-areas/sherwood"
+        "href": "/bathroom-remodeling/sherwood"
       },
       {
         "label": "Kitchen Remodeling",
@@ -206,7 +207,7 @@ export const CITIES = [
     "services": [
       {
         "label": "Bathroom Remodeling",
-        "href": "/service-areas/cabot"
+        "href": "/bathroom-remodeling/cabot"
       },
       {
         "label": "Kitchen Remodeling",
@@ -233,7 +234,7 @@ export const CITIES = [
     "services": [
       {
         "label": "Bathroom Remodeling",
-        "href": "/service-areas/benton"
+        "href": "/bathroom-remodeling/benton"
       },
       {
         "label": "Kitchen Remodeling",
@@ -259,7 +260,7 @@ export const CITIES = [
     "services": [
       {
         "label": "Bathroom Remodeling",
-        "href": "/service-areas/bryant"
+        "href": "/bathroom-remodeling/bryant"
       },
       {
         "label": "Kitchen Remodeling",
@@ -272,3 +273,18 @@ export const CITIES = [
     ]
   }
 ];
+
+// Stage 3: 9 more city hubs from architecture.md (straight-line miles for these).
+const HQ = { latitude: 35.0887, longitude: -92.4421 };
+const rad = (x) => x * Math.PI / 180;
+const miles = (g) => { const a = rad(g.latitude - HQ.latitude), b = rad(g.longitude - HQ.longitude);
+  return Math.round(2 * 3958.8 * Math.asin(Math.sqrt(Math.sin(a / 2) ** 2 + Math.cos(rad(HQ.latitude)) * Math.cos(rad(g.latitude)) * Math.sin(b / 2) ** 2))); };
+const svc = (slug) => [
+  { label: 'Bathroom Remodeling', href: `/bathroom-remodeling/${slug}` },
+  { label: 'Kitchen Remodeling', href: `/kitchen-remodeling/${slug}` },
+  { label: 'Handyman Services', href: `/handyman-services/${slug}` },
+];
+export const CITIES = [...BASE, ...NEW_CITIES.map((c) => ({ ...c, milesFromHQ: miles(c.geo), services: svc(c.slug) }))];
+export const nearestCities = (slug, n = 4) => { const c = CITIES.find((x) => x.slug === slug);
+  const d = (o) => Math.hypot(o.geo.latitude - c.geo.latitude, (o.geo.longitude - c.geo.longitude) * 0.82);
+  return CITIES.filter((o) => o.slug !== slug).sort((a, b) => d(a) - d(b)).slice(0, n); };

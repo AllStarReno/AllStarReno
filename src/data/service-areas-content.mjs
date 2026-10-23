@@ -1,13 +1,14 @@
 // Copy for /service-areas (shared by the page, its JSON-LD and its markdown copy).
 export const ANSWER = {
   question: 'Which Central Arkansas cities does All-Star Renovations serve?',
-  answer: 'All-Star Renovations serves homeowners within a 50-mile radius of its Conway, Arkansas headquarters, including Conway, Greenbrier, Vilonia, Maumelle, Little Rock, North Little Rock, Sherwood, Cabot, Benton and Bryant across Faulkner, Pulaski, Lonoke and Saline counties. Free in-home estimates: call (501) 504-3398.',
+  answer: 'All-Star Renovations serves homeowners within a 50-mile radius of its Conway, Arkansas headquarters, including Conway, Greenbrier, Vilonia, Maumelle, Little Rock, North Little Rock, Sherwood, Jacksonville, Mayflower, Cabot, Benton, Bryant and Morrilton across Faulkner, Pulaski, Lonoke, Saline and Conway counties. Free in-home estimates: call (501) 504-3398.',
 };
 export const COUNTIES = [
-  { slug: 'faulkner-county', name: 'Faulkner County', cities: 'Conway, Greenbrier, Vilonia' },
-  { slug: 'pulaski-county', name: 'Pulaski County', cities: 'Little Rock, North Little Rock, Maumelle, Sherwood' },
+  { slug: 'faulkner-county', name: 'Faulkner County', cities: 'Conway, Greenbrier, Vilonia, Mayflower, Guy, Enola, Quitman' },
+  { slug: 'pulaski-county', name: 'Pulaski County', cities: 'Little Rock, North Little Rock, Maumelle, Sherwood, Jacksonville, Roland' },
   { slug: 'saline-county', name: 'Saline County', cities: 'Benton, Bryant' },
-  { slug: 'lonoke-county', name: 'Lonoke County', cities: 'Cabot' },
+  { slug: 'lonoke-county', name: 'Lonoke County', cities: 'Cabot, Ward, Austin' },
+  { slug: 'conway-county', name: 'Conway County', cities: 'Morrilton' },
 ];
 export const FAQS = [
   { q: 'How far do you travel?', a: 'We serve a 50-mile radius of our Conway, AR headquarters, from Faulkner County to the Little Rock metro, Saline County and Lonoke County.' },

@@ -13,8 +13,9 @@ import { loadPages } from '../lib/legacy.mjs';
 import { buildGraph, breadcrumbTrail } from '../lib/schema.mjs';
 import { formPlacement, addVisitCta } from '../lib/placement.mjs';
 import { SERVICE_PAGE_SLUGS } from '../data/service-pages.mjs';
+import { CITY_PAGE_SLUGS } from '../data/city-pages.mjs';
 export function getStaticPaths() {
-  const SKIP = new Set(['404', 'service-areas', ...SERVICE_PAGE_SLUGS]);
+  const SKIP = new Set(['404', 'service-areas', ...SERVICE_PAGE_SLUGS, ...CITY_PAGE_SLUGS]);
   return loadPages().filter((p) => !SKIP.has(p.slug)).map((page) => ({ params: { slug: page.slug || undefined }, props: { page } }));
 }
 const { page } = Astro.props;

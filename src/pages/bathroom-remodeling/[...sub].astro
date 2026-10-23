@@ -2,8 +2,11 @@
 // Stage 2: bathroom-remodeling hub + sub-service pages (AI Studio service layout). City pages stay on the catch-all until stage 3.
 import ServicePage from '../../components/service/ServicePage.astro';
 import { SERVICE_PAGE_SLUGS } from '../../data/service-pages.mjs';
+import { CITY_PAGE_SLUGS } from '../../data/city-pages.mjs';
+import CityPage from '../../components/city/CityPage.astro';
 export function getStaticPaths() {
-  return SERVICE_PAGE_SLUGS.filter((s) => s === 'bathroom-remodeling' || s.startsWith('bathroom-remodeling/')).map((s) => ({ params: { sub: s === 'bathroom-remodeling' ? undefined : s.slice('bathroom-remodeling/'.length) }, props: { slug: s } }));
+  return [...(SERVICE_PAGE_SLUGS.filter((s) => s === 'bathroom-remodeling' || s.startsWith('bathroom-remodeling/')).map((s) => ({ params: { sub: s === 'bathroom-remodeling' ? undefined : s.slice('bathroom-remodeling/'.length) }, props: { slug: s } }))).map((p) => ({ ...p, props: { ...p.props, kind: 'service' } })),
+    ...CITY_PAGE_SLUGS.filter((s) => s.startsWith('bathroom-remodeling/')).map((s) => ({ params: { sub: s.slice('bathroom-remodeling/'.length) }, props: { slug: s, kind: 'city' } }))];
 }
 ---
-<ServicePage slug={Astro.props.slug} />
+{Astro.props.kind === 'city' ? <CityPage slug={Astro.props.slug} /> : <ServicePage slug={Astro.props.slug} />}
