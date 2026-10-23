@@ -19,6 +19,21 @@
       "statusCode": 301
     },
     {
+      "source": "/kitchen-remodel",
+      "destination": "/kitchen-remodeling",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodel",
+      "destination": "/bathroom-remodeling",
+      "permanent": true
+    },
+    {
+      "source": "/shower-replacement",
+      "destination": "/bathroom-remodeling/all-star-shower-systems",
+      "permanent": true
+    },
+    {
       "source": "/estimate",
       "destination": "/contact",
       "permanent": true
