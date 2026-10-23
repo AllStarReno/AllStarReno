@@ -1072,6 +1072,26 @@
       "source": "/content/financing",
       "destination": "/financing",
       "permanent": true
+    },
+    {
+      "source": "/morrilton",
+      "destination": "/service-areas/morrilton",
+      "permanent": true
+    },
+    {
+      "source": "/morrilton-ar",
+      "destination": "/service-areas/morrilton",
+      "permanent": true
+    },
+    {
+      "source": "/roland",
+      "destination": "/service-areas/roland",
+      "permanent": true
+    },
+    {
+      "source": "/roland-ar",
+      "destination": "/service-areas/roland",
+      "permanent": true
     }
   ],
   "headers": [
