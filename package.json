@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build && node scripts/check.mjs",
     "preview": "astro preview",
-    "check:site": "node scripts/check.mjs"
+    "check:site": "node scripts/check.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "astro": "^5.0.0"

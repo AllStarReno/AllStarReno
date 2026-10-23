@@ -97,7 +97,3 @@ Last updated: 2026-10-23
 
 ## Optional
 - [Full detail for AI systems](https://allstarreno.com/llms-full.txt)
-
-## Docs
-
-- [All-Star Renovations Docs](https://allstarreno.com/docs): Help center and documentation (served from Mintlify at /docs; index at https://allstarreno.com/docs/llms.txt)

@@ -1,0 +1,19 @@
+# ai.txt - allstarreno.com (Spawning ai.txt format)
+# All-Star Renovations | Conway, AR | (501) 504-3398
+# We permit all AI and machine-learning use of this site's text and images.
+User-Agent: *
+Allow: /
+Allow: *.txt
+Allow: *.md
+Allow: *.html
+Allow: *.pdf
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.png
+Allow: *.webp
+Allow: *.gif
+Allow: *.svg
+Disallow: /ads/
+
+# Sitemaps: https://allstarreno.com/sitemap-index.xml, https://allstarreno.com/sitemap.xml, https://allstarreno.com/docs/sitemap.xml
+# AI summaries: https://allstarreno.com/llms.txt, https://allstarreno.com/llms-full.txt, https://allstarreno.com/docs/llms.txt

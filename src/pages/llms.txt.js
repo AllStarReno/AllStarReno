@@ -1,3 +1,4 @@
 import fs from 'node:fs';
-// Curated summary lives in src/data/llms.txt (hand-edited); served verbatim.
-export function GET() { return new Response(fs.readFileSync('src/data/llms.txt', 'utf8'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } }); }
+import { docsSection, locationsSection } from '../lib/llms-extra.mjs';
+// Curated summary (src/data/llms.txt, hand-edited) + generated Help Center and location sections.
+export function GET() { return new Response(fs.readFileSync('src/data/llms.txt', 'utf8').trimEnd() + '\n\n' + locationsSection() + '\n\n' + docsSection() + '\n', { headers: { 'Content-Type': 'text/plain; charset=utf-8' } }); }
