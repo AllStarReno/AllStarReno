@@ -15,6 +15,7 @@ export function validate(b) {
     phone: clean(b.phone, 40), service: clean(b.service, 80), category: clean(b.category, 80), city: clean(b.city, 80),
     timeline: clean(b.timeline, 40), message: cleanNotes(b.message),
     source: clean(b.source, 120), page: clean(b.page, 200),
+    smsConsent: ['yes','on','true'].includes(clean(b.smsConsent, 10).toLowerCase()),
     trustedForm: /^https:\/\/cert\.trustedform\.com\/[A-Za-z0-9]+$/.test(clean(b.xxTrustedFormCertUrl, 200)) ? clean(b.xxTrustedFormCertUrl, 200) : '',
   };
   const errors = {};
@@ -38,7 +39,7 @@ function summaryText(l) {
     `Name: ${l.firstName} ${l.lastName}`, `Phone: ${l.phone}`, `Email: ${l.email}`, `City / Region: ${l.city}, AR`,
     `Category: ${l.category || 'Not specified'}`, `Service: ${l.service}`, `Consultation time: customer is shown the Google Calendar booking page next (check the calendar for their booking; call if none).`,
     l.timeline ? `Project timeline: ${l.timeline}` : null, `Notes: ${l.message || 'No additional notes provided.'}`, '',
-    `Consent: submitted with the call/SMS consent disclosure shown on the form.`,
+    `SMS consent: ${l.smsConsent ? 'YES, checked the optional SMS opt-in box' : 'NO, did not opt in to text messages (do not text)'}`,
     `TrustedForm certificate: ${l.trustedForm || 'Not captured'}`,
     `Source: ${l.source || 'website'} ${l.page || ''}`.trim(), `Submitted: ${new Date().toISOString()}`,
   ].filter((x) => x !== null).join('\n');
