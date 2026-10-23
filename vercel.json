@@ -19,18 +19,28 @@
       "statusCode": 301
     },
     {
+      "source": "/estimate",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/estimate.html",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
       "source": "/areas",
       "destination": "/service-areas",
       "permanent": true
     },
     {
       "source": "/free-estimate",
-      "destination": "/estimate",
+      "destination": "/contact",
       "permanent": true
     },
     {
       "source": "/quote",
-      "destination": "/estimate",
+      "destination": "/contact",
       "permanent": true
     },
     {

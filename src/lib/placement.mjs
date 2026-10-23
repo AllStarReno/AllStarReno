@@ -31,7 +31,7 @@ export function addVisitCta(body, hasForm) {
   const m = body.match(/<a\b[^>]*data-swivl="scheduler"[^>]*>[\s\S]*?<\/a>/) || body.match(/<a\b[^>]*data-swivl="quote"[^>]*>[\s\S]*?<\/a>/);
   if (!m) return body;
   const cls = (m[0].match(/class="([^"]*)"/) || [])[1] || '';
-  const href = hasForm ? '#request-visit' : '/estimate';
+  const href = hasForm ? '#request-visit' : '/contact#request-visit';
   const link = `<a href="${href}" class="${cls} asr-rv" data-cta="request-visit">Request a visit</a><a href="${hasForm ? '#book' : '/contact#book'}" class="${cls} asr-rv" data-cta="book-time" data-book-time>Book a time</a>`;
   return body.slice(0, m.index + m[0].length) + link + body.slice(m.index + m[0].length);
 }
