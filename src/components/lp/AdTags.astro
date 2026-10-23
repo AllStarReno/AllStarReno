@@ -1,0 +1,48 @@
+---
+// Ad tags for /lp/ pages only. Every tag is driven by a build-time env var; unset = nothing is emitted.
+// IDs are public site-tag IDs but are still never committed: set them in Vercel → Settings → Environment Variables.
+const env = import.meta.env;
+const ok = (v, re) => (v && re.test(String(v).trim()) ? String(v).trim() : '');
+const cfg = {
+  meta: ok(env.PUBLIC_META_PIXEL_ID, /^\d{6,20}$/),
+  aw: ok(env.PUBLIC_GOOGLE_ADS_ID, /^AW-\d{6,15}$/),
+  awLead: ok(env.PUBLIC_GOOGLE_ADS_LEAD_LABEL, /^[\w-]{4,40}$/),
+  awCall: ok(env.PUBLIC_GOOGLE_ADS_CALL_LABEL, /^[\w-]{4,40}$/),
+  awClickCall: ok(env.PUBLIC_GOOGLE_ADS_CLICK_TO_CALL_LABEL, /^[\w-]{4,40}$/),
+  uet: ok(env.PUBLIC_MS_UET_TAG_ID, /^\d{4,15}$/),
+  phone: '(501) 504-3398',
+};
+const any = cfg.meta || cfg.aw || cfg.uet;
+---
+{any && (
+<script is:inline define:vars={{ cfg }}>
+(function(){
+  var w=window,d=document,q=[];
+  function load(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s);}
+  function boot(){
+    if(cfg.aw){w.dataLayer=w.dataLayer||[];w.gtag=function(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config',cfg.aw);
+      if(cfg.awCall)gtag('config',cfg.aw+'/'+cfg.awCall,{phone_conversion_number:cfg.phone});
+      load('https://www.googletagmanager.com/gtag/js?id='+cfg.aw);}
+    if(cfg.meta){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}(w,d);
+      fbq('init',cfg.meta);fbq('track','PageView');load('https://connect.facebook.net/en_US/fbevents.js');}
+    if(cfg.uet){w.uetq=w.uetq||[];var o={ti:cfg.uet,enableAutoSpaTracking:true};
+      var s=d.createElement('script');s.async=true;s.src='https://bat.bing.com/bat.js';s.onload=function(){o.q=w.uetq;w.uetq=new UET(o);w.uetq.push('pageLoad');};d.head.appendChild(s);}
+  }
+  // Defer until after first paint/interaction so tags never hurt LCP.
+  var done=false;function go(){if(done)return;done=true;boot();}
+  ['pointerdown','keydown','scroll','touchstart'].forEach(function(e){w.addEventListener(e,go,{once:true,passive:true});});
+  w.addEventListener('load',function(){setTimeout(go,2500);});
+  function ensure(fn){go();fn();}
+  d.addEventListener('asr:lead',function(e){ensure(function(){
+    if(cfg.aw&&cfg.awLead)gtag('event','conversion',{send_to:cfg.aw+'/'+cfg.awLead});
+    if(cfg.meta)fbq('track','Lead',{content_name:(e.detail||{}).service||''});
+    if(cfg.uet)(w.uetq=w.uetq||[]).push('event','submit_lead_form',{event_category:'lead',event_label:(e.detail||{}).service||''});
+  });});
+  d.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="tel:"]');if(!a)return;ensure(function(){
+    if(cfg.aw&&cfg.awClickCall)gtag('event','conversion',{send_to:cfg.aw+'/'+cfg.awClickCall});
+    if(cfg.meta)fbq('track','Contact');
+    if(cfg.uet)(w.uetq=w.uetq||[]).push('event','phone_call',{event_category:'contact'});
+  });});
+})();
+</script>
+)}

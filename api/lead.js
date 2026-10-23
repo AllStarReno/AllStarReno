@@ -4,6 +4,8 @@
 // a prefilled mailto/sms fallback. Accepts JSON (JS form) or urlencoded (no-JS form).
 import { resolveService, TIMELINES, PHONE, LEAD_TO, LEAD_FROM, readBody } from './_lib.js';
 
+const ATTR = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','gbraid','wbraid','msclkid','fbclid','landing'];
+const platformOf = (a) => a.gclid || a.gbraid || a.wbraid ? 'Google Ads' : a.msclkid ? 'Microsoft Ads' : a.fbclid ? 'Meta' : a.utm_source || '';
 const MIN_FILL_MS = 3000, MAX_FILL_MS = 24 * 3600e3;
 const clean = (v, n = 200) => String(v ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, n);
 const cleanNotes = (v) => String(v ?? '').replace(/[\u0000-\u0009\u000b-\u001f\u007f]/g, ' ').trim().slice(0, 2000);
@@ -16,6 +18,7 @@ export function validate(b) {
     timeline: clean(b.timeline, 40), message: cleanNotes(b.message),
     source: clean(b.source, 120), page: clean(b.page, 200),
     smsConsent: ['yes','on','true'].includes(clean(b.smsConsent, 10).toLowerCase()),
+    attribution: Object.fromEntries(ATTR.map((k) => [k, clean(b['a_' + k], 200)]).filter(([, v]) => v)),
     trustedForm: /^https:\/\/cert\.trustedform\.com\/[A-Za-z0-9]+$/.test(clean(b.xxTrustedFormCertUrl, 200)) ? clean(b.xxTrustedFormCertUrl, 200) : '',
   };
   const errors = {};
@@ -41,7 +44,9 @@ function summaryText(l) {
     l.timeline ? `Project timeline: ${l.timeline}` : null, `Notes: ${l.message || 'No additional notes provided.'}`, '',
     `SMS consent: ${l.smsConsent ? 'YES, checked the optional SMS opt-in box' : 'NO, did not opt in to text messages (do not text)'}`,
     `TrustedForm certificate: ${l.trustedForm || 'Not captured'}`,
-    `Source: ${l.source || 'website'} ${l.page || ''}`.trim(), `Submitted: ${new Date().toISOString()}`,
+    `Source: ${l.source || 'website'} ${l.page || ''}`.trim(),
+    Object.keys(l.attribution).length ? `Ad platform: ${platformOf(l.attribution) || 'unknown'}` : 'Ad platform: none (organic/direct)',
+    ...Object.entries(l.attribution).map(([k, v]) => `  ${k}: ${v}`), `Submitted: ${new Date().toISOString()}`,
   ].filter((x) => x !== null).join('\n');
 }
 const fallbackLinks = (l, text) => ({
