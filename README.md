@@ -292,3 +292,12 @@ The site is built with [Astro](https://astro.build) as fully static output (`npm
 - `sitemap.xml`, `llms.txt`, `llms-full.txt` are generated at build time.
 - `scripts/check.mjs` runs after every build and fails it on broken internal links, missing alt text, invalid JSON-LD, wrong canonical/h1 counts.
 - `build.format: 'file'` + `cleanUrls` keep every existing path; redirects/headers remain in `vercel.json`.
+
+## IndexNow
+The IndexNow key file is `/6a39220f02001b770c0a334155fe232e.txt` (it contains the key). After a deploy, submit changed URLs to Bing, Yandex and other IndexNow engines with:
+
+```
+curl "https://api.indexnow.org/indexnow?url=https://allstarreno.com/&key=6a39220f02001b770c0a334155fe232e"
+```
+
+or POST a JSON list of URLs to https://api.indexnow.org/indexnow with `host`, `key` and `keyLocation`.
