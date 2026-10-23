@@ -8,5 +8,6 @@ export const BUSINESS = {
   email: 'info@allstarreno.com',
   city: 'Conway, AR',
   address: { streetAddress: '11 Arnett Ln', addressLocality: 'Conway', addressRegion: 'AR', postalCode: '72032', addressCountry: 'US' },
+  identity: 'All-Star Renovations of Conway, Arkansas is a locally owned company serving Central Arkansas. We are not affiliated with any other All-Star Renovations outside of Central Arkansas.',
   geo: { latitude: 35.0887, longitude: -92.4421 },
 };

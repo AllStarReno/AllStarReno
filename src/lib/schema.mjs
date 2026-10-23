@@ -56,5 +56,13 @@ export function buildGraph(page) {
   add({ '@type': 'BreadcrumbList', '@id': `${page.url}#breadcrumb`, itemListElement: breadcrumbTrail(page).map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: c.url })) });
   const LOGO = { '@type': 'ImageObject', '@id': `${SITE}/#logo`, url: `${SITE}/images/logo.png`, contentUrl: `${SITE}/images/logo.png`, width: 512, height: 512, caption: BUSINESS.name };
   for (const n of graph) if (n['@id'] === BIZ || n.logo) n.logo = LOGO;
+  const biz = graph.find((n) => n['@id'] === BIZ);
+  if (biz) {
+    Object.assign(biz, { name: BUSINESS.name, url: `${SITE}/`, telephone: '+1-501-504-3398',
+      address: { '@type': 'PostalAddress', ...BUSINESS.address }, geo: { '@type': 'GeoCoordinates', ...BUSINESS.geo },
+      description: `Bathroom remodeling, kitchen remodeling and handyman services based in Conway, Arkansas. ${BUSINESS.identity}`,
+      disambiguatingDescription: BUSINESS.identity });
+    biz.sameAs = [...new Set([...(biz.sameAs || []), 'https://www.facebook.com/allstarreno1/', 'https://www.instagram.com/allstarreno/', 'https://www.linkedin.com/company/all-starrenovations', 'https://www.yelp.com/biz/all-star-renovations-conway', 'https://www.bbb.org/us/ar/conway/profile/bathroom-remodel/all-star-renovations-0935-90368635'])];
+  }
   return { '@context': 'https://schema.org', '@graph': graph, _hasArticle: hasArticle };
 }
