@@ -1,0 +1,9 @@
+---
+// Stage 2: kitchen-remodeling hub + sub-service pages (AI Studio service layout). City pages stay on the catch-all until stage 3.
+import ServicePage from '../../components/service/ServicePage.astro';
+import { SERVICE_PAGE_SLUGS } from '../../data/service-pages.mjs';
+export function getStaticPaths() {
+  return SERVICE_PAGE_SLUGS.filter((s) => s === 'kitchen-remodeling' || s.startsWith('kitchen-remodeling/')).map((s) => ({ params: { sub: s === 'kitchen-remodeling' ? undefined : s.slice('kitchen-remodeling/'.length) }, props: { slug: s } }));
+}
+---
+<ServicePage slug={Astro.props.slug} />

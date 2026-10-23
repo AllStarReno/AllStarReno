@@ -2,14 +2,16 @@
 // "Ready to Transform" contact block (AI Studio) wrapping our tabbed LeadForm (Request a Quote / Book a Time).
 import LeadForm from '../LeadForm.astro';
 import { BUSINESS } from '../../data/business.mjs';
-interface Props { slug?: string; city?: string; source?: string }
+interface Props { slug?: string; city?: string; source?: string; topic?: string }
 const { slug = '', city = 'Conway', source = 'contact_block' } = Astro.props;
+const first = slug.split('/')[0];
+const topic = Astro.props.topic || (first === 'kitchen-remodeling' ? 'Kitchen' : first === 'handyman-services' ? 'Home' : first === 'bathroom-remodeling' || first === 'service-areas' ? 'Bathroom' : 'Home');
 ---
 <section class="ui cb" id="contact" aria-labelledby="cb-h">
   <div class="wrap cb-grid">
     <div>
       <span class="pill">Get Started Today</span>
-      <h2 id="cb-h">Ready to <em>Transform</em> Your Bathroom?</h2>
+      <h2 id="cb-h">Ready to <em>Transform</em> Your {topic}?</h2>
       <p class="lead">Request your free, no-obligation in-home estimate or pick a time on our calendar. Our Central Arkansas remodeling specialists confirm by call or text.</p>
       <ul>
         <li><a href={`tel:${BUSINESS.tel}`} data-contact="call"><span class="ic"><span class="ms" aria-hidden="true">call</span></span><span><strong>Call Our Experts</strong><span>{BUSINESS.phone}</span><small>Tap to dial</small></span></a></li>
