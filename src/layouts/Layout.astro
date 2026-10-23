@@ -1,4 +1,5 @@
 ---
+import NewoChat from '../components/NewoChat.astro';
 // Site-wide <head>: canonical, meta/OG/Twitter, robots, and a single JSON-LD @graph.
 import '../styles/tokens.css';
 import { SITE } from '../data/business.mjs';
@@ -37,5 +38,6 @@ const ogImage = page.ogImage || `${SITE}/assets/img/og-image.jpg`;
 <body class={page.bodyClass}>
   {hasMain && <a class="skip-link" href="#main">Skip to main content</a>}
   <slot />
+  <NewoChat />
 </body>
 </html>

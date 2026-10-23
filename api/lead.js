@@ -2,7 +2,7 @@
 // books an exact time on the Google Calendar appointment page. Email failure never loses the lead:
 // the full lead is always written to the function log and the client gets success plus
 // a prefilled mailto/sms fallback. Accepts JSON (JS form) or urlencoded (no-JS form).
-import { SERVICES, TIMELINES, PHONE, LEAD_TO, LEAD_FROM, readBody } from './_lib.js';
+import { resolveService, TIMELINES, PHONE, LEAD_TO, LEAD_FROM, readBody } from './_lib.js';
 
 const MIN_FILL_MS = 3000, MAX_FILL_MS = 24 * 3600e3;
 const clean = (v, n = 200) => String(v ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, n);
@@ -12,7 +12,7 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&
 export function validate(b) {
   const lead = {
     firstName: clean(b.firstName, 80), lastName: clean(b.lastName, 80), email: clean(b.email, 160).toLowerCase(),
-    phone: clean(b.phone, 40), service: clean(b.service, 80), city: clean(b.city, 80),
+    phone: clean(b.phone, 40), service: clean(b.service, 80), category: clean(b.category, 80), city: clean(b.city, 80),
     timeline: clean(b.timeline, 40), message: cleanNotes(b.message),
     source: clean(b.source, 120), page: clean(b.page, 200),
   };
@@ -23,31 +23,33 @@ export function validate(b) {
   const digits = lead.phone.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '');
   if (digits.length !== 10) errors.phone = 'Please enter a 10-digit phone number.';
   else lead.phone = `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
-  if (!SERVICES.includes(lead.service)) errors.service = 'Please choose a service.';
+  const rs = resolveService(lead.category, lead.service);
+  if (!rs) errors.service = 'Please choose a service.'; else Object.assign(lead, rs);
   if (!lead.city) errors.city = 'Please enter your city.';
   if (!TIMELINES.includes(lead.timeline)) lead.timeline = '';
   return { lead, errors };
 }
 
+const label = (l) => (l.category && l.category !== l.service ? `${l.category}: ${l.service}` : l.service);
 function summaryText(l) {
   return [
-    `NEW WEB LEAD: ${l.firstName} ${l.lastName} (${l.service})`, '',
+    `NEW WEB LEAD: ${l.firstName} ${l.lastName} (${label(l)})`, '',
     `Name: ${l.firstName} ${l.lastName}`, `Phone: ${l.phone}`, `Email: ${l.email}`, `City / Region: ${l.city}, AR`,
-    `Project Type: ${l.service}`, `Consultation time: customer is shown the Google Calendar booking page next (check the calendar for their booking; call if none).`,
+    `Category: ${l.category || 'Not specified'}`, `Service: ${l.service}`, `Consultation time: customer is shown the Google Calendar booking page next (check the calendar for their booking; call if none).`,
     l.timeline ? `Project timeline: ${l.timeline}` : null, `Notes: ${l.message || 'No additional notes provided.'}`, '',
     `Consent: submitted with the call/SMS consent disclosure shown on the form.`,
     `Source: ${l.source || 'website'} ${l.page || ''}`.trim(), `Submitted: ${new Date().toISOString()}`,
   ].filter((x) => x !== null).join('\n');
 }
 const fallbackLinks = (l, text) => ({
-  mailto: `mailto:info@allstarreno.com?subject=${encodeURIComponent(`Consultation request: ${l.firstName} ${l.lastName}, ${l.service}, ${l.city}`)}&body=${encodeURIComponent(text)}`,
+  mailto: `mailto:info@allstarreno.com?subject=${encodeURIComponent(`Consultation request: ${l.firstName} ${l.lastName}, ${label(l)}, ${l.city}`)}&body=${encodeURIComponent(text)}`,
   sms: `sms:+15015043398?&body=${encodeURIComponent(`Hi All-Star Renovations, this is ${l.firstName} ${l.lastName}. I requested a free consultation for ${l.service} in ${l.city}. My number is ${l.phone}.`)}`,
 });
 
 async function sendEmail(l, text) {
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST', headers: { authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'content-type': 'application/json' },
-    body: JSON.stringify({ from: LEAD_FROM(), to: [LEAD_TO()], reply_to: l.email, subject: `New web lead: ${l.firstName} ${l.lastName} (${l.service}, ${l.city})`,
+    body: JSON.stringify({ from: LEAD_FROM(), to: [LEAD_TO()], reply_to: l.email, subject: `New web lead: ${l.firstName} ${l.lastName} (${label(l)}, ${l.city})`,
       text, html: `<pre style="font:14px/1.5 ui-monospace,monospace;white-space:pre-wrap">${esc(text)}</pre>` }),
     signal: AbortSignal.timeout(8000),
   });

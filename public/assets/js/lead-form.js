@@ -9,8 +9,8 @@
     var p = null; try { p = localStorage.getItem('calculator_estimate_prefill'); } catch (e) {}
     if (!p) return;
     var msg = $('[name=message]', form); if (msg && !msg.value) msg.value = p;
-    var map = [['Shower Replacement', 'Shower Replacement'], ['Tub-to-Shower Conversion', 'Tub-to-Shower Conversion'], ['Walk-In Safety Tub', 'Walk-In Tub Installation'], ['Full Bathroom Remodel', 'Full Bathroom Remodel']];
-    map.forEach(function (m) { if (p.indexOf(m[0]) > -1) $('[name=service]', form).value = m[1]; });
+    var map = [['Bath', 'Bathroom Remodeling'], ['Shower', 'Bathroom Remodeling'], ['Shower', 'Walk-In Showers'], ['Tub-to-Shower', 'Tub-to-Shower Conversions'], ['Walk-In Safety Tub', 'Walk-In Tubs'], ['Full Bathroom Remodel', 'Full Bathroom Remodel']];
+    var sel = $('[name=service]', form); map.forEach(function (m) { if (p.indexOf(m[0]) > -1 && $$('option', sel).some(function (o) { return o.value === m[1]; })) sel.value = m[1]; });
     CITIES.some(function (c) { if (p.indexOf(c) > -1) { $('[name=city]', form).value = c; return true; } });
   }
 
@@ -61,7 +61,7 @@
         });
     });
     function showDone(j, data) {
-      var rows = [['To', 'info@allstarreno.com'], ['Name', data.firstName + ' ' + data.lastName], ['Phone', data.phone], ['Email', data.email], ['City / Region', data.city + ', AR'], ['Project Type', data.service], ['Notes', data.message || 'No additional notes provided.']];
+      var rows = [['To', 'info@allstarreno.com'], ['Name', data.firstName + ' ' + data.lastName], ['Phone', data.phone], ['Email', data.email], ['City / Region', data.city + ', AR'], ['Service', (data.category && data.category !== data.service ? data.category + ': ' : '') + data.service], ['Notes', data.message || 'No additional notes provided.']];
       $('[data-sum]', done).innerHTML = rows.map(function (r) { return '<dt>' + esc(r[0]) + ':</dt><dd>' + esc(r[1]) + '</dd>'; }).join('');
       var text = rows.map(function (r) { return r[0] + ': ' + r[1]; }).join('\n');
       var fbBox = $('[data-fb]', done);

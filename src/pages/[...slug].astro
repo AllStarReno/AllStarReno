@@ -31,6 +31,6 @@ if (i > -1) segs[i] = { ...segs[i], html: addVisitCta(segs[i].html, !!form) };
 const needsCallBar = !/fixed bottom|data-contact="call"/.test(page.body);
 ---
 <Layout page={page} graph={graph}>
-  {segs.map((s) => s.kind === 'html' ? <Fragment set:html={s.html} /> : s.kind === 'crumbs' ? <Breadcrumbs items={breadcrumbTrail(page)} /> : <LeadForm {...s.props} />)}
+  {segs.map((s) => s.kind === 'html' ? <Fragment set:html={s.html} /> : s.kind === 'crumbs' ? <Breadcrumbs items={breadcrumbTrail(page)} /> : <LeadForm slug={page.slug} {...s.props} />)}
   {needsCallBar && <CallBar />}
 </Layout>

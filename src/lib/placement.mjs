@@ -1,10 +1,5 @@
 // Where the AI Studio lead form goes on each legacy page, and with what presets.
 const CITY = { conway: 'Conway', greenbrier: 'Greenbrier', vilonia: 'Vilonia', maumelle: 'Maumelle', 'little-rock': 'Little Rock', 'north-little-rock': 'North Little Rock', sherwood: 'Sherwood', cabot: 'Cabot', benton: 'Benton', bryant: 'Bryant' };
-const SVC = {
-  'bathroom-remodeling': 'Full Bathroom Remodel', 'all-star-shower-systems': 'Shower Replacement', 'walk-in-showers': 'Shower Replacement',
-  'tub-to-shower-conversions': 'Tub-to-Shower Conversion', 'walk-in-tubs': 'Walk-In Tub Installation', 'aging-in-place-ada': 'Aging-in-Place Renovation',
-  'kitchen-remodeling': 'Kitchen Remodeling', 'handyman-services': 'Handyman Services', 'service-areas': 'Full Bathroom Remodel',
-};
 const COMPACT = /^(bathroom-remodeling|kitchen-remodeling|handyman-services|service-areas)(\/|$)/;
 
 // Returns { at, end, props } (insert/replace range in page.body) or null.
@@ -25,9 +20,8 @@ export function formPlacement(page) {
   if (COMPACT.test(s)) {
     const parts = s.split('/'), last = parts[parts.length - 1];
     const city = CITY[last] || 'Conway';
-    const service = SVC[last] || SVC[parts[0]];
-    const at = b.lastIndexOf('<footer') > -1 ? b.lastIndexOf('<footer') : b.length;
-    return { at, end: at, props: { variant: 'compact', city, service, source: `compact:${s}` } };
+        const at = b.lastIndexOf('<footer') > -1 ? b.lastIndexOf('<footer') : b.length;
+    return { at, end: at, props: { variant: 'compact', city, source: `compact:${s}` } };
   }
   return null;
 }

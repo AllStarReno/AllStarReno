@@ -8,8 +8,7 @@ export const PHONE = '(501) 504-3398';
 // Public Google Calendar appointment booking page (owner's schedule; not a secret).
 export const BOOKING_URL = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0ZRx4CfMx9hmkVVcZm7KSoe_jVz0t6PvVOoKPgbogD28yX4PjouFRxs54v6qmA-gPzzc3hVSfi?gv=true';
 
-export const SERVICES = ['Shower Replacement', 'Tub-to-Shower Conversion', 'Walk-In Tub Installation', 'Full Bathroom Remodel',
-  'Aging-in-Place Renovation', 'Kitchen Remodeling', 'Handyman Services', 'Other / Not Sure'];
+export { resolveService } from '../src/data/services.mjs';
 export const TIMELINES = ['', 'Immediate (1-2 Weeks)', 'Within 1 Month', '1 to 3 Months', 'Planning / Flexible'];
 
 export async function readBody(req) {

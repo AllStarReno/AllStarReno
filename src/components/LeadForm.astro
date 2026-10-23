@@ -2,9 +2,11 @@
 // AI Studio "Contact" lead form (navy card, orange submit, consent text, "Request Received!"),
 // rebuilt as accessible static HTML + progressive enhancement (public/assets/js/lead-form.js).
 // variant="full": two-column AI Studio section. variant="compact": card only, preset city/service.
-interface Props { variant?: 'full' | 'compact'; city?: string; service?: string; source?: string; heading?: string; pitch?: boolean; bare?: boolean; defaultTab?: 'quote' | 'book' }
-const { variant = 'full', city = 'Conway', service = 'Shower Replacement', source = 'contact_form', heading, pitch = true, bare = false, defaultTab = 'quote' } = Astro.props;
-const SERVICES = ['Shower Replacement', 'Tub-to-Shower Conversion', 'Walk-In Tub Installation', 'Full Bathroom Remodel', 'Aging-in-Place Renovation', 'Kitchen Remodeling', 'Handyman Services', 'Other / Not Sure'];
+interface Props { variant?: 'full' | 'compact'; city?: string; service?: string; source?: string; heading?: string; pitch?: boolean; bare?: boolean; defaultTab?: 'quote' | 'book'; slug?: string }
+const { variant = 'full', city = 'Conway', service, slug = '', source = 'contact_form', heading, pitch = true, bare = false, defaultTab = 'quote' } = Astro.props;
+import { serviceContext } from '../data/services.mjs';
+const svc = serviceContext(slug);
+const selected = service || svc.selected;
 const BOOKING_URL = 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ0ZRx4CfMx9hmkVVcZm7KSoe_jVz0t6PvVOoKPgbogD28yX4PjouFRxs54v6qmA-gPzzc3hVSfi?gv=true';
 const TIMELINES = ['Immediate (1-2 Weeks)', 'Within 1 Month', '1 to 3 Months', 'Planning / Flexible'];
 const full = variant === 'full';
@@ -41,14 +43,14 @@ const showPitch = full && pitch;
           <div class="lf-f"><label for="lf-last">Last Name <span aria-hidden="true">*</span></label><input id="lf-last" name="lastName" required autocomplete="family-name" placeholder="Doe" aria-describedby="lf-last-e" maxlength="80" /><p id="lf-last-e" class="lf-e" data-err></p></div>
           <div class="lf-f"><label for="lf-email">Email Address <span aria-hidden="true">*</span></label><input id="lf-email" name="email" type="email" required autocomplete="email" inputmode="email" placeholder="john@example.com" aria-describedby="lf-email-e" maxlength="160" /><p id="lf-email-e" class="lf-e" data-err></p></div>
           <div class="lf-f"><label for="lf-phone">Phone Number <span aria-hidden="true">*</span></label><input id="lf-phone" name="phone" type="tel" required autocomplete="tel-national" inputmode="tel" placeholder="(501) 555-1234" aria-describedby="lf-phone-e" maxlength="40" /><p id="lf-phone-e" class="lf-e" data-err></p></div>
-          <div class="lf-f"><label for="lf-service">Service Interested In <span aria-hidden="true">*</span></label><select id="lf-service" name="service" required aria-describedby="lf-service-e">{SERVICES.map((s) => <option selected={s === service}>{s}</option>)}</select><p id="lf-service-e" class="lf-e" data-err></p></div>
+          <div class="lf-f"><label for="lf-service">Service Interested In <span aria-hidden="true">*</span></label><select id="lf-service" name="service" required aria-describedby="lf-service-e"><option value="" selected={!selected}>Select a service</option>{svc.options.map((s) => <option selected={s === selected}>{s}</option>)}</select><p id="lf-service-e" class="lf-e" data-err></p></div>
           <div class="lf-f"><label for="lf-city">Your City / Community <span aria-hidden="true">*</span></label><input id="lf-city" name="city" required autocomplete="address-level2" value={city} placeholder="e.g. Conway, Maumelle, Vilonia" aria-describedby="lf-city-e" maxlength="80" /><p id="lf-city-e" class="lf-e" data-err></p></div>
         </div>
         {full && <div class="lf-f"><label for="lf-timeline">Project Timeline <span class="lf-opt">(optional)</span></label><select id="lf-timeline" name="timeline"><option value="">Choose one</option>{TIMELINES.map((s) => <option>{s}</option>)}</select></div>}
         <div class="lf-f"><label for="lf-msg">Additional details / notes <span class="lf-opt">(optional)</span></label><textarea id="lf-msg" name="message" rows={full ? 3 : 2} maxlength="2000" placeholder="Describe your project, layout details, or any special accessibility requirements..."></textarea></div>
         <div class="lf-hp" aria-hidden="true"><label for="lf-company">Company (leave blank)</label><input id="lf-company" name="company" tabindex="-1" autocomplete="off" /></div>
         <input type="hidden" name="t" value="" data-t />
-        <input type="hidden" name="source" value={source} />
+        <input type="hidden" name="source" value={source} /><input type="hidden" name="category" value={svc.category} />
         <input type="hidden" name="page" value="" data-page />
         <button type="submit" class="lf-submit">Request Free Consultation <svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg></button>
         <p class="lf-consent">By submitting this form, you provide express written consent for All-Star Renovations and our automated communication systems (including AI scheduling assistants and SMS notifications) to contact you at the phone number provided regarding your estimate, consultation booking, and project updates via phone calls and SMS/MMS. Consent is not a condition of purchase. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to cancel at any time, or HELP for help. View our <a href="/privacy-policy">Privacy Policy</a> and <a href="/terms-and-conditions">Terms of Service</a>. We will never share or sell your phone number or opt-in data with third parties for marketing purposes.</p>

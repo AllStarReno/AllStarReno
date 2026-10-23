@@ -211,21 +211,7 @@ details[open] .chev{transform:rotate(180deg)}summary::-webkit-details-marker{dis
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 border-t border-white/10 pt-8"><div><h3 class="font-bold text-orange-300 uppercase tracking-wider text-sm mb-3 flex items-center gap-2"><svg aria-hidden="true" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM12 6v6l4 2"></path></svg> Business Hours</h3><ul class="space-y-1 text-slate-200 text-sm"><li><strong>Mon–Fri:</strong> 7:30 AM – 5:00 PM</li><li><strong>Saturday:</strong> 7:00 AM – 7:00 PM</li><li><strong>Sunday:</strong> 9:00 AM – 3:00 PM</li></ul></div>
 <div><h3 class="font-bold text-orange-300 uppercase tracking-wider text-sm mb-3 flex items-center gap-2"><svg aria-hidden="true" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Credentials</h3><ul class="space-y-1 text-slate-200 text-sm"><li>Fully Insured · Workers’ Comp Covered</li><li>100% Customer Guarantee</li><li>Lifetime product warranty on All-Star Shower Systems materials · 5-year workmanship warranty</li><li>Serving Central Arkansas since 2014</li></ul></div></div></div></div></div></section></main>
 <!-- Floating Swivl Chat Assistant Trigger Button -->
-<aside aria-label="Live Assistant" class="fixed bottom-20 xl:bottom-6 right-5 z-40 flex flex-col items-end gap-2">
-<button class="group flex items-center gap-3 bg-primary hover:bg-primary-container text-on-primary pl-4 pr-5 py-3 rounded-full shadow-2xl border border-primary-container/40 transition-all hover:scale-105 cursor-pointer" id="swivl-chat-trigger" onclick="openChatModal()">
-<span class="relative flex h-3 w-3">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-trust-emerald opacity-75"></span>
-<span class="relative inline-flex rounded-full h-3 w-3 bg-trust-emerald"></span>
-</span>
-<div class="flex flex-col text-left leading-none">
-<span class="font-label-sm text-label-sm font-bold text-white tracking-wide">Ask Thomas's Team</span>
-<span class="text-[11px] text-surface-variant mt-0.5">Live AI Shower Assistant</span>
-</div>
-<div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-inner group-hover:rotate-12 transition-transform">
-<span class="material-symbols-outlined text-[19px]">chat</span>
-</div>
-</button>
-</aside>
+
 <!-- Modal: Swivl Instant Quote -->
 <div class="fixed inset-0 z-50 bg-primary/70 backdrop-blur-sm hidden items-center justify-center p-3 md:p-6 transition-opacity" id="modal-instant-quote">
 <div class="bg-surface-card rounded-2xl w-full max-w-4xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden border border-border-subtle animate-in fade-in zoom-in-95 duration-200">
@@ -260,28 +246,7 @@ details[open] .chev{transform:rotate(180deg)}summary::-webkit-details-marker{dis
 </div>
 </div>
 </div>
-<!-- Modal: Swivl Chatbot -->
-<div class="fixed inset-0 z-50 bg-primary/70 backdrop-blur-sm hidden items-end sm:items-center justify-end sm:justify-center p-2 sm:p-6 transition-opacity" id="modal-chat">
-<div class="bg-surface-card rounded-2xl w-full max-w-lg max-h-[90vh] h-[640px] flex flex-col shadow-2xl overflow-hidden border border-border-subtle animate-in fade-in slide-in-from-bottom-5 duration-200">
-<div class="flex items-center justify-between p-3.5 bg-primary text-on-primary">
-<div class="flex items-center gap-2">
-<div class="w-7 h-7 rounded-full bg-trust-emerald/20 text-trust-emerald flex items-center justify-center">
-<span class="material-symbols-outlined text-[18px]">support_agent</span>
-</div>
-<div class="flex flex-col">
-<span class="font-label-md text-label-md font-bold text-white leading-tight">All-Star Renovations Concierge</span>
-<span class="text-[11px] text-surface-variant leading-none">Instant answers &amp; estimates</span>
-</div>
-</div>
-<button aria-label="Close chat" class="w-8 h-8 rounded-full bg-primary-container hover:bg-primary-container/80 text-white flex items-center justify-center cursor-pointer" onclick="closeChatModal()">
-<span class="material-symbols-outlined text-[20px]">close</span>
-</button>
-</div>
-<div class="flex-1 w-full bg-surface-canvas relative">
-<iframe allow="camera; microphone; payment; autoplay; clipboard-write" class="w-full h-full border-0" loading="lazy" src="https://client.swivl.tech/all-star-renovate-318dbc/chat" title="Swivl Chatbot"></iframe>
-</div>
-</div>
-</div>
+
 <footer class="w-full bg-[#070d1d] text-slate-300 border-t border-white/10 pb-24 lg:pb-0"><div class="max-w-7xl mx-auto px-5 lg:px-8 py-12"><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
 <div class="sm:col-span-2 lg:col-span-1"><p class="font-serif text-2xl font-bold text-white">ALL-STAR <span class="text-orange-300">RENOVATIONS</span></p><p class="text-sm mt-3">11 Arnett Ln, Conway, AR 72032</p><p class="text-sm mt-1"><a class="underline" data-contact="call" href="tel:5015043398">(501) 504-3398</a></p><p class="text-sm mt-1"><a class="underline" href="mailto:info@allstarreno.com">info@allstarreno.com</a></p><p class="text-xs mt-3 text-slate-400">Serving a 50-mile radius of Conway since 2014.</p></div>
 <div><h3 class="font-serif text-xl font-bold text-white mb-3">Services</h3><ul class="space-y-0.5"><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/bathroom-remodeling/tub-to-shower-conversions">Tub-to-Shower Conversions</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/bathroom-remodeling/walk-in-showers">Walk-in Showers</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/bathroom-remodeling/walk-in-tubs">Walk-in Tubs</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/bathroom-remodeling/aging-in-place-ada">Aging-in-Place &amp; ADA</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/bathroom-remodeling/all-star-shower-systems">All-Star Shower Systems</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/kitchen-remodeling">Kitchen Remodeling</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/handyman-services">Handyman Services</a></li></ul></div><div><h3 class="font-serif text-xl font-bold text-white mb-3">Service Areas</h3><ul class="space-y-0.5"><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/service-areas">All Service Areas &amp; Map</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/service-areas/faulkner-county">Faulkner County</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/service-areas/pulaski-county">Pulaski County</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/service-areas/saline-county">Saline County</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/service-areas/lonoke-county">Lonoke County</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/service-areas/other-areas">Other Areas</a></li></ul></div><div><h3 class="font-serif text-xl font-bold text-white mb-3">Company</h3><ul class="space-y-0.5"><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/about">About</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/portfolio">Portfolio</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/warranty">Warranty</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/financing">Financing</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/contact">Contact</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/guides">Guides &amp; Blog</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/services-pricing">Services &amp; Process</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/privacy-policy">Privacy Policy</a></li><li><a class="block py-2 text-sm text-slate-300 hover:text-white" href="/terms-and-conditions">Terms &amp; Conditions</a></li></ul></div>

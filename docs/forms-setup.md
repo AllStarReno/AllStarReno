@@ -39,3 +39,15 @@ Never commit keys to the repo.
 - A 3-second minimum fill time.
 
 Both are checked on the server. Spam is silently dropped.
+
+## Service dropdown (driven by `src/data/services.mjs`)
+- On pages under `/bathroom-remodeling`, `/kitchen-remodeling` or `/handyman-services` (the category page, its sub-service pages and their location pages), the dropdown lists that category's sub-services. On a sub-service page, that sub-service is preselected.
+- Every other page lists only the three categories.
+- Every list ends with "Other / Not sure".
+- New pages inherit this from their URL, so adding a sub-service only means adding it to `services.mjs`.
+- The email subject reads `New web lead: Name (Category: Service, City)`.
+
+## Newo AI chat
+- A branded "Chat with us" button appears on every page. The Newo script (`static.newo.ai`) loads only on hover, focus or click, and the chat opens automatically on click.
+- The client id is a public site-embed id. It defaults to the value in `src/components/NewoChat.astro` and can be overridden with `PUBLIC_NEWO_CLIENT_ID`.
+- **Owner step:** in the Newo dashboard, set the client website base URL / allowed domain to `https://allstarreno.com`, plus any preview domain you want to test on. Until then, the chat shows "Invalid Client Website Base URL setting".
