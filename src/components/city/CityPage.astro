@@ -158,7 +158,7 @@ const topic = cat ? cat.name.split(' ')[0] : undefined;
       <div class="sec-head"><span class="pill">{cat ? cat.name : 'Services'}</span><h2 id="svc-h">{cat ? `${cat.name.replace(' Services', '')} Services in ${place}` : `Services Available in ${place}`}</h2><p>Pick the project that fits, or call {BUSINESS.phone} and describe it.</p></div>
       <div class="sp-subs">
         {cat ? subs.map((s) => (
-          <a class="card" href={`/${cat.slug}/${s.slug}`}><h3>{s.name}</h3><p>{subBlurb[s.slug] || `${s.name} for ${city.name} homes.`}</p><span class="go">Learn more <span class="ms" aria-hidden="true">arrow_forward</span></span></a>
+          <a class="card" href={`/${cat.slug}/${s.slug}/${city.slug}`}><h3>{s.name} in {city.name}</h3><p>{subBlurb[s.slug] || `${s.name} for ${city.name} homes.`}</p><span class="go">See {s.name.toLowerCase()} in {city.name} <span class="ms" aria-hidden="true">arrow_forward</span></span></a>
         )) : CATEGORIES.map((c) => (
           <a class="card" href={city ? catHref(c.slug, city.slug) : `/${c.slug}`}><h3>{c.name}{city ? ` in ${city.name}` : ''}</h3><p>{c.subs.slice(0, 4).map((s) => s.name).join(' · ')}</p><span class="go">{city ? `See ${c.name.split(' ')[0].toLowerCase()} in ${city.name}` : `Explore ${c.name.toLowerCase()}`} <span class="ms" aria-hidden="true">arrow_forward</span></span></a>
         ))}
@@ -236,18 +236,3 @@ const topic = cat ? cat.name.split(' ')[0] : undefined;
   </main>
   <SiteFooter />
 </Layout>
-<style is:global>
-.lp-tabs{display:flex;flex-wrap:wrap;gap:.5rem;padding-top:1.5rem}
-.lp-tabs a{padding:.55rem 1rem;border-radius:999px;border:1px solid rgba(255,255,255,.18);color:#dbe5ef;text-decoration:none;font-weight:700;font-size:.9rem}
-.lp-tabs a[aria-current="page"]{background:var(--amber);color:#0F2B48;border-color:var(--amber)}
-.lp-local{padding:1.5rem}
-.lp-local>p{color:#cbd6e2;line-height:1.7;margin:0 0 1.25rem}
-.lp-cols{display:grid;gap:1.25rem;grid-template-columns:1fr}
-@media(min-width:800px){.lp-cols{grid-template-columns:repeat(3,1fr)}}
-.lp-cols h3{display:flex;gap:.4rem;align-items:flex-start;min-width:0;font-size:1rem;font-weight:800;margin:0 0 .5rem}
-.lp-cols h3 .ms{color:var(--amber)}
-.lp-cols ul{margin:0;padding-left:1.1rem;color:#cbd6e2;line-height:1.7}
-.lp-cols p{margin:0;color:#cbd6e2;line-height:1.7}
-.lp-steps{counter-reset:none}
-.lp-steps b{color:#fff}
-</style>

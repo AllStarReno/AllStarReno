@@ -12,6 +12,7 @@ import { SERVICE_PAGES, SPEC } from '../../data/service-pages.mjs';
 import { CATEGORIES } from '../../data/services.mjs';
 import { CITIES } from '../../data/cities.mjs';
 import { SITE, BUSINESS } from '../../data/business.mjs';
+import { guidesFor } from '../../data/guide-links.mjs';
 interface Props { slug: string }
 const { slug } = Astro.props;
 const d = SERVICE_PAGES[slug];
@@ -29,8 +30,9 @@ const img = (legacy.body.slice(legacy.body.indexOf('<main')).match(/<img\b[^>]*s
 const imgAlt = img ? ((legacy.body.match(new RegExp(`<img\\b[^>]*src="${img.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*>`)) || [''])[0].match(/alt="([^"]*)"/) || [])[1] || `${subName} by All-Star Renovations` : '';
 const webp = img && /\.(jpe?g|png)$/.test(img) ? img.replace(/\.(jpe?g|png)$/, '.webp') : null;
 // City links: bathroom -> city hubs; kitchen/handyman -> /<category>/<city>.
-const cityHref = (c) => `/${d.cat}/${c.slug}`;
+const cityHref = (c) => isCat ? `/${d.cat}/${c.slug}` : `/${slug}/${c.slug}`;
 const subsOf = cat.subs.filter((s) => s.slug !== 'full-bathroom-remodel');
+const guides = guidesFor(d.cat, isCat ? null : slug.split('/').pop());
 const related = isCat ? [] : subsOf.filter((s) => !slug.endsWith('/' + s.slug));
 const page = { ...legacy, body: 'id="main"', title: legacy.title, description: legacy.description };
 // JSON-LD: base graph, then Service (+ catalog on hubs), FAQPage, BreadcrumbList (from buildGraph), speakable.
@@ -101,7 +103,7 @@ const tel = BUSINESS.tel;
         <div class="sec-head"><span class="pill">{cat.name}</span><h2 id="subs-h">{cat.name.replace(' Services', '')} Services We Offer</h2><p>Pick the project that fits, or call {BUSINESS.phone} and describe it.</p></div>
         <div class="sp-subs">
           {subsOf.filter((s) => d.subs[s.slug]).map((s) => (
-            <a class="card" href={`/${cat.slug}/${s.slug}`}><h3>{s.name}</h3><p>{d.subs[s.slug]}</p><span class="go">Learn more <span class="ms" aria-hidden="true">arrow_forward</span></span></a>
+            <a class="card" href={`/${cat.slug}/${s.slug}`}><h3>{s.name}</h3><p>{d.subs[s.slug]}</p><span class="go">Explore {s.name.toLowerCase()} <span class="ms" aria-hidden="true">arrow_forward</span></span></a>
           ))}
         </div>
       </section>
@@ -136,6 +138,13 @@ const tel = BUSINESS.tel;
       <section class="wrap sp-sec" aria-labelledby="rel-h">
         <h2 class="sp-h2" id="rel-h">More {cat.name}</h2>
         <div class="sp-rel"><a href={`/${cat.slug}`}>All {cat.name}</a>{related.map((s) => <a href={`/${cat.slug}/${s.slug}`}>{s.name}</a>)}</div>
+      </section>
+    )}
+
+    {guides.length > 0 && (
+      <section class="wrap sp-sec" aria-labelledby="gd-h">
+        <h2 class="sp-h2" id="gd-h">Helpful Guides</h2>
+        <div class="sp-rel">{guides.map((g) => <a href={g.href}>{g.title}</a>)}</div>
       </section>
     )}
 

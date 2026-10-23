@@ -709,18 +709,13 @@
       "permanent": true
     },
     {
-      "source": "/service-areas/mayflower",
-      "destination": "/service-areas/other-areas",
-      "permanent": true
-    },
-    {
       "source": "/mayflower",
-      "destination": "/service-areas/other-areas",
+      "destination": "/service-areas/mayflower",
       "permanent": true
     },
     {
       "source": "/mayflower-ar",
-      "destination": "/service-areas/other-areas",
+      "destination": "/service-areas/mayflower",
       "permanent": true
     },
     {
@@ -910,22 +905,22 @@
     },
     {
       "source": "/location/morrilton",
-      "destination": "/service-areas/other-areas",
+      "destination": "/service-areas/morrilton",
       "permanent": true
     },
     {
       "source": "/location/morrilton/:service",
-      "destination": "/service-areas/other-areas",
+      "destination": "/service-areas/morrilton",
       "permanent": true
     },
     {
       "source": "/location/mayflower",
-      "destination": "/service-areas/other-areas",
+      "destination": "/service-areas/mayflower",
       "permanent": true
     },
     {
       "source": "/location/mayflower/:service",
-      "destination": "/service-areas/other-areas",
+      "destination": "/service-areas/mayflower",
       "permanent": true
     },
     {
@@ -1035,12 +1030,12 @@
     },
     {
       "source": "/location/roland",
-      "destination": "/service-areas/other-areas",
+      "destination": "/service-areas/roland",
       "permanent": true
     },
     {
       "source": "/location/roland/:service",
-      "destination": "/service-areas/other-areas",
+      "destination": "/service-areas/roland",
       "permanent": true
     },
     {
@@ -1076,6 +1071,26 @@
     {
       "source": "/content/financing",
       "destination": "/financing",
+      "permanent": true
+    },
+    {
+      "source": "/morrilton",
+      "destination": "/service-areas/morrilton",
+      "permanent": true
+    },
+    {
+      "source": "/morrilton-ar",
+      "destination": "/service-areas/morrilton",
+      "permanent": true
+    },
+    {
+      "source": "/roland",
+      "destination": "/service-areas/roland",
+      "permanent": true
+    },
+    {
+      "source": "/roland-ar",
+      "destination": "/service-areas/roland",
       "permanent": true
     }
   ],
