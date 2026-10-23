@@ -4,9 +4,12 @@ import ServicePage from '../../components/service/ServicePage.astro';
 import { SERVICE_PAGE_SLUGS } from '../../data/service-pages.mjs';
 import { CITY_PAGE_SLUGS } from '../../data/city-pages.mjs';
 import CityPage from '../../components/city/CityPage.astro';
+import SubCityPage from '../../components/location/SubCityPage.astro';
+import { SUB_CITY_SLUGS } from '../../data/sub-locations.mjs';
 export function getStaticPaths() {
   return [...(SERVICE_PAGE_SLUGS.filter((s) => s === 'handyman-services' || s.startsWith('handyman-services/')).map((s) => ({ params: { sub: s === 'handyman-services' ? undefined : s.slice('handyman-services/'.length) }, props: { slug: s } }))).map((p) => ({ ...p, props: { ...p.props, kind: 'service' } })),
-    ...CITY_PAGE_SLUGS.filter((s) => s.startsWith('handyman-services/')).map((s) => ({ params: { sub: s.slice('handyman-services/'.length) }, props: { slug: s, kind: 'city' } }))];
+    ...CITY_PAGE_SLUGS.filter((s) => s.startsWith('handyman-services/')).map((s) => ({ params: { sub: s.slice('handyman-services/'.length) }, props: { slug: s, kind: 'city' } })),
+    ...SUB_CITY_SLUGS.filter((s) => s.startsWith('handyman-services/')).map((s) => ({ params: { sub: s.slice('handyman-services/'.length) }, props: { slug: s, kind: 'subcity' } }))];
 }
 ---
-{Astro.props.kind === 'city' ? <CityPage slug={Astro.props.slug} /> : <ServicePage slug={Astro.props.slug} />}
+{Astro.props.kind === 'subcity' ? <SubCityPage slug={Astro.props.slug} /> : Astro.props.kind === 'city' ? <CityPage slug={Astro.props.slug} /> : <ServicePage slug={Astro.props.slug} />}
