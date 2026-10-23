@@ -1,6 +1,8 @@
 // Builds one connected JSON-LD @graph per page (business, website, webpage, breadcrumbs,
 // services, FAQ, articles, images, speakable) from the page's existing structured data.
 import { SITE, BUSINESS } from '../data/business.mjs';
+import { CITIES } from '../data/cities.mjs';
+import { CATEGORIES } from '../data/services.mjs';
 
 const BIZ = `${SITE}/#business`;
 const WEBSITE = `${SITE}/#website`;
@@ -38,7 +40,7 @@ export function buildGraph(page) {
         add(n); continue;
       }
       if (t.includes('BreadcrumbList')) continue; // regenerated below
-      if (t.includes('Article') || t.includes('BlogPosting')) { hasArticle = true; n.publisher = { '@id': BIZ }; n.mainEntityOfPage = { '@id': pageId }; n.author ||= { '@type': 'Person', name: 'Thomas Pedersen', worksFor: { '@id': BIZ } }; }
+      if (t.includes('Article') || t.includes('BlogPosting')) { hasArticle = true; n.publisher = { '@id': BIZ }; n.mainEntityOfPage = { '@id': pageId }; n.author ||= { '@type': 'Person', '@id': `${SITE}/about#thomas-pedersen`, name: 'Thomas Pedersen', jobTitle: 'Owner', url: `${SITE}/about`, worksFor: { '@id': BIZ } }; n.dateModified ||= LASTMOD; }
       if (t.includes('Service') && !n.provider) n.provider = { '@id': BIZ };
       add(n);
     }
@@ -63,7 +65,19 @@ export function buildGraph(page) {
       description: `Bathroom remodeling, kitchen remodeling and handyman services based in Conway, Arkansas. ${BUSINESS.identity}`,
       disambiguatingDescription: BUSINESS.identity, foundingDate: '2014', slogan: '20 years of experience. In business since 2014.' });
     delete biz.aggregateRating; delete biz.review;
-    biz.sameAs = [...new Set([...(biz.sameAs || []), 'https://www.facebook.com/allstarreno1/', 'https://www.instagram.com/allstarreno/', 'https://www.linkedin.com/company/all-starrenovations', 'https://www.yelp.com/biz/all-star-renovations-conway', 'https://www.bbb.org/us/ar/conway/profile/bathroom-remodel/all-star-renovations-0935-90368635'])];
+    biz.sameAs = [...BUSINESS.sameAs];
+    Object.assign(biz, {
+      hasMap: BUSINESS.gbp, currenciesAccepted: 'USD',
+      openingHoursSpecification: BUSINESS.hours.map((h) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: h.days, opens: h.opens, closes: h.closes })),
+      areaServed: [...CITIES.map((c) => ({ '@type': 'City', name: `${c.name}, AR`, ...(c.county ? { containedInPlace: { '@type': 'AdministrativeArea', name: `${c.county}, Arkansas` } } : {}) })),
+        { '@type': 'GeoCircle', geoMidpoint: { '@type': 'GeoCoordinates', ...BUSINESS.geo }, geoRadius: '80467' }],
+      hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Remodeling services', itemListElement: CATEGORIES.map((c) => ({ '@type': 'OfferCatalog', name: c.name, url: `${SITE}/${c.slug}`,
+        itemListElement: c.subs.map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.name, url: `${SITE}/${c.slug}/${s.slug}`, provider: { '@id': BIZ } } })) })) },
+      knowsAbout: ['Bathroom remodeling', 'Tub-to-shower conversions', 'Walk-in showers', 'Walk-in tubs', 'Grout-free shower wall panels', 'Aging-in-place and ADA bathroom design', 'Kitchen remodeling', 'Cabinet refacing', 'Countertop replacement', 'Backsplash installation', 'Handyman repairs'],
+      founder: { '@type': 'Person', '@id': `${SITE}/about#thomas-pedersen`, name: BUSINESS.founder, jobTitle: 'Owner', worksFor: { '@id': BIZ } },
+      email: BUSINESS.email, logo: LOGO, image: `${SITE}/assets/img/og-image.jpg`,
+    });
+    delete biz.openingHours;
   }
   return { '@context': 'https://schema.org', '@graph': graph, _hasArticle: hasArticle };
 }

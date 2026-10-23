@@ -20,7 +20,7 @@ const ogImage = page.ogImage || `${SITE}/assets/img/og-image.jpg`;
   <meta name="robots" content={robots} />
   {page.indexable && <link rel="canonical" href={page.url} />}
   <meta name="theme-color" content="#0F2B48" />
-  <meta name="geo.region" content="US-AR" /><meta name="geo.placename" content="Conway" />
+  <meta name="geo.region" content="US-AR" /><meta name="geo.placename" content="Conway, Arkansas" /><meta name="geo.position" content="35.0887;-92.4421" /><meta name="ICBM" content="35.0887, -92.4421" />
   <meta property="og:site_name" content="All-Star Renovations" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:type" content={_hasArticle ? 'article' : page.ogType} />
@@ -31,6 +31,10 @@ const ogImage = page.ogImage || `${SITE}/assets/img/og-image.jpg`;
   <meta property="og:image:alt" content={page.ogImageAlt || page.title} />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@All_StarReno" />
+  <meta name="twitter:title" content={page.title} />
+  <meta name="twitter:description" content={page.description} />
+  <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:image:alt" content={page.ogImageAlt || page.title} />
   <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM summary" />
   <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />

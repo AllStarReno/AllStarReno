@@ -10,18 +10,46 @@ export const BUSINESS = {
   address: { streetAddress: '11 Arnett Ln', addressLocality: 'Conway', addressRegion: 'AR', postalCode: '72032', addressCountry: 'US' },
   identity: 'All-Star Renovations of Conway, Arkansas is a locally owned company serving Central Arkansas. We are not affiliated with any other All-Star Renovations outside of Central Arkansas.',
   geo: { latitude: 35.0887, longitude: -92.4421 },
+  founder: 'Thomas Pedersen',
+  hours: [
+    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '07:30', closes: '17:00' },
+    { days: ['Saturday'], opens: '07:00', closes: '19:00' },
+    { days: ['Sunday'], opens: '09:00', closes: '15:00' },
+  ],
+  // Google Business Profile (verified via g.page short link -> Maps place CID 0x10915455e557a7a5).
+  gbp: 'https://www.google.com/maps?cid=1193828104126572453',
+  // Only profiles verified to exist (owner's allstarreno.link hub + web search, 2026-10-23). Never invent one.
+  sameAs: [
+    'https://www.google.com/maps?cid=1193828104126572453',
+    'https://www.facebook.com/allstarreno1/',
+    'https://www.instagram.com/allstarreno/',
+    'https://www.yelp.com/biz/all-star-renovations-conway',
+    'https://www.bbb.org/us/ar/conway/profile/bathroom-remodel/all-star-renovations-0935-90368635',
+    'https://nextdoor.com/pages/all-star-renovations-conway-ar-1',
+    'https://www.houzz.com/professionals/kitchen-and-bath-remodelers/all-star-renovations-pfvwus-pf~1481213171',
+    'https://pro.porch.com/conway-ar/remodeling-contractors/all-star-renovations-167519291/pp',
+    'https://www.linkedin.com/company/all-starrenovations',
+    'https://www.youtube.com/channel/UChXHzlSsdqMEQwMV8V4BqRA',
+    'https://www.pinterest.com/All_StarReno',
+    'https://www.tiktok.com/@allstarreno',
+    'https://www.threads.net/@allstarreno',
+    'https://x.com/All_StarReno',
+  ],
 };
+
+// Keyless Google Maps embed (lazy, below the fold) for contact + service areas.
+export const MAP_EMBED = `<section class="asr-map" aria-labelledby="asr-map-h" style="padding:48px 20px;background:#0e172a"><div style="max-width:1100px;margin:0 auto"><h2 id="asr-map-h" style="color:#fff;font-size:1.6rem;font-weight:700;margin:0 0 6px">Where is All-Star Renovations located?</h2><p style="color:#cbd5e1;margin:0 0 16px">All-Star Renovations, 11 Arnett Ln, Conway, AR 72032 · <a href="tel:+15015043398" style="color:#fdba74">(501) 504-3398</a> · <a href="https://www.google.com/maps?cid=1193828104126572453" rel="noopener" target="_blank" style="color:#fdba74">Open in Google Maps</a></p><iframe title="Map of All-Star Renovations, 11 Arnett Ln, Conway, AR 72032" src="https://maps.google.com/maps?q=All-Star%20Renovations%2C%2011%20Arnett%20Ln%2C%20Conway%2C%20AR%2072032&z=11&output=embed" width="100%" height="380" style="border:0;border-radius:12px;display:block;aspect-ratio:auto" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div></section>`;
 
 // Trust badges (owner-confirmed). Add a profile URL to `href` to make a badge a link; empty = plain image.
 // Display-only: these are NOT used for aggregateRating schema.
 export const BADGES = [
-  { id: 'google-reviews', alt: 'Google Reviews 5-star rated', w: 218, h: 104, href: '' },
-  { id: 'yelp-5-star', alt: 'Yelp 5-star rated', w: 163, h: 112, href: '' },
-  { id: 'facebook-5-rating', alt: 'Facebook 5.0 average rating', w: 218, h: 92, href: '' },
+  { id: 'google-reviews', alt: 'Google Reviews 5-star rated', w: 218, h: 104, href: 'https://g.page/r/CaWnV-VVVJEQEBM/review' },
+  { id: 'yelp-5-star', alt: 'Yelp 5-star rated', w: 163, h: 112, href: 'https://www.yelp.com/biz/all-star-renovations-conway' },
+  { id: 'facebook-5-rating', alt: 'Facebook 5.0 average rating', w: 218, h: 92, href: 'https://www.facebook.com/allstarreno1/' },
   { id: 'top-10-rated-best-remodel', alt: 'Top 10 Rated Best Remodel', w: 200, h: 110, href: '' },
-  { id: 'porch-featured-pro', alt: 'Porch Featured Pro', w: 91, h: 112, href: '' },
+  { id: 'porch-featured-pro', alt: 'Porch Featured Pro', w: 91, h: 112, href: 'https://pro.porch.com/conway-ar/remodeling-contractors/all-star-renovations-167519291/pp' },
   { id: 'fibo', alt: 'Fibo listed contractor', w: 211, h: 112, href: '' },
-  { id: 'houzz', alt: 'Houzz listed pro', w: 101, h: 112, href: '' },
+  { id: 'houzz', alt: 'Houzz listed pro', w: 101, h: 112, href: 'https://www.houzz.com/professionals/kitchen-and-bath-remodelers/all-star-renovations-pfvwus-pf~1481213171' },
   { id: 'homeadvisor-screened-approved', alt: 'HomeAdvisor Screened & Approved', w: 123, h: 112, href: '' },
-  { id: 'nextdoor-fave-2026', alt: '2026 Nextdoor Fave Winner, voted by neighbors on Nextdoor', w: 112, h: 112, href: '' },
+  { id: 'nextdoor-fave-2026', alt: '2026 Nextdoor Fave Winner, voted by neighbors on Nextdoor', w: 112, h: 112, href: 'https://nextdoor.com/pages/all-star-renovations-conway-ar-1' },
 ];

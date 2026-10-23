@@ -10,7 +10,7 @@ import { loadPages } from '../lib/legacy.mjs';
 import { buildGraph } from '../lib/schema.mjs';
 import { CITIES } from '../data/cities.mjs';
 import { ANSWER, COUNTIES, FAQS, HOURS } from '../data/service-areas-content.mjs';
-import { SITE, BUSINESS } from '../data/business.mjs';
+import { SITE, BUSINESS, MAP_EMBED } from '../data/business.mjs';
 
 const legacy = loadPages().find((p) => p.slug === 'service-areas');
 const b = legacy.body;
@@ -63,6 +63,7 @@ const tel = BUSINESS.tel;
     </section>
 
     <Fragment set:html={coverage} />
+    <Fragment set:html={MAP_EMBED} />
 
     <section class="sec cm" aria-labelledby="cm-h">
       <div class="wrap" data-filter-root>
