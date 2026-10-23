@@ -97,5 +97,5 @@ Disallow: /ads/
 # ==============================================================================
 # 3. CANONICAL SITEMAPS & AI KNOWLEDGE DIRECTIVES
 # ==============================================================================
-Sitemap: https://www.allstarreno.com/sitemap.xml
-# Generative AI grounding document: https://www.allstarreno.com/llms.txt
+Sitemap: https://allstarreno.com/sitemap.xml
+# AI grounding documents: https://allstarreno.com/llms.txt and https://allstarreno.com/llms-full.txt
