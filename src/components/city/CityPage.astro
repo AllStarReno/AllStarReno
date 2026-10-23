@@ -158,7 +158,7 @@ const topic = cat ? cat.name.split(' ')[0] : undefined;
       <div class="sec-head"><span class="pill">{cat ? cat.name : 'Services'}</span><h2 id="svc-h">{cat ? `${cat.name.replace(' Services', '')} Services in ${place}` : `Services Available in ${place}`}</h2><p>Pick the project that fits, or call {BUSINESS.phone} and describe it.</p></div>
       <div class="sp-subs">
         {cat ? subs.map((s) => (
-          <a class="card" href={`/${cat.slug}/${s.slug}/${city.slug}`}><h3>{s.name} in {city.name}</h3><p>{subBlurb[s.slug] || `${s.name} for ${city.name} homes.`}</p><span class="go">Learn more <span class="ms" aria-hidden="true">arrow_forward</span></span></a>
+          <a class="card" href={`/${cat.slug}/${s.slug}/${city.slug}`}><h3>{s.name} in {city.name}</h3><p>{subBlurb[s.slug] || `${s.name} for ${city.name} homes.`}</p><span class="go">See {s.name.toLowerCase()} in {city.name} <span class="ms" aria-hidden="true">arrow_forward</span></span></a>
         )) : CATEGORIES.map((c) => (
           <a class="card" href={city ? catHref(c.slug, city.slug) : `/${c.slug}`}><h3>{c.name}{city ? ` in ${city.name}` : ''}</h3><p>{c.subs.slice(0, 4).map((s) => s.name).join(' · ')}</p><span class="go">{city ? `See ${c.name.split(' ')[0].toLowerCase()} in ${city.name}` : `Explore ${c.name.toLowerCase()}`} <span class="ms" aria-hidden="true">arrow_forward</span></span></a>
         ))}
