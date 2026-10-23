@@ -8,6 +8,7 @@ import LeadForm from '../components/LeadForm.astro';
 import SiteHeader from '../components/global/SiteHeader.astro';
 import SiteFooter from '../components/global/SiteFooter.astro';
 import ContactBlock from '../components/global/ContactBlock.astro';
+import TrustBadges from '../components/TrustBadges.astro';
 import '../styles/ui.css';
 import { loadPages } from '../lib/legacy.mjs';
 import { buildGraph, breadcrumbTrail } from '../lib/schema.mjs';
@@ -43,7 +44,7 @@ if (form) b = b.slice(0, form.at) + '<!--@FORM-->' + b.slice(form.end);
 if (!NO_CONTACT.has(s)) { const m = b.lastIndexOf('</main>'); const at = m > -1 ? m : b.indexOf('<!--@FOOTER-->'); b = b.slice(0, at) + '<!--@CONTACT-->' + b.slice(at); }
 // 3) Breadcrumbs only where a content page lacks them.
 if (!page.hasBreadcrumb && s !== '' && page.indexable) { const m = b.match(/<main\b[^>]*>/); if (m) b = b.replace(m[0], m[0] + '<!--@CRUMBS-->'); }
-const segs = b.split(/(<!--@(?:HEADER|FOOTER|CONTACT|CRUMBS|FORM)-->)/).filter(Boolean).map((x) => {
+const segs = b.split(/(<!--@(?:HEADER|FOOTER|CONTACT|CRUMBS|FORM|BADGES)-->)/).filter(Boolean).map((x) => {
   const k = x.match(/^<!--@(\w+)-->$/); return k ? { kind: k[1] } : { kind: 'html', html: x };
 });
 const hasForm = !!form || !NO_CONTACT.has(s);
@@ -57,6 +58,7 @@ const current = s.split('/')[0];
     : x.kind === 'HEADER' ? <SiteHeader current={current} />
     : x.kind === 'FOOTER' ? <SiteFooter />
     : x.kind === 'CONTACT' ? <ContactBlock slug={s} source={`contact_block:${s}`} />
+    : x.kind === 'BADGES' ? <section class="ui" aria-label="Reviews, awards and verified profiles" style={s === 'about' ? 'background:#fff' : 'background:#0b1329'}><TrustBadges tone={s === 'about' ? 'light' : 'dark'} title={s === '' ? 'Rated & Recognized Across the Web' : s === 'about' ? 'Awards & Verified Profiles' : 'Find Us Across the Web'} note={s === 'about' ? 'Proud 2026 Nextdoor Fave Winner, voted by our Central Arkansas neighbors on Nextdoor.' : s === '' ? '2026 Nextdoor Fave Winner · Screened & Approved on HomeAdvisor · Featured Pro on Porch' : undefined} /></section>
     : x.kind === 'CRUMBS' ? <Breadcrumbs items={breadcrumbTrail(page)} />
     : <LeadForm slug={s} {...form.props} />)}
   {needsCallBar && <CallBar />}

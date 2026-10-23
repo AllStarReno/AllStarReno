@@ -36,7 +36,7 @@ export const SERVICE_PAGES = {
     lead: 'All-Star Shower Systems is how All-Star Renovations delivers walk-in showers and tub-to-shower conversions. It is a service of All-Star Renovations, not a separate company, and it is backed by our 100% Customer Guarantee.',
     q: 'What is All-Star Shower Systems?',
     a: 'All-Star Shower Systems is the branded shower service of All-Star Renovations in Conway, AR. It covers walk-in showers and tub-to-shower conversions with grout-free wall panels, installed by our own crew, usually in 1-2 days. Materials carry a lifetime product warranty and our work a 5-year workmanship warranty.',
-    features: ['Walk-in shower remodels', 'Tub-to-shower conversions', 'Grout-free wall panel surfaces', 'Lifetime product warranty on materials', 'Installed by the All-Star Renovations crew', '100% Customer Guarantee'],
+    features: ['Walk-in shower remodels', 'Tub-to-shower conversions', 'Grout-free wall panel surfaces', 'Lifetime product warranty + 5-year workmanship warranty', 'Installed by the All-Star Renovations crew', '100% Customer Guarantee'],
     compare: showerCmp,
   },
   'bathroom-remodeling/walk-in-showers': {
@@ -54,7 +54,7 @@ export const SERVICE_PAGES = {
     lead: 'Convert an old bathtub into a modern walk-in shower, usually in just 1-2 days. All-Star Shower Systems, our signature walk-in shower service, removes the high tub wall and replaces grout lines with durable, easy-clean wall panels.',
     q: 'How long does a tub-to-shower conversion take?',
     a: 'Most tub-to-shower conversions by All-Star Renovations take 1-2 days. We remove the tub, set a low-threshold shower base and install grout-free wall panels, using our own crew. Homeowners within 50 miles of Conway, AR can call (501) 504-3398 or book a free in-home quote online.',
-    features: ['Tub removal and haul-away', 'Low-threshold shower base', 'Grout-free wall panel system', 'Glass door or curtain options', 'Grab-bar and seat planning', 'Lifetime product warranty on All-Star Shower Systems materials'],
+    features: ['Tub removal and haul-away', 'Low-threshold shower base', 'Grout-free wall panel system', 'Glass door or curtain options', 'Grab-bar and seat planning', 'Lifetime product warranty + 5-year workmanship warranty'],
     compare: showerCmp,
   },
   'bathroom-remodeling/walk-in-tubs': {
