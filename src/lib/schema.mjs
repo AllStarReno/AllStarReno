@@ -54,5 +54,7 @@ export function buildGraph(page) {
     geo: { '@type': 'GeoCoordinates', ...BUSINESS.geo }, image: `${SITE}/assets/img/og-image.jpg` });
   if (page.ogImage) add({ '@type': 'ImageObject', '@id': `${page.url}#primaryimage`, url: page.ogImage, contentUrl: page.ogImage, caption: page.ogImageAlt || page.title, width: 1200, height: 630 });
   add({ '@type': 'BreadcrumbList', '@id': `${page.url}#breadcrumb`, itemListElement: breadcrumbTrail(page).map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: c.url })) });
+  const LOGO = { '@type': 'ImageObject', '@id': `${SITE}/#logo`, url: `${SITE}/images/logo.png`, contentUrl: `${SITE}/images/logo.png`, width: 512, height: 512, caption: BUSINESS.name };
+  for (const n of graph) if (n['@id'] === BIZ || n.logo) n.logo = LOGO;
   return { '@context': 'https://schema.org', '@graph': graph, _hasArticle: hasArticle };
 }

@@ -32,7 +32,12 @@ const ogImage = page.ogImage || `${SITE}/assets/img/og-image.jpg`;
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@All_StarReno" />
   <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM summary" />
-  <Fragment set:html={page.assets.join('\n')} />
+  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <Fragment set:html={page.assets.filter((a) => !/rel="?(icon|apple-touch-icon|manifest|shortcut icon)"?/i.test(a)).join('\n')} />
   <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 </head>
 <body class={page.bodyClass}>
