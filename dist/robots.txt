@@ -1,0 +1,101 @@
+# robots.txt — allstarreno.com
+# Version: 4.0 (Production Release with Ad Funnel Protection & AI Search Visibility)
+# Website: https://allstarreno.com | Conway, AR | Phone: (501) 504-3398
+
+# ==============================================================================
+# 1. CORE SEARCH ENGINES (Google, Bing, Yahoo, DuckDuckGo)
+# ==============================================================================
+User-agent: Googlebot
+Allow: /
+# /ads/ pages are NOT disallowed for search engines on purpose: every /ads/ page
+# carries <meta name="robots" content="noindex,follow">, and a crawler can only
+# honor noindex if it is allowed to fetch the page. (AI crawlers below stay
+# disallowed because they do not reliably honor noindex.)
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+Disallow: /?s=
+Disallow: /search/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /wp-admin/
+Disallow: /?s=
+Disallow: /search/
+
+User-agent: *
+Allow: /
+Disallow: /wp-admin/
+Disallow: /?s=
+Disallow: /search/
+
+# ==============================================================================
+# 2. GENERATIVE AI CITATION & ANSWER ENGINES (Zero Cost, Drives High-Intent Leads)
+# These crawlers cite All-Star Renovations in conversational AI queries like
+# "Who does 1-2 day tub to shower conversions in Conway or Little Rock?"
+# ==============================================================================
+
+# OpenAI: ChatGPT search, conversational answers, and SearchGPT index
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /ads/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /ads/
+
+# OpenAI training / ground truth crawler
+User-agent: GPTBot
+Allow: /
+Disallow: /ads/
+
+# Perplexity AI: Real-time citation index and user-request fetches
+User-agent: PerplexityBot
+Allow: /
+Disallow: /ads/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /ads/
+
+# Anthropic: Claude conversational answers & search indexing
+User-agent: ClaudeBot
+Allow: /
+Disallow: /ads/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /ads/
+
+User-agent: Claude-Search
+Allow: /
+Disallow: /ads/
+
+# Google Gemini: AI Overview grounding & conversational search
+User-agent: Google-Extended
+Allow: /
+Disallow: /ads/
+
+# Apple Intelligence / Siri Knowledge Base
+User-agent: Applebot
+Allow: /
+Disallow: /ads/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /ads/
+
+# Meta AI
+User-agent: meta-externalagent
+Allow: /
+Disallow: /ads/
+
+# Amazon Alexa Knowledge Service
+User-agent: Amazonbot
+Allow: /
+Disallow: /ads/
+
+# ==============================================================================
+# 3. CANONICAL SITEMAPS & AI KNOWLEDGE DIRECTIVES
+# ==============================================================================
+Sitemap: https://allstarreno.com/sitemap.xml
+# AI grounding documents: https://allstarreno.com/llms.txt and https://allstarreno.com/llms-full.txt
