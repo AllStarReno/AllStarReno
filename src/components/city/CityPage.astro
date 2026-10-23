@@ -15,6 +15,7 @@ import { SERVICE_PAGES } from '../../data/service-pages.mjs';
 import { SITE, BUSINESS } from '../../data/business.mjs';
 interface Props { slug: string }
 const { slug } = Astro.props;
+import { NOINDEX_SLUGS } from '../../data/city-pages.mjs';
 const [first, key] = slug.split('/');
 const pages = loadPages();
 const legacy = pages.find((p) => p.slug === slug);
@@ -52,9 +53,9 @@ const description = (legacy && kind !== 'hub') ? legacy.description
   : county ? `Bathroom remodeling, kitchen remodeling and handyman services in ${county.name}, AR from All-Star Renovations of Conway. Free in-home quotes. Call ${BUSINESS.phone}.`
   : `${cat ? cat.name : 'Bathroom, kitchen and handyman services'} in ${place} from All-Star Renovations of Conway, ${miles ? `about ${miles} miles away` : 'our home base'}. Free in-home quote. Call ${BUSINESS.phone}.`;
 
-// FAQs: existing page FAQs (minus street-address mentions) + local, de-duplicated.
+// FAQs: existing page FAQs + local, de-duplicated.
 const legacyFaq = (legacy?.jsonld || []).flatMap((n) => (n['@graph'] || [n])).filter((n) => [].concat(n['@type']).includes('FAQPage'))
-  .flatMap((n) => n.mainEntity || []).map((x) => ({ q: x.name, a: (x.acceptedAnswer?.text || '').replace(/,? ?(based )?at 11 Arnett L[a-z]*\.?( in Conway)?(, AR)?( 72032)?/gi, ' in Conway, AR').replace(/\s+/g, ' ') }));
+  .flatMap((n) => n.mainEntity || []).map((x) => ({ q: x.name, a: (x.acceptedAnswer?.text || '').replace(/\s+/g, ' ') }));
 const localFaq = county ? [
   { q: `Which ${county.name} cities do you serve?`, a: `${countyCities.map((c) => `${c.name} (ZIP ${c.zips.join(', ')})`).join('; ')}. Nearby communities are usually covered too; call ${BUSINESS.phone} to confirm.` },
   { q: `What services do you offer in ${county.name}?`, a: 'Bathroom remodeling (walk-in showers, tub-to-shower conversions, walk-in tubs, aging-in-place updates), kitchen remodeling (cabinets, countertops, backsplashes) and handyman repairs, installation and maintenance.' },
@@ -77,7 +78,7 @@ crumbs.push({ name: place, url });
 
 // Page + JSON-LD (sitewide nodes reused from the existing site; page nodes built here).
 const site = shell.jsonld.flatMap((n) => (n['@graph'] || [n])).filter((n) => /\/#/.test(n['@id'] || ''));
-const page = { ...shell, slug, url, title: legacy?.title && kind === 'cat' ? legacy.title : title, description, body: 'id="main"', robots: '', indexable: true,
+const page = { ...shell, slug, url, title: legacy?.title && kind === 'cat' ? legacy.title : title, description, body: 'id="main"', robots: '', indexable: !NOINDEX_SLUGS.has(slug),
   jsonld: [{ '@context': 'https://schema.org', '@graph': site }, { '@type': 'BreadcrumbList', itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: c.url })) }] };
 const g = buildGraph(page);
 const SVC = `${url}#service`, FAQ = `${url}#faq`, PAGE = `${url}#webpage`;
@@ -113,7 +114,7 @@ const topic = cat ? cat.name.split(' ')[0] : undefined;
             <ul class="sp-badges">
               <li><span class="ms" aria-hidden="true">home_pin</span>Locally owned in Conway, AR</li>
               <li><span class="ms" aria-hidden="true">verified_user</span>100% Customer Guarantee</li>
-              <li><span class="ms" aria-hidden="true">workspace_premium</span>Since 2014 · 500+ remodels</li>
+              <li><span class="ms" aria-hidden="true">workspace_premium</span>20 years of experience · In business since 2014</li>
             </ul>
             <div class="ctas">
               <a class="btn btn-amber" href="#contact"><span class="ms" aria-hidden="true">event_available</span>Get Free In-Home Quote</a>
@@ -206,6 +207,16 @@ const topic = cat ? cat.name.split(' ')[0] : undefined;
         </div>
       </section>
     )}
+
+    <section class="wrap sp-sec" aria-labelledby="nap-h">
+      <div class="card" itemscope itemtype="https://schema.org/HomeAndConstructionBusiness">
+        <h2 class="sp-h2" id="nap-h" style="margin:0 0 .4rem">Contact All-Star Renovations</h2>
+        <p style="margin:0;line-height:1.7"><b itemprop="name">{BUSINESS.name}</b><br />
+          <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress"><span itemprop="streetAddress">{BUSINESS.address.streetAddress}</span>, <span itemprop="addressLocality">{BUSINESS.address.addressLocality}</span>, <span itemprop="addressRegion">{BUSINESS.address.addressRegion}</span> <span itemprop="postalCode">{BUSINESS.address.postalCode}</span></span><br />
+          <a href={`tel:${BUSINESS.tel}`} data-contact="call" itemprop="telephone">{BUSINESS.phone}</a></p>
+        <p style="margin:.4rem 0 0;font-size:.9rem;opacity:.85">20 years of experience · In business since 2014 · Serving {place} from our Conway office.</p>
+      </div>
+    </section>
 
     <section class="wrap sp-sec" aria-labelledby="fin-h">
       <div class="card sp-fin">

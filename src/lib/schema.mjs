@@ -51,7 +51,7 @@ export function buildGraph(page) {
   }
   if (!seen.has(BIZ)) add({ '@type': ['HomeAndConstructionBusiness', 'LocalBusiness'], '@id': BIZ, name: BUSINESS.name, url: `${SITE}/`,
     telephone: BUSINESS.tel, email: BUSINESS.email, address: { '@type': 'PostalAddress', ...BUSINESS.address },
-    geo: { '@type': 'GeoCoordinates', ...BUSINESS.geo }, image: `${SITE}/assets/img/og-image.jpg` });
+    geo: { '@type': 'GeoCoordinates', ...BUSINESS.geo }, foundingDate: '2014', image: `${SITE}/assets/img/og-image.jpg` });
   if (page.ogImage) add({ '@type': 'ImageObject', '@id': `${page.url}#primaryimage`, url: page.ogImage, contentUrl: page.ogImage, caption: page.ogImageAlt || page.title, width: 1200, height: 630 });
   add({ '@type': 'BreadcrumbList', '@id': `${page.url}#breadcrumb`, itemListElement: breadcrumbTrail(page).map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: c.url })) });
   const LOGO = { '@type': 'ImageObject', '@id': `${SITE}/#logo`, url: `${SITE}/images/logo.png`, contentUrl: `${SITE}/images/logo.png`, width: 512, height: 512, caption: BUSINESS.name };
@@ -61,7 +61,8 @@ export function buildGraph(page) {
     Object.assign(biz, { name: BUSINESS.name, url: `${SITE}/`, telephone: '+1-501-504-3398',
       address: { '@type': 'PostalAddress', ...BUSINESS.address }, geo: { '@type': 'GeoCoordinates', ...BUSINESS.geo },
       description: `Bathroom remodeling, kitchen remodeling and handyman services based in Conway, Arkansas. ${BUSINESS.identity}`,
-      disambiguatingDescription: BUSINESS.identity });
+      disambiguatingDescription: BUSINESS.identity, foundingDate: '2014', slogan: '20 years of experience. In business since 2014.' });
+    delete biz.aggregateRating; delete biz.review;
     biz.sameAs = [...new Set([...(biz.sameAs || []), 'https://www.facebook.com/allstarreno1/', 'https://www.instagram.com/allstarreno/', 'https://www.linkedin.com/company/all-starrenovations', 'https://www.yelp.com/biz/all-star-renovations-conway', 'https://www.bbb.org/us/ar/conway/profile/bathroom-remodel/all-star-renovations-0935-90368635'])];
   }
   return { '@context': 'https://schema.org', '@graph': graph, _hasArticle: hasArticle };
