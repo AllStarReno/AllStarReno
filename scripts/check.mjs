@@ -27,6 +27,11 @@ for (const f of html) {
   if (!noindex && (s.match(/rel="canonical"/g) || []).length !== 1) errs.push(`${rel}: canonical count`);
   if (/license/i.test(s.replace(/<script[\s\S]*?<\/script>/g, '')) && /lic(ense)?\s*#|license (no|number)/i.test(s)) errs.push(`${rel}: license number present`);
 }
+// Built pages must not be shadowed by a redirect; noindex pages must stay out of the sitemap.
+const smTxt = fs.readFileSync(path.join(DIST, 'sitemap.xml'), 'utf8');
+for (const f of html) { const rel = '/' + path.relative(DIST, f).replace(/(^|\/)index\.html$/, '').replace(/\.html$/, ''); const r = rel.replace(/\/$/, '') || '/';
+  if (r !== '/' && !r.endsWith('-mobile') && redirects.has(r)) errs.push(`${r}: page shadowed by a redirect`);
+  if (/name="robots" content="noindex/.test(fs.readFileSync(f, 'utf8')) && smTxt.includes(`<loc>https://allstarreno.com${r}</loc>`)) errs.push(`${r}: noindex page in sitemap`); }
 const sm = fs.readFileSync(path.join(DIST, 'sitemap.xml'), 'utf8');
 for (const m of sm.matchAll(/<loc>https:\/\/allstarreno\.com([^<]*)<\/loc>/g)) if (!exists(m[1] || '/')) errs.push(`sitemap: ${m[1]} missing`);
 console.log(`check: ${html.length} pages, ${(sm.match(/<loc>/g) || []).length} sitemap URLs, ${errs.length} problems`);

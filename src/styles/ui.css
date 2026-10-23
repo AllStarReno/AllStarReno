@@ -198,3 +198,18 @@ main.ui .cc-foot a,main.ui .chips a,main.ui .cty a,footer.ui a{text-decoration:n
 .sp-rel a:hover{border-color:var(--amber)}
 .sp-fin{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;padding:1.5rem;margin-bottom:2.5rem}
 .sp-fin p{margin:0;color:var(--muted)}
+
+/* LocationPage (city + sub-service x city) */
+.lp-tabs{display:flex;flex-wrap:wrap;gap:.5rem;padding-top:1.5rem}
+.lp-tabs a{padding:.55rem 1rem;border-radius:999px;border:1px solid rgba(255,255,255,.18);color:#dbe5ef;text-decoration:none;font-weight:700;font-size:.9rem}
+.lp-tabs a[aria-current="page"]{background:var(--amber);color:#0F2B48;border-color:var(--amber)}
+.lp-local{padding:1.5rem}
+.lp-local>p{color:#cbd6e2;line-height:1.7;margin:0 0 1.25rem}
+.lp-cols{display:grid;gap:1.25rem;grid-template-columns:1fr}
+@media(min-width:800px){.lp-cols{grid-template-columns:repeat(3,1fr)}}
+.lp-cols h3{display:flex;gap:.4rem;align-items:flex-start;min-width:0;font-size:1rem;font-weight:800;margin:0 0 .5rem}
+.lp-cols h3 .ms{color:var(--amber)}
+.lp-cols ul{margin:0;padding-left:1.1rem;color:#cbd6e2;line-height:1.7}
+.lp-cols p{margin:0;color:#cbd6e2;line-height:1.7}
+.lp-steps{counter-reset:none}
+.lp-steps b{color:#fff}
