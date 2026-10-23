@@ -28,11 +28,23 @@
     if (msg) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
   }
 
+  // Ad attribution: UTM + click IDs from the landing URL, kept for the session so later pages keep them.
+  var ATTR = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','gbraid','wbraid','msclkid','fbclid'];
+  function attrib(form) {
+    var q = new URLSearchParams(location.search), st = {};
+    try { st = JSON.parse(sessionStorage.getItem('asr-attr') || '{}'); } catch (e) {}
+    var fresh = ATTR.some(function (k) { return q.get(k); });
+    if (fresh) { st = {}; ATTR.forEach(function (k) { if (q.get(k)) st[k] = q.get(k).slice(0, 200); }); st.landing = location.pathname; }
+    try { sessionStorage.setItem('asr-attr', JSON.stringify(st)); } catch (e) {}
+    ATTR.concat(['landing']).forEach(function (k) { var el = form.elements['a_' + k]; if (el && st[k]) el.value = st[k]; });
+  }
+
   function init(form) {
     var card = form.closest('[data-lead-card]'), done = $('[data-done]', card), summary = $('[data-summary]', form);
     $('[data-t]', form).value = String(Date.now());
     $('[data-page]', form).value = location.pathname;
     prefill(form);
+    attrib(form);
     window.addEventListener('estimate_updated', function () { prefill(form); });
     Object.keys(RULES).forEach(function (n) {
       var el = form.elements[n];
@@ -72,6 +84,7 @@
       fbBox.hidden = !needs;
       $('[data-fb-msg]', fbBox).textContent = needs ? 'Our system could not confirm delivery. To make sure we get your request, please tap to email or text it to us (it is already filled in), or call us.' : '';
       try { localStorage.removeItem('calculator_estimate_prefill'); localStorage.setItem('asr-last-lead', text); } catch (e) {}
+      if (j.ok) { try { document.dispatchEvent(new CustomEvent('asr:lead', { detail: { service: data.service, source: data.source } })); } catch (e) {} }
       form.hidden = true; done.hidden = false; done.focus();
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'generate_lead', lead_source: data.source, service: data.service, city: data.city, form_location: location.pathname });
