@@ -1,12 +1,15 @@
 ---
 // Reusable trust-badge strip. Grayscale by default, color on hover/focus. Badges link only when href is set in business.mjs.
-import { BADGES } from '../data/business.mjs';
+import { BADGES, BUSINESS } from '../data/business.mjs';
+const RP = [['Google','google.com/maps'],['Facebook','facebook.com'],['Yelp','yelp.com'],['Houzz','houzz.com'],['Porch','porch.com'],['Nextdoor','nextdoor.com']].map(([n,k]) => [n, (BUSINESS.sameAs||[]).find((u) => u.includes(k))]).filter(([,u]) => u);
 interface Props { title?: string; note?: string; tone?: 'dark' | 'light'; compact?: boolean }
 const { title, note, tone = 'dark', compact = false } = Astro.props;
 const H = compact ? 40 : 52;
 ---
 <div class:list={['tb', `tb-${tone}`, compact && 'tb-c']}>
   {title && <h2 class="tb-t">{title}</h2>}
+  {!compact && <p class="tb-r"><strong>5-Star Rated on Every Platform</strong>: {RP.map(([n,u],i) => <>{i ? ' · ' : ''}<a href={u} target="_blank" rel="noopener">{n}</a></>)}</p>}
+  {!compact && <p class="tb-g">Google Verified on Google Local Services Ads</p>}
   {note && <p class="tb-n">{note}</p>}
   <ul class="tb-l" role="list">
     {BADGES.map((b) => {
@@ -19,9 +22,12 @@ const H = compact ? 40 : 52;
 .tb{max-width:72rem;margin:0 auto;padding:2rem 1.25rem;text-align:center}
 .tb-c{padding:1.25rem 0 1.5rem;max-width:none}
 .tb-t{font-size:1.25rem;font-weight:800;margin:0 0 .4rem}
+.tb-r,.tb-g{margin:0 0 .5rem;font-size:.95rem}.tb-r a{text-decoration:underline}.tb-light .tb-r,.tb-light .tb-g{color:#0f172a}.tb-light .tb-r a{color:#9a3412}.tb-dark .tb-r,.tb-dark .tb-g{color:#fff}.tb-dark .tb-r a{color:#fdba74}
 .tb-n{margin:0 0 1rem;font-size:.9rem}
-.tb-light .tb-t{color:#0f172a}.tb-light .tb-n{color:#334155}
-.tb-dark .tb-t{color:#fff}.tb-dark .tb-n{color:#cbd6e2}
+.tb-light .tb-t{color:#0f172a}.tb-light .tb-r,.tb-g{margin:0 0 .5rem;font-size:.95rem}.tb-r a{text-decoration:underline}.tb-light .tb-r,.tb-light .tb-g{color:#0f172a}.tb-light .tb-r a{color:#9a3412}.tb-dark .tb-r,.tb-dark .tb-g{color:#fff}.tb-dark .tb-r a{color:#fdba74}
+.tb-n{color:#334155}
+.tb-dark .tb-t{color:#fff}.tb-dark .tb-r,.tb-g{margin:0 0 .5rem;font-size:.95rem}.tb-r a{text-decoration:underline}.tb-light .tb-r,.tb-light .tb-g{color:#0f172a}.tb-light .tb-r a{color:#9a3412}.tb-dark .tb-r,.tb-dark .tb-g{color:#fff}.tb-dark .tb-r a{color:#fdba74}
+.tb-n{color:#cbd6e2}
 .tb-l{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem}
 .tb-l li>*{display:flex;align-items:center;justify-content:center;background:#fff;border-radius:.6rem;padding:.35rem .5rem;min-height:44px}
 .tb-l img{display:block;height:52px;width:auto;max-width:100%;filter:grayscale(1);opacity:.85;transition:filter .25s,opacity .25s}
