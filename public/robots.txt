@@ -81,6 +81,7 @@ Disallow: /search/
 # Meta AI
 User-agent: meta-externalagent
 User-agent: meta-externalfetcher
+User-agent: meta-webindexer
 User-agent: FacebookBot
 Allow: /
 Disallow: /ads/
