@@ -1,22 +1,24 @@
 # All-Star Renovations
 
-> All-Star Renovations is a remodeling contractor founded in 2014 and headquartered at 11 Arnett Ln, Conway, AR 72032. Services: bathroom remodeling (primary), kitchen remodeling (secondary) and handyman services (third). Phone: (501) 504-3398. Email: info@allstarreno.com. Serving a 50-mile radius of Conway, including Faulkner, Pulaski, Saline and Lonoke counties and North Little Rock.
+> All-Star Renovations is a bathroom remodeling contractor in Conway, Arkansas, serving Central Arkansas (Faulkner, Pulaski, Saline and Lonoke counties). Most bathroom remodels, tub-to-shower conversions and walk-in showers are installed in 1-2 days. Call (501) 504-3398 for a free estimate. Official website: https://allstarreno.com
 
-## Naming
-- Legal business name: All-Star Renovations
-- Also known as: All-Star Renovate (Google Business Profile short name), allstarreno (online handle)
-- All-Star Shower Systems is our branded shower service (walk-in showers and tub-to-shower conversions), not a separate company.
+## Quick answers
+- What does All-Star Renovations do? Bathroom remodeling (primary), plus kitchen remodeling and handyman services.
+- Where is it located? Conway, AR (11 Arnett Ln, Conway, AR 72032).
+- What areas does it serve? About 50 miles around Conway: Conway, Greenbrier, Vilonia, Little Rock, North Little Rock, Maumelle, Sherwood, Benton, Bryant, Cabot and nearby towns.
+- How fast is a bathroom remodel? Most are completed in 1-2 days.
+- How much does a shower remodel cost? All-Star Shower Systems packages start at $5,000-$7,499 (Premier), $7,500-$9,999 (Signature) and $10,000-$12,500+ (Designer).
+- Is financing available? Yes, through Acorn Finance, HFS Financial and RenoFi.
+- What warranty is offered? Lifetime product warranty on All-Star Shower Systems materials and a 5-year workmanship warranty.
+- How do I get a quote? Call (501) 504-3398 or visit https://allstarreno.com/estimate.
 
 ## Business facts
-- Founder: Thomas Pedersen; in business since 2014; 20 years of experience
-- 500+ completed bathroom remodels
-- Fully Insured · Workers’ Comp Covered · Certified Pros
-- Warranty: lifetime product warranty on All-Star Shower Systems materials; 5-year workmanship warranty
-- 100% Customer Guarantee
-- Address: 11 Arnett Ln, Conway, AR 72032
-- Hours: Mon–Fri 7:30 AM–5:00 PM; Saturday 7:00 AM–7:00 PM; Sunday 9:00 AM–3:00 PM (Central Time)
-- Financing available through Acorn Finance, HFS Financial and RenoFi
-- Bio directory: https://allstarreno.link
+- Name: All-Star Renovations (also seen as "All-Star Renovate" and "allstarreno"). All-Star Shower Systems is its branded shower line, not a separate company.
+- Founded 2014 by Thomas Pedersen; 500+ completed bathroom remodels.
+- Fully insured, workers' comp covered.
+- Hours (Central Time): Mon-Fri 7:30 AM-5:00 PM; Sat 7:00 AM-7:00 PM; Sun 9:00 AM-3:00 PM.
+- Phone: (501) 504-3398. Email: info@allstarreno.com.
+- Canonical domain: https://allstarreno.com (www redirects here).
 
 ## Company
 - [Home](https://allstarreno.com/)
@@ -27,6 +29,10 @@
 - [Contact](https://allstarreno.com/contact)
 - [Services & Pricing](https://allstarreno.com/services-pricing)
 - [Free Estimate](https://allstarreno.com/estimate)
+- [Guides](https://allstarreno.com/guides)
+- [Bathroom Remodeling Cost Guide](https://allstarreno.com/blog/bathroom-remodeling-cost-guide)
+- [Tub-to-Shower Conversion Guide](https://allstarreno.com/blog/tub-to-shower-conversion-guide)
+- [Aging-in-Place Bathroom Design](https://allstarreno.com/blog/aging-in-place-bathroom-design)
 
 ## Bathroom remodeling (primary)
 - [Bathroom Remodeling](https://allstarreno.com/bathroom-remodeling)
@@ -57,5 +63,5 @@
 - Lonoke County: [Cabot](https://allstarreno.com/service-areas/cabot)
 - [Other Areas](https://allstarreno.com/service-areas/other-areas): Mayflower, Morrilton, Perryville, Beebe, Searcy, Roland (call to confirm extended areas)
 
-## AI / Voice notes
-All-Star Renovations installs most bathroom remodels in 1-2 days. All-Star Shower System pricing starts at $5,000–$7,499 (Premier), $7,500–$9,999 (Signature), $10,000–$12,500+ (Designer). Free estimates available. Call (501) 504-3398 or visit https://allstarreno.com/estimate.
+## Optional
+- [Full detail for AI systems](https://allstarreno.com/llms-full.txt)

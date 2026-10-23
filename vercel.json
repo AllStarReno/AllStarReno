@@ -3,14 +3,54 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/(.*)",
+      "source": "/:path*",
       "has": [
         {
           "type": "host",
           "value": "www.allstarreno.com"
         }
       ],
-      "destination": "https://allstarreno.com/$1",
+      "destination": "https://allstarreno.com/:path*",
+      "statusCode": 301
+    },
+    {
+      "source": "/areas",
+      "destination": "/service-areas",
+      "permanent": true
+    },
+    {
+      "source": "/free-estimate",
+      "destination": "/estimate",
+      "permanent": true
+    },
+    {
+      "source": "/quote",
+      "destination": "/estimate",
+      "permanent": true
+    },
+    {
+      "source": "/reviews",
+      "destination": "/portfolio",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/terms-and-conditions-mobile",
+      "destination": "/terms-and-conditions",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy-mobile",
+      "destination": "/privacy-policy",
       "permanent": true
     },
     {
@@ -1081,6 +1121,19 @@
     {
       "source": "/(sitemap.xml|robots.txt)",
       "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/(llms.txt|llms-full.txt)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
         {
           "key": "Cache-Control",
           "value": "public, max-age=3600"
