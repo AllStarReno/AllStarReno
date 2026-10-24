@@ -78,6 +78,7 @@ const otherCats = [..._pool.slice(_off), ..._pool.slice(0, _off)].slice(0, 4);
 const guides = guidesFor(cat.slug, sub.slug);
 const tel = BUSINESS.tel;
 const timeline = /1-2 day/i.test(d.timeline) ? `${d.timeline}*` : d.timeline;
+import Reviews from '../Reviews.astro';
 ---
 <Layout page={page} graph={g}>
   <SiteHeader current={cat.slug} />
@@ -184,6 +185,7 @@ const timeline = /1-2 day/i.test(d.timeline) ? `${d.timeline}*` : d.timeline;
       {guides.length > 0 && <div class="sp-rel" style="margin-top:.75rem">{guides.map((g) => <a href={g.href}>{g.title}</a>)}</div>}
     </section>
 
+    <Reviews tags={[cat.slug, sub.slug]} city={city.slug} n={2} />
     <section class="sec" aria-labelledby="fq-h" style="background:#0a1e33">
       <div class="wrap">
         <div class="sec-head"><span class="pill">FAQs</span><h2 id="fq-h">{sub.name} Questions in {place}</h2></div>

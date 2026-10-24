@@ -5,6 +5,8 @@ import Layout from '../../layouts/Layout.astro';
 import SiteHeader from '../global/SiteHeader.astro';
 import SiteFooter from '../global/SiteFooter.astro';
 import ContactBlock from '../global/ContactBlock.astro';
+import Reviews from '../Reviews.astro';
+
 import '../../styles/ui.css';
 import { loadPages } from '../../lib/legacy.mjs';
 import { buildGraph, breadcrumbTrail } from '../../lib/schema.mjs';
@@ -157,6 +159,7 @@ const tel = BUSINESS.tel;
       </div>
     </section>
 
+    <Reviews tags={isCat ? [d.cat] : [d.cat, slug.split('/').pop()]} />
     <section class="sec" aria-labelledby="fq-h" style="background:#0a1e33">
       <div class="wrap">
         <div class="sec-head"><span class="pill">Voice search FAQs</span><h2 id="fq-h">Common Questions About {isCat ? cat.name : subName}</h2></div>

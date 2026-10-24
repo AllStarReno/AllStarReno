@@ -99,6 +99,7 @@ const here = `/${slug}`;
 const near = city ? nearestCities(city.slug, 4) : [];
 const nearHref = (c) => cat ? catHref(cat.slug, c.slug) : `/service-areas/${c.slug}`;
 const topic = cat ? cat.name.split(' ')[0] : undefined;
+import Reviews from '../Reviews.astro';
 ---
 <Layout page={page} graph={g}>
   <SiteHeader current={cat ? cat.slug : 'service-areas'} />
@@ -225,6 +226,7 @@ const topic = cat ? cat.name.split(' ')[0] : undefined;
       </div>
     </section>
 
+    {!county && <Reviews tags={cat ? [cat.slug] : ["bathroom-remodeling", "handyman-services"]} city={city ? city.slug : null} n={cat ? 3 : 2} title={city ? `What customers say about our work near ${city.name}` : undefined} />}
     <section class="sec" aria-labelledby="fq-h" style="background:#0a1e33">
       <div class="wrap">
         <div class="sec-head"><span class="pill">FAQs</span><h2 id="fq-h">Common Questions in {place}</h2></div>

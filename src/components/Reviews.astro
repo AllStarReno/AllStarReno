@@ -1,0 +1,32 @@
+---
+// Real, attributed customer quotes (verbatim). No rating/review schema on purpose.
+// TODO(owner): Trustindex's public page exposes no embeddable widget ID. To show the live Trustindex widget,
+// copy the embed code from the Trustindex dashboard (Widgets > Get code) and add it here, lazy-loaded.
+import { reviewsFor } from '../data/reviews.mjs';
+import { BUSINESS } from '../data/business.mjs';
+interface Props { tags?: string[]; city?: string | null; n?: number; title?: string }
+const { tags = [], city = null, n = 3, title = 'What our customers say' } = Astro.props;
+const list = reviewsFor({ tags, city, n });
+const fmt = (d) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+---
+{list.length > 0 && (
+<section class="wrap sp-sec rv" aria-labelledby="rv-h">
+  <h2 id="rv-h">{title}</h2>
+  <div class="rv-g">
+    {list.map((r) => (
+      <figure class="rv-c">
+        <blockquote>“{r.text}”</blockquote>
+        <figcaption><strong>{r.name}</strong> · {r.platform}{r.date ? ` · ${fmt(r.date)}` : ''} · <a href={r.url} target="_blank" rel="noopener">Read the original review<span class="sr-only"> on {r.platform} (opens in new tab)</span></a></figcaption>
+      </figure>
+    ))}
+  </div>
+  <p class="rv-more">More reviews: <a href="https://www.trustindex.io/reviews/allstarreno.com" target="_blank" rel="noopener">Trustindex</a> · <a href="{BUSINESS.gbp}" target="_blank" rel="noopener">Google</a></p>
+</section>
+)}
+<style>
+.rv h2{font-size:1.5rem;font-weight:800;margin:0 0 1rem}
+.rv-g{display:grid;gap:1rem;grid-template-columns:1fr}@media(min-width:768px){.rv-g{grid-template-columns:repeat(auto-fit,minmax(18rem,1fr))}}
+.rv-c{margin:0;padding:1.1rem 1.2rem;border-radius:.9rem;background:#13294a;color:#e2e8f0}
+.rv-c blockquote{margin:0 0 .75rem;font-style:italic;line-height:1.6}
+.rv-c figcaption{font-size:.88rem;color:#cbd5e1}.rv a{color:#fdba74;text-decoration:underline}.rv-more{margin:.9rem 0 0;font-size:.92rem}
+</style>

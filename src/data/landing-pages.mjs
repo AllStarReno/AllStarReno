@@ -31,9 +31,13 @@ export const OFFERS = [
     sub: 'Reliable repairs, installations and maintenance from a local team that shows up when scheduled.',
     points: ['Repairs, installs and maintenance', 'Insured, in-house pros', 'On-time arrival and clean-up', 'Free estimates'] },
 ];
-export const TESTIMONIALS = [
-  { q: 'Our new shower is absolutely stunning, exceeding all our expectations. The craftsmanship is truly top-notch.', n: 'Rob D.' },
-  { q: 'Their craftsmanship, communication, and professionalism were top-notch. Completed on schedule and within budget.', n: 'Anibal Garcia' },
-  { q: 'Thomas communicated clearly from the start, arrived as scheduled, and completed the work within the agreed timeline.', n: 'Gary R' },
-];
+// Real reviews now come from src/data/reviews.mjs (verbatim, attributed, linked to the source).
+export const OFFER_REVIEW_TAGS = {
+  'shower-replacement': ['bathroom-remodeling', 'all-star-shower-systems'],
+  'tub-to-shower': ['bathroom-remodeling', 'tub-to-shower-conversions'],
+  'walk-in-tub': ['bathroom-remodeling', 'walk-in-tubs'],
+  'bathroom-remodel': ['bathroom-remodeling', 'full-bathroom-remodel'],
+  'kitchen-remodel': ['handyman-services', 'repairs'],
+  handyman: ['handyman-services', 'repairs'],
+};
 export const LP_SLUGS = PLATFORMS.flatMap((p) => OFFERS.map((o) => `lp/${p.slug}/${o.slug}`));
