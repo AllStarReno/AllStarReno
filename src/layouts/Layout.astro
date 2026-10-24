@@ -8,6 +8,9 @@ const { page, graph } = Astro.props;
 const { _hasArticle, ...ld } = graph;
 const robots = page.indexable ? 'index,follow,max-image-preview:large,max-snippet:-1' : 'noindex,follow';
 const hasMain = page.body.includes('id="main"');
+// Stitch PREVIEW (branch stitch-preview only): restyle limited to 4 pages.
+const STITCH_PREVIEW = ['/', '/contact', '/bathroom-remodeling/walk-in-showers', '/service-areas/conway'];
+const stitch = STITCH_PREVIEW.includes((new URL(page.url, 'https://allstarreno.com').pathname.replace(/\.html$/, '').replace(/(.)\/$/, '$1')) || '/');
 const ogImage = page.ogImage || `${SITE}/assets/img/og-image.jpg`;
 ---
 <!doctype html>
@@ -43,9 +46,10 @@ const ogImage = page.ogImage || `${SITE}/assets/img/og-image.jpg`;
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <Fragment set:html={page.assets.filter((a) => !/rel="?(icon|apple-touch-icon|manifest|shortcut icon)"?/i.test(a)).join('\n')} />
+  {stitch && <link rel="stylesheet" href="/assets/css/stitch-preview.css" />}
   <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 </head>
-<body class={page.bodyClass}>
+<body class={stitch ? `${page.bodyClass || ''} stitch`.trim() : page.bodyClass}>
   {hasMain && <a class="skip-link" href="#main">Skip to main content</a>}
   <slot />
   <NewoChat />
