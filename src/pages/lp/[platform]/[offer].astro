@@ -4,7 +4,8 @@ import '../../../styles/tokens.css';
 import LeadForm from '../../../components/LeadForm.astro';
 import TrustBadges from '../../../components/TrustBadges.astro';
 import AdTags from '../../../components/lp/AdTags.astro';
-import { PLATFORMS, OFFERS, TESTIMONIALS } from '../../../data/landing-pages.mjs';
+import { PLATFORMS, OFFERS, OFFER_REVIEW_TAGS } from '../../../data/landing-pages.mjs';
+import { reviewsFor } from '../../../data/reviews.mjs';
 import { SITE, BUSINESS } from '../../../data/business.mjs';
 export function getStaticPaths() {
   return PLATFORMS.flatMap((p) => OFFERS.map((o) => ({ params: { platform: p.slug, offer: o.slug }, props: { p, o } })));
@@ -64,7 +65,7 @@ const phoneSvg = '<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height=
     <section class="lp-trust"><TrustBadges title="Trusted by Central Arkansas Homeowners" tone="light" /></section>
     <section class="lp-reviews" aria-labelledby="lp-rev">
       <h2 id="lp-rev">What Our Customers Say</h2>
-      <div class="lp-rgrid">{TESTIMONIALS.map((t) => <figure><blockquote>“{t.q}”</blockquote><figcaption>{t.n}</figcaption></figure>)}</div>
+      <div class="lp-rgrid">{reviewsFor({ tags: OFFER_REVIEW_TAGS[Astro.params.offer] || ['bathroom-remodeling'], n: 3 }).map((t) => <figure><blockquote>“{t.text}”</blockquote><figcaption>{t.name} · {t.platform} · <a href={t.url} target="_blank" rel="noopener">Original review</a></figcaption></figure>)}</div>
     </section>
     <section class="lp-why">
       <h2>Why All-Star Renovations</h2>
