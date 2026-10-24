@@ -4,11 +4,13 @@ import { CATEGORIES } from '../../data/services.mjs';
 import { CITIES } from '../../data/cities.mjs';
 import { BUSINESS } from '../../data/business.mjs';
 import TrustBadges from '../TrustBadges.astro';
+import AskAllStar from '../ask/AskAllStar.astro';
 const a = BUSINESS.address;
 const SOCIAL = [['Google', 'https://g.page/r/CaWnV-VVVJEQEBM'], ['Facebook', 'https://www.facebook.com/allstarreno1/'], ['Instagram', 'https://www.instagram.com/allstarreno/'], ['YouTube', 'https://www.youtube.com/@all-starreno']];
 ---
 <footer class="ui sf">
   <div class="wrap">
+    <AskAllStar />
     <div class="sf-grid">
       <div>
         <a class="sh-brand" href="/"><img src="/icon-192.png" alt="" width="44" height="44" loading="lazy" /><span><b>ALL-STAR RENOVATIONS</b><small>Central Arkansas · Conway</small></span></a>

@@ -1,0 +1,34 @@
+---
+// "Ask All-Star": no-backend answer box. Loads /ask-index.json (verbatim on-site FAQ answers) only when used.
+import { BUSINESS } from '../../data/business.mjs';
+---
+<section class="ask" aria-labelledby="ask-h">
+  <h2 id="ask-h">Ask All-Star</h2>
+  <p class="ask-sub">Answers come straight from our own FAQ pages. Not finding it? Call <a href={`tel:${BUSINESS.tel}`} data-contact="call">{BUSINESS.phone}</a>.</p>
+  <form class="ask-f" role="search" data-ask>
+    <label for="ask-q" class="sr-only">Ask a question about our remodeling services</label>
+    <input id="ask-q" name="q" type="search" autocomplete="off" maxlength="160" placeholder="e.g. How long does a shower replacement take?" />
+    <button type="submit">Ask</button>
+  </form>
+  <div class="ask-r" aria-live="polite" data-ask-out></div>
+</section>
+<script is:inline>
+(function(){var f=document.querySelector('[data-ask]');if(!f)return;var out=document.querySelector('[data-ask-out]'),inp=f.querySelector('input'),idx=null,p=null;
+var STOP={'a':1,'an':1,'the':1,'is':1,'are':1,'do':1,'does':1,'you':1,'your':1,'i':1,'my':1,'to':1,'of':1,'in':1,'for':1,'and':1,'or':1,'on':1,'can':1,'how':1,'what':1,'much':0,'it':1,'me':1,'we':1,'with':1,'ar':1,'be':1,'will':1};
+function tok(s){return (s.toLowerCase().match(/[a-z0-9]+/g)||[]).filter(function(w){return !STOP[w]&&w.length>1}).map(function(w){return w.replace(/(ing|es|s)$/,'')})}
+function load(){return p||(p=fetch('/ask-index.json').then(function(r){return r.json()}).then(function(d){idx=d.map(function(x){return {x:x,q:tok(x.q),a:tok(x.a)}});return idx}))}
+inp.addEventListener('focus',load,{once:true});
+function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+f.addEventListener('submit',function(e){e.preventDefault();var t=tok(inp.value);if(!t.length)return;out.textContent='Searching…';
+load().then(function(ix){var r=ix.map(function(d){var s=0;t.forEach(function(w){if(d.q.indexOf(w)>-1)s+=3;else if(d.a.indexOf(w)>-1)s+=1});return {d:d.x,s:s/Math.sqrt(t.length)}}).filter(function(r){return r.s>=2}).sort(function(a,b){return b.s-a.s}).slice(0,3);
+var cta='<p class="ask-cta">Still have a question? <a href="tel:+15015043398" data-contact="call">Call (501) 504-3398</a> or <a href="/contact">send us a request</a>.</p>';
+out.innerHTML=r.length?r.map(function(x){return '<article class="ask-a"><h3>'+esc(x.d.q)+'</h3><p>'+esc(x.d.a)+'</p><a href="'+esc(x.d.url)+'">Source: '+esc(x.d.url)+'</a></article>'}).join('')+cta:'<p>We don’t have a written answer for that yet.</p>'+cta;}).catch(function(){out.innerHTML='<p>Please call <a href="tel:+15015043398">(501) 504-3398</a>.</p>'})});})();
+</script>
+<style>
+.ask{max-width:72rem;margin:0 auto 1.5rem;padding:1.25rem;border-radius:.9rem;background:#13294a;color:#fff}
+.ask h2{margin:0 0 .25rem;font-size:1.2rem;font-weight:800;color:#fff}.ask-sub{margin:0 0 .75rem;font-size:.9rem;color:#cbd5e1}.ask a{color:#fdba74;text-decoration:underline}
+.ask-f{display:flex;gap:.5rem;flex-wrap:wrap}.ask-f input{flex:1 1 14rem;min-height:44px;padding:.6rem .8rem;border-radius:.6rem;border:1px solid #64748b;font-size:1rem;color:#0f172a;background:#fff}
+.ask-f button{min-height:44px;padding:.6rem 1.2rem;border:0;border-radius:.6rem;background:#c2410c;color:#fff;font-weight:700;font-size:1rem;cursor:pointer}
+.ask-f input:focus-visible,.ask-f button:focus-visible{outline:2px solid #f59e0b;outline-offset:2px}
+.ask-r{margin-top:.75rem}.ask-a{background:#0b1329;border-radius:.6rem;padding:.75rem .9rem;margin:0 0 .5rem}.ask-a h3{margin:0 0 .3rem;font-size:1rem;color:#fff}.ask-a p{margin:0 0 .3rem;font-size:.92rem;line-height:1.55;color:#e2e8f0}.ask-cta{font-size:.92rem}
+</style>
