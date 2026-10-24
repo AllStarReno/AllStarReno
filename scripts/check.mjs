@@ -18,7 +18,7 @@ const errs = [];
 for (const f of html) {
   const s = fs.readFileSync(f, 'utf8'); const rel = f.slice(DIST.length);
   for (const m of s.matchAll(/<img\b[^>]*>/g)) if (!/\balt="/.test(m[0])) errs.push(`${rel}: <img> without alt: ${m[0].slice(0, 90)}`);
-  for (const m of s.matchAll(/\b(?:href|src)="(\/[^"]*)"/g)) if (!m[1].startsWith('//') && !exists(m[1])) errs.push(`${rel}: broken link ${m[1]}`);
+  for (const m of s.matchAll(/\b(?:href|src)="(\/[^"]*)"/g)) if (!m[1].startsWith('//') && !m[1].startsWith('/_vercel/') && !exists(m[1])) errs.push(`${rel}: broken link ${m[1]}`);
   const ld = [...s.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
   if (ld.length !== 1) errs.push(`${rel}: expected 1 JSON-LD graph, got ${ld.length}`);
   for (const m of ld) { try { const g = JSON.parse(m[1]); const ids = g['@graph'].map((n) => n['@id']).filter(Boolean); if (new Set(ids).size !== ids.length) errs.push(`${rel}: duplicate @id`); if (!g['@graph'].some((n) => n['@id'] === 'https://allstarreno.com/#business')) errs.push(`${rel}: no business node`); if (!g['@graph'].some((n) => n['@type'] === 'BreadcrumbList')) errs.push(`${rel}: no BreadcrumbList`); } catch (e) { errs.push(`${rel}: invalid JSON-LD ${e.message}`); } }
