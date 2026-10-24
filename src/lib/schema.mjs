@@ -75,6 +75,12 @@ export function buildGraph(page) {
         itemListElement: c.subs.map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.name, url: `${SITE}/${c.slug}/${s.slug}`, provider: { '@id': BIZ } } })) })) },
       knowsAbout: ['Bathroom remodeling', 'Tub-to-shower conversions', 'Walk-in showers', 'Walk-in tubs', 'Grout-free shower wall panels', 'Aging-in-place and ADA bathroom design', 'Kitchen remodeling', 'Cabinet refacing', 'Countertop replacement', 'Backsplash installation', 'Handyman repairs'],
       founder: { '@type': 'Person', '@id': `${SITE}/about#thomas-pedersen`, name: BUSINESS.founder, jobTitle: 'Owner', worksFor: { '@id': BIZ } },
+      contactPoint: [
+        { '@type': 'ContactPoint', telephone: '+1-501-504-3398', contactType: 'customer service', areaServed: 'US-AR', availableLanguage: 'en' },
+        { '@type': 'ContactPoint', telephone: '+1-501-909-4406', contactType: 'office', areaServed: 'US-AR', availableLanguage: 'en' },
+        { '@type': 'ContactPoint', telephone: '+1-501-504-3398', contactType: 'emergency handyman service', areaServed: 'US-AR', availableLanguage: 'en',
+          hoursAvailable: { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], opens: '00:00', closes: '23:59' } },
+      ],
       email: BUSINESS.email, logo: LOGO, image: `${SITE}/assets/img/og-image.jpg`,
     });
     delete biz.openingHours;

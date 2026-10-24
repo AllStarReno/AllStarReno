@@ -5,6 +5,12 @@ export const BUSINESS = {
   alternateName: ['All-Star Renovate', 'allstarreno'],
   phone: '(501) 504-3398',
   tel: '+15015043398',
+  officePhone: '(501) 909-4406',
+  officeTel: '+15019094406',
+  // Owner-approved standard trust wording (2026-10-23). Never show a license number.
+  coverage: 'Licensed, Insured & Workers’ Comp Covered',
+  veteranOwned: true,
+  emergency: '24/7 Emergency Handyman Service',
   email: 'info@allstarreno.com',
   city: 'Conway, AR',
   address: { streetAddress: '11 Arnett Ln', addressLocality: 'Conway', addressRegion: 'AR', postalCode: '72032', addressCountry: 'US' },

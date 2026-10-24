@@ -13,8 +13,10 @@ const SOCIAL = [['Google', 'https://g.page/r/CaWnV-VVVJEQEBM'], ['Facebook', 'ht
       <div>
         <a class="sh-brand" href="/"><img src="/icon-192.png" alt="" width="44" height="44" loading="lazy" /><span><b>ALL-STAR RENOVATIONS</b><small>Central Arkansas · Conway</small></span></a>
         <p style="margin:1rem 0 0;line-height:1.65">Bathroom, kitchen and handyman remodeling for homeowners within 50 miles of Conway, Arkansas. 20 years of experience · In business since 2014.</p>
+        <p style="margin:.6rem 0 0;font-weight:700">Veteran-Owned · {BUSINESS.coverage} · <a href="/handyman-services">{BUSINESS.emergency}</a></p>
         <div class="nap">
           <a href={`tel:${BUSINESS.tel}`} data-contact="call">{BUSINESS.phone}</a>
+          <a href={`tel:${BUSINESS.officeTel}`}>Office: {BUSINESS.officePhone}</a>
           <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a>
           <span>{a.streetAddress}, {a.addressLocality}, {a.addressRegion} {a.postalCode}</span>
         </div>
