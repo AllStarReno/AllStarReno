@@ -103,7 +103,7 @@ import Reviews from '../Reviews.astro';
           </div>
           <aside class="card sp-spec" aria-labelledby="spec-h">
             <div class="sp-spec-b">
-              <h2 id="spec-h"><span class="ms" aria-hidden="true">military_tech</span>{sub.name}: {city.name} Specs</h2>
+              <h2 id="spec-h"><span class="ms" aria-hidden="true" data-i="military_tech"></span>{sub.name}: {city.name} Specs</h2>
               <dl>
                 <div><dt>Typical timeline</dt><dd>{timeline}</dd></div>
                 <div><dt>Distance</dt><dd>{miles ? `About ${miles} mi from Conway` : 'Home base'}</dd></div>
@@ -137,9 +137,9 @@ import Reviews from '../Reviews.astro';
         <p>{L.housing}</p>
         <p>{visitLine(city)} {L.route}</p>
         <div class="lp-cols">
-          <div><h3><span class="ms" aria-hidden="true">holiday_village</span>Areas we serve in {city.name}</h3><ul>{L.areas.map((x) => <li>{x}</li>)}</ul></div>
-          <div><h3><span class="ms" aria-hidden="true">pin_drop</span>Near local landmarks</h3><ul>{L.landmarks.map((x) => <li>{x}</li>)}</ul></div>
-          <div><h3><span class="ms" aria-hidden="true">checklist</span>Before your visit</h3><p>{A.prep}</p></div>
+          <div><h3><span class="ms" aria-hidden="true" data-i="holiday_village"></span>Areas we serve in {city.name}</h3><ul>{L.areas.map((x) => <li>{x}</li>)}</ul></div>
+          <div><h3><span class="ms" aria-hidden="true" data-i="pin_drop"></span>Near local landmarks</h3><ul>{L.landmarks.map((x) => <li>{x}</li>)}</ul></div>
+          <div><h3><span class="ms" aria-hidden="true" data-i="checklist"></span>Before your visit</h3><p>{A.prep}</p></div>
         </div>
       </div>
     </section>

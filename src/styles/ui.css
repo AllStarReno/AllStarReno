@@ -246,3 +246,4 @@ main.ui .cc-foot a,main.ui .chips a,main.ui .cty a,footer.ui a{text-decoration:n
   .sf .sf-grid ul{grid-template-columns:1fr 1fr;column-gap:1rem}
   .sf .sf-grid ul a{font-size:.875rem}
 }
+.ui .ms[data-i]::before{content:attr(data-i)}

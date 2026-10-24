@@ -98,7 +98,7 @@ const tabs = city ? [{ href: `/service-areas/${city.slug}`, label: 'All services
 const here = `/${slug}`;
 const near = city ? nearestCities(city.slug, 4) : [];
 const nearHref = (c) => cat ? catHref(cat.slug, c.slug) : `/service-areas/${c.slug}`;
-const topic = cat ? cat.name.split(' ')[0] : undefined;
+const topic = cat ? (cat.name.startsWith('Handyman') ? 'Home' : cat.name.split(' ')[0]) : undefined;
 import Reviews from '../Reviews.astro';
 ---
 <Layout page={page} graph={g}>
@@ -124,7 +124,7 @@ import Reviews from '../Reviews.astro';
           </div>
           <aside class="card sp-spec" aria-labelledby="spec-h">
             <div class="sp-spec-b">
-              <h2 id="spec-h"><span class="ms" aria-hidden="true">map</span>{county ? `${county.name} at a Glance` : `Serving ${city.name} Homeowners`}</h2>
+              <h2 id="spec-h"><span class="ms" aria-hidden="true" data-i="map"></span>{county ? `${county.name} at a Glance` : `Serving ${city.name} Homeowners`}</h2>
               <dl>
                 {city && <div><dt>County</dt><dd>{city.county}</dd></div>}
                 {county && <div><dt>County seat</dt><dd>{county.seat}</dd></div>}
@@ -172,9 +172,9 @@ import Reviews from '../Reviews.astro';
           <h2 class="sp-h2" id="loc-h">{city.slug === 'conway' ? 'Our Hometown: Conway' : `Remodeling in ${city.name}: Local Guide`}</h2>
           <p>{local.housing}</p>
           <div class="lp-cols">
-            <div><h3><span class="ms" aria-hidden="true">holiday_village</span>Neighborhoods &amp; areas we serve</h3><ul>{local.areas.map((x) => <li>{x}</li>)}</ul></div>
-            <div><h3><span class="ms" aria-hidden="true">pin_drop</span>Local landmarks</h3><ul>{local.landmarks.map((x) => <li>{x}</li>)}</ul></div>
-            <div><h3><span class="ms" aria-hidden="true">directions_car</span>Getting there from Conway</h3><p>{local.route}</p></div>
+            <div><h3><span class="ms" aria-hidden="true" data-i="holiday_village"></span>Neighborhoods &amp; areas we serve</h3><ul>{local.areas.map((x) => <li>{x}</li>)}</ul></div>
+            <div><h3><span class="ms" aria-hidden="true" data-i="pin_drop"></span>Local landmarks</h3><ul>{local.landmarks.map((x) => <li>{x}</li>)}</ul></div>
+            <div><h3><span class="ms" aria-hidden="true" data-i="directions_car"></span>Getting there from Conway</h3><p>{local.route}</p></div>
           </div>
         </div>
       </section>
