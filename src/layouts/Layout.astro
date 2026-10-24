@@ -53,5 +53,9 @@ const ogImage = page.ogImage || `${SITE}/assets/img/og-image.jpg`;
   <script is:inline type="text/javascript">(function(){var tf=document.createElement('script');tf.type='text/javascript';tf.async=true;tf.src=("https:"==document.location.protocol?'https':'http')+'://api.trustedform.com/trustedform.js?field=xxTrustedFormCertUrl&use_tagged_consent=true&l='+new Date().getTime()+Math.random();var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(tf,s);})();</script>
   <noscript><img src='https://api.trustedform.com/ns.gif' alt="" /></noscript>
   <!-- End TrustedForm -->
+  <!-- Vercel Web Analytics + Speed Insights (cookie-free; replaces stale PRs #1/#2) -->
+  <script is:inline>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>
+  <script is:inline defer src="/_vercel/insights/script.js"></script>
+  <script is:inline defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
