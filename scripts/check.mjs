@@ -27,6 +27,7 @@ for (const f of html) {
   if (!noindex && (s.match(/rel="canonical"/g) || []).length !== 1) errs.push(`${rel}: canonical count`);
   if (/license/i.test(s.replace(/<script[\s\S]*?<\/script>/g, '')) && /lic(ense)?\s*#|license (no|number)/i.test(s)) errs.push(`${rel}: license number present`);
   if (/\d+\+\s*(5|five)[- ]star reviews/i.test(s)) errs.push(`${rel}: forbidden review-count claim (e.g. '20+ 5-Star Reviews')`);
+  if (/\$2M Coverage|State License &amp;/i.test(s)) errs.push(`${rel}: use 'Licensed, Insured & Workers’ Comp Covered' wording`);
   if (/"aggregateRating"|"@type":"Review"/.test(s)) errs.push(`${rel}: rating/review schema not allowed`);
 }
 // Built pages must not be shadowed by a redirect; noindex pages must stay out of the sitemap.
