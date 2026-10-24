@@ -22,7 +22,8 @@ function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'
 f.addEventListener('submit',function(e){e.preventDefault();var t=tok(inp.value);if(!t.length)return;out.textContent='Searching…';
 load().then(function(ix){var r=ix.map(function(d){var s=0;t.forEach(function(w){if(d.q.indexOf(w)>-1)s+=3;else if(d.a.indexOf(w)>-1)s+=1});return {d:d.x,s:s/Math.sqrt(t.length)}}).filter(function(r){return r.s>=2}).sort(function(a,b){return b.s-a.s}).slice(0,3);
 var cta='<p class="ask-cta">Still have a question? <a href="tel:+15015043398" data-contact="call">Call (501) 504-3398</a> or <a href="/contact">send us a request</a>.</p>';
-out.innerHTML=r.length?r.map(function(x){return '<article class="ask-a"><h3>'+esc(x.d.q)+'</h3><p>'+esc(x.d.a)+'</p><a href="'+esc(x.d.url)+'">Source: '+esc(x.d.url)+'</a></article>'}).join('')+cta:'<p>We don’t have a written answer for that yet.</p>'+cta;}).catch(function(){out.innerHTML='<p>Please call <a href="tel:+15015043398">(501) 504-3398</a>.</p>'})});})();
+out.innerHTML=r.length?r.map(function(x){return '<article class="ask-a"><h3>'+esc(x.d.q)+'</h3><p>'+esc(x.d.a)+'</p><a data-src></a></article>'}).join('')+cta:'<p>We don’t have a written answer for that yet.</p>'+cta;
+[].forEach.call(out.querySelectorAll('a[data-src]'),function(a,i){a.setAttribute('href',r[i].d.url);a.textContent='Source: '+r[i].d.url;a.removeAttribute('data-src')});}).catch(function(){out.innerHTML='<p>Please call <a href="tel:+15015043398">(501) 504-3398</a>.</p>'})});})();
 </script>
 <style>
 .ask{max-width:72rem;margin:0 auto 1.5rem;padding:1.25rem;border-radius:.9rem;background:#13294a;color:#fff}
