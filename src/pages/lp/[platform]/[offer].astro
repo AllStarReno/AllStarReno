@@ -18,7 +18,7 @@ const desc = `${o.name} from All-Star Renovations of Conway, AR. 20 years of exp
 const url = `${SITE}/lp/${p.slug}/${o.slug}`;
 const A = BUSINESS.address;
 const graph = { '@context': 'https://schema.org', '@graph': [
-  { '@type': 'HomeAndConstructionBusiness', '@id': `${SITE}/#business`, name: BUSINESS.name, url: `${SITE}/`, telephone: BUSINESS.tel, email: BUSINESS.email,
+  { '@type': 'HomeAndConstructionBusiness', '@id': `${SITE}/#business`, name: BUSINESS.name, url: `${SITE}/`, telephone: BUSINESS.telSchema, email: BUSINESS.email,
     address: { '@type': 'PostalAddress', ...A }, disambiguatingDescription: BUSINESS.identity },
   { '@type': 'WebPage', '@id': `${url}#webpage`, url, name: title, about: { '@id': `${SITE}/#business` }, breadcrumb: { '@id': `${url}#breadcrumb` } },
   { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` }, { '@type': 'ListItem', position: 2, name: o.name, item: url }] },

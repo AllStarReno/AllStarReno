@@ -52,7 +52,7 @@ export function buildGraph(page) {
       ...(page.ogImage ? { primaryImageOfPage: { '@id': `${page.url}#primaryimage` } } : {}) });
   }
   if (!seen.has(BIZ)) add({ '@type': ['HomeAndConstructionBusiness', 'LocalBusiness'], '@id': BIZ, name: BUSINESS.name, url: `${SITE}/`,
-    telephone: BUSINESS.tel, email: BUSINESS.email, address: { '@type': 'PostalAddress', ...BUSINESS.address },
+    telephone: BUSINESS.telSchema, email: BUSINESS.email, address: { '@type': 'PostalAddress', ...BUSINESS.address },
     geo: { '@type': 'GeoCoordinates', ...BUSINESS.geo }, foundingDate: '2014', image: `${SITE}/assets/img/og-image.jpg` });
   if (page.ogImage) add({ '@type': 'ImageObject', '@id': `${page.url}#primaryimage`, url: page.ogImage, contentUrl: page.ogImage, caption: page.ogImageAlt || page.title, width: 1200, height: 630 });
   add({ '@type': 'BreadcrumbList', '@id': `${page.url}#breadcrumb`, itemListElement: breadcrumbTrail(page).map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: c.url })) });

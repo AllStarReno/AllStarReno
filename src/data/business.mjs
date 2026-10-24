@@ -5,6 +5,8 @@ export const BUSINESS = {
   alternateName: ['All-Star Renovate', 'allstarreno'],
   phone: '(501) 504-3398',
   tel: '+15015043398',
+  telSchema: '+1-501-504-3398',
+  guarantee: 'Google Guaranteed',
   officePhone: '(501) 909-4406',
   officeTel: '+15019094406',
   // Owner-approved standard trust wording (2026-10-23). Never show a license number.
