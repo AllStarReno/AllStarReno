@@ -34,6 +34,7 @@ export const BUSINESS = {
     'https://www.tiktok.com/@allstarreno',
     'https://www.threads.net/@allstarreno',
     'https://x.com/All_StarReno',
+    'https://prosgrade.com/renovations/conway/all-star-renovations',
   ],
 };
 
