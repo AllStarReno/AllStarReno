@@ -1117,6 +1117,46 @@
       "source": "/roland-ar",
       "destination": "/service-areas/roland",
       "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling/tub-to-shower-conversion",
+      "destination": "/bathroom-remodeling/tub-to-shower-conversions",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling/aging-in-place",
+      "destination": "/bathroom-remodeling/aging-in-place-ada",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling/full-renovations",
+      "destination": "/bathroom-remodeling",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling/partial-renovations",
+      "destination": "/bathroom-remodeling",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling/cabinet-installation",
+      "destination": "/kitchen-remodeling/cabinet-renovations",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling/fixture-upgrades",
+      "destination": "/kitchen-remodeling/cabinet-refacing",
+      "permanent": true
+    },
+    {
+      "source": "/kitchen-remodeling/full-renovations",
+      "destination": "/kitchen-remodeling",
+      "permanent": true
+    },
+    {
+      "source": "/handyman-services/installations",
+      "destination": "/handyman-services/installation",
+      "permanent": true
     }
   ],
   "headers": [

@@ -8,9 +8,9 @@ const { page, graph } = Astro.props;
 const { _hasArticle, ...ld } = graph;
 const robots = page.indexable ? 'index,follow,max-image-preview:large,max-snippet:-1' : 'noindex,follow';
 const hasMain = page.body.includes('id="main"');
-// Stitch PREVIEW (branch stitch-preview only): restyle limited to 4 pages.
-const STITCH_PREVIEW = ['/', '/contact', '/bathroom-remodeling/walk-in-showers', '/service-areas/conway'];
-const stitch = STITCH_PREVIEW.includes((new URL(page.url, 'https://allstarreno.com').pathname.replace(/\.html$/, '').replace(/(.)\/$/, '$1')) || '/');
+// Keep meta descriptions within ~160 chars (search snippet length): cut at the last full sentence that fits, else at a word.
+const fitDesc = (d = '') => { if (d.length <= 160) return d; const c = d.slice(0, 160); const i = c.lastIndexOf('. '); return i >= 70 ? c.slice(0, i + 1) : c.slice(0, c.lastIndexOf(' ', 157)).replace(/[,;:\s]+$/, '') + '…'; };
+const desc = fitDesc(page.description);
 const ogImage = page.ogImage || `${SITE}/assets/img/og-image.jpg`;
 ---
 <!doctype html>
@@ -19,7 +19,7 @@ const ogImage = page.ogImage || `${SITE}/assets/img/og-image.jpg`;
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>{page.title}</title>
-  <meta name="description" content={page.description} />
+  <meta name="description" content={desc} />
   <meta name="robots" content={robots} />
   {page.indexable && <link rel="canonical" href={page.url} />}
   <meta name="theme-color" content="#0F2B48" />
@@ -28,14 +28,14 @@ const ogImage = page.ogImage || `${SITE}/assets/img/og-image.jpg`;
   <meta property="og:locale" content="en_US" />
   <meta property="og:type" content={_hasArticle ? 'article' : page.ogType} />
   <meta property="og:title" content={page.title} />
-  <meta property="og:description" content={page.description} />
+  <meta property="og:description" content={desc} />
   <meta property="og:url" content={page.url} />
   <meta property="og:image" content={ogImage} />
   <meta property="og:image:alt" content={page.ogImageAlt || page.title} />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@All_StarReno" />
   <meta name="twitter:title" content={page.title} />
-  <meta name="twitter:description" content={page.description} />
+  <meta name="twitter:description" content={desc} />
   <meta name="twitter:image" content={ogImage} />
   <meta name="twitter:image:alt" content={page.ogImageAlt || page.title} />
   <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM summary" />
@@ -46,10 +46,9 @@ const ogImage = page.ogImage || `${SITE}/assets/img/og-image.jpg`;
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <Fragment set:html={page.assets.filter((a) => !/rel="?(icon|apple-touch-icon|manifest|shortcut icon)"?/i.test(a)).join('\n')} />
-  {stitch && <link rel="stylesheet" href="/assets/css/stitch-preview.css" />}
   <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 </head>
-<body class={stitch ? `${page.bodyClass || ''} stitch`.trim() : page.bodyClass}>
+<body class={page.bodyClass}>
   {hasMain && <a class="skip-link" href="#main">Skip to main content</a>}
   <slot />
   <NewoChat />
