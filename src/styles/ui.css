@@ -241,10 +241,8 @@ main.ui .cc-foot a,main.ui .chips a,main.ui .cty a,footer.ui a{text-decoration:n
   .sf ul a{min-height:44px}
   .gal .p-6{padding:1.1rem}.gal .aspect-\[4\/3\]{aspect-ratio:16/10}
 }
-/* ---- Cleanup: footer lists 2-up, lead-form fine print >=14px on mobile ---- */
+/* ---- Cleanup: footer lists 2-up on mobile (fine print/disclaimers stay small) ---- */
 @media(max-width:639px){
   .sf .sf-grid ul{grid-template-columns:1fr 1fr;column-gap:1rem}
   .sf .sf-grid ul a{font-size:.875rem}
-  .lf-wrap p.lf-note,.lf-wrap p.lf-req,.lf-wrap p.lf-consent{font-size:.875rem}
-  .sf p.sf-ident{font-size:.875rem!important}
 }
