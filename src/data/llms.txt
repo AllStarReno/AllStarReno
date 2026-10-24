@@ -30,6 +30,7 @@ Last updated: 2026-10-23
 - Award: 2026 Nextdoor Fave Awards winner (Contractor category), voted by verified neighbors.
 - Motto: "Creating Perfection"
 - Canonical domain: https://allstarreno.com (www redirects here).
+- JSON Feed (services, service areas, guides): https://allstarreno.com/feed.json
 
 ## Official profiles and reviews
 - Google Business Profile: https://g.page/r/CaWnV-VVVJEQEBM
