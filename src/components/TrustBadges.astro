@@ -10,7 +10,7 @@ const H = compact ? 40 : 52;
   {title && <h2 class="tb-t">{title}</h2>}
   {!compact && <p class="tb-r"><strong>5-Star Rated on Every Platform</strong>: {RP.map(([n,u],i) => <>{i ? ' · ' : ''}<a href={u} target="_blank" rel="noopener">{n}</a></>)}</p>}
   {!compact && <p class="tb-g">Google Verified on Google Local Services Ads</p>}
-  {!compact && <p class="tb-g"><strong>Veteran-Owned</strong> · {BUSINESS.coverage} · {BUSINESS.emergency}</p>}
+  {!compact && <p class="tb-g"><strong>Veteran-Owned</strong> · {BUSINESS.coverage} · {BUSINESS.guarantee} · {BUSINESS.emergency}</p>}
   {note && <p class="tb-n">{note}</p>}
   <ul class="tb-l" role="list">
     {BADGES.map((b) => {
