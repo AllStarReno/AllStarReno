@@ -78,7 +78,7 @@ const tel = BUSINESS.tel;
           <aside class="card sp-spec" aria-labelledby="spec-h">
             {img && <picture>{webp && <source srcset={webp} type="image/webp" />}<img src={img} alt={imgAlt} width="640" height="360" loading="eager" fetchpriority="high" decoding="async" /></picture>}
             <div class="sp-spec-b">
-              <h2 id="spec-h"><span class="ms" aria-hidden="true">military_tech</span>Service Summary &amp; Specs</h2>
+              <h2 id="spec-h"><span class="ms" aria-hidden="true" data-i="military_tech"></span>Service Summary &amp; Specs</h2>
               <dl>
                 <div><dt>Pricing</dt><dd class="ok">{SPEC.QUOTE}</dd></div>
                 <div><dt>Install timeline</dt><dd>{d.timeline}</dd></div>

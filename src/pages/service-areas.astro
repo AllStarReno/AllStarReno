@@ -80,7 +80,7 @@ const tel = BUSINESS.tel;
           {CITIES.map((c) => (
             <article class="card cc" data-item data-county={c.countySlug} data-text={`${c.name} ${c.county} ${c.zips.join(' ')}`}>
               <div>
-                <div class="cc-top"><h3><span class="ms" aria-hidden="true">location_on</span>{c.name}, AR</h3><span class="county">{c.county}</span></div>
+                <div class="cc-top"><h3><span class="ms" aria-hidden="true" data-i="location_on"></span>{c.name}, AR</h3><span class="county">{c.county}</span></div>
                 <p>{c.description}</p>
                 <span class="lbl">Available local services</span>
                 <div class="chips">{c.services.map((s) => <a href={s.href}>{s.label}</a>)}</div>
