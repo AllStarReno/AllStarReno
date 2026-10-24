@@ -17,7 +17,7 @@ const b = legacy.body;
 const coverage = b.slice(b.indexOf('<section id="service-area"'), b.indexOf('</section>', b.indexOf('id="cgrid"')) + 10);
 const tailAt = b.indexOf('<div id="asr-sticky"');
 const tail = b.slice(tailAt, b.indexOf('</body>') > -1 ? b.indexOf('</body>') : undefined);
-const page = { ...legacy, body: 'id="main"', title: 'Central Arkansas Service Coverage & City Directory | All-Star Renovations',
+const page = { ...legacy, body: 'id="main"', title: 'Central Arkansas Service Areas & Cities | All-Star Renovations',
   assets: [...legacy.assets, '<link rel="alternate" type="text/markdown" href="/service-areas.md" title="Markdown copy" />'] };
 
 // JSON-LD: base graph + geo/areaServed entity graph, city ItemList, FAQPage, speakable.

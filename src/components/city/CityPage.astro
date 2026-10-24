@@ -39,8 +39,9 @@ const ZIP = city ? city.zips.join(', ') : countyCities.flatMap((c) => c.zips).jo
 
 // Copy
 const h1 = county ? ['Remodeling & Handyman Services in', `${county.name}, AR`] : cat ? [`${cat.name} in`, place] : ['Home Remodeling in', place];
-const title = county ? `${county.name}, AR Remodeling & Handyman | All-Star Renovations`
-  : cat ? `${cat.name} in ${place} | All-Star Renovations` : `${place} Bathroom & Kitchen Remodeling | All-Star Renovations`;
+const title0 = county ? `${county.name}, AR Remodeling & Handyman | All-Star Renovations`
+  : cat ? ((t) => t.length > 60 ? `${cat.name} in ${place} | All-Star` : t)(`${cat.name} in ${place} | All-Star Renovations`) : `${place} Bathroom & Kitchen Remodeling | All-Star Renovations`;
+const title = title0.length > 65 ? title0.replace(' | All-Star Renovations', ' | All-Star') : title0;
 const what = cat ? cat.name.toLowerCase() : 'bathroom remodeling, kitchen remodeling and handyman services';
 const q = county ? `Does All-Star Renovations serve ${county.name}, Arkansas?` : `Does All-Star Renovations offer ${what} in ${city.name}, AR?`;
 const a = county
