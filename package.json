@@ -10,6 +10,9 @@
     "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
-    "astro": "^5.0.0"
+    "astro": "^7.4.2"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }
