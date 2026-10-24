@@ -38,7 +38,7 @@ b = b.replace(/<main\b[^>]*>/, (t) => t.replace(/\s(?:sm:|md:|lg:)?pt-(?:\[[^\]]
 }
 // 2) Lead form / contact block.
 const OWN_FORM = new Set(['', 'estimate', 'contact']);
-const NO_CONTACT = new Set(['thank-you', 'estimate', 'contact', '', 'privacy-policy-mobile', 'terms-and-conditions-mobile']);
+const NO_CONTACT = new Set(['thank-you', 'checklist-thank-you', 'estimate', 'contact', '', 'privacy-policy-mobile', 'terms-and-conditions-mobile']);
 let form = OWN_FORM.has(s) ? formPlacement({ ...page, body: b }) : null;
 if (form) b = b.slice(0, form.at) + '<!--@FORM-->' + b.slice(form.end);
 if (!NO_CONTACT.has(s)) { const m = b.lastIndexOf('</main>'); const at = m > -1 ? m : b.indexOf('<!--@FOOTER-->'); b = b.slice(0, at) + '<!--@CONTACT-->' + b.slice(at); }

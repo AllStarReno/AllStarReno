@@ -11,8 +11,15 @@ const clean = (v, n = 200) => String(v ?? '').replace(/[\u0000-\u001f\u007f]/g, 
 const cleanNotes = (v) => String(v ?? '').replace(/[\u0000-\u0009\u000b-\u001f\u007f]/g, ' ').trim().slice(0, 2000);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
+// Lead-magnet downloads: lighter form (name, email, city, optional phone), own thank-you page.
+export const DOWNLOADS = {
+  'planning-checklist': { title: 'Tub-to-Shower & Walk-In Shower Planning Checklist', thanks: '/checklist-thank-you' },
+};
+
 export function validate(b) {
+  const dl = DOWNLOADS[clean(b.download, 40)] ? clean(b.download, 40) : '';
   const lead = {
+    download: dl,
     firstName: clean(b.firstName, 80), lastName: clean(b.lastName, 80), email: clean(b.email, 160).toLowerCase(),
     phone: clean(b.phone, 40), service: clean(b.service, 80), category: clean(b.category, 80), city: clean(b.city, 80),
     timeline: clean(b.timeline, 40), message: cleanNotes(b.message),
@@ -23,12 +30,13 @@ export function validate(b) {
   };
   const errors = {};
   if (!lead.firstName) errors.firstName = 'Please enter your first name.';
-  if (!lead.lastName) errors.lastName = 'Please enter your last name.';
+  if (!lead.lastName && !dl) errors.lastName = 'Please enter your last name.';
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(lead.email)) errors.email = 'Please enter a valid email address.';
   const digits = lead.phone.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '');
-  if (digits.length !== 10) errors.phone = 'Please enter a 10-digit phone number.';
+  if (dl && !digits) lead.phone = '';
+  else if (digits.length !== 10) errors.phone = 'Please enter a 10-digit phone number.';
   else lead.phone = `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
-  const rs = resolveService(lead.category, lead.service);
+  const rs = dl ? { category: 'Lead magnet', service: 'Download: ' + DOWNLOADS[dl].title } : resolveService(lead.category, lead.service);
   if (!rs) errors.service = 'Please choose a service.'; else Object.assign(lead, rs);
   if (!lead.city) errors.city = 'Please enter your city.';
   if (!TIMELINES.includes(lead.timeline)) lead.timeline = '';
@@ -39,7 +47,8 @@ const label = (l) => (l.category && l.category !== l.service ? `${l.category}: $
 function summaryText(l) {
   return [
     `NEW WEB LEAD: ${l.firstName} ${l.lastName} (${label(l)})`, '',
-    `Name: ${l.firstName} ${l.lastName}`, `Phone: ${l.phone}`, `Email: ${l.email}`, `City / Region: ${l.city}, AR`,
+    l.download ? 'Type: checklist download (warm lead; no consultation requested yet). Follow up by email, or by phone only if given.' : null,
+    `Name: ${l.firstName} ${l.lastName}`, `Phone: ${l.phone || 'Not provided'}`, `Email: ${l.email}`, `City / Region: ${l.city}, AR`,
     `Category: ${l.category || 'Not specified'}`, `Service: ${l.service}`, `Consultation time: customer is shown the Google Calendar booking page next (check the calendar for their booking; call if none).`,
     l.timeline ? `Project timeline: ${l.timeline}` : null, `Notes: ${l.message || 'No additional notes provided.'}`, '',
     `SMS consent: ${l.smsConsent ? 'YES, checked the optional SMS opt-in box' : 'NO, did not opt in to text messages (do not text)'}`,
@@ -71,10 +80,11 @@ export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST') { res.setHeader('Allow', 'POST'); return res.status(405).json({ ok: false, error: 'method' }); }
   const b = await readBody(req);
+  const thanks = (DOWNLOADS[clean(b.download, 40)] || {}).thanks || '/thank-you';
   const wantsHtml = !String(req.headers['content-type'] || '').includes('json');
   const reply = (code, obj) => {
     if (!wantsHtml) return res.status(code).json(obj);
-    if (obj.ok) { res.statusCode = 303; res.setHeader('Location', '/thank-you'); return res.end(); }
+    if (obj.ok) { res.statusCode = 303; res.setHeader('Location', thanks); return res.end(); }
     res.status(code).setHeader('Content-Type', 'text/html; charset=utf-8');
     return res.end(`<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><title>Please check your request</title><body style="font-family:system-ui;max-width:36rem;margin:3rem auto;padding:0 1rem"><h1>Please check your request</h1><ul>${Object.values(obj.errors || { x: 'Something went wrong.' }).map((e) => `<li>${esc(e)}</li>`).join('')}</ul><p><a href="javascript:history.back()">Go back to the form</a> or call <a href="tel:+15015043398">${PHONE}</a>.</p>`);
   };
@@ -96,5 +106,5 @@ export default async function handler(req, res) {
   // Never lose the lead: always log it; ask the visitor to send a copy if nothing reached the office.
   console.log('[lead] ' + JSON.stringify({ ...lead, emailStatus: result.email }));
   if (result.email !== 'sent') { result.fallback = true; Object.assign(result, fallbackLinks(lead, text)); }
-  return reply(200, { ...result, lead });
+  return reply(200, { ...result, lead, redirect: thanks });
 }

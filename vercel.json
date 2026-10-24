@@ -1213,7 +1213,7 @@
       ]
     },
     {
-      "source": "/(thank-you|api/.*)",
+      "source": "/(thank-you|checklist-thank-you|downloads/.*|api/.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
