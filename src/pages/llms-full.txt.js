@@ -9,5 +9,5 @@ const text = (h) => h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>
 export function GET() {
   const pages = loadPages().filter((p) => p.indexable).sort((a, b) => a.slug.localeCompare(b.slug));
   const body = pages.map((p) => `\n\n---\n\n## ${p.title}\nURL: ${p.url}\n${p.description}\n\n${text(p.body)}`).join('');
-  return new Response(fs.readFileSync('src/data/llms-full.txt', 'utf8').trimEnd() + '\n\n' + locationsSection() + '\n\n' + docsSection() + '\n\n# Appendix: page content (generated at build time)' + body + '\n', { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+  return new Response(fs.readFileSync('src/data/llms-full.txt', 'utf8').trimEnd() + '\n\n' + locationsSection({ full: true }) + '\n\n' + docsSection() + '\n\n# Appendix: page content (generated at build time)' + body + '\n', { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 }
