@@ -213,3 +213,31 @@ main.ui .cc-foot a,main.ui .chips a,main.ui .cty a,footer.ui a{text-decoration:n
 .lp-cols p{margin:0;color:#cbd6e2;line-height:1.7}
 .lp-steps{counter-reset:none}
 .lp-steps b{color:#fff}
+/* ---- Mobile tightening (<640px only; tablet/desktop unchanged) ---- */
+.lp-cols>*{min-width:0}.lp-cols li,.lp-cols p{overflow-wrap:anywhere}
+@media(max-width:639px){
+  section.py-24,section.py-20{padding-top:3rem;padding-bottom:3rem}
+  section.py-16,section.py-14{padding-top:2.5rem;padding-bottom:2.5rem}
+  section.px-6{padding-left:1.25rem;padding-right:1.25rem}
+  .mb-16,.mb-14{margin-bottom:2rem}.mb-12,.mb-10{margin-bottom:1.75rem}
+  .mt-20,.mt-12,.mt-10{margin-top:1.75rem}
+  .gap-16,.gap-14,.gap-12,.gap-10{gap:1.5rem}.space-y-10>*+*{margin-top:1.5rem}
+  .p-10,.p-8{padding:1.25rem}.px-8{padding-left:1.25rem;padding-right:1.25rem}
+  h1.text-5xl,h1.text-6xl,h1.text-7xl{font-size:clamp(2rem,8.5vw,2.25rem);line-height:1.12}
+  h2.text-4xl,h2.text-5xl,h1.text-4xl{font-size:clamp(1.6rem,7vw,1.85rem);line-height:1.18}
+  h2.text-3xl{font-size:1.55rem}
+  .h-\[620px\],.h-\[650px\],.h-\[560px\]{height:420px}
+  .h-96{height:18rem}
+  .min-h-\[88vh\]{min-height:auto}
+  .ui .sec{padding:2.75rem 0}
+  .ui .sec-head h2,.sp-h2{font-size:1.6rem}
+  .cb{padding:3rem 0}.cb h2{font-size:1.85rem}
+  .sf{padding-top:2.5rem}
+  .sp-hero{padding-bottom:1.75rem}
+  .cc{padding:1.25rem}
+  .lf-wrap.lf-compact,.lf-wrap{padding-top:2.5rem;padding-bottom:2.5rem}
+  .lf-wrap.lf-bare{padding-top:0;padding-bottom:0}
+  .lf-wrap .lf-h{font-size:1.75rem;margin-bottom:.9rem}
+  .sf ul a{min-height:44px}
+  .gal .p-6{padding:1.1rem}.gal .aspect-\[4\/3\]{aspect-ratio:16/10}
+}
