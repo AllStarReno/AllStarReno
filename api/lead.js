@@ -46,10 +46,10 @@ export function validate(b) {
 const label = (l) => (l.category && l.category !== l.service ? `${l.category}: ${l.service}` : l.service);
 function summaryText(l) {
   return [
-    `NEW WEB LEAD: ${l.firstName} ${l.lastName} (${label(l)})`, '',
+    `${l.download ? 'NEW CHECKLIST DOWNLOAD' : 'NEW WEB LEAD'}: ${[l.firstName, l.lastName].filter(Boolean).join(' ')} (${label(l)})`, '',
     l.download ? 'Type: checklist download (warm lead; no consultation requested yet). Follow up by email, or by phone only if given.' : null,
-    `Name: ${l.firstName} ${l.lastName}`, `Phone: ${l.phone || 'Not provided'}`, `Email: ${l.email}`, `City / Region: ${l.city}, AR`,
-    `Category: ${l.category || 'Not specified'}`, `Service: ${l.service}`, `Consultation time: customer is shown the Google Calendar booking page next (check the calendar for their booking; call if none).`,
+    `Name: ${[l.firstName, l.lastName].filter(Boolean).join(' ')}`, `Phone: ${l.phone || 'Not provided'}`, `Email: ${l.email}`, `City / Region: ${l.city}, AR`,
+    `Category: ${l.category || 'Not specified'}`, `Service: ${l.service}`, l.download ? null : `Consultation time: customer is shown the Google Calendar booking page next (check the calendar for their booking; call if none).`,
     l.timeline ? `Project timeline: ${l.timeline}` : null, `Notes: ${l.message || 'No additional notes provided.'}`, '',
     `SMS consent: ${l.smsConsent ? 'YES, checked the optional SMS opt-in box' : 'NO, did not opt in to text messages (do not text)'}`,
     `TrustedForm certificate: ${l.trustedForm || 'Not captured'}`,
@@ -58,15 +58,20 @@ function summaryText(l) {
     ...Object.entries(l.attribution).map(([k, v]) => `  ${k}: ${v}`), `Submitted: ${new Date().toISOString()}`,
   ].filter((x) => x !== null).join('\n');
 }
-const fallbackLinks = (l, text) => ({
+const fallbackLinks = (l, text) => { const nm = [l.firstName, l.lastName].filter(Boolean).join(' ');
+  if (l.download) { const t = DOWNLOADS[l.download].title; return {
+    mailto: `mailto:info@allstarreno.com?subject=${encodeURIComponent(`Checklist download: ${nm}, ${l.city}`)}&body=${encodeURIComponent(text)}`,
+    sms: `sms:+15015043398?&body=${encodeURIComponent(`Hi All-Star Renovations, this is ${nm}. I downloaded the ${t} (${l.city}).${l.phone ? ` My number is ${l.phone}.` : ''}`)}`,
+  }; }
+  return {
   mailto: `mailto:info@allstarreno.com?subject=${encodeURIComponent(`Consultation request: ${l.firstName} ${l.lastName}, ${label(l)}, ${l.city}`)}&body=${encodeURIComponent(text)}`,
   sms: `sms:+15015043398?&body=${encodeURIComponent(`Hi All-Star Renovations, this is ${l.firstName} ${l.lastName}. I requested a free consultation for ${l.service} in ${l.city}. My number is ${l.phone}.`)}`,
-});
+}; };
 
 async function sendEmail(l, text) {
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST', headers: { authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'content-type': 'application/json' },
-    body: JSON.stringify({ from: LEAD_FROM(), to: [LEAD_TO()], reply_to: l.email, subject: `New web lead: ${l.firstName} ${l.lastName} (${label(l)}, ${l.city})`,
+    body: JSON.stringify({ from: LEAD_FROM(), to: [LEAD_TO()], reply_to: l.email, subject: l.download ? `Checklist download: ${[l.firstName, l.lastName].filter(Boolean).join(' ')} (${l.city})` : `New web lead: ${l.firstName} ${l.lastName} (${label(l)}, ${l.city})`,
       text, html: `<pre style="font:14px/1.5 ui-monospace,monospace;white-space:pre-wrap">${esc(text)}</pre>` }),
     signal: AbortSignal.timeout(8000),
   });
