@@ -2,10 +2,14 @@
 main.home > section{scroll-margin-top:84px}
 main.home section .mb-16{margin-bottom:3rem}
 main.home section h2 + p{max-width:40rem;margin-left:auto;margin-right:auto}
-/* Calmer section rhythm on desktop */
-@media(min-width:1024px){
-  main.home > section.py-20{padding-top:6.5rem;padding-bottom:6.5rem}
-  main.home > section.py-24{padding-top:7rem;padding-bottom:7rem}
+/* Section rhythm matched to the AI Studio build (80px / 96px on desktop) */
+main.home #services .grid.gap-10{gap:2rem}
+main.home #portfolio .grid.gap-8,main.home #reviews .grid.gap-8{gap:1.5rem}
+/* Tablet: tighter sections, closer to the AI Studio build's density */
+@media(min-width:768px) and (max-width:1023px){
+  main.home > section.py-20,main.home > section.py-24{padding-top:4.5rem;padding-bottom:4.5rem}
+  main.home section .mb-16{margin-bottom:2.5rem}
+  main.home #services .grid.gap-10,main.home #portfolio .grid.gap-8,main.home #reviews .grid.gap-8{gap:1.25rem}
 }
 /* Mobile: shorter sections and swipeable rows instead of long single-column stacks */
 @media(max-width:767px){
