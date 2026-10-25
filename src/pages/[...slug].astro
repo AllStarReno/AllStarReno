@@ -10,6 +10,7 @@ import SiteFooter from '../components/global/SiteFooter.astro';
 import ContactBlock from '../components/global/ContactBlock.astro';
 import TrustBadges from '../components/TrustBadges.astro';
 import '../styles/ui.css';
+import '../styles/home.css';
 import { loadPages } from '../lib/legacy.mjs';
 import { buildGraph, breadcrumbTrail } from '../lib/schema.mjs';
 import { formPlacement, addVisitCta } from '../lib/placement.mjs';
@@ -36,6 +37,8 @@ else b = b + '<!--@FOOTER-->';
 // The new header is sticky, so drop the legacy fixed-header top padding on <main>.
 b = b.replace(/<main\b[^>]*>/, (t) => t.replace(/\s(?:sm:|md:|lg:)?pt-(?:\[[^\]]+\]|\d+)/g, ''));
 }
+// Homepage gets a scoped 'home' class for the decluttered layout (src/styles/home.css); content is unchanged.
+if (s === '') b = b.replace(/<main\b([^>]*)\bclass="/, '<main$1class="home ');
 // 2) Lead form / contact block.
 const OWN_FORM = new Set(['', 'estimate', 'contact']);
 const NO_CONTACT = new Set(['thank-you', 'checklist-thank-you', 'estimate', 'contact', '', 'privacy-policy-mobile', 'terms-and-conditions-mobile']);

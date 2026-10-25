@@ -1,5 +1,6 @@
 ---
-// AI Studio-style global header (Stitch Crafted Heritage). No JS: native <details> menus.
+// AI Studio-style global header. Native <details> menus (links stay plain <a href> in the HTML);
+// a tiny script adds hover-open on desktop, one-open-at-a-time, Esc and click-outside close.
 import { CATEGORIES } from '../../data/services.mjs';
 import { CITIES } from '../../data/cities.mjs';
 import { BUSINESS } from '../../data/business.mjs';
@@ -16,7 +17,7 @@ const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'pag
     <nav class="sh-nav" aria-label="Primary">
       {CATEGORIES.map((c) => (
         <details class="sh-dd">
-          <summary aria-current={cur(c.slug)}>{c.name.replace(' Services', '')}<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <summary aria-current={cur(c.slug)}>{c.name.replace(' Services', '').replace(' Remodeling', '')}<span class="ms" aria-hidden="true">expand_more</span></summary>
           <div class="sh-menu">
             <a href={`/${c.slug}`}><strong>All {c.name}</strong></a>
             {c.subs.filter((s) => s.slug !== 'full-bathroom-remodel').map((s) => <a href={`/${c.slug}/${s.slug}`}>{s.name}</a>)}
@@ -51,3 +52,26 @@ const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'pag
     </details>
   </div>
 </header>
+<script is:inline>
+(() => {
+  const h = document.querySelector('header.sh'); if (!h || h.dataset.ddInit) return; h.dataset.ddInit = '1';
+  const dds = [...h.querySelectorAll('.sh-dd')], mob = h.querySelector('.sh-mob');
+  const closeAll = (keep) => dds.forEach((d) => { if (d !== keep) d.open = false; });
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  dds.forEach((d) => {
+    let t;
+    d.addEventListener('toggle', () => { if (d.open) closeAll(d); });
+    d.addEventListener('mouseenter', () => { if (!fine.matches) return; clearTimeout(t); if (!d.open) { d.open = true; d.dataset.hov = Date.now(); } });
+    d.addEventListener('mouseleave', () => { if (!fine.matches) return; t = setTimeout(() => { d.open = false; }, 180); });
+    d.querySelector('summary').addEventListener('click', (e) => { if (d.open && Date.now() - (+d.dataset.hov || 0) < 700) e.preventDefault(); });
+  });
+  if (mob) mob.addEventListener('toggle', () => document.body.classList.toggle('sh-lock', mob.open));
+  document.addEventListener('click', (e) => { if (!e.target.closest('.sh-dd')) closeAll(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    const o = h.querySelector('.sh-dd[open], .sh-mob[open]'); if (!o) return;
+    o.open = false; o.querySelector('summary').focus();
+  });
+  h.addEventListener('focusout', (e) => { const d = e.target.closest('.sh-dd'); if (d && !d.contains(e.relatedTarget)) d.open = false; });
+})();
+</script>
