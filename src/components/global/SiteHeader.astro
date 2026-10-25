@@ -25,7 +25,7 @@ const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'pag
           <a href={`/${bath.slug}`}><strong>All {bath.name}</strong></a>
           {bath.subs.filter((s) => s.slug !== 'full-bathroom-remodel').map((s) => <a href={`/${bath.slug}/${s.slug}`}>{s.name}</a>)}
           <span class="lbl">More Services</span>
-          {rest.map((c) => <a href={`/${c.slug}`}><strong>{c.name}</strong></a>)}
+          {rest.map((c) => <a href={`/${c.slug}`}><strong>{c.name}{c.slug === 'handyman-services' ? ' & 24/7 Emergency' : ''}</strong></a>)}
         </div>
       </details>
       <details class="sh-dd">
@@ -35,14 +35,18 @@ const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'pag
           <a href="/service-areas"><strong>All service areas &amp; map →</strong></a>
         </div>
       </details>
-      <a href="/reviews" aria-current={cur('reviews')}>Reviews</a>
       <details class="sh-dd">
-        <summary aria-current={['guides','portfolio','financing','docs'].some((x) => cur(x)) ? 'page' : undefined}>Resources<span class="ms" aria-hidden="true">expand_more</span></summary>
+        <summary aria-current={['guides','financing','docs'].some((x) => cur(x)) ? 'page' : undefined}>Guides<span class="ms" aria-hidden="true">expand_more</span></summary>
         <div class="sh-menu">
-          <a href="/guides">Guides</a><a href="/portfolio">Gallery</a><a href="/financing">Financing</a><a href="/docs">Docs &amp; Help Center</a>
+          <a href="/guides"><strong>All Guides</strong></a><a href="/financing">Financing</a><a href="/docs">Docs &amp; Help Center</a>
         </div>
       </details>
-      <a href="/contact" aria-current={cur('contact')}>Contact</a>
+      <details class="sh-dd">
+        <summary aria-current={['about','reviews','portfolio','contact'].some((x) => cur(x)) ? 'page' : undefined}>About<span class="ms" aria-hidden="true">expand_more</span></summary>
+        <div class="sh-menu">
+          <a href="/about">About Us</a><a href="/reviews">Reviews</a><a href="/portfolio">Gallery</a><a href="/contact">Contact</a>
+        </div>
+      </details>
     </nav>
     <div class="sh-ctas">
       <a class="sh-call" href={`tel:${BUSINESS.tel}`} data-contact="call"><span class="ms" aria-hidden="true">call</span>{BUSINESS.phone}</a>
@@ -52,7 +56,7 @@ const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'pag
       <summary aria-label="Menu"><svg class="o" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span class="ms c" aria-hidden="true">close</span></summary>
       <nav class="sh-mp" aria-label="Mobile">
         <div class="mp-act">
-          <a class="btn btn-amber" href={`tel:${BUSINESS.tel}`} data-contact="call"><span class="ms" aria-hidden="true">call</span>Call</a>
+          <a class="btn btn-amber" href={`tel:${BUSINESS.tel}`} data-contact="call"><span class="ms" aria-hidden="true">call</span>Call {BUSINESS.phone}</a>
           <a class="btn mp-q" href={Q} data-swivl="quote">Free Quote</a>
         </div>
         <details class="mp-g">
@@ -68,8 +72,8 @@ const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'pag
         </details>
         <a class="mp-l" href="/reviews">Reviews</a>
         <details class="mp-g">
-          <summary>Resources<span class="ms" aria-hidden="true">expand_more</span></summary>
-          <a href="/guides">Guides</a><a href="/portfolio">Gallery</a><a href="/financing">Financing</a><a href="/docs">Docs &amp; Help Center</a>
+          <summary>Guides &amp; About<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <a href="/guides">Guides</a><a href="/financing">Financing</a><a href="/about">About Us</a><a href="/portfolio">Gallery</a><a href="/docs">Docs &amp; Help Center</a>
         </details>
         <a class="mp-l" href="/contact">Contact</a>
         <button type="button" class="mp-x" data-close>Close menu</button>
