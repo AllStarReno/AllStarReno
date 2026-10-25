@@ -41,7 +41,7 @@ export function buildGraph(page) {
         add(n); continue;
       }
       if (t.includes('BreadcrumbList')) continue; // regenerated below
-      if (t.includes('Article') || t.includes('BlogPosting')) { hasArticle = true; n.publisher = { '@id': BIZ }; n.mainEntityOfPage = { '@id': pageId }; n.author ||= { '@type': 'Person', '@id': `${SITE}/about#thomas-pedersen`, name: 'Thomas Pedersen', jobTitle: 'Owner', url: `${SITE}/about`, worksFor: { '@id': BIZ } }; n.dateModified ||= LASTMOD; }
+      if (t.includes('Article') || t.includes('BlogPosting')) { hasArticle = true; n.publisher = { '@id': BIZ }; n.mainEntityOfPage = { '@id': pageId }; n.author ||= { '@type': 'Organization', '@id': BIZ, name: 'All-Star Renovations' }; n.dateModified ||= LASTMOD; }
       if (t.includes('Service') && !n.provider) n.provider = { '@id': BIZ };
       add(n);
     }
