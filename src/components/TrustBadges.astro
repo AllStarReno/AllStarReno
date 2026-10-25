@@ -5,14 +5,14 @@ import { REVIEW_PLATFORMS } from '../data/review-summary.mjs';
 // 21 verified public reviews, all 5.0 stars (checked 2026-10-24): Google 10, Bark 5, TrustIndex 2, Facebook 1, BBB 1, Allbiz 1, BuildZoom 1.
 // Plain text only: never add rating/review schema.
 const RP = REVIEW_PLATFORMS.map((p) => [p.name, p.url]);
-interface Props { title?: string; note?: string; tone?: 'dark' | 'light'; compact?: boolean }
-const { title, note, tone = 'dark', compact = false } = Astro.props;
+interface Props { title?: string; note?: string; tone?: 'dark' | 'light'; compact?: boolean; rating?: boolean }
+const { title, note, tone = 'dark', compact = false, rating = true } = Astro.props;
 const H = compact ? 40 : 52;
 ---
 <div class:list={['tb', `tb-${tone}`, compact && 'tb-c']}>
   {title && <h2 class="tb-t">{title}</h2>}
-  {!compact && <p class="tb-r"><strong>5.0 stars across 21 verified reviews</strong> on {RP.map(([n,u],i) => <>{i ? (i === RP.length - 1 ? ' and ' : ', ') : ''}<a href={u} target="_blank" rel="noopener">{n}</a></>)}</p>}
-  {!compact && <p class="tb-r"><a href={BUSINESS.gbp} target="_blank" rel="noopener">5.0 on Google · 10 reviews</a> · <a href="/reviews">Read all 21 reviews</a></p>}
+  {!compact && rating && <p class="tb-r"><strong>5.0 stars across 21 verified reviews</strong> on {RP.map(([n,u],i) => <>{i ? (i === RP.length - 1 ? ' and ' : ', ') : ''}<a href={u} target="_blank" rel="noopener">{n}</a></>)}</p>}
+  {!compact && rating && <p class="tb-r"><a href={BUSINESS.gbp} target="_blank" rel="noopener">5.0 on Google · 10 reviews</a> · <a href="/reviews">Read all 21 reviews</a></p>}
   {!compact && <p class="tb-g">Google Verified on Google Local Services Ads</p>}
   {!compact && <p class="tb-g"><strong>Veteran-Owned</strong> · {BUSINESS.coverage} · {BUSINESS.guarantee} · {BUSINESS.emergency}</p>}
   {note && <p class="tb-n">{note}</p>}

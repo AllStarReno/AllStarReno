@@ -61,7 +61,7 @@ const current = s.split('/')[0];
     : x.kind === 'HEADER' ? <SiteHeader current={current} />
     : x.kind === 'FOOTER' ? <SiteFooter />
     : x.kind === 'CONTACT' ? <ContactBlock slug={s} source={`contact_block:${s}`} />
-    : x.kind === 'BADGES' ? <section class="ui" aria-label="Reviews, awards and verified profiles" style={s === 'about' ? 'background:#fff' : 'background:#0b1329'}><TrustBadges tone={s === 'about' ? 'light' : 'dark'} title={s === '' ? 'Rated & Recognized Across the Web' : s === 'about' ? 'Awards & Verified Profiles' : 'Find Us Across the Web'} note={s === 'about' ? 'Proud 2026 Nextdoor Fave Winner, voted by our Central Arkansas neighbors on Nextdoor.' : s === '' ? '2026 Nextdoor Fave Winner' : undefined} /></section>
+    : x.kind === 'BADGES' ? <section class="ui" aria-label={s === '' || s === 'reviews' ? 'Reviews, awards and verified profiles' : 'Awards and verified profiles'} style={s === 'about' ? 'background:#fff' : 'background:#0b1329'}><TrustBadges rating={s === '' || s === 'reviews'} tone={s === 'about' ? 'light' : 'dark'} title={s === '' ? 'Rated & Recognized Across the Web' : s === 'about' ? 'Awards & Verified Profiles' : 'Find Us Across the Web'} note={s === 'about' ? 'Proud 2026 Nextdoor Fave Winner, voted by our Central Arkansas neighbors on Nextdoor.' : s === '' ? '2026 Nextdoor Fave Winner' : undefined} /></section>
     : x.kind === 'CRUMBS' ? <Breadcrumbs items={breadcrumbTrail(page)} />
     : <LeadForm slug={s} {...form.props} />)}
   {needsCallBar && <CallBar />}
