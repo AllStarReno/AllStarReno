@@ -32,7 +32,7 @@ const ZIP = city.zips.join(', ');
 const indexable = !SUB_CITY_NOINDEX.has(slug);
 const okCity = (c) => !THIN_TOWNS.includes(c.slug);
 
-const title = (t => t.length > 60 ? `${sub.name} in ${place} | All-Star` : t)(`${sub.name} in ${place} | All-Star Renovations`);
+const title = [`${sub.name} in ${place} | All-Star Renovations`, `${sub.name} in ${place} | All-Star`, `${sub.name} in ${place.replace(', AR', ' AR')} | All-Star`].find((x) => x.length <= 60) || `${sub.name} in ${place} | All-Star`;
 const description = `${sub.name} in ${city.name}, ${city.county} from All-Star Renovations of Conway${miles ? `, about ${miles} miles away` : ''}. Free in-home quote, lifetime product + 5-year workmanship warranty. Call ${BUSINESS.phone}.`;
 const q = `Who offers ${sub.name.toLowerCase()} in ${city.name}, AR?`;
 const a = `All-Star Renovations of Conway, AR provides ${sub.name.toLowerCase()} in ${city.name}, ${city.county}${miles ? `, about ${miles} miles from our office` : ''}. We bring 20 years of experience, have been in business since 2014 and back every job with a lifetime product warranty + 5-year workmanship warranty. Call ${BUSINESS.phone} for a free in-home quote.`;

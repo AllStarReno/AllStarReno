@@ -52,6 +52,17 @@ g['@graph'].push({ '@type': 'FAQPage', '@id': FAQ, url, isPartOf: { '@id': PAGE 
 for (const n of g['@graph']) if (n['@id'] === PAGE) { n.mainEntity = { '@id': SVC }; n.speakable = { '@type': 'SpeakableSpecification', cssSelector: ['h1', '#speakable-summary'] }; }
 const crumbs = breadcrumbTrail(page);
 const tel = BUSINESS.tel;
+const LEARN = {
+  'bathroom-remodeling': [['/docs/materials/choosing-a-vanity', 'how to choose a bathroom vanity']],
+  'bathroom-remodeling/walk-in-tubs': [['/docs/accessibility/walk-in-tub-vs-walk-in-shower', 'walk-in tub vs. walk-in shower: which fits you']],
+  'bathroom-remodeling/all-star-shower-systems': [['/docs/materials/tile-vs-acrylic-surrounds', 'tile vs. acrylic shower surrounds'], ['/docs/warranty/installation-day', 'what to expect on installation day']],
+  'kitchen-remodeling': [['/docs/costs/kitchen-cost-factors', 'what shapes a kitchen remodel quote'], ['/docs/care/kitchen-countertop-and-cabinet-care', 'countertop and cabinet care']],
+  'kitchen-remodeling/countertop-replacement': [['/docs/costs/kitchen-cost-factors', 'kitchen cost factors'], ['/docs/care/kitchen-countertop-and-cabinet-care', 'caring for new countertops and cabinets']],
+  'kitchen-remodeling/cabinet-refacing': [['/docs/costs/kitchen-cost-factors', 'kitchen cost factors'], ['/docs/care/kitchen-countertop-and-cabinet-care', 'cabinet and countertop care']],
+  'handyman-services': [['/docs/faq/kitchen-and-handyman-faq', 'kitchen and handyman FAQ']],
+  'handyman-services/maintenance': [['/docs/care/seasonal-home-maintenance-checklist', 'seasonal home maintenance checklist']],
+};
+const learnLinks = LEARN[slug] || [];
 ---
 <Layout page={page} graph={g}>
   <SiteHeader current={d.cat} />
@@ -102,6 +113,12 @@ const tel = BUSINESS.tel;
         <h2 id="ans-q">{d.q}</h2>
         <p>{d.a}</p>
       </div>
+      {(learnLinks.length > 0 || isCat) && (
+        <p class="sp-learn" style="margin:1rem 0 0;color:#cbd5e1">
+          {learnLinks.length > 0 && <>From our Help Center: {learnLinks.map(([h, t], i) => <>{i > 0 && ' and '}<a class="underline underline-offset-2" href={h}>{t}</a></>)}.{' '}</>}
+          {isCat && <>Learn about <a class="underline underline-offset-2" href="/about">our team and story</a>, or <a class="underline underline-offset-2" href="/services-pricing">see our service packages</a>.</>}
+        </p>
+      )}
     </section>
 
     {isCat && (
