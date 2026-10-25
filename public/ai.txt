@@ -17,3 +17,6 @@ Disallow: /ads/
 
 # Sitemaps: https://allstarreno.com/sitemap-index.xml, https://allstarreno.com/sitemap.xml, https://allstarreno.com/docs/sitemap.xml
 # AI summaries: https://allstarreno.com/llms.txt, https://allstarreno.com/llms-full.txt, https://allstarreno.com/docs/llms.txt
+
+# Reviews: https://allstarreno.com/reviews - 21 verified public reviews, all 5.0 stars (checked October 2026):
+# Google 10, Bark 5, TrustIndex 2, Facebook 1, BBB 1, Allbiz 1, BuildZoom 1.

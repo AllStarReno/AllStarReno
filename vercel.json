@@ -59,11 +59,6 @@
       "permanent": true
     },
     {
-      "source": "/reviews",
-      "destination": "/portfolio",
-      "permanent": true
-    },
-    {
       "source": "/index.html",
       "destination": "/",
       "permanent": true
