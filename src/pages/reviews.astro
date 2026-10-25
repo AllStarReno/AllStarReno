@@ -16,7 +16,7 @@ import { REVIEW_TOTAL, REVIEW_CHECKED, REVIEW_PLATFORMS, REVIEW_FAQS, GOOGLE_REV
 const legacy = loadPages().find((p) => p.slug === 'warranty');
 const URL = `${SITE}/reviews`;
 const page = { ...legacy, slug: 'reviews', url: URL, file: 'src/pages/reviews.astro', body: 'id="main"', jsonld: [], hasBreadcrumb: true, indexable: true,
-  title: 'Customer Reviews: 21 Verified 5-Star Reviews | All-Star Renovations, Conway AR',
+  title: 'Customer Reviews in Conway, AR | All-Star Renovations',
   description: 'All-Star Renovations of Conway, AR has 21 verified public reviews, all 5.0 stars, on Google, Bark, TrustIndex, Facebook, BBB, Allbiz and BuildZoom.',
   assets: legacy.assets.filter((a) => !/<script/i.test(a)) };
 const graph = buildGraph(page);
@@ -62,7 +62,7 @@ const names = list.slice(0, -1).join(', ') + ' and ' + list.at(-1);
 
     <section class="sec" aria-labelledby="q-h" style="background:#0a1e33">
       <div class="wrap">
-        <div class="sec-head"><h2 id="q-h">What customers say, word for word</h2><p>Each quote is copied exactly from a public review page and links to the original.</p></div>
+        <div class="sec-head"><h2 id="q-h">What customers say, word for word</h2><p>Each quote is copied exactly from a public review page and links to the original. Learn about <a class="underline underline-offset-2" href="/about">our team and story</a>, or <a class="underline underline-offset-2" href="/services-pricing">see our service packages</a>.</p></div>
         <div class="rvq">
           {quotes.map((r) => (
             <figure>
