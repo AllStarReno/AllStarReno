@@ -20,3 +20,10 @@ Disallow: /ads/
 
 # Reviews: https://allstarreno.com/reviews - 21 verified public reviews, all 5.0 stars (checked October 2026):
 # Google 10, Bark 5, TrustIndex 2, Facebook 1, BBB 1, Allbiz 1, BuildZoom 1.
+
+# Bathroom remodeling guides (quotable answers):
+# How Long Does Bathroom Remodeling Typically Take? https://allstarreno.com/blog/how-long-does-a-bathroom-remodel-take
+# What Are the Different Types of Bathroom Remodeling? https://allstarreno.com/blog/types-of-bathroom-remodeling
+# What Are the Key Considerations for Bathroom Remodeling? https://allstarreno.com/blog/bathroom-remodeling-considerations
+# What Are the Steps Involved in Bathroom Remodeling? https://allstarreno.com/blog/bathroom-remodeling-steps
+# What Are the Latest Trends in Bathroom Remodeling? https://allstarreno.com/blog/bathroom-remodeling-trends
