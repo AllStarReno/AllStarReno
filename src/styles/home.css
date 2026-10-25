@@ -28,3 +28,17 @@ main.home #portfolio .grid.gap-8,main.home #reviews .grid.gap-8{gap:1.5rem}
   main.home #reviews .grid.md\:grid-cols-3:not(.hidden)>*{flex:0 0 84%;scroll-snap-align:start;max-width:340px}
   main.home #transformation .grid.md\:grid-cols-3{gap:1.25rem;padding:1.5rem}
 }
+
+/* Collapsible secondary homepage blocks (native <details>; all text and links stay in the HTML). */
+.home .home-more > summary::-webkit-details-marker { display: none; }
+.home .home-more-hint { display: block; margin-top: .5rem; font-size: .875rem; color: #94a3b8; }
+.home .home-more-sum::after { content: "Show ▾"; display: inline-block; margin-top: .75rem; padding: .5rem 1.25rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.08); color: #fff; font-weight: 700; font-size: .875rem; }
+.home .home-more[open] > .home-more-sum::after { content: "Hide ▴"; }
+.home .home-more-btn { display: block; color: #fdba74; font-weight: 600; }
+.home .home-more-sum:focus-visible { outline: 2px solid #fb923c; outline-offset: 4px; border-radius: 1rem; }
+
+/* Always-visible service community chips (links match the city cards). */
+.home .sa-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;max-width:56rem;margin:0 auto 1.5rem;padding:0;list-style:none}
+.home .sa-chip{display:inline-flex;align-items:center;min-height:2.5rem;padding:.375rem .875rem;border-radius:9999px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:#e2e8f0;font-size:.875rem;font-weight:500;transition:border-color .15s,color .15s}
+.home .sa-chip:hover{border-color:#fb923c;color:#fff}
+.home .sa-chip:focus-visible{outline:2px solid #fb923c;outline-offset:2px}
