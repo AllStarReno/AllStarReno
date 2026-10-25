@@ -1,7 +1,7 @@
 ---
 // Reusable trust-badge strip. Grayscale by default, color on hover/focus. Badges link only when href is set in business.mjs.
 import { BADGES, BUSINESS } from '../data/business.mjs';
-const RP = [['Google','google.com/maps'],['Facebook','facebook.com'],['Yelp','yelp.com'],['Houzz','houzz.com'],['Porch','porch.com'],['Nextdoor','nextdoor.com']].map(([n,k]) => [n, (BUSINESS.sameAs||[]).find((u) => u.includes(k))]).filter(([,u]) => u);
+const RP = [['Google','google.com/maps'],['Facebook','facebook.com'],['Yelp','yelp.com'],['Houzz','houzz.com'],['Nextdoor','nextdoor.com']].map(([n,k]) => [n, (BUSINESS.sameAs||[]).find((u) => u.includes(k))]).filter(([,u]) => u);
 interface Props { title?: string; note?: string; tone?: 'dark' | 'light'; compact?: boolean }
 const { title, note, tone = 'dark', compact = false } = Astro.props;
 const H = compact ? 40 : 52;

@@ -55,10 +55,6 @@ export const BADGES = [
   { id: 'google-reviews', alt: 'Google Reviews 5-star rated', w: 218, h: 104, href: 'https://g.page/r/CaWnV-VVVJEQEBM/review' },
   { id: 'yelp-5-star', alt: 'Yelp 5-star rated', w: 163, h: 112, href: 'https://www.yelp.com/biz/all-star-renovations-conway' },
   { id: 'facebook-5-rating', alt: 'Facebook 5.0 average rating', w: 218, h: 92, href: 'https://www.facebook.com/allstarreno1/' },
-  { id: 'top-10-rated-best-remodel', alt: 'Top 10 Rated Best Remodel', w: 200, h: 110, href: '' },
-  { id: 'porch-featured-pro', alt: 'Porch Featured Pro', w: 91, h: 112, href: 'https://pro.porch.com/conway-ar/remodeling-contractors/all-star-renovations-167519291/pp' },
-  { id: 'fibo', alt: 'Fibo listed contractor', w: 211, h: 112, href: '' },
   { id: 'houzz', alt: 'Houzz listed pro', w: 101, h: 112, href: 'https://www.houzz.com/professionals/kitchen-and-bath-remodelers/all-star-renovations-pfvwus-pf~1481213171' },
-  { id: 'homeadvisor-screened-approved', alt: 'HomeAdvisor Screened & Approved', w: 123, h: 112, href: '' },
   { id: 'nextdoor-fave-2026', alt: '2026 Nextdoor Fave Winner, voted by neighbors on Nextdoor', w: 112, h: 112, href: 'https://nextdoor.com/pages/all-star-renovations-conway-ar-1' },
 ];
