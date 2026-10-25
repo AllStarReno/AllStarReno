@@ -8,5 +8,7 @@ export const GUIDES = [
   { href: '/blog/bathroom-remodeling-considerations', title: 'Bathroom Remodel Considerations', subs: [] },
   { href: '/blog/bathroom-remodeling-steps', title: 'Bathroom Remodeling Steps', subs: [] },
   { href: '/blog/bathroom-remodeling-trends', title: 'Bathroom Remodeling Trends', subs: ['walk-in-showers', 'all-star-shower-systems'] },
+  { href: '/blog/how-to-finance-a-bathroom-safety-remodel', title: 'Paying for a Bathroom Safety Remodel', subs: ['aging-in-place-ada', 'walk-in-tubs'] },
+  { href: '/blog/how-to-vet-a-bathroom-remodeling-contractor', title: 'How to Vet a Bathroom Remodeler', subs: ['*'] },
 ];
 export const guidesFor = (cat, sub) => cat !== 'bathroom-remodeling' ? [] : GUIDES.filter((g) => !sub || g.subs.includes('*') || g.subs.includes(sub));
