@@ -3,6 +3,7 @@
 import { SITE, BUSINESS } from '../data/business.mjs';
 import { CITIES } from '../data/cities.mjs';
 import { CATEGORIES } from '../data/services.mjs';
+import { REVIEW_TOTAL } from '../data/review-summary.mjs';
 
 const BIZ = `${SITE}/#business`;
 const WEBSITE = `${SITE}/#website`;
@@ -64,7 +65,9 @@ export function buildGraph(page) {
       address: { '@type': 'PostalAddress', ...BUSINESS.address }, geo: { '@type': 'GeoCoordinates', ...BUSINESS.geo },
       description: `Bathroom remodeling, kitchen remodeling and handyman services based in Conway, Arkansas. ${BUSINESS.identity}`,
       disambiguatingDescription: BUSINESS.identity, foundingDate: '2014', slogan: '20 years of experience. In business since 2014.' });
-    delete biz.aggregateRating; delete biz.review;
+    delete biz.review;
+    // Owner-approved (Oct 2026) despite Google's self-serving review rule; revert this commit to remove.
+    biz.aggregateRating = { '@type': 'AggregateRating', ratingValue: 5, bestRating: 5, worstRating: 1, reviewCount: REVIEW_TOTAL };
     biz.sameAs = [...BUSINESS.sameAs];
     Object.assign(biz, {
       hasMap: BUSINESS.gbp, currenciesAccepted: 'USD',

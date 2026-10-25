@@ -1,6 +1,7 @@
 // Post-build QA: internal links, alt text, JSON-LD validity, canonical/h1, sitemap coverage.
 import fs from 'node:fs';
 import path from 'node:path';
+import { REVIEW_TOTAL } from '../src/data/review-summary.mjs';
 const DIST = 'dist';
 const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]);
 const files = walk(DIST);
@@ -28,7 +29,8 @@ for (const f of html) {
   if (/license/i.test(s.replace(/<script[\s\S]*?<\/script>/g, '')) && /lic(ense)?\s*#|license (no|number)/i.test(s)) errs.push(`${rel}: license number present`);
   if (/\d+\+\s*(5|five)[- ]star reviews/i.test(s)) errs.push(`${rel}: forbidden review-count claim (e.g. '20+ 5-Star Reviews')`);
   if (/\$2M Coverage|State License &amp;/i.test(s)) errs.push(`${rel}: use 'Licensed, Insured & Workers’ Comp Covered' wording`);
-  if (/"aggregateRating"|"@type":"Review"/.test(s)) errs.push(`${rel}: rating/review schema not allowed`);
+  if (/"@type":"Review"/.test(s)) errs.push(`${rel}: individual Review schema not allowed`);
+  for (const m of s.matchAll(/"aggregateRating":(\{[^}]*\})/g)) { const a = JSON.parse(m[1]); if (a.ratingValue !== 5 || a.bestRating !== 5 || a.worstRating !== 1 || a.reviewCount !== REVIEW_TOTAL) errs.push(`${rel}: aggregateRating must match review-summary.mjs`); }
 }
 // Built pages must not be shadowed by a redirect; noindex pages must stay out of the sitemap.
 const smTxt = fs.readFileSync(path.join(DIST, 'sitemap.xml'), 'utf8');
