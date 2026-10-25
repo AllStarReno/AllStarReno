@@ -7,7 +7,7 @@ const AREA = '50-mile radius of Conway, AR';
 const FIN = 'Acorn Finance, HFS Financial, RenoFi';
 const cmpBase = [
   ['Estimate', 'Phone ballpark, change orders later', 'Free in-home quote: we measure and review options with you'],
-  ['Who does the work', 'Often rotating subcontractors', 'The All-Star Renovations crew, led by Thomas Pedersen'],
+  ['Who does the work', 'Often rotating subcontractors', 'The All-Star Renovations team'],
   ['Guarantee', 'Varies by contractor', '100% Customer Guarantee + 5-year workmanship warranty'],
   ['Payment options', 'Cash or card up front', `Financing through ${FIN}`],
 ];
@@ -22,7 +22,7 @@ export const SERVICE_PAGES = {
   'bathroom-remodeling': {
     kind: 'category', cat: 'bathroom-remodeling', short: 'Bathroom Remodel', badge: 'Primary service · Bathroom remodeling',
     h1: ['Bathroom Remodeling in', 'Central Arkansas'], timeline: 'Confirmed at your quote', topic: 'Bathroom',
-    lead: 'Bathroom remodeling is what All-Star Renovations does most. From tub-to-shower conversions and walk-in showers to walk-in tubs and aging-in-place bathrooms, Thomas Pedersen and his crew have completed 500+ remodels since 2014.',
+    lead: 'Bathroom remodeling is what All-Star Renovations does most. From tub-to-shower conversions and walk-in showers to walk-in tubs and aging-in-place bathrooms, the All-Star Renovations team has completed 500+ remodels since 2014.',
     q: 'Who remodels bathrooms near Conway, AR?',
     a: 'All-Star Renovations is a Conway, AR bathroom remodeler serving a 50-mile radius across Faulkner, Pulaski, Saline and Lonoke counties. We install walk-in showers, tub-to-shower conversions, walk-in tubs and aging-in-place bathrooms; most shower replacements take 1-2 days. Call (501) 504-3398 for a free in-home quote.',
     features: ['Free in-home quote with measurements and options', 'Grout-free wall panel systems for showers', 'Low-threshold and curbless entry options', 'Grab-bar and seating planning for safer bathing', 'Lifetime product warranty on All-Star Shower Systems materials', '5-year workmanship warranty and 100% Customer Guarantee'],
@@ -51,7 +51,7 @@ export const SERVICE_PAGES = {
     h1: ['Walk-In Shower Remodeling in', 'Central Arkansas'], timeline: 'Confirmed at your quote', topic: 'Bathroom',
     lead: 'A walk-in shower removes the high step of a tub and gives you easier, safer entry. All-Star Renovations designs and installs walk-in showers for homeowners across Central Arkansas.',
     q: 'How long does a walk-in shower remodel take?',
-    a: 'Most walk-in shower replacements by All-Star Renovations are installed in 1-2 days. Thomas visits first to measure your bathroom and walk through entry, wall-surface, fixture and glass options. We serve homeowners within 50 miles of Conway, AR; call (501) 504-3398 for a free in-home quote.',
+    a: 'Most walk-in shower replacements by All-Star Renovations are installed on a timeline confirmed at your quote. Our team visits first to measure your bathroom and walk through entry, wall-surface, fixture and glass options. We serve homeowners within 50 miles of Conway, AR; call (501) 504-3398 for a free in-home quote.',
     features: ['Low-threshold or no-step entry', 'Grout-free wall surfaces that are easier to clean', 'Choice of fixtures and glass', 'Grab-bar and bench planning on request', 'In-home measurement before any work', '100% Customer Guarantee on the finished work'],
     compare: showerCmp,
   },
@@ -85,7 +85,7 @@ export const SERVICE_PAGES = {
   'kitchen-remodeling': {
     kind: 'category', cat: 'kitchen-remodeling', short: 'Kitchen Remodel', badge: 'Secondary service · Kitchen remodeling',
     h1: ['Kitchen Remodeling in', 'Central Arkansas'], timeline: 'Confirmed at your quote', topic: 'Kitchen',
-    lead: 'All-Star Renovations remodels kitchens for homeowners in Conway and across Central Arkansas, from a fresh backsplash to new cabinets and countertops. Describe your kitchen and Thomas will walk through the options with you.',
+    lead: 'All-Star Renovations remodels kitchens for homeowners in Conway and across Central Arkansas, from a fresh backsplash to new cabinets and countertops. Describe your kitchen and our team will walk through the options with you.',
     q: 'Who does kitchen remodeling near Conway, AR?',
     a: 'All-Star Renovations in Conway, AR remodels kitchens within a 50-mile radius, including cabinet refacing, cabinet renovations, countertop replacement and backsplash installation. Choose one upgrade or combine several. Call (501) 504-3398 or request a free in-home quote online.',
     features: ['Free in-home quote and measurements', 'Cabinet refacing or full cabinet renovation', 'Countertops fit around sink and range', 'Backsplash planned with the counter line', 'Upgrades can be combined into one project', '5-year workmanship warranty'],
@@ -131,7 +131,7 @@ export const SERVICE_PAGES = {
   'handyman-services': {
     kind: 'category', cat: 'handyman-services', short: 'Handyman Job', badge: 'Third service · Handyman',
     h1: ['Handyman Services in', 'Central Arkansas'], timeline: 'Scheduled after your quote', topic: 'Home',
-    lead: 'From small fixes to installs and routine upkeep, Thomas Pedersen and the All-Star Renovations crew handle handyman work for homeowners in Conway and across Central Arkansas.',
+    lead: 'From small fixes to installs and routine upkeep, the All-Star Renovations team handles handyman work for homeowners in Conway and across Central Arkansas.',
     q: 'Does All-Star Renovations do handyman work?',
     a: 'Yes. All-Star Renovations in Conway, AR handles repairs, installation and routine maintenance for homeowners within a 50-mile radius. Many handyman calls come from past remodeling customers, and several small jobs can often be grouped into one visit. Call (501) 504-3398 to describe the job.',
     features: ['Repairs around the house', 'Fixture and home-item installation', 'Routine maintenance visits', 'Several small jobs grouped into one visit', 'Same crew as our remodels', '100% Customer Guarantee'],
@@ -141,7 +141,7 @@ export const SERVICE_PAGES = {
   'handyman-services/repairs': {
     kind: 'sub', cat: 'handyman-services', short: 'Repair Visit', badge: 'Handyman services · Repairs',
     h1: ['Home Repairs in', 'Central Arkansas'], timeline: 'Scheduled after your quote', topic: 'Home',
-    lead: 'When something at home breaks, a repair visit gets it working again. Thomas and the All-Star crew handle repairs for homeowners across Central Arkansas, from small fixes to the list of jobs that has built up.',
+    lead: 'When something at home breaks, a repair visit gets it working again. the All-Star Renovations team handles repairs for homeowners across Central Arkansas, from small fixes to the list of jobs that has built up.',
     q: 'Can one handyman visit cover several repairs?',
     a: 'Often, yes. Make a written list, add photos if you can, and share it when you request your quote so the visit can be planned. All-Star Renovations handles home repairs within 50 miles of Conway, AR. Call (501) 504-3398 and describe the problem.',
     features: ['Describe the problem, we look in person', 'Bundle small jobs into one visit', 'Leaks and safety issues first', 'Honest advice if a repair points to a remodel', 'Free in-home quote', '100% Customer Guarantee'],

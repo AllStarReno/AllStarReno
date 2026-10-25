@@ -2,7 +2,7 @@
 
 **Project:** Fully optimized, AI Voice Search + AEO ready website for All-Star Renovations (bathroom remodeling business in Conway, AR and Central Arkansas).
 
-**Owner:** Thomas Pedersen  
+**Owner:** see the About page  
 **Business:** All-Star Renovations - Creating Perfection  
 **Contact:** (501) 504-3398 | info@allstarreno.com  
 **Location:** Conway, AR (serving Central Arkansas)

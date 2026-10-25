@@ -1,6 +1,6 @@
 # All-Star Renovations | Bathroom Remodeling Conway AR
 
-All-Star Renovations is a bathroom and kitchen remodeling contractor based in Conway, Arkansas. Founded in 2014 by Thomas Pedersen. Specializes in the All-Star Shower System and Aging Safely Walk-In Tubs. Most installs completed in 1–2 days with lifetime material warranties.
+All-Star Renovations is a bathroom and kitchen remodeling contractor based in Conway, Arkansas. Founded in 2014. Specializes in the All-Star Shower System and Aging Safely Walk-In Tubs. Most installs completed in 1–2 days with lifetime material warranties.
 
 ## Core Services
 - Bathroom remodeling (primary)
