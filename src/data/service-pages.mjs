@@ -21,7 +21,7 @@ const showerCmp = [
 export const SERVICE_PAGES = {
   'bathroom-remodeling': {
     kind: 'category', cat: 'bathroom-remodeling', short: 'Bathroom Remodel', badge: 'Primary service · Bathroom remodeling',
-    h1: ['Bathroom Remodeling in', 'Central Arkansas'], timeline: 'Confirmed at your quote', topic: 'Bathroom',
+    h1: ['Bathroom Remodeling in', 'Central Arkansas'], timeline: 'Most showers 1-2 days', topic: 'Bathroom',
     lead: 'Bathroom remodeling is what All-Star Renovations does most. From tub-to-shower conversions and walk-in showers to walk-in tubs and aging-in-place bathrooms, the All-Star Renovations team has completed 500+ remodels since 2014.',
     q: 'Who remodels bathrooms near Conway, AR?',
     a: 'All-Star Renovations is a Conway, AR bathroom remodeler serving a 50-mile radius across Faulkner, Pulaski, Saline and Lonoke counties. We install walk-in showers, tub-to-shower conversions, walk-in tubs and aging-in-place bathrooms; most shower replacements take 1-2 days. Call (501) 504-3398 for a free in-home quote.',
@@ -32,7 +32,7 @@ export const SERVICE_PAGES = {
   },
   'bathroom-remodeling/all-star-shower-systems': {
     kind: 'sub', cat: 'bathroom-remodeling', short: 'All-Star Shower System', badge: 'Our branded shower service',
-    h1: ['All-Star Shower Systems in', 'Central Arkansas'], timeline: 'Confirmed at your quote', topic: 'Bathroom',
+    h1: ['All-Star Shower Systems in', 'Central Arkansas'], timeline: 'Most installs 1-2 days', topic: 'Bathroom',
     lead: 'All-Star Shower Systems is how All-Star Renovations delivers walk-in showers and tub-to-shower conversions. It is a service of All-Star Renovations, not a separate company, and it is backed by our 100% Customer Guarantee.',
     q: 'What is All-Star Shower Systems?',
     a: 'All-Star Shower Systems is the branded shower service of All-Star Renovations in Conway, AR. It covers walk-in showers and tub-to-shower conversions with grout-free wall panels, installed by our own crew, usually in 1-2 days. Materials carry a lifetime product warranty and our work a 5-year workmanship warranty.',
@@ -48,16 +48,16 @@ export const SERVICE_PAGES = {
   },
   'bathroom-remodeling/walk-in-showers': {
     kind: 'sub', cat: 'bathroom-remodeling', short: 'Walk-In Shower', badge: 'Bathroom remodeling · Walk-in showers',
-    h1: ['Walk-In Shower Remodeling in', 'Central Arkansas'], timeline: 'Confirmed at your quote', topic: 'Bathroom',
+    h1: ['Walk-In Shower Remodeling in', 'Central Arkansas'], timeline: 'Most installs 1-2 days', topic: 'Bathroom',
     lead: 'A walk-in shower removes the high step of a tub and gives you easier, safer entry. All-Star Renovations designs and installs walk-in showers for homeowners across Central Arkansas.',
     q: 'How long does a walk-in shower remodel take?',
-    a: 'Most walk-in shower replacements by All-Star Renovations are installed on a timeline confirmed at your quote. Our team visits first to measure your bathroom and walk through entry, wall-surface, fixture and glass options. We serve homeowners within 50 miles of Conway, AR; call (501) 504-3398 for a free in-home quote.',
+    a: 'Most walk-in shower replacements by All-Star Renovations are installed in about 1-2 days; timing varies by project and is confirmed in your written quote. Our team visits first to measure your bathroom and walk through entry, wall-surface, fixture and glass options. We serve homeowners within 50 miles of Conway, AR; call (501) 504-3398 for a free in-home quote.',
     features: ['Low-threshold or no-step entry', 'Grout-free wall surfaces that are easier to clean', 'Choice of fixtures and glass', 'Grab-bar and bench planning on request', 'In-home measurement before any work', '100% Customer Guarantee on the finished work'],
     compare: showerCmp,
   },
   'bathroom-remodeling/tub-to-shower-conversions': {
     kind: 'sub', cat: 'bathroom-remodeling', short: 'Tub-to-Shower Conversion', badge: 'All-Star Shower Systems · Conversions',
-    h1: ['Tub-to-Shower Conversions in', 'Central Arkansas'], timeline: 'Confirmed at your quote', topic: 'Bathroom',
+    h1: ['Tub-to-Shower Conversions in', 'Central Arkansas'], timeline: 'Most conversions 1-2 days', topic: 'Bathroom',
     lead: 'Convert an old bathtub into a modern walk-in shower, usually in just 1-2 days. All-Star Shower Systems, our signature walk-in shower service, removes the high tub wall and replaces grout lines with durable, easy-clean wall panels.',
     q: 'How long does a tub-to-shower conversion take?',
     a: 'Most tub-to-shower conversions by All-Star Renovations take 1-2 days. We remove the tub, set a low-threshold shower base and install grout-free wall panels, using our own crew. Homeowners within 50 miles of Conway, AR can call (501) 504-3398 or book a free in-home quote online.',
@@ -75,7 +75,7 @@ export const SERVICE_PAGES = {
   },
   'bathroom-remodeling/aging-in-place-ada': {
     kind: 'sub', cat: 'bathroom-remodeling', short: 'Accessible Bathroom', badge: 'Accessibility remodeling · Faulkner & Pulaski County',
-    h1: ['Aging-in-Place & ADA Bathrooms in', 'Central Arkansas'], timeline: 'Confirmed at your quote', topic: 'Bathroom',
+    h1: ['Aging-in-Place & ADA Bathrooms in', 'Central Arkansas'], timeline: 'Many showers 1-2 days', topic: 'Bathroom',
     lead: 'Barrier-free roll-in and low-threshold showers, grab-bar planning and seating help you stay safe and independent in the home you love, without giving up a beautiful bathroom.',
     q: 'What makes a bathroom aging-in-place friendly?',
     a: 'An aging-in-place bathroom removes the tub wall, adds a low or curbless shower entry, plans grab bars into solid backing, adds seating and uses easy-clean surfaces. All-Star Renovations builds these bathrooms within 50 miles of Conway, AR; many shower conversions take 1-2 days.',

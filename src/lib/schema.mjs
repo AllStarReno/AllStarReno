@@ -8,6 +8,19 @@ import { REVIEW_TOTAL } from '../data/review-summary.mjs';
 const BIZ = `${SITE}/#business`;
 const WEBSITE = `${SITE}/#website`;
 const LASTMOD = '2026-10-23';
+const FOUNDER = `${SITE}/about#thomas-pedersen`;
+const ABOUT_URL = `${SITE}/about`;
+
+// Full founder Person entity. Emitted once, on the About page only; every other page
+// references it by @id through the business `founder`. Facts come only from the About page.
+export function founderPerson() {
+  return { '@type': 'Person', '@id': FOUNDER, name: BUSINESS.founder, jobTitle: 'Founder and Owner',
+    url: ABOUT_URL, mainEntityOfPage: { '@id': `${ABOUT_URL}#webpage` },
+    worksFor: { '@id': BIZ }, affiliation: { '@id': BIZ },
+    description: `Founder and owner of All-Star Renovations, a veteran-owned bathroom remodeling, kitchen remodeling and handyman company in Conway, Arkansas. He started the company in 2014 and still leads it, bringing 20 years of experience.`,
+    knowsAbout: ['Bathroom remodeling', 'Grout-free shower systems', 'Tub-to-shower conversions', 'Aging-in-place bathroom safety', 'Kitchen remodeling'],
+    areaServed: [{ '@type': 'City', name: 'Conway, AR' }, { '@type': 'AdministrativeArea', name: 'Central Arkansas' }] };
+}
 
 export function breadcrumbTrail(page) {
   if (page.slug === '') return [{ name: 'Home', url: `${SITE}/` }];
@@ -77,7 +90,7 @@ export function buildGraph(page) {
       hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Remodeling services', itemListElement: CATEGORIES.map((c) => ({ '@type': 'OfferCatalog', name: c.name, url: `${SITE}/${c.slug}`,
         itemListElement: c.subs.map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.name, url: `${SITE}/${c.slug}/${s.slug}`, provider: { '@id': BIZ } } })) })) },
       knowsAbout: ['Bathroom remodeling', 'Tub-to-shower conversions', 'Walk-in showers', 'Walk-in tubs', 'Grout-free shower wall panels', 'Aging-in-place and ADA bathroom design', 'Kitchen remodeling', 'Cabinet refacing', 'Countertop replacement', 'Backsplash installation', 'Handyman repairs'],
-      founder: { '@type': 'Person', '@id': `${SITE}/about#thomas-pedersen`, name: BUSINESS.founder, jobTitle: 'Owner', worksFor: { '@id': BIZ } },
+      founder: { '@id': FOUNDER, name: BUSINESS.founder },
       contactPoint: [
         { '@type': 'ContactPoint', telephone: '+1-501-504-3398', contactType: 'customer service', areaServed: 'US-AR', availableLanguage: 'en' },
         { '@type': 'ContactPoint', telephone: '+1-501-909-4406', contactType: 'office', areaServed: 'US-AR', availableLanguage: 'en' },
@@ -87,6 +100,12 @@ export function buildGraph(page) {
       email: BUSINESS.email, logo: LOGO, image: `${SITE}/assets/img/og-image.jpg`,
     });
     delete biz.openingHours;
+  }
+  if (page.slug === 'about') {
+    for (let i = graph.length - 1; i >= 0; i--) if (graph[i]['@id'] === `${ABOUT_URL}#about` || (graph[i]['@id'] === FOUNDER)) graph.splice(i, 1);
+    const wp = graph.find((n) => n['@id'] === pageId);
+    if (wp) Object.assign(wp, { '@type': ['AboutPage', 'ProfilePage'], mainEntity: { '@id': FOUNDER } });
+    graph.push(founderPerson());
   }
   return { '@context': 'https://schema.org', '@graph': graph, _hasArticle: hasArticle };
 }
