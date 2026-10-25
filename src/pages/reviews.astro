@@ -4,6 +4,7 @@
 import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/global/SiteHeader.astro';
 import SiteFooter from '../components/global/SiteFooter.astro';
+import CallBar from '../components/CallBar.astro';
 import ContactBlock from '../components/global/ContactBlock.astro';
 import '../styles/ui.css';
 import { loadPages } from '../lib/legacy.mjs';
@@ -35,6 +36,7 @@ const names = list.slice(0, -1).join(', ') + ' and ' + list.at(-1);
       <div class="wrap">
         <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a> <span aria-hidden="true">›</span></li><li aria-current="page">Reviews</li></ol></nav>
         <h1 id="hero-h" style="margin-top:1.25rem">All-Star Renovations Reviews in Conway, AR</h1>
+        <p class="rv-cta"><a class="btn btn-amber" href="https://client.swivl.tech/all-star-renovate-318dbc/instant-quote?widget=instant-quote" data-swivl="quote">Get your free quote</a> <span aria-hidden="true">·</span> <a class="rv-call" href={`tel:${BUSINESS.tel}`} data-contact="call">Call {BUSINESS.phone}</a></p>
         <section class="ans" id="speakable-summary" data-quick-answer aria-labelledby="ans-q">
           <span class="k">Quick answer</span>
           <h2 id="ans-q">How well reviewed is All-Star Renovations?</h2>
@@ -105,6 +107,7 @@ const names = list.slice(0, -1).join(', ') + ' and ' + list.at(-1);
     <ContactBlock slug="reviews" source="reviews_contact" />
   </main>
   <SiteFooter />
+  <CallBar />
 </Layout>
 <style>
 .rvt{width:100%;max-width:40rem;margin:0 auto;border-collapse:collapse;color:#e2e8f0}

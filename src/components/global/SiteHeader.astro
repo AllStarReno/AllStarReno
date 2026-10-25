@@ -6,6 +6,9 @@ import { CITIES } from '../../data/cities.mjs';
 import { BUSINESS } from '../../data/business.mjs';
 interface Props { current?: string }
 const { current = '' } = Astro.props;
+const TOP = ['conway','little-rock','north-little-rock','maumelle','cabot','benton','bryant','sherwood'].map((x) => CITIES.find((c) => c.slug === x)).filter(Boolean);
+const [bath, ...rest] = CATEGORIES;
+const Q = 'https://client.swivl.tech/all-star-renovate-318dbc/instant-quote?widget=instant-quote';
 const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'page' : undefined;
 ---
 <header class="ui sh">
@@ -15,39 +18,61 @@ const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'pag
       <span><b>ALL-STAR RENOVATIONS</b><small>Central Arkansas · Conway</small></span>
     </a>
     <nav class="sh-nav" aria-label="Primary">
-      {CATEGORIES.map((c) => (
-        <details class="sh-dd">
-          <summary aria-current={cur(c.slug)}>{c.name.replace(' Services', '').replace(' Remodeling', '')}<span class="ms" aria-hidden="true">expand_more</span></summary>
-          <div class="sh-menu">
-            <a href={`/${c.slug}`}><strong>All {c.name}</strong></a>
-            {c.subs.filter((s) => s.slug !== 'full-bathroom-remodel').map((s) => <a href={`/${c.slug}/${s.slug}`}>{s.name}</a>)}
-          </div>
-        </details>
-      ))}
+      <details class="sh-dd">
+        <summary aria-current={['bathroom-remodeling','kitchen-remodeling','handyman-services'].some((x) => cur(x)) ? 'page' : undefined}>Services<span class="ms" aria-hidden="true">expand_more</span></summary>
+        <div class="sh-menu">
+          <span class="lbl">Bathroom</span>
+          <a href={`/${bath.slug}`}><strong>All {bath.name}</strong></a>
+          {bath.subs.filter((s) => s.slug !== 'full-bathroom-remodel').map((s) => <a href={`/${bath.slug}/${s.slug}`}>{s.name}</a>)}
+          <span class="lbl">More Services</span>
+          {rest.map((c) => <a href={`/${c.slug}`}><strong>{c.name}</strong></a>)}
+        </div>
+      </details>
       <details class="sh-dd">
         <summary aria-current={cur('service-areas')}>Service Areas<span class="ms" aria-hidden="true">expand_more</span></summary>
         <div class="sh-menu">
-          <a href="/service-areas"><strong>City Directory &amp; Map</strong></a>
-          {CITIES.map((c) => <a href={`/service-areas/${c.slug}`}>{c.name}, AR</a>)}
+          {TOP.map((c) => <a href={`/service-areas/${c.slug}`}>{c.name}, AR</a>)}
+          <a href="/service-areas"><strong>All service areas &amp; map →</strong></a>
         </div>
       </details>
-      <a href="/guides" aria-current={cur('guides')}>Guides</a>
-      <a href="/portfolio" aria-current={cur('portfolio')}>Gallery</a>
-      <a href="/financing" aria-current={cur('financing')}>Financing</a>
-      <a href="/docs">Docs</a>
+      <a href="/reviews" aria-current={cur('reviews')}>Reviews</a>
+      <details class="sh-dd">
+        <summary aria-current={['guides','portfolio','financing','docs'].some((x) => cur(x)) ? 'page' : undefined}>Resources<span class="ms" aria-hidden="true">expand_more</span></summary>
+        <div class="sh-menu">
+          <a href="/guides">Guides</a><a href="/portfolio">Gallery</a><a href="/financing">Financing</a><a href="/docs">Docs &amp; Help Center</a>
+        </div>
+      </details>
+      <a href="/contact" aria-current={cur('contact')}>Contact</a>
     </nav>
-    <a class="btn btn-amber sh-cta" href={`tel:${BUSINESS.tel}`} data-contact="call"><span class="ms" aria-hidden="true">call</span>{BUSINESS.phone}</a>
+    <div class="sh-ctas">
+      <a class="sh-call" href={`tel:${BUSINESS.tel}`} data-contact="call"><span class="ms" aria-hidden="true">call</span>{BUSINESS.phone}</a>
+      <a class="btn btn-amber sh-cta" href={Q} data-swivl="quote">Free Quote</a>
+    </div>
     <details class="sh-mob">
       <summary aria-label="Menu"><svg class="o" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span class="ms c" aria-hidden="true">close</span></summary>
       <nav class="sh-mp" aria-label="Mobile">
-        {CATEGORIES.map((c) => (<>
-          <span class="lbl">{c.name}</span>
-          <a href={`/${c.slug}`}>All {c.name}</a>
-          {c.subs.filter((s) => s.slug !== 'full-bathroom-remodel').map((s) => <a href={`/${c.slug}/${s.slug}`}>{s.name}</a>)}
-        </>))}
-        <span class="lbl">Explore</span>
-        <a href="/service-areas">Service Areas</a><a href="/guides">Guides</a><a href="/portfolio">Gallery</a><a href="/financing">Financing</a><a href="/docs">Docs</a><a href="/contact">Contact</a>
-        <a class="btn btn-amber" href={`tel:${BUSINESS.tel}`} data-contact="call">Call {BUSINESS.phone}</a>
+        <div class="mp-act">
+          <a class="btn btn-amber" href={`tel:${BUSINESS.tel}`} data-contact="call"><span class="ms" aria-hidden="true">call</span>Call</a>
+          <a class="btn mp-q" href={Q} data-swivl="quote">Free Quote</a>
+        </div>
+        <details class="mp-g">
+          <summary>Services<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <a href={`/${bath.slug}`}>Bathroom Remodeling</a>
+          {bath.subs.filter((s) => s.slug !== 'full-bathroom-remodel').map((s) => <a class="sub" href={`/${bath.slug}/${s.slug}`}>{s.name}</a>)}
+          {rest.map((c) => <a href={`/${c.slug}`}>{c.name}</a>)}
+        </details>
+        <details class="mp-g">
+          <summary>Service Areas<span class="ms" aria-hidden="true">expand_more</span></summary>
+          {TOP.map((c) => <a href={`/service-areas/${c.slug}`}>{c.name}, AR</a>)}
+          <a href="/service-areas"><strong>All service areas &amp; map</strong></a>
+        </details>
+        <a class="mp-l" href="/reviews">Reviews</a>
+        <details class="mp-g">
+          <summary>Resources<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <a href="/guides">Guides</a><a href="/portfolio">Gallery</a><a href="/financing">Financing</a><a href="/docs">Docs &amp; Help Center</a>
+        </details>
+        <a class="mp-l" href="/contact">Contact</a>
+        <button type="button" class="mp-x" data-close>Close menu</button>
       </nav>
     </details>
   </div>
@@ -55,7 +80,7 @@ const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'pag
 <script is:inline>
 (() => {
   const h = document.querySelector('header.sh'); if (!h || h.dataset.ddInit) return; h.dataset.ddInit = '1';
-  const dds = [...h.querySelectorAll('.sh-dd')], mob = h.querySelector('.sh-mob');
+  const dds = [...h.querySelectorAll('.sh-dd, .mp-g')], mob = h.querySelector('.sh-mob');
   const closeAll = (keep) => dds.forEach((d) => { if (d !== keep) d.open = false; });
   const fine = matchMedia('(hover: hover) and (pointer: fine)');
   dds.forEach((d) => {
@@ -65,8 +90,8 @@ const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'pag
     d.addEventListener('mouseleave', () => { if (!fine.matches) return; t = setTimeout(() => { d.open = false; }, 180); });
     d.querySelector('summary').addEventListener('click', (e) => { if (d.open && Date.now() - (+d.dataset.hov || 0) < 700) e.preventDefault(); });
   });
-  if (mob) mob.addEventListener('toggle', () => document.body.classList.toggle('sh-lock', mob.open));
-  document.addEventListener('click', (e) => { if (!e.target.closest('.sh-dd')) closeAll(); });
+  if (mob) { mob.addEventListener('toggle', () => document.body.classList.toggle('sh-lock', mob.open)); mob.querySelector('[data-close]').addEventListener('click', () => { mob.open = false; mob.querySelector('summary').focus(); }); mob.querySelectorAll('.sh-mp a').forEach((a) => a.addEventListener('click', () => { mob.open = false; })); }
+  document.addEventListener('click', (e) => { if (!e.target.closest('.sh-dd, .mp-g')) closeAll(); });
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
     const o = h.querySelector('.sh-dd[open], .sh-mob[open]'); if (!o) return;

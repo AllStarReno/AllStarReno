@@ -42,3 +42,4 @@ main.home #portfolio .grid.gap-8,main.home #reviews .grid.gap-8{gap:1.5rem}
 @media (pointer: coarse) {
   .home #cgrid a { min-height: 44px; }
 }
+@media(max-width:1023px){body:has(#asr-sticky){padding-bottom:calc(64px + env(safe-area-inset-bottom))}}

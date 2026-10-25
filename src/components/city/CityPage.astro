@@ -4,6 +4,7 @@
 import Layout from '../../layouts/Layout.astro';
 import SiteHeader from '../global/SiteHeader.astro';
 import SiteFooter from '../global/SiteFooter.astro';
+import CallBar from '../CallBar.astro';
 import ContactBlock from '../global/ContactBlock.astro';
 import '../../styles/ui.css';
 import { loadPages } from '../../lib/legacy.mjs';
@@ -241,4 +242,5 @@ import Reviews from '../Reviews.astro';
     <ContactBlock slug={slug} city={city ? city.name : undefined} source={`city_page:${slug}`} topic={topic} />
   </main>
   <SiteFooter />
+  <CallBar />
 </Layout>

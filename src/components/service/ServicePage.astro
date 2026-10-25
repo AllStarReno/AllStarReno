@@ -4,6 +4,7 @@
 import Layout from '../../layouts/Layout.astro';
 import SiteHeader from '../global/SiteHeader.astro';
 import SiteFooter from '../global/SiteFooter.astro';
+import CallBar from '../CallBar.astro';
 import ContactBlock from '../global/ContactBlock.astro';
 import Reviews from '../Reviews.astro';
 
@@ -178,4 +179,5 @@ const tel = BUSINESS.tel;
     <ContactBlock slug={slug} source={`service_page:${slug}`} topic={d.topic} />
   </main>
   <SiteFooter />
+  <CallBar />
 </Layout>
