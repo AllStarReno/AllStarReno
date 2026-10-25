@@ -122,18 +122,6 @@ export const REVIEWS = [
    "repairs"
   ],
   "cities": []
- },
- {
-  "name": "T. P.",
-  "platform": "Nextdoor",
-  "url": "https://nextdoor.com/pages/all-star-renovations-conway-ar-1",
-  "date": "~2025 (shown as \"1y\")",
-  "text": "@All-Star Renovations\nIf you’re thinking about a bathroom upgrade, All-Star Renovations did ours and couldn’t be happier!",
-  "tags": [
-   "bathroom-remodeling",
-   "full-bathroom-remodel"
-  ],
-  "cities": []
  }
 ];
 

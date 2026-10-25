@@ -35,7 +35,6 @@ export const BUSINESS = {
     'https://www.bbb.org/us/ar/conway/profile/bathroom-remodel/all-star-renovations-0935-90368635',
     'https://nextdoor.com/pages/all-star-renovations-conway-ar-1',
     'https://www.houzz.com/professionals/kitchen-and-bath-remodelers/all-star-renovations-pfvwus-pf~1481213171',
-    'https://pro.porch.com/conway-ar/remodeling-contractors/all-star-renovations-167519291/pp',
     'https://www.linkedin.com/company/all-starrenovations',
     'https://www.youtube.com/channel/UChXHzlSsdqMEQwMV8V4BqRA',
     'https://www.pinterest.com/All_StarReno',
@@ -53,7 +52,7 @@ export const MAP_EMBED = `<section class="asr-map" aria-labelledby="asr-map-h" s
 // Display-only: these are NOT used for aggregateRating schema.
 export const BADGES = [
   { id: 'google-reviews', alt: 'Google Reviews 5-star rated', w: 218, h: 104, href: 'https://g.page/r/CaWnV-VVVJEQEBM/review' },
-  { id: 'yelp-5-star', alt: 'Yelp 5-star rated', w: 163, h: 112, href: 'https://www.yelp.com/biz/all-star-renovations-conway' },
+  { id: 'yelp-5-star', alt: 'Yelp business profile', w: 163, h: 112, href: 'https://www.yelp.com/biz/all-star-renovations-conway' },
   { id: 'facebook-5-rating', alt: 'Facebook 5.0 average rating', w: 218, h: 92, href: 'https://www.facebook.com/allstarreno1/' },
   { id: 'houzz', alt: 'Houzz listed pro', w: 101, h: 112, href: 'https://www.houzz.com/professionals/kitchen-and-bath-remodelers/all-star-renovations-pfvwus-pf~1481213171' },
   { id: 'nextdoor-fave-2026', alt: '2026 Nextdoor Fave Winner, voted by neighbors on Nextdoor', w: 112, h: 112, href: 'https://nextdoor.com/pages/all-star-renovations-conway-ar-1' },
