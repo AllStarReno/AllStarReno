@@ -37,6 +37,13 @@ export const SERVICE_PAGES = {
     q: 'What is All-Star Shower Systems?',
     a: 'All-Star Shower Systems is the branded shower service of All-Star Renovations in Conway, AR. It covers walk-in showers and tub-to-shower conversions with grout-free wall panels, installed by our own crew, usually in 1-2 days. Materials carry a lifetime product warranty and our work a 5-year workmanship warranty.',
     features: ['Walk-in shower remodels', 'Tub-to-shower conversions', 'Grout-free wall panel surfaces', 'Lifetime product warranty + 5-year workmanship warranty', 'Installed by the All-Star Renovations crew', '100% Customer Guarantee'],
+    materials: [
+      ['Non-Porous Custom Acrylic', 'Microbe-resistant coatings'],
+      ['Engineered Solid Surface', 'Custom-molded resins'],
+      ['Composite Stone', 'Ultra-dense crushed stone & marble'],
+      ['RCB', 'Rigid PVC & fiber composite'],
+      ['Engineered Wood', 'Marine-grade waterproof birch plywood & laminate'],
+    ],
     compare: showerCmp,
   },
   'bathroom-remodeling/walk-in-showers': {

@@ -118,6 +118,14 @@ const tel = BUSINESS.tel;
       <ul class="sp-feat">{d.features.map((f) => <li class="card"><span class="ms" aria-hidden="true">check_circle</span>{f}</li>)}</ul>
     </section>
 
+    {d.materials && (
+      <section class="wrap sp-sec" id="materials" aria-labelledby="mat-h">
+        <h2 class="sp-h2" id="mat-h">Our Materials</h2>
+        <p class="sp-mat-lead">We work with five material types and help you choose the right one for your shower at your free in-home consultation.</p>
+        <ul class="sp-mat">{d.materials.map((m) => <li class="card"><h3>{m[0]}</h3><p>{m[1]}</p></li>)}</ul>
+      </section>
+    )}
+
     <section class="wrap sp-sec" aria-labelledby="cmp-h">
       <div class="card sp-cmp">
         <h2 class="sp-h2" id="cmp-h">Typical Contractor vs. All-Star Renovations</h2>

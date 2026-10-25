@@ -186,6 +186,10 @@ main.ui .cc-foot a,main.ui .chips a,main.ui .cty a,footer.ui a{text-decoration:n
 @media(min-width:768px){.sp-feat{grid-template-columns:repeat(2,1fr)}}@media(min-width:1024px){.sp-feat{grid-template-columns:repeat(3,1fr)}}
 .sp-feat li{display:flex;gap:.6rem;align-items:flex-start;padding:1.1rem 1.2rem;color:#dbe4ee;font-weight:600;line-height:1.45;border-radius:1rem}
 .sp-feat .ms{color:var(--amber)}
+.sp-mat-lead{margin:0 0 1rem;color:#cbd5e1;max-width:46rem;line-height:1.6}
+.sp-mat{list-style:none;padding:0;margin:0;display:grid;gap:.75rem;grid-template-columns:1fr}
+@media(min-width:640px){.sp-mat{grid-template-columns:repeat(2,1fr)}}@media(min-width:1024px){.sp-mat{grid-template-columns:repeat(5,1fr)}}
+.sp-mat li{padding:1rem 1.1rem;border-radius:1rem}.sp-mat h3{margin:0 0 .3rem;font-size:1rem;line-height:1.3;color:#fff}.sp-mat p{margin:0;font-size:.9rem;line-height:1.45;color:#cbd5e1}
 .sp-cmp{padding:1.5rem}
 .sp-tbl{overflow-x:auto;max-width:100%}
 .sp-tbl table{width:100%;border-collapse:collapse;font-size:.9rem;min-width:520px}
@@ -253,3 +257,10 @@ main.ui .cc-foot a,main.ui .chips a,main.ui .cty a,footer.ui a{text-decoration:n
   .sf .sf-grid ul a{font-size:.875rem}
 }
 .ui .ms[data-i]::before{content:attr(data-i)}
+
+/* Mobile-first tap targets: on touch screens, standalone small links get a 44px-tall hit area (WCAG 2.5.5). Visual size and font are unchanged. */
+@media (pointer: coarse) {
+  .sf .nap a { display: flex; align-items: center; min-height: 44px; }
+  .sf-bot a { display: inline-flex; align-items: center; min-height: 44px; }
+  table th a, table td > a:only-child { display: inline-flex; align-items: center; min-height: 44px; }
+}
