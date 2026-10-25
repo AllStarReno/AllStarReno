@@ -1,14 +1,22 @@
 ---
-// Mobile tap-to-call / text bar (only rendered on pages that don't already include one).
+// Phone-only sticky contact bar (Call / Text / Free Quote), matching the homepage bar.
+// Reserves its own height with body padding so it never covers content or forms (no layout shift).
 import { BUSINESS } from '../data/business.mjs';
+interface Props { quote?: string }
+const { quote = 'https://client.swivl.tech/all-star-renovate-318dbc/instant-quote?widget=instant-quote' } = Astro.props;
+const swivl = quote.startsWith('http');
 ---
 <div class="callbar" role="region" aria-label="Contact All-Star Renovations">
-  <a href={`tel:${BUSINESS.tel}`} data-contact="call">Call {BUSINESS.phone}</a>
-  <a href={`sms:${BUSINESS.tel}`} data-contact="sms">Text us</a>
+  <a class="cb-call" href={`tel:${BUSINESS.tel}`} data-contact="call">Call</a>
+  <a class="cb-text" href={`sms:${BUSINESS.tel}`} data-contact="sms">Text</a>
+  <a class="cb-quote" href={quote} data-swivl={swivl ? 'quote' : undefined}>Free Quote</a>
 </div>
-<style>
-  .callbar { position: fixed; inset: auto 0 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; padding: .5rem; background: var(--asr-navy); z-index: 60; }
-  .callbar a { min-height: 48px; display: flex; align-items: center; justify-content: center; border-radius: .75rem; font-weight: 800; background: var(--asr-amber); color: var(--asr-navy); }
-  .callbar a + a { background: transparent; color: #fff; border: 2px solid #fff; }
-  @media (min-width: 1024px) { .callbar { display: none; } }
+<style is:global>
+  .callbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 80; display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; padding: .5rem .75rem max(.5rem, env(safe-area-inset-bottom)); background: rgba(11,19,41,.96); border-top: 1px solid rgba(255,255,255,.15); }
+  .callbar a { min-height: 48px; display: flex; align-items: center; justify-content: center; border-radius: .75rem; font-weight: 700; font-size: .9rem; text-decoration: none; }
+  .callbar .cb-call { background: #c2410c; color: #fff; }
+  .callbar .cb-text { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); color: #fff; }
+  .callbar .cb-quote { background: #fff; color: #0b1329; }
+  body:has(.callbar) { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+  @media (min-width: 1024px) { .callbar { display: none; } body:has(.callbar) { padding-bottom: 0; } }
 </style>

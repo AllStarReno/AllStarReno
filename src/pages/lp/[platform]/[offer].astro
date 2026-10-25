@@ -3,6 +3,7 @@
 import '../../../styles/tokens.css';
 import LeadForm from '../../../components/LeadForm.astro';
 import TrustBadges from '../../../components/TrustBadges.astro';
+import CallBar from '../../../components/CallBar.astro';
 import AdTags from '../../../components/lp/AdTags.astro';
 import { PLATFORMS, OFFERS, OFFER_REVIEW_TAGS } from '../../../data/landing-pages.mjs';
 import { reviewsFor } from '../../../data/reviews.mjs';
@@ -85,6 +86,7 @@ const phoneSvg = '<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height=
     <p class="lp-fine">* Timelines, costs and results shown or described are typical and are not guaranteed. Actual install time, pricing and results vary with each home, product selection, site conditions and scope. Warranty terms are subject to the written warranty provided with your contract. Financing, if offered, is subject to lender approval. Testimonials reflect individual experiences.</p>
     <p><a href="/privacy-policy">Privacy Policy</a> · <a href="/terms-and-conditions">Terms</a> · <a href="/terms-and-conditions#sms-terms">SMS Terms</a></p>
   </footer>
+  <CallBar quote="#request-visit" />
   <script is:inline type="text/javascript">(function(){var tf=document.createElement('script');tf.type='text/javascript';tf.async=true;tf.src='https://cdn.trustedform.com/bootstrap.js?field=xxTrustedFormCertUrl&use_tagged_consent=true&l='+new Date().getTime()+Math.random();var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(tf,s)})();</script>
   <noscript><img src="https://api.trustedform.com/ns.gif" alt="" /></noscript>
   <!-- Vercel Web Analytics + Speed Insights (cookie-free; replaces stale PRs #1/#2) -->

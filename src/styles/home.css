@@ -37,8 +37,9 @@ main.home #portfolio .grid.gap-8,main.home #reviews .grid.gap-8{gap:1.5rem}
 .home .home-more-btn { display: block; color: #fdba74; font-weight: 600; }
 .home .home-more-sum:focus-visible { outline: 2px solid #fb923c; outline-offset: 4px; border-radius: 1rem; }
 
-/* Always-visible service community chips (links match the city cards). */
-.home .sa-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;max-width:56rem;margin:0 auto 1.5rem;padding:0;list-style:none}
-.home .sa-chip{display:inline-flex;align-items:center;min-height:2.5rem;padding:.375rem .875rem;border-radius:9999px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:#e2e8f0;font-size:.875rem;font-weight:500;transition:border-color .15s,color .15s}
-.home .sa-chip:hover{border-color:#fb923c;color:#fff}
-.home .sa-chip:focus-visible{outline:2px solid #fb923c;outline-offset:2px}
+
+/* Touch screens: city-card action links get a 44px hit area (homepage Service Areas). */
+@media (pointer: coarse) {
+  .home #cgrid a { min-height: 44px; }
+}
+@media(max-width:1023px){body:has(#asr-sticky){padding-bottom:calc(64px + env(safe-area-inset-bottom))}}

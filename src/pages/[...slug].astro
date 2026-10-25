@@ -53,7 +53,7 @@ const segs = b.split(/(<!--@(?:HEADER|FOOTER|CONTACT|CRUMBS|FORM|BADGES)-->)/).f
 const hasForm = !!form || !NO_CONTACT.has(s);
 const i = segs.findIndex((x) => x.kind === 'html' && /data-swivl="(scheduler|quote)"/.test(x.html));
 if (i > -1) segs[i] = { ...segs[i], html: addVisitCta(segs[i].html, hasForm) };
-const needsCallBar = !/fixed bottom|data-contact="call"/.test(page.body);
+const needsCallBar = !segs.some((x) => x.kind === 'html' && x.html.includes('id="asr-sticky"'));
 const current = s.split('/')[0];
 ---
 <Layout page={page} graph={graph}>

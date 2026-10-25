@@ -4,6 +4,7 @@
 import Layout from '../../layouts/Layout.astro';
 import SiteHeader from '../global/SiteHeader.astro';
 import SiteFooter from '../global/SiteFooter.astro';
+import CallBar from '../CallBar.astro';
 import ContactBlock from '../global/ContactBlock.astro';
 import Reviews from '../Reviews.astro';
 
@@ -71,9 +72,10 @@ const tel = BUSINESS.tel;
               {d.cat === 'handyman-services' && <li><span class="ms" aria-hidden="true">emergency</span><a href={`tel:${tel}`} data-contact="call">{BUSINESS.emergency}: {BUSINESS.phone}</a></li>}
             </ul>
             <div class="ctas">
-              <a class="btn btn-amber" href="#contact"><span class="ms" aria-hidden="true">event_available</span>Get Free In-Home Quote</a>
-              <a class="btn btn-ghost" href={`tel:${tel}`} data-contact="call"><span class="ms" aria-hidden="true">call</span>{BUSINESS.phone}</a>
+              <a class="btn btn-amber" href="https://client.swivl.tech/all-star-renovate-318dbc/instant-quote?widget=instant-quote" data-swivl="quote"><span class="ms" aria-hidden="true">event_available</span>Get My Free Quote</a>
+              <a class="sp-tel" href={`tel:${tel}`} data-contact="call">or call {BUSINESS.phone}</a>
             </div>
+            <p class="sp-trust">Google Guaranteed · Veteran-owned · Licensed and Insured · 24/7 emergency</p>
           </div>
           <aside class="card sp-spec" aria-labelledby="spec-h">
             {img && <picture>{webp && <source srcset={webp} type="image/webp" />}<img src={img} alt={imgAlt} width="640" height="360" loading="eager" fetchpriority="high" decoding="async" /></picture>}
@@ -118,6 +120,14 @@ const tel = BUSINESS.tel;
       <ul class="sp-feat">{d.features.map((f) => <li class="card"><span class="ms" aria-hidden="true">check_circle</span>{f}</li>)}</ul>
     </section>
 
+    {d.materials && (
+      <section class="wrap sp-sec" id="materials" aria-labelledby="mat-h">
+        <h2 class="sp-h2" id="mat-h">Our Materials</h2>
+        <p class="sp-mat-lead">We work with five material types and help you choose the right one for your shower at your free in-home consultation.</p>
+        <ul class="sp-mat">{d.materials.map((m) => <li class="card"><h3>{m[0]}</h3><p>{m[1]}</p></li>)}</ul>
+      </section>
+    )}
+
     <section class="wrap sp-sec" aria-labelledby="cmp-h">
       <div class="card sp-cmp">
         <h2 class="sp-h2" id="cmp-h">Typical Contractor vs. All-Star Renovations</h2>
@@ -159,6 +169,11 @@ const tel = BUSINESS.tel;
       </div>
     </section>
 
+    <section class="wrap sp-sec" aria-labelledby="proc-h">
+      <h2 class="sp-h2" id="proc-h">How It Works</h2>
+      <ol class="sp-proc"><li><b>1</b>Free quote</li><li><b>2</b>Design &amp; materials</li><li><b>3</b>Install</li><li><b>4</b>Warranty &amp; follow-up</li></ol>
+    </section>
+
     <Reviews tags={isCat ? [d.cat] : [d.cat, slug.split('/').pop()]} />
     <section class="sec" aria-labelledby="fq-h" style="background:#0a1e33">
       <div class="wrap">
@@ -168,6 +183,8 @@ const tel = BUSINESS.tel;
     </section>
 
     <ContactBlock slug={slug} source={`service_page:${slug}`} topic={d.topic} />
+    <p class="wrap sp-close"><a href="https://client.swivl.tech/all-star-renovate-318dbc/instant-quote?widget=instant-quote" data-swivl="quote">Get instant estimate</a> · <a href={`tel:${tel}`} data-contact="call">Call</a> · <a href={`sms:${tel}`} data-contact="sms">Text</a></p>
   </main>
   <SiteFooter />
+  <CallBar />
 </Layout>
