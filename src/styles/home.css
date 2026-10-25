@@ -28,3 +28,11 @@ main.home #portfolio .grid.gap-8,main.home #reviews .grid.gap-8{gap:1.5rem}
   main.home #reviews .grid.md\:grid-cols-3:not(.hidden)>*{flex:0 0 84%;scroll-snap-align:start;max-width:340px}
   main.home #transformation .grid.md\:grid-cols-3{gap:1.25rem;padding:1.5rem}
 }
+
+/* Collapsible secondary homepage blocks (native <details>; all text and links stay in the HTML). */
+.home .home-more > summary::-webkit-details-marker { display: none; }
+.home .home-more-hint { display: block; margin-top: .5rem; font-size: .875rem; color: #94a3b8; }
+.home .home-more-sum::after { content: "Show ▾"; display: inline-block; margin-top: .75rem; padding: .5rem 1.25rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.08); color: #fff; font-weight: 700; font-size: .875rem; }
+.home .home-more[open] > .home-more-sum::after { content: "Hide ▴"; }
+.home .home-more-btn { display: block; color: #fdba74; font-weight: 600; }
+.home .home-more-sum:focus-visible { outline: 2px solid #fb923c; outline-offset: 4px; border-radius: 1rem; }
