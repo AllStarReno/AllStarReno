@@ -1,3 +1,4 @@
+import { scrubOwner } from './owner-name.mjs';
 // Build-time data for /feed.json (JSON Feed 1.1) and /ask-index.json (Ask All-Star answer box).
 // Answers are copied verbatim from on-site FAQ content only: no AI, no generated text.
 import fs from 'node:fs';
@@ -37,7 +38,7 @@ export function feed() {
 
 export function askIndex() {
   const out = [];
-  const add = (q, a, url) => { q = strip(q); a = strip(a); if (q && a && !out.some((x) => x.q.toLowerCase() === q.toLowerCase())) out.push({ q, a, url }); };
+  const add = (q, a, url) => { q = scrubOwner(strip(q)); a = scrubOwner(strip(a)); if (q && a && !out.some((x) => x.q.toLowerCase() === q.toLowerCase())) out.push({ q, a, url }); };
   for (const [slug, d] of Object.entries(SERVICE_PAGES)) { add(d.q, d.a, `/${slug}`); for (const f of d.extraFaq || []) add(f.q, f.a, `/${slug}`); }
   for (const f of AREA_FAQS) add(f.q, f.a, '/service-areas');
   for (const p of loadPages().filter((p) => p.indexable && !NOINDEX_SLUGS.has(p.slug))) {

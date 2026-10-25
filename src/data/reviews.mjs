@@ -48,7 +48,7 @@ export const REVIEWS = [
   "platform": "Trustindex",
   "url": "https://www.trustindex.io/reviews/allstarreno.com",
   "date": "2026-01-30",
-  "text": "I hired All-Star Renovations for a bathroom remodel in my Little Rock home. Thomas communicated clearly from the start, arrived as scheduled, and completed the work within the agreed timeline. The workmanship was solid, with exceptional attention to detail and professionalism. Any questions I had were answered promptly, and the crew left the space clean at the end of each day. Overall, I’m happy with the result and would consider them for future projects.",
+  "text": "I hired All-Star Renovations for a bathroom remodel in my Little Rock home. [The owner] communicated clearly from the start, arrived as scheduled, and completed the work within the agreed timeline. The workmanship was solid, with exceptional attention to detail and professionalism. Any questions I had were answered promptly, and the crew left the space clean at the end of each day. Overall, I’m happy with the result and would consider them for future projects.",
   "tags": [
    "bathroom-remodeling",
    "full-bathroom-remodel"
@@ -77,7 +77,7 @@ export const REVIEWS = [
   "platform": "Trustindex",
   "url": "https://www.trustindex.io/reviews/allstarreno.com",
   "date": "2026-03-27",
-  "text": "Central Arkansas homeowner All-Star Renovations Amazing work and customer service. He finished the jobs in no time and explained in detail the work that he was doing and is super affordable. 😊 I recommend calling Thomas for any home repairs/renovations!!",
+  "text": "Central Arkansas homeowner All-Star Renovations Amazing work and customer service. He finished the jobs in no time and explained in detail the work that he was doing and is super affordable. 😊 I recommend calling [All-Star Renovations] for any home repairs/renovations!!",
   "tags": [
    "handyman-services",
    "repairs",
@@ -91,7 +91,7 @@ export const REVIEWS = [
   "platform": "Trustindex",
   "url": "https://www.trustindex.io/reviews/allstarreno.com",
   "date": "2025-12-27",
-  "text": "Thomas was professional, knowledgeable and fixed my dryer belt in no time. I would do business with him again. Great work.",
+  "text": "[The owner] was professional, knowledgeable and fixed my dryer belt in no time. I would do business with him again. Great work.",
   "tags": [
    "handyman-services",
    "repairs",
@@ -104,7 +104,7 @@ export const REVIEWS = [
   "platform": "Trustindex",
   "url": "https://www.trustindex.io/reviews/allstarreno.com",
   "date": "2025-11-05",
-  "text": "Thomas gave us a good estimate and did a great job refinishing our wall. I highly recommend All Star Renovations.",
+  "text": "[The owner] gave us a good estimate and did a great job refinishing our wall. I highly recommend All Star Renovations.",
   "tags": [
    "handyman-services",
    "repairs"
