@@ -9,11 +9,12 @@ const SHARED = { service: [C + 'service/ServicePage.astro', D + 'service-pages.m
   city: [C + 'city/CityPage.astro', D + 'city-pages.mjs', D + 'service-areas-content.mjs', D + 'reviews.mjs'],
   sub: [C + 'location/SubCityPage.astro', D + 'sub-locations.mjs', D + 'service-pages.mjs', D + 'reviews.mjs'] };
 const SUBSET = new Set(SUB_CITY_SLUGS), CITYSET = new Set(CITY_PAGE_SLUGS);
-const sources = (p) => [p.file, ...(SUBSET.has(p.slug) ? SHARED.sub : SERVICE_PAGES[p.slug] ? SHARED.service : CITYSET.has(p.slug) || p.slug.startsWith('service-areas/') ? SHARED.city : [])].filter(Boolean);
+const sources = (p) => [p.file, ...(p.slug === 'reviews' ? [D + 'review-summary.mjs', D + 'reviews.mjs'] : []), ...(SUBSET.has(p.slug) ? SHARED.sub : SERVICE_PAGES[p.slug] ? SHARED.service : CITYSET.has(p.slug) || p.slug.startsWith('service-areas/') ? SHARED.city : [])].filter(Boolean);
 const prio = (s) => s === '' ? '1.0' : /^(bathroom-remodeling|kitchen-remodeling|handyman-services|service-areas)$/.test(s) ? '0.9' : s.split('/').length === 1 ? '0.7' : s.split('/').length === 3 ? '0.6' : '0.8';
 export function GET() {
   const known = new Set(loadPages().map((p) => p.slug));
   const extra = CITY_PAGE_SLUGS.filter((s) => !known.has(s)).map((slug) => ({ slug, url: `${SITE}/${slug}`, indexable: !NOINDEX_SLUGS.has(slug) }))
+    .concat([{ slug: 'reviews', url: `${SITE}/reviews`, indexable: true, file: 'src/pages/reviews.astro' }])
     .concat(SUB_CITY_SLUGS.map((slug) => ({ slug, url: `${SITE}/${slug}`, indexable: !SUB_CITY_NOINDEX.has(slug) })));
   const urls = [...loadPages(), ...extra].filter((p) => p.indexable).sort((a, b) => a.slug.localeCompare(b.slug))
     .map((p) => `  <url><loc>${p.url}</loc><lastmod>${lastmodFor(sources(p))}</lastmod><priority>${prio(p.slug)}</priority></url>`).join('\n');

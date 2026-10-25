@@ -5,8 +5,11 @@
 import { reviewsFor } from '../data/reviews.mjs';
 import { BUSINESS } from '../data/business.mjs';
 interface Props { tags?: string[]; city?: string | null; n?: number; title?: string }
-const { tags = [], city = null, n = 3, title = 'What our customers say' } = Astro.props;
+const { tags = [], city = null, n = 3, title: t0 } = Astro.props;
 const list = reviewsFor({ tags, city, n });
+// Only use a town-specific heading when a quoted review actually mentions that town.
+const local = !!city && list.some((r) => r.cities.includes(city));
+const title = t0 && (!city || local) ? t0 : 'What our customers say';
 const fmt = (d) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 ---
 {list.length > 0 && (
@@ -20,7 +23,7 @@ const fmt = (d) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month
       </figure>
     ))}
   </div>
-  <p class="rv-more"><a href={BUSINESS.gbp} target="_blank" rel="noopener">5.0 on Google · 10 reviews</a>. More reviews: <a href="https://www.trustindex.io/reviews/allstarreno.com" target="_blank" rel="noopener">Trustindex</a> · <a href={BUSINESS.gbp} target="_blank" rel="noopener">Google</a></p>
+  <p class="rv-more"><a href={BUSINESS.gbp} target="_blank" rel="noopener">5.0 on Google · 10 reviews</a>. <a href="/reviews">Read all 21 verified reviews</a> · <a href="https://g.page/r/CaWnV-VVVJEQEBM/review" target="_blank" rel="noopener">Leave a Google review<span class="sr-only"> (opens in new tab)</span></a></p>
 </section>
 )}
 <style>
