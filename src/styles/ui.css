@@ -18,18 +18,20 @@
 .ui .sec-head p{color:var(--muted);font-size:1.05rem;line-height:1.65;margin:0}
 .ui .card{background:var(--navy-900);border:1px solid var(--line);border-radius:1.5rem}
 /* header */
-.sh{position:sticky;top:0;z-index:60;background:rgba(10,30,51,.97);backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid var(--line)}
+.sh{position:sticky;top:0;z-index:60;background:rgba(10,30,51,.97);border-bottom:1px solid var(--line)}
+/* blur lives on a pseudo-element: backdrop-filter on .sh itself made it the containing block for the fixed mobile panel, clipping the menu to the header's height */
+.sh::before{content:"";position:absolute;inset:0;z-index:-1;backdrop-filter:saturate(1.2) blur(8px);-webkit-backdrop-filter:saturate(1.2) blur(8px)}
 .sh-in{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:72px}
-.sh-brand{display:flex;align-items:center;gap:.7rem;text-decoration:none}
+.sh-brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;flex-shrink:0;white-space:nowrap}
 .sh-brand img{width:44px;height:44px;border-radius:10px;background:#fff}
 .sh-brand b{display:block;font-family:"Plus Jakarta Sans",sans-serif;font-weight:800;color:#fff;font-size:1rem;letter-spacing:.02em;line-height:1.1}
 .sh-brand small{display:block;color:var(--amber);font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 .sh-nav{display:none;align-items:center;gap:.25rem}
-.sh-nav>a,.sh-dd>summary{color:#dbe4ee;font-weight:600;font-size:.9rem;padding:.6rem .75rem;border-radius:.6rem;text-decoration:none;cursor:pointer;list-style:none;display:flex;align-items:center;gap:.15rem;min-height:44px}
+.sh-nav>a,.sh-dd>summary{color:#dbe4ee;font-weight:600;font-size:.88rem;padding:.55rem .6rem;border-radius:.6rem;text-decoration:none;cursor:pointer;list-style:none;display:flex;align-items:center;gap:.15rem;min-height:44px;white-space:nowrap}
 .sh-dd>summary::-webkit-details-marker{display:none}
 .sh-nav>a:hover,.sh-dd>summary:hover,.sh-nav [aria-current]{color:#fff;background:rgba(255,255,255,.07)}
 .sh-dd{position:relative}
-.sh-menu{position:absolute;left:0;top:calc(100% + .4rem);min-width:280px;background:var(--navy-900);border:1px solid var(--line);border-radius:1rem;padding:.5rem;box-shadow:0 20px 40px rgba(0,0,0,.4);display:grid;gap:.1rem}
+.sh-menu{position:absolute;z-index:70;left:0;top:100%;margin-top:.4rem;max-height:calc(100vh - 96px);overflow-y:auto;min-width:280px;background:var(--navy-900);border:1px solid var(--line);border-radius:1rem;padding:.5rem;box-shadow:0 20px 40px rgba(0,0,0,.4);display:grid;gap:.1rem}
 .sh-menu a{display:block;padding:.6rem .8rem;border-radius:.6rem;color:#dbe4ee;text-decoration:none;font-size:.9rem}
 .sh-menu a:hover{background:rgba(255,255,255,.07);color:#fff}
 .sh-menu .lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--amber);font-weight:800;padding:.5rem .8rem .2rem}
@@ -41,7 +43,11 @@
 .sh-mp a{display:flex;align-items:center;min-height:48px;padding:0 .5rem;color:#fff;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(255,255,255,.06)}
 .sh-mp .lbl{display:block;margin:1.1rem .5rem .3rem;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--amber);font-weight:800}
 .sh-mp .btn{width:100%;margin-top:1rem;border:0}
-@media(min-width:1100px){.sh-nav{display:flex}.sh-cta{display:inline-flex}.sh-mob{display:none}}
+.sh-dd>summary .ms{transition:transform .15s}.sh-dd[open]>summary .ms{transform:rotate(180deg)}
+.sh-dd:last-of-type .sh-menu{columns:2;display:block;min-width:420px}.sh-dd:last-of-type .sh-menu a{break-inside:avoid}
+.sh-cta{white-space:nowrap}
+body.sh-lock{overflow:hidden}
+@media(min-width:1340px){.sh-nav{display:flex}.sh-cta{display:inline-flex}.sh-mob{display:none}}
 /* intro */
 .sa-intro{text-align:center;padding:2.5rem 0 3rem;background:radial-gradient(ellipse at top,rgba(245,165,36,.10),transparent 60%),var(--navy)}
 .sa-intro h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;line-height:1.1;margin:1.1rem auto 1rem;max-width:56rem;text-wrap:balance}
@@ -139,7 +145,7 @@
 .sf-bot a{color:#cbd6e2}
 .ui .hidden,.ui [hidden]{display:none!important}
 .sh .sh-cta{display:none}
-@media(min-width:1100px){.sh .sh-cta{display:inline-flex}}
+@media(min-width:1340px){.sh .sh-cta{display:inline-flex}}
 @media(max-width:480px){.sh-brand b{font-size:.85rem}.sh-brand small{font-size:.6rem}}
 main.ui .cc-foot a,main.ui .chips a,main.ui .cty a,footer.ui a{text-decoration:none}
 @font-face{font-family:"Material Symbols Outlined";font-style:normal;font-weight:100 700;font-display:block;src:url(/assets/fonts/material-symbols-subset.woff2) format("woff2")}
