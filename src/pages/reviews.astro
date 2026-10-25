@@ -1,5 +1,5 @@
 ---
-// /reviews: verified public reviews as visible, quotable plain text. Owner rule: NO aggregateRating / Review / rating schema.
+// /reviews: verified public reviews as visible, quotable plain text. Individual Review schema not used; business aggregateRating comes from src/lib/schema.mjs.
 // JSON-LD here is limited to the shared business/site graph + WebPage (FAQPage) + BreadcrumbList.
 import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/global/SiteHeader.astro';
@@ -39,6 +39,7 @@ const names = list.slice(0, -1).join(', ') + ' and ' + list.at(-1);
           <span class="k">Quick answer</span>
           <h2 id="ans-q">How well reviewed is All-Star Renovations?</h2>
           <p>All-Star Renovations of Conway, Arkansas has {REVIEW_TOTAL} verified public reviews, and every one is 5.0 stars. They are on {names} (checked {REVIEW_CHECKED}).</p>
+          <p>Google Guaranteed, veteran-owned, licensed and insured.</p>
         </section>
       </div>
     </section>

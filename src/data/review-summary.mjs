@@ -1,5 +1,5 @@
 // Verified public review counts (checked October 2026). All 5.0 stars. Plain text only:
-// NEVER output aggregateRating / Review / rating schema from this data (Google self-serving review rule).
+// REVIEW_TOTAL drives the business aggregateRating (owner-approved). Never output individual Review schema.
 import { BUSINESS } from './business.mjs';
 export const REVIEW_TOTAL = 21;
 export const REVIEW_CHECKED = 'October 2026';
