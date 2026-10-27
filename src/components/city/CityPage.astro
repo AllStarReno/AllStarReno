@@ -7,6 +7,7 @@ import SiteFooter from '../global/SiteFooter.astro';
 import CallBar from '../CallBar.astro';
 import ContactBlock from '../global/ContactBlock.astro';
 import '../../styles/ui.css';
+import ProjectPhotos from '../beforeafter/ProjectPhotos.astro';
 import { loadPages } from '../../lib/legacy.mjs';
 import { buildGraph } from '../../lib/schema.mjs';
 import { CATEGORIES } from '../../data/services.mjs';
@@ -146,6 +147,7 @@ import Reviews from '../Reviews.astro';
         </div>
       </div>
     </section>
+    {city && <ProjectPhotos slug={slug} />}
 <style>.sp-svc-links{list-style:none;margin:.5rem 0;padding:0;display:grid;gap:.35rem}.sp-tiers{display:block;font-size:.75rem;opacity:.8}.sp-svc-links a{text-decoration:underline;text-underline-offset:2px}</style>
 
     {tabs.length > 0 && (

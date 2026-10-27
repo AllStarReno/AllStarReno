@@ -13,7 +13,7 @@ const SUBSET = new Set(SUB_CITY_SLUGS), CITYSET = new Set(CITY_PAGE_SLUGS);
 const sources = (p) => [p.file, ...(p.slug === 'reviews' ? [D + 'review-summary.mjs', D + 'reviews.mjs'] : []), ...(SUBSET.has(p.slug) ? SHARED.sub : SERVICE_PAGES[p.slug] ? SHARED.service : CITYSET.has(p.slug) || p.slug.startsWith('service-areas/') ? SHARED.city : [])].filter(Boolean);
 const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 // image:caption/title are deprecated by Google (ignored) but kept for other crawlers; image:loc is what counts.
-const imgs = (slug) => (photosFor(slug)?.images || []).map((i) => `\n    <image:image><image:loc>${SITE}${i.url}</image:loc><image:caption>${esc(i.caption)}</image:caption><image:title>${esc(i.title)}</image:title><image:geo_location>Conway, Arkansas, USA</image:geo_location></image:image>`).join('');
+const imgs = (slug) => (photosFor(slug)?.images || []).map((i) => `\n    <image:image><image:loc>${SITE}${i.url}</image:loc><image:caption>${esc(i.caption)}</image:caption><image:title>${esc(i.title)}</image:title><image:geo_location>${esc(i.townName)}, Arkansas, USA</image:geo_location></image:image>`).join('');
 const prio = (s) => s === '' ? '1.0' : /^(bathroom-remodeling|kitchen-remodeling|handyman-services|service-areas)$/.test(s) ? '0.9' : s.split('/').length === 1 ? '0.7' : s.split('/').length === 3 ? '0.6' : '0.8';
 export function GET() {
   const known = new Set(loadPages().map((p) => p.slug));

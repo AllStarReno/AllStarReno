@@ -30,13 +30,13 @@ export function locationsSection({ full = false } = {}) {
   return lines.join('\n');
 }
 
-// Real project photos (before/after pairs + finished showers). Location is the Conway, AR area, not a job-site address.
+// Real project photos (before/after pairs + finished showers). Each is labeled with a Central Arkansas town (city-level), not a job-site address.
 import { PAIRS, SINGLES } from './project-photos.mjs';
 import { PHOTO_PLACEMENT } from '../data/photo-placement.mjs';
 export function photosSection() {
   const where = (id) => Object.entries(PHOTO_PLACEMENT).filter(([, c]) => c.pairs === '*' || (Array.isArray(c.pairs) && c.pairs.includes(id))).map(([s]) => `${SITE}/${s}`)[0];
-  return ['## Project photos (Conway, AR area)',
+  return ['## Project photos (Central Arkansas)',
     'Real All-Star Renovations bathroom projects. Each pair shows the same bathroom before and after. Photo credit: All-Star Renovations.',
-    ...PAIRS.map((p) => `- ${p.title} (${where(p.id) || SITE + '/portfolio'}): before ${SITE}${p.before.url} (${p.before.alt}); after ${SITE}${p.after.url} (${p.after.alt})`),
+    ...PAIRS.map((p) => `- ${p.title}, ${p.place} (${where(p.id) || SITE + '/portfolio'}): before ${SITE}${p.before.url} (${p.before.alt}); after ${SITE}${p.after.url} (${p.after.alt})`),
     ...SINGLES.map((s) => `- ${s.caption} ${SITE}${s.url} (${s.alt})`)].join('\n');
 }

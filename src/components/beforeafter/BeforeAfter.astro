@@ -54,7 +54,7 @@ const sizesHalf = '(min-width: 768px) 50vw, 100vw';
       <span class="ba-tag ba-tag--a ba-fade-state" aria-hidden="true">After · tap or hover for before</span>
     </button>
   )}
-  {caption && <figcaption><strong>{pair.title}</strong>. <span class="ba-cap">Before: {b.caption.replace(/^Before: /, '')} After: {a.caption.replace(/^After: /, '')}</span></figcaption>}
+  {caption && <figcaption><strong>{pair.title}</strong>. {pair.place}. <span class="ba-cap">Before: {b.caption.replace(/^Before: /, '').replace(/ Project in .*$/, '')} After: {a.caption.replace(/^After: /, '').replace(/ Project in .*$/, '')}</span></figcaption>}
 </figure>
 <style is:global>
 .ba{margin:0 0 2rem;max-width:960px}
