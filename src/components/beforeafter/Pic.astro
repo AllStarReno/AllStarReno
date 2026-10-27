@@ -1,0 +1,11 @@
+---
+// <picture> with AVIF/WebP/JPEG srcsets; width/height always set (no layout shift); lazy by default.
+interface Props { img: any; sizes?: string; priority?: boolean; class?: string; alt?: string }
+const { img, sizes = '(min-width: 1024px) 560px, 100vw', priority = false, class: cls, alt = img.alt } = Astro.props;
+---
+<picture class={cls}>
+  <source type="image/avif" srcset={img.avif} sizes={sizes} />
+  <source type="image/webp" srcset={img.webp} sizes={sizes} />
+  <img src={img.src} srcset={img.jpg} sizes={sizes} alt={alt} width={img.width} height={img.height}
+    loading={priority ? 'eager' : 'lazy'} decoding="async" />
+</picture>

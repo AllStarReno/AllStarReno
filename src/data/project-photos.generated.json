@@ -1,0 +1,106 @@
+{
+ "tub-surround-white-square-tile-before-conway-ar": {
+  "width": 597,
+  "height": 726,
+  "widths": [
+   480,
+   597
+  ]
+ },
+ "tub-surround-gray-subway-tile-after-conway-ar": {
+  "width": 597,
+  "height": 726,
+  "widths": [
+   480,
+   597
+  ]
+ },
+ "tub-surround-stained-beige-tile-before-conway-ar": {
+  "width": 577,
+  "height": 709,
+  "widths": [
+   480,
+   577
+  ]
+ },
+ "tub-surround-white-subway-pattern-after-conway-ar": {
+  "width": 577,
+  "height": 709,
+  "widths": [
+   480,
+   577
+  ]
+ },
+ "primary-bathroom-jetted-tub-before-conway-ar": {
+  "width": 640,
+  "height": 853,
+  "widths": [
+   480,
+   640
+  ]
+ },
+ "primary-bathroom-freestanding-tub-after-conway-ar": {
+  "width": 640,
+  "height": 853,
+  "widths": [
+   480,
+   640
+  ]
+ },
+ "worn-fiberglass-tub-surround-before-conway-ar": {
+  "width": 640,
+  "height": 853,
+  "widths": [
+   480,
+   640
+  ]
+ },
+ "white-tub-surround-grab-bar-after-conway-ar": {
+  "width": 640,
+  "height": 853,
+  "widths": [
+   480,
+   640
+  ]
+ },
+ "tub-to-shower-conversion-before-conway-ar": {
+  "width": 640,
+  "height": 849,
+  "widths": [
+   480,
+   640
+  ]
+ },
+ "tub-to-shower-conversion-after-conway-ar": {
+  "width": 640,
+  "height": 852,
+  "widths": [
+   480,
+   640
+  ]
+ },
+ "white-subway-tile-shower-black-glass-door-conway-ar": {
+  "width": 1200,
+  "height": 800,
+  "widths": [
+   480,
+   800,
+   1200
+  ]
+ },
+ "gray-tile-walk-in-shower-niche-linear-drain-conway-ar": {
+  "width": 735,
+  "height": 1103,
+  "widths": [
+   480,
+   735
+  ]
+ },
+ "wood-look-panel-shower-black-sliding-door-conway-ar": {
+  "width": 480,
+  "height": 640,
+  "widths": [
+   480
+  ]
+ }
+}
