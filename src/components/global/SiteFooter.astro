@@ -2,6 +2,7 @@
 // AI Studio-style footer: brand + full NAP (consistent site-wide for NAP SEO), services, cities, guides/legal.
 import { CATEGORIES } from '../../data/services.mjs';
 import { CITIES } from '../../data/cities.mjs';
+import { THIN_TOWNS } from '../../data/city-pages.mjs';
 import { BUSINESS } from '../../data/business.mjs';
 import TrustBadges from '../TrustBadges.astro';
 import AskAllStar from '../ask/AskAllStar.astro';
@@ -29,7 +30,8 @@ const SOCIAL = [['Google', 'https://g.page/r/CaWnV-VVVJEQEBM'], ['Facebook', 'ht
         {CATEGORIES[0].subs.filter((s) => s.slug !== 'full-bathroom-remodel').map((s) => <li><a href={`/${CATEGORIES[0].slug}/${s.slug}`}>{s.name}</a></li>)}
       </ul></div>
       <div><h3>Service Areas</h3><ul>
-        {CITIES.map((c) => <li><a href={`/service-areas/${c.slug}`}>{c.name}, AR</a></li>)}
+        {CITIES.filter((c) => !THIN_TOWNS.includes(c.slug)).map((c) => <li><a href={`/service-areas/${c.slug}`}>{c.name}, AR</a></li>)}
+        <li><a href="/service-areas/faulkner-county">Faulkner County (Guy, Enola, Quitman)</a></li>
         <li><a href="/service-areas/other-areas">Other nearby towns</a></li>
         <li><a href="/service-areas"><strong>All service areas →</strong></a></li>
       </ul></div>

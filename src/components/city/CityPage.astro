@@ -16,7 +16,7 @@ import { SERVICE_PAGES } from '../../data/service-pages.mjs';
 import { SITE, BUSINESS } from '../../data/business.mjs';
 interface Props { slug: string }
 const { slug } = Astro.props;
-import { NOINDEX_SLUGS } from '../../data/city-pages.mjs';
+import { NOINDEX_SLUGS, THIN_TOWNS } from '../../data/city-pages.mjs';
 const [first, key] = slug.split('/');
 const pages = loadPages();
 const legacy = pages.find((p) => p.slug === slug);
@@ -29,6 +29,8 @@ const url = `${SITE}/${slug}`;
 const tel = BUSINESS.tel;
 const local = city ? LOCAL[city.slug] : null;
 const countyCities = county ? CITIES.filter((c) => c.countySlug === county.slug) : [];
+const towns = county ? countyCities.filter((c) => THIN_TOWNS.includes(c.slug)).map((c) => ({ ...c, local: LOCAL[c.slug] })) : [];
+const hubHref = (c) => THIN_TOWNS.includes(c.slug) ? `/service-areas/${c.countySlug}#${c.slug}` : `/service-areas/${c.slug}`;
 const place = city ? `${city.name}, AR` : county ? `${county.name}, AR` : '';
 const miles = city ? city.milesFromHQ : 0;
 const dist = city ? (miles === 0 ? 'Home of our office' : `About ${miles} miles from our Conway office`) : `${countyCities.length} city hub${countyCities.length === 1 ? '' : 's'}`;
@@ -61,6 +63,7 @@ const legacyFaq = (legacy?.jsonld || []).flatMap((n) => (n['@graph'] || [n])).fi
   .flatMap((n) => n.mainEntity || []).map((x) => ({ q: x.name, a: (x.acceptedAnswer?.text || '').replace(/\s+/g, ' ') }));
 const localFaq = county ? [
   { q: `Which ${county.name} cities do you serve?`, a: `${countyCities.map((c) => `${c.name} (ZIP ${c.zips.join(', ')})`).join('; ')}. Nearby communities are usually covered too; call ${BUSINESS.phone} to confirm.` },
+  ...(towns.length ? [{ q: `Do you serve ${towns.map((t) => t.name).join(', ').replace(/, ([^,]*)$/, ' and $1')} in ${county.name}?`, a: `Yes. ${towns.map((t) => `${t.name} (ZIP ${t.zips.join(', ')}) is about ${t.milesFromHQ} miles from our Conway office`).join('; ')}. We offer the same bathroom, kitchen and handyman services there, with free in-home quotes. Call ${BUSINESS.phone} to schedule.` }] : []),
   { q: `What services do you offer in ${county.name}?`, a: 'Bathroom remodeling (walk-in showers, tub-to-shower conversions, walk-in tubs, aging-in-place updates), kitchen remodeling (cabinets, countertops, backsplashes) and handyman repairs, installation and maintenance.' },
 ] : [
   { q: `How far is ${city.name} from your office?`, a: miles ? `${city.name} is about ${miles} miles from our Conway office. ${local.route}` : 'Our office is in Conway, so Conway homeowners are right in our backyard.' },
@@ -88,7 +91,7 @@ const SVC = `${url}#service`, FAQ = `${url}#faq`, PAGE = `${url}#webpage`;
 g['@graph'] = g['@graph'].filter((n) => !['FAQPage', 'Service', 'City', 'AdministrativeArea'].some((t) => [].concat(n['@type']).includes(t)));
 const areaNode = city
   ? { '@type': 'City', '@id': `${url}#place`, name: place, geo: { '@type': 'GeoCoordinates', ...city.geo }, containedInPlace: { '@type': 'AdministrativeArea', name: `${city.county}, Arkansas` } }
-  : { '@type': 'AdministrativeArea', '@id': `${url}#place`, name: `${county.name}, Arkansas`, containsPlace: countyCities.map((c) => ({ '@type': 'City', name: `${c.name}, AR`, url: `${SITE}/service-areas/${c.slug}` })) };
+  : { '@type': 'AdministrativeArea', '@id': `${url}#place`, name: `${county.name}, Arkansas`, containsPlace: countyCities.map((c) => ({ '@type': 'City', name: `${c.name}, AR`, url: `${SITE}${hubHref(c)}` })) };
 g['@graph'].push(areaNode);
 g['@graph'].push({ '@type': 'Service', '@id': SVC, name: `${svcName} in ${place}`, serviceType: cat ? cat.name : CATEGORIES.map((c) => c.name), url,
   description: a, provider: { '@id': `${SITE}/#business` }, areaServed: { '@id': `${url}#place` },
@@ -190,8 +193,24 @@ import Reviews from '../Reviews.astro';
       <section class="wrap sp-sec" aria-labelledby="cc-h">
         <div class="card sp-cities">
           <div class="sec-head" style="margin-bottom:1.5rem"><span class="pill">City hubs</span><h2 id="cc-h">Cities We Serve in {county.name}</h2></div>
-          <ul>{countyCities.map((c) => <li><a href={`/service-areas/${c.slug}`}><b>{c.name}, AR</b><small>ZIP {c.zips.join(', ')}</small></a></li>)}</ul>
+          <ul>{countyCities.map((c) => <li><a href={hubHref(c)}><b>{c.name}, AR</b><small>ZIP {c.zips.join(', ')}</small></a></li>)}</ul>
         </div>
+      </section>
+    )}
+
+    {towns.length > 0 && (
+      <section class="wrap sp-sec" aria-labelledby="tw-h">
+        <div class="sec-head" style="margin-bottom:1.5rem"><span class="pill">Smaller communities</span><h2 id="tw-h">Rural {county.name} Towns We Serve</h2></div>
+        <p>Our Conway-based crew also works in the smaller towns of {county.name}. Here is what to know for each one.</p>
+        {towns.map((t) => (
+          <article class="card" id={t.slug} style="margin-top:1rem;scroll-margin-top:6rem" aria-labelledby={`${t.slug}-h`}>
+            <h3 id={`${t.slug}-h`}>Remodeling &amp; Handyman Services in {t.name}, {county.name}, AR</h3>
+            <p>{t.description} {t.name} (ZIP {t.zips.join(', ')}) is about {t.milesFromHQ} miles from our Conway office. {t.local.route}</p>
+            <p>{t.local.housing}</p>
+            <p><b>Areas we cover:</b> {t.local.areas.join(', ')}. <b>Nearby landmarks:</b> {t.local.landmarks.join(', ')}.</p>
+            <p><a href={`/bathroom-remodeling`}>Bathroom remodeling</a>, <a href={`/kitchen-remodeling`}>kitchen remodeling</a> and <a href={`/handyman-services`}>handyman services</a> are all available in {t.name}. <a href={`tel:${tel}`}>Call {BUSINESS.phone}</a> for a free in-home quote.</p>
+          </article>
+        ))}
       </section>
     )}
 

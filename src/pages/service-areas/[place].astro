@@ -1,9 +1,9 @@
 ---
 // Stage 3: city hubs + county hubs in the LocationPage layout. other-areas stays on the catch-all.
 import CityPage from '../../components/city/CityPage.astro';
-import { CITY_PAGE_SLUGS } from '../../data/city-pages.mjs';
+import { CITY_PAGE_SLUGS, NOINDEX_SLUGS } from '../../data/city-pages.mjs';
 export function getStaticPaths() {
-  return CITY_PAGE_SLUGS.filter((s) => s.startsWith('service-areas/')).map((s) => ({ params: { place: s.split('/')[1] }, props: { slug: s } }));
+  return CITY_PAGE_SLUGS.filter((s) => s.startsWith('service-areas/') && !NOINDEX_SLUGS.has(s)).map((s) => ({ params: { place: s.split('/')[1] }, props: { slug: s } }));
 }
 ---
 <CityPage slug={Astro.props.slug} />
