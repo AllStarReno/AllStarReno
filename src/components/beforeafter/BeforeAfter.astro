@@ -1,0 +1,122 @@
+---
+// Reusable before/after display. Only for real pairs with exactly one before + one after.
+// variant: slider (drag/keyboard reveal) | side (side-by-side labels) | toggle (Before/After buttons)
+//          | stack (stacked on mobile with arrow) | fade (crossfade on hover/focus/tap)
+import Pic from './Pic.astro';
+interface Props { pair: any; variant?: 'slider' | 'side' | 'toggle' | 'stack' | 'fade'; caption?: boolean; headingLevel?: 3 | 4 }
+const { pair, variant = 'slider', caption = true } = Astro.props;
+const { before: b, after: a } = pair;
+const uid = `ba-${variant}-${pair.id}`;
+const ratio = `${a.width} / ${a.height}`;
+const sizesHalf = '(min-width: 768px) 50vw, 100vw';
+---
+<figure class={`ba ba--${variant}`} data-ba={variant} id={uid}>
+  {variant === 'slider' && (
+    <div class="ba-frame" style={`aspect-ratio:${ratio}`}>
+      <Pic img={a} class="ba-img" />
+      <div class="ba-clip"><Pic img={b} class="ba-img" /></div>
+      <span class="ba-tag ba-tag--b" aria-hidden="true">Before</span><span class="ba-tag ba-tag--a" aria-hidden="true">After</span>
+      <div class="ba-handle" aria-hidden="true"><span>‹ ›</span></div>
+      <input class="ba-range" type="range" min="0" max="100" value="50" step="1"
+        aria-label={`Before and after slider: ${pair.title}. Left shows before, right shows after.`} aria-valuetext="50% before" />
+    </div>
+  )}
+  {variant === 'side' && (
+    <div class="ba-grid">
+      <div class="ba-cell"><Pic img={b} sizes={sizesHalf} /><span class="ba-tag ba-tag--b">Before</span></div>
+      <div class="ba-cell"><Pic img={a} sizes={sizesHalf} /><span class="ba-tag ba-tag--a">After</span></div>
+    </div>
+  )}
+  {variant === 'toggle' && (
+    <>
+      <div class="ba-tabs" role="group" aria-label={`Show before or after: ${pair.title}`}>
+        <button type="button" class="ba-btn" aria-pressed="false" data-show="b">Before</button>
+        <button type="button" class="ba-btn" aria-pressed="true" data-show="a">After</button>
+      </div>
+      <div class="ba-frame ba-stackimgs" style={`aspect-ratio:${ratio}`} aria-live="polite">
+        <div class="ba-layer" data-layer="b" hidden><Pic img={b} /></div>
+        <div class="ba-layer" data-layer="a"><Pic img={a} /></div>
+      </div>
+    </>
+  )}
+  {variant === 'stack' && (
+    <div class="ba-stack">
+      <div class="ba-cell"><Pic img={b} sizes={sizesHalf} /><span class="ba-tag ba-tag--b">Before</span></div>
+      <div class="ba-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path d="M12 4v14m0 0-6-6m6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="ba-cell"><Pic img={a} sizes={sizesHalf} /><span class="ba-tag ba-tag--a">After</span></div>
+    </div>
+  )}
+  {variant === 'fade' && (
+    <button type="button" class="ba-frame ba-fade" style={`aspect-ratio:${ratio}`} aria-pressed="false"
+      aria-label={`${pair.title}: showing after. Press to show before.`}>
+      <span class="ba-layer ba-layer--a"><Pic img={a} /></span>
+      <span class="ba-layer ba-layer--b"><Pic img={b} /></span>
+      <span class="ba-tag ba-tag--a ba-fade-state" aria-hidden="true">After · tap or hover for before</span>
+    </button>
+  )}
+  {caption && <figcaption><strong>{pair.title}</strong>. <span class="ba-cap">Before: {b.caption.replace(/^Before: /, '')} After: {a.caption.replace(/^After: /, '')}</span></figcaption>}
+</figure>
+<style is:global>
+.ba{margin:0 0 2rem;max-width:960px}
+.ba picture,.ba img{display:block;width:100%;height:100%;object-fit:cover}
+.ba-frame{position:relative;overflow:hidden;border-radius:14px;background:#e9edf2;width:100%;max-height:80vh;margin-inline:auto}
+.ba--slider .ba-frame,.ba--toggle .ba-frame,.ba--fade .ba-frame{max-width:min(100%,calc(80vh * 0.82))}
+.ba-tag{position:absolute;top:.6rem;padding:.3rem .65rem;border-radius:999px;font:700 .8rem/1 var(--asr-font-body);letter-spacing:.04em;text-transform:uppercase;pointer-events:none}
+.ba-tag--b{left:.6rem;background:rgba(15,43,72,.88);color:#fff}
+.ba-tag--a{right:.6rem;background:var(--asr-amber);color:var(--asr-amber-ink)}
+.ba figcaption{margin-top:.6rem;font:400 .95rem/1.45 var(--asr-font-body);color:inherit}
+/* slider */
+.ba-clip{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0)}
+.ba-handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:3px;margin-left:-1.5px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.15);pointer-events:none}
+.ba-handle span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#fff;color:var(--asr-navy);display:grid;place-items:center;font:800 1rem/1 var(--asr-font-body);box-shadow:0 2px 10px rgba(0,0,0,.3)}
+.ba--slider .ba-frame{touch-action:pan-y;cursor:ew-resize;user-select:none}
+.ba-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;pointer-events:none}
+.ba-range:focus-visible+*,.ba-frame:has(.ba-range:focus-visible){outline:3px solid var(--asr-amber);outline-offset:3px}
+/* side + stack */
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.ba-cell{position:relative;overflow:hidden;border-radius:12px}
+.ba-stack{display:grid;gap:.25rem;justify-items:center}
+.ba-stack .ba-cell{width:100%}
+.ba-arrow{color:var(--asr-amber);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--asr-navy);margin:-1.4rem 0;z-index:1}
+@media (min-width:768px){.ba-stack{grid-template-columns:1fr auto 1fr;align-items:center;gap:.5rem}.ba-arrow{margin:0;transform:rotate(-90deg)}}
+@media (max-width:420px){.ba-grid .ba-tag{font-size:.7rem;top:.4rem;padding:.25rem .5rem}.ba-grid .ba-tag--b{left:.4rem}.ba-grid .ba-tag--a{right:.4rem}}
+/* toggle */
+.ba-tabs{display:flex;gap:0;margin:0 auto .6rem;border:2px solid var(--asr-navy);border-radius:999px;overflow:hidden;width:max-content}
+.ba-btn{min-width:7rem;min-height:44px;border:0;background:#fff;color:var(--asr-navy);font:700 1rem/1 var(--asr-font-body);cursor:pointer}
+.ba-btn[aria-pressed=true]{background:var(--asr-navy);color:#fff}
+.dk .ba-tabs{border-color:#fff}.dk .ba-btn[aria-pressed=true]{background:var(--asr-amber);color:var(--asr-amber-ink)}
+.ba-stackimgs .ba-layer{position:absolute;inset:0}
+.ba-stackimgs .ba-layer[hidden]{display:none}
+/* fade */
+.ba-fade{display:block;border:0;padding:0;cursor:pointer;color:inherit}
+.ba-fade .ba-layer{position:absolute;inset:0;transition:opacity .45s ease}
+.ba-fade .ba-layer--b{opacity:0}
+.ba-fade[aria-pressed=true] .ba-layer--b{opacity:1}
+@media (hover:hover){.ba-fade:hover .ba-layer--b{opacity:1}}
+@media (prefers-reduced-motion:reduce){.ba-fade .ba-layer{transition:none}}
+.ba-fade-state{top:auto;bottom:.6rem}
+</style>
+<script>
+  for (const el of document.querySelectorAll('[data-ba]')) {
+    if (el.dataset.baInit) continue; el.dataset.baInit = '1';
+    const v = el.dataset.ba;
+    if (v === 'slider') {
+      const r = el.querySelector('.ba-range'), f = el.querySelector('.ba-frame');
+      const set = () => { f.style.setProperty('--pos', r.value + '%'); r.setAttribute('aria-valuetext', `${r.value}% before, ${100 - r.value}% after`); };
+      r.addEventListener('input', set); set();
+      let down = false; const at = (e) => { const b = f.getBoundingClientRect(); r.value = String(Math.round(Math.min(100, Math.max(0, (e.clientX - b.left) / b.width * 100)))); set(); };
+      f.addEventListener('pointerdown', (e) => { down = true; at(e); });
+      f.addEventListener('pointermove', (e) => { if (down) at(e); });
+      addEventListener('pointerup', () => { down = false; }); addEventListener('pointercancel', () => { down = false; });
+    } else if (v === 'toggle') {
+      const btns = el.querySelectorAll('.ba-btn');
+      btns.forEach((b) => b.addEventListener('click', () => { btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        el.querySelectorAll('.ba-layer').forEach((l) => { l.hidden = l.dataset.layer !== b.dataset.show; }); }));
+    } else if (v === 'fade') {
+      const b = el.querySelector('.ba-fade'), s = el.querySelector('.ba-fade-state'), t = b.getAttribute('aria-label').split(':')[0];
+      b.addEventListener('click', () => { const on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', String(on));
+        b.setAttribute('aria-label', `${t}: showing ${on ? 'before' : 'after'}. Press to show ${on ? 'after' : 'before'}.`);
+        s.textContent = on ? 'Before · tap for after' : 'After · tap or hover for before'; s.className = `ba-tag ba-fade-state ${on ? 'ba-tag--b' : 'ba-tag--a'}`; });
+    }
+  }
+</script>

@@ -3,6 +3,7 @@
 import { SITE, BUSINESS } from '../data/business.mjs';
 import { CITIES } from '../data/cities.mjs';
 import { CATEGORIES } from '../data/services.mjs';
+import { photosFor, imageObject } from './project-photos.mjs';
 import { REVIEW_TOTAL } from '../data/review-summary.mjs';
 
 const BIZ = `${SITE}/#business`;
@@ -107,5 +108,9 @@ export function buildGraph(page) {
     if (wp) Object.assign(wp, { '@type': ['AboutPage', 'ProfilePage'], mainEntity: { '@id': FOUNDER } });
     graph.push(founderPerson());
   }
+  // Real project photos placed on this page (city-level Conway, AR contentLocation).
+  const P = photosFor(page.slug);
+  if (P) { const imgs = P.images.map((i) => imageObject(i, page.url)); imgs.forEach(add);
+    const wp = graph.find((n) => n['@id'] === pageId); if (wp) wp.image = [...[].concat(wp.image || []), ...imgs.map((i) => ({ '@id': i['@id'] }))]; }
   return { '@context': 'https://schema.org', '@graph': graph, _hasArticle: hasArticle };
 }

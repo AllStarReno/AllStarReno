@@ -1,6 +1,7 @@
 ---
 // Stage 2: AI Studio ServicePage layout (hero + "Service Summary & Specs" card, AEO quick answer,
 // "Included Standard" grid, comparison table, city hub grid, FAQ, contact block) in Stitch styling.
+import ProjectPhotos from '../beforeafter/ProjectPhotos.astro';
 import Layout from '../../layouts/Layout.astro';
 import SiteHeader from '../global/SiteHeader.astro';
 import SiteFooter from '../global/SiteFooter.astro';
@@ -120,6 +121,8 @@ const learnLinks = LEARN[slug] || [];
         </p>
       )}
     </section>
+
+    <ProjectPhotos slug={slug} />
 
     {isCat && (
       <section class="wrap sp-sec" aria-labelledby="subs-h">
