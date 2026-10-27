@@ -83,7 +83,7 @@ export function buildGraph(page) {
     biz.aggregateRating = { '@type': 'AggregateRating', ratingValue: 5, bestRating: 5, worstRating: 1, reviewCount: REVIEW_TOTAL };
     biz.sameAs = [...BUSINESS.sameAs];
     Object.assign(biz, {
-      hasMap: BUSINESS.gbp, currenciesAccepted: 'USD',
+      hasMap: BUSINESS.gbp, currenciesAccepted: 'USD', paymentAccepted: BUSINESS.paymentAccepted,
       openingHoursSpecification: BUSINESS.hours.map((h) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: h.days, opens: h.opens, closes: h.closes })),
       areaServed: [...CITIES.map((c) => ({ '@type': 'City', name: `${c.name}, AR`, ...(c.county ? { containedInPlace: { '@type': 'AdministrativeArea', name: `${c.county}, Arkansas` } } : {}) })),
         { '@type': 'GeoCircle', geoMidpoint: { '@type': 'GeoCoordinates', ...BUSINESS.geo }, geoRadius: '80467' }],

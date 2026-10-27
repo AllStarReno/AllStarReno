@@ -14,6 +14,9 @@ export const BUSINESS = {
   veteranOwned: true,
   emergency: '24/7 Emergency Handyman Service',
   email: 'info@allstarreno.com',
+  // Owner-confirmed 2026-10-26.
+  paymentAccepted: 'Cash, Check, Credit Card, Debit Card, ACH, Wire Transfer, PayPal, Cash App, Apple Pay, Google Pay, Amazon Pay, Bitcoin, Buy Now Pay Later',
+  paymentText: 'cash, check, credit and debit cards, ACH, wire, PayPal, Cash App, Apple Pay, Google Pay, Amazon Pay, Bitcoin, and several buy-now-pay-later options, in person or digitally on invoice',
   city: 'Conway, AR',
   address: { streetAddress: '11 Arnett Ln', addressLocality: 'Conway', addressRegion: 'AR', postalCode: '72032', addressCountry: 'US' },
   identity: 'All-Star Renovations of Conway, Arkansas is a locally owned company serving Central Arkansas. We are not affiliated with any other All-Star Renovations outside of Central Arkansas.',
