@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import thinTownLinks from './src/integrations/thin-town-links.mjs';
 // Static output. build.format 'file' emits /about.html etc. so Vercel cleanUrls serves
 // identical paths (/about) and every vercel.json redirect/header keeps working.
 export default defineConfig({
@@ -7,4 +8,5 @@ export default defineConfig({
   trailingSlash: 'never',
   build: { format: 'file', inlineStylesheets: 'auto' },
   compressHTML: false,
+  integrations: [thinTownLinks()],
 });

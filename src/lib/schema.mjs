@@ -77,7 +77,12 @@ export function buildGraph(page) {
     Object.assign(biz, { name: BUSINESS.name, url: `${SITE}/`, telephone: '+1-501-504-3398',
       address: { '@type': 'PostalAddress', ...BUSINESS.address }, geo: { '@type': 'GeoCoordinates', ...BUSINESS.geo },
       description: `Bathroom remodeling, kitchen remodeling and handyman services based in Conway, Arkansas. ${BUSINESS.identity}`,
-      disambiguatingDescription: BUSINESS.identity, foundingDate: '2014', slogan: '20 years of experience. In business since 2014.' });
+      disambiguatingDescription: BUSINESS.identity, foundingDate: '2014', slogan: '20 years of experience. In business since 2014.',
+      alternateName: BUSINESS.alternateName,
+      foundingLocation: { '@type': 'Place', name: 'Conway, Arkansas', address: { '@type': 'PostalAddress', addressLocality: 'Conway', addressRegion: 'AR', addressCountry: 'US' } },
+      location: { '@type': 'Place', name: 'All-Star Renovations, Conway, AR', hasMap: BUSINESS.gbp, address: { '@type': 'PostalAddress', ...BUSINESS.address }, geo: { '@type': 'GeoCoordinates', ...BUSINESS.geo } },
+      identifier: [{ '@type': 'PropertyValue', propertyID: 'Google Maps CID', value: '1193828104126572453' }],
+      keywords: 'All-Star Renovations Conway AR, bathroom remodeling Conway Arkansas, walk-in tubs Central Arkansas' });
     delete biz.review;
     // Owner-approved (Oct 2026) despite Google's self-serving review rule; revert this commit to remove.
     biz.aggregateRating = { '@type': 'AggregateRating', ratingValue: 5, bestRating: 5, worstRating: 1, reviewCount: REVIEW_TOTAL };

@@ -19,6 +19,111 @@
       "statusCode": 301
     },
     {
+      "source": "/kitchen-remodeling-1",
+      "destination": "/kitchen-remodeling",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom-remodeling-1",
+      "destination": "/bathroom-remodeling",
+      "permanent": true
+    },
+    {
+      "source": "/handyman-services-1",
+      "destination": "/handyman-services",
+      "permanent": true
+    },
+    {
+      "source": "/financing-1",
+      "destination": "/financing",
+      "permanent": true
+    },
+    {
+      "source": "/month",
+      "destination": "/guides",
+      "permanent": true
+    },
+    {
+      "source": "/month/:path*",
+      "destination": "/guides",
+      "permanent": true
+    },
+    {
+      "source": "/blog/page/:n",
+      "destination": "/guides",
+      "permanent": true
+    },
+    {
+      "source": "/category/:path*",
+      "destination": "/guides",
+      "permanent": true
+    },
+    {
+      "source": "/tag/:path*",
+      "destination": "/guides",
+      "permanent": true
+    },
+    {
+      "source": "/author/:path*",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/feed",
+      "destination": "/feed.json",
+      "permanent": true
+    },
+    {
+      "source": "/sample-page",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/bathroom",
+      "destination": "/bathroom-remodeling",
+      "permanent": true
+    },
+    {
+      "source": "/ada-bathroom",
+      "destination": "/bathroom-remodeling/aging-in-place-ada",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-bathtub",
+      "destination": "/bathroom-remodeling/walk-in-tubs",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-bathtubs",
+      "destination": "/bathroom-remodeling/walk-in-tubs",
+      "permanent": true
+    },
+    {
+      "source": "/walk-in-tubs-conway-ar",
+      "destination": "/bathroom-remodeling/walk-in-tubs/conway",
+      "permanent": true
+    },
+    {
+      "source": "/service-area",
+      "destination": "/service-areas",
+      "permanent": true
+    },
+    {
+      "source": "/reviews-1",
+      "destination": "/reviews",
+      "permanent": true
+    },
+    {
+      "source": "/help",
+      "destination": "/docs",
+      "permanent": true
+    },
+    {
+      "source": "/careers",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
       "source": "/kitchen-remodel",
       "destination": "/kitchen-remodeling",
       "permanent": true
@@ -310,12 +415,12 @@
     },
     {
       "source": "/blog/walk-in-tub-vs-walk-in-shower-conway-ar",
-      "destination": "/blog/aging-in-place-bathroom-design",
+      "destination": "/bathroom-remodeling/walk-in-tubs",
       "permanent": true
     },
     {
       "source": "/blog/walk-in-tub-vs-walk-in-shower-which-is-right-for-you",
-      "destination": "/blog/aging-in-place-bathroom-design",
+      "destination": "/bathroom-remodeling/walk-in-tubs",
       "permanent": true
     },
     {
@@ -340,7 +445,7 @@
     },
     {
       "source": "/content/testimonials",
-      "destination": "/",
+      "destination": "/reviews",
       "permanent": true
     },
     {
@@ -420,7 +525,7 @@
     },
     {
       "source": "/testimonials",
-      "destination": "/",
+      "destination": "/reviews",
       "permanent": true
     },
     {

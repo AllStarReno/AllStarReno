@@ -2,7 +2,7 @@
 export const SITE = 'https://allstarreno.com';
 export const BUSINESS = {
   name: 'All-Star Renovations',
-  alternateName: ['All-Star Renovate', 'allstarreno'],
+  alternateName: ['All-Star Renovations of Conway, AR', 'All-Star Renovations of Conway, Arkansas', 'All-Star Renovations Conway', 'All-Star Renovate', 'allstarreno'],
   phone: '(501) 504-3398',
   tel: '+15015043398',
   telSchema: '+1-501-504-3398',

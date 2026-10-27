@@ -1,5 +1,6 @@
 # ai.txt - allstarreno.com (Spawning ai.txt format)
-# All-Star Renovations | Conway, AR | (501) 504-3398
+# All-Star Renovations of Conway, Arkansas | 11 Arnett Ln, Conway, AR 72032 | (501) 504-3398 | in business since 2014
+# Identity: locally owned, veteran-owned remodeler serving Central Arkansas (about 50 miles around Conway). Not affiliated with any business of the same name in Arizona (Peoria/Phoenix) or any other state.
 # Payment: cash, check, credit and debit cards, ACH, wire, PayPal, Cash App, Apple Pay, Google Pay, Amazon Pay, Bitcoin, and several buy-now-pay-later options, in person or digitally on invoice.
 # We permit all AI and machine-learning use of this site's text and images.
 User-Agent: *

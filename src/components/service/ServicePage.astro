@@ -27,7 +27,7 @@ const url = `${SITE}/${slug}`;
 // FAQ: existing page FAQs (legacy JSON-LD) + any extra, de-duplicated by question.
 const legacyFaq = legacy.jsonld.flatMap((n) => (n['@graph'] || [n])).filter((n) => [].concat(n['@type']).includes('FAQPage'))
   .flatMap((n) => n.mainEntity || []).map((q) => ({ q: q.name, a: q.acceptedAnswer?.text || '' }));
-const faqs = [{ q: d.q, a: d.a }, ...legacyFaq, ...(d.extraFaq || [])].filter((f, i, arr) => f.a && arr.findIndex((g) => g.q.toLowerCase() === f.q.toLowerCase()) === i).slice(0, 8);
+const faqs = [{ q: d.q, a: d.a }, ...(d.faq || legacyFaq), ...(d.extraFaq || [])].filter((f, i, arr) => f.a && arr.findIndex((g) => g.q.toLowerCase() === f.q.toLowerCase()) === i).slice(0, d.faq ? 10 : 8);
 // Hero photo: first real photo on the original page, if any.
 const img = (legacy.body.slice(legacy.body.indexOf('<main')).match(/<img\b[^>]*src="(\/assets\/img\/[^"]+)"[^>]*>/) || [])[1];
 const imgAlt = img ? ((legacy.body.match(new RegExp(`<img\\b[^>]*src="${img.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*>`)) || [''])[0].match(/alt="([^"]*)"/) || [])[1] || `${subName} by All-Star Renovations` : '';
@@ -136,6 +136,13 @@ const learnLinks = LEARN[slug] || [];
       <h2 class="sp-h2" id="feat-h">Included Standard in Every {d.short}</h2>
       <ul class="sp-feat">{d.features.map((f) => <li class="card"><span class="ms" aria-hidden="true">check_circle</span>{f}</li>)}</ul>
     </section>
+
+    {(d.sections || []).map((x) => (
+      <section class="wrap sp-sec sp-prose" id={x.id} aria-labelledby={`${x.id}-h`}>
+        <h2 class="sp-h2" id={`${x.id}-h`}>{x.h}</h2>
+        <div class="card" style="padding:1.25rem 1.5rem;color:#cbd5e1;line-height:1.65" set:html={x.html} />
+      </section>
+    ))}
 
     {d.materials && (
       <section class="wrap sp-sec" id="materials" aria-labelledby="mat-h">
