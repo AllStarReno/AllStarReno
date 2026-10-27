@@ -1,0 +1,17 @@
+---
+// Page section with real project photos per src/data/photo-placement.mjs (renders nothing if slug not placed).
+import BeforeAfter from './BeforeAfter.astro';
+import ProjectGallery from './ProjectGallery.astro';
+import { photosFor } from '../../lib/project-photos.mjs';
+interface Props { slug: string }
+const P = photosFor(Astro.props.slug);
+---
+{P && (
+  <section class="wrap sp-sec pp" aria-labelledby="pp-h" style="padding-block:2.5rem">
+    <h2 class="sp-h2" id="pp-h">{P.cfg.title}</h2>
+    <p>Real projects by our crew in Central Arkansas.{P.cfg.variant === 'slider' ? ' Drag the handle, or focus it and use the arrow keys, to compare.' : ''}</p>
+    <div class="pp-grid">{P.pairs.map((p) => <BeforeAfter pair={p} variant={P.cfg.variant} />)}</div>
+    {P.singles.length > 0 && <><h3 style="margin-top:1.5rem">More finished showers</h3><ProjectGallery items={P.singles} /></>}
+  </section>
+)}
+<style>.pp-grid{display:grid;gap:1.5rem}.pp-grid:has(> :only-child){grid-template-columns:1fr!important;justify-items:center}.pp-grid > :only-child{width:100%;max-width:620px}@media (min-width:1024px){.pp-grid{grid-template-columns:repeat(2,1fr)}}</style>
