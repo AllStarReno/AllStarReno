@@ -7,7 +7,22 @@ import { BUSINESS } from '../../data/business.mjs';
 interface Props { current?: string }
 const { current = '' } = Astro.props;
 const TOP = ['conway','little-rock','north-little-rock','maumelle','cabot','benton'].map((x) => CITIES.find((c) => c.slug === x)).filter(Boolean);
-const [bath, ...rest] = CATEGORIES;
+// One dropdown per service category (AI Studio-style), plus areas, financing, reviews, company.
+// Header = most important pages only; legal, docs, small towns and full city lists stay in the footer.
+const cat = (slug: string, overview: string, extra: [string, string][] = []) => {
+  const c = CATEGORIES.find((x) => x.slug === slug)!;
+  return [[`/${c.slug}`, overview, true], ...extra.map(([h, n]) => [h, n, false]), ...c.subs.filter((s) => s.slug !== 'full-bathroom-remodel').map((s) => [`/${c.slug}/${s.slug}`, s.name, false])];
+};
+type Item = [string, string, boolean];
+const MENU: { label: string; href?: string; match: string[]; items?: Item[]; sub?: boolean; right?: boolean }[] = [
+  { label: 'Bathroom', match: ['bathroom-remodeling'], sub: true, items: cat('bathroom-remodeling', 'Bathroom Remodeling Overview') as Item[] },
+  { label: 'Kitchen', match: ['kitchen-remodeling'], sub: true, items: cat('kitchen-remodeling', 'Kitchen Remodeling Overview') as Item[] },
+  { label: 'Handyman', match: ['handyman-services'], sub: true, items: cat('handyman-services', 'Handyman & 24/7 Emergency Service') as Item[] },
+  { label: 'Service Areas', match: ['service-areas'], items: [...TOP.map((c) => [`/service-areas/${c!.slug}`, `${c!.name}, AR`, false]), ['/service-areas', 'All service areas & map →', true]] as Item[] },
+  { label: 'Financing', match: ['financing', 'services-pricing', 'warranty'], items: [['/financing', 'Financing & Payment Options', true], ['/services-pricing', 'Pricing & Shower Packages', false], ['/warranty', 'Warranty & Guarantee', false]] },
+  { label: 'Reviews', href: '/reviews', match: ['reviews'] },
+  { label: 'Company', match: ['about', 'portfolio', 'guides', 'contact', 'blog', 'planning-checklist'], right: true, items: [['/about', 'About Us', false], ['/portfolio', 'Project Gallery', false], ['/guides', 'Guides & Costs', false], ['/planning-checklist', 'Bathroom Planning Checklist', false], ['/contact', 'Contact Us', false]] },
+];
 const Q = 'https://client.swivl.tech/all-star-renovate-318dbc/instant-quote?widget=instant-quote';
 const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'page' : undefined;
 ---
@@ -18,34 +33,17 @@ const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'pag
       <span><b>ALL-STAR RENOVATIONS</b><small>Central Arkansas · Conway</small></span>
     </a>
     <nav class="sh-nav" aria-label="Primary">
-      <details class="sh-dd">
-        <summary aria-current={['bathroom-remodeling','kitchen-remodeling','handyman-services'].some((x) => cur(x)) ? 'page' : undefined}>Services<span class="ms" aria-hidden="true">expand_more</span></summary>
-        <div class="sh-menu">
-          <span class="lbl">Bathroom</span>
-          <a href={`/${bath.slug}`}><strong>All {bath.name}</strong></a>
-          {bath.subs.filter((s) => s.slug !== 'full-bathroom-remodel').map((s) => <a href={`/${bath.slug}/${s.slug}`}>{s.name}</a>)}
-          <span class="lbl">More Services</span>
-          {rest.map((c) => <a href={`/${c.slug}`}><strong>{c.name}{c.slug === 'handyman-services' ? ' & 24/7 Emergency' : ''}</strong></a>)}
-        </div>
-      </details>
-      <details class="sh-dd">
-        <summary aria-current={cur('service-areas')}>Service Areas<span class="ms" aria-hidden="true">expand_more</span></summary>
-        <div class="sh-menu">
-          {TOP.map((c) => <a href={`/service-areas/${c.slug}`}>{c.name}, AR</a>)}
-          <a href="/service-areas"><strong>All service areas &amp; map →</strong></a>
-        </div>
-      </details>
-      <a href="/financing" aria-current={cur('financing')}>Financing</a>
-      <a href="/reviews" aria-current={cur('reviews')}>Reviews</a>
-      <details class="sh-dd sh-dd-r">
-        <summary aria-current={['about','portfolio','contact','guides'].some((x) => cur(x)) ? 'page' : undefined}>Company<span class="ms" aria-hidden="true">expand_more</span></summary>
-        <div class="sh-menu">
-          <a href="/about">About Us</a><a href="/portfolio">Project Gallery</a><a href="/guides">Remodeling Guides</a><a href="/contact">Contact</a>
-        </div>
-      </details>
+      {MENU.map((m) => m.items ? (
+        <details class:list={['sh-dd', m.right && 'sh-dd-r']}>
+          <summary aria-current={m.match.some((x) => cur(x)) ? 'page' : undefined}>{m.label}<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <div class="sh-menu">
+            {m.items.map(([h, n, top]) => <a href={h} aria-current={current && h === `/${current}` ? 'page' : undefined}>{top ? <strong>{n}</strong> : n}</a>)}
+          </div>
+        </details>
+      ) : <a href={m.href} aria-current={cur(m.match[0])}>{m.label}</a>)}
     </nav>
     <div class="sh-ctas">
-      <a class="sh-call" href={`tel:${BUSINESS.tel}`} data-contact="call"><span class="ms" aria-hidden="true">call</span>{BUSINESS.phone}</a>
+      <a class="sh-call" href={`tel:${BUSINESS.tel}`} data-contact="call"><span class="ms" aria-hidden="true">call</span><span class="sh-ph">{BUSINESS.phone}</span></a>
       <a class="btn btn-amber sh-cta" href={Q} data-swivl="quote">Free Quote</a>
     </div>
     <details class="sh-mob">
@@ -55,23 +53,12 @@ const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'pag
           <a class="btn btn-amber" href={`tel:${BUSINESS.tel}`} data-contact="call"><span class="ms" aria-hidden="true">call</span>Call {BUSINESS.phone}</a>
           <a class="btn mp-q" href={Q} data-swivl="quote">Free Quote</a>
         </div>
-        <details class="mp-g">
-          <summary>Services<span class="ms" aria-hidden="true">expand_more</span></summary>
-          <a href={`/${bath.slug}`}><strong>All Bathroom Remodeling</strong></a>
-          {bath.subs.filter((s) => s.slug !== 'full-bathroom-remodel').map((s) => <a class="sub" href={`/${bath.slug}/${s.slug}`}>{s.name}</a>)}
-          {rest.map((c) => <a href={`/${c.slug}`}>{c.name}{c.slug === 'handyman-services' ? ' & 24/7 Emergency' : ''}</a>)}
-        </details>
-        <details class="mp-g">
-          <summary>Service Areas<span class="ms" aria-hidden="true">expand_more</span></summary>
-          {TOP.map((c) => <a href={`/service-areas/${c.slug}`}>{c.name}, AR</a>)}
-          <a href="/service-areas"><strong>All service areas &amp; map</strong></a>
-        </details>
-        <a class="mp-l" href="/financing">Financing</a>
-        <a class="mp-l" href="/reviews">Reviews</a>
-        <details class="mp-g">
-          <summary>Company<span class="ms" aria-hidden="true">expand_more</span></summary>
-          <a href="/about">About Us</a><a href="/portfolio">Project Gallery</a><a href="/guides">Remodeling Guides</a><a href="/contact">Contact</a>
-        </details>
+        {MENU.map((m) => m.items ? (
+          <details class="mp-g">
+            <summary>{m.label}<span class="ms" aria-hidden="true">expand_more</span></summary>
+            {m.items.map(([h, n, top]) => <a class:list={[!top && m.sub && 'sub']} href={h}>{top ? <strong>{n}</strong> : n}</a>)}
+          </details>
+        ) : <a class="mp-l" href={m.href}>{m.label}</a>)}
         <button type="button" class="mp-x" data-close>Close menu</button>
       </nav>
     </details>

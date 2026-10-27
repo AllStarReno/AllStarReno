@@ -6,8 +6,6 @@ import { THIN_TOWNS } from '../../data/city-pages.mjs';
 import { BUSINESS } from '../../data/business.mjs';
 import TrustBadges from '../TrustBadges.astro';
 import AskAllStar from '../ask/AskAllStar.astro';
-interface Props { badges?: boolean }
-const { badges = true } = Astro.props;
 const a = BUSINESS.address;
 const SOCIAL = [['Google', 'https://g.page/r/CaWnV-VVVJEQEBM'], ['Facebook', 'https://www.facebook.com/allstarreno1/'], ['Instagram', 'https://www.instagram.com/allstarreno/'], ['YouTube', 'https://www.youtube.com/@all-starreno']];
 ---
@@ -42,7 +40,7 @@ const SOCIAL = [['Google', 'https://g.page/r/CaWnV-VVVJEQEBM'], ['Facebook', 'ht
         <li><a href="/financing">Financing</a></li><li><a href="/warranty">Warranty</a></li><li><a href="/portfolio">Gallery</a></li><li><a href="/reviews">Reviews</a></li><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li>
       </ul></div>
     </div>
-    {badges && <TrustBadges compact />}
+    <TrustBadges compact />
     <p class="sf-ident" style="font-size:.75rem;line-height:1.5;opacity:.8;margin:0 0 .75rem">All-Star Renovations of Conway, Arkansas is a locally owned company serving Central Arkansas. We are not affiliated with any other All-Star Renovations outside of Central Arkansas.</p>
     <div class="sf-bot"><span>© 2026 All-Star Renovations. All rights reserved. · <time datetime="2026-10-23">Last updated October 23, 2026</time></span><span><a href="/privacy-policy">Privacy Policy</a> · <a href="/terms-and-conditions">Terms</a> · <a href="/llms.txt">llms.txt</a></span></div>
   </div>
