@@ -19,6 +19,51 @@
       "statusCode": 301
     },
     {
+      "source": "/service-areas/guy",
+      "destination": "/service-areas/faulkner-county#guy",
+      "permanent": true
+    },
+    {
+      "source": "/:cat(bathroom-remodeling|kitchen-remodeling|handyman-services)/guy",
+      "destination": "/service-areas/faulkner-county#guy",
+      "permanent": true
+    },
+    {
+      "source": "/:cat(bathroom-remodeling|kitchen-remodeling|handyman-services)/:sub/guy",
+      "destination": "/service-areas/faulkner-county#guy",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/enola",
+      "destination": "/service-areas/faulkner-county#enola",
+      "permanent": true
+    },
+    {
+      "source": "/:cat(bathroom-remodeling|kitchen-remodeling|handyman-services)/enola",
+      "destination": "/service-areas/faulkner-county#enola",
+      "permanent": true
+    },
+    {
+      "source": "/:cat(bathroom-remodeling|kitchen-remodeling|handyman-services)/:sub/enola",
+      "destination": "/service-areas/faulkner-county#enola",
+      "permanent": true
+    },
+    {
+      "source": "/service-areas/quitman",
+      "destination": "/service-areas/faulkner-county#quitman",
+      "permanent": true
+    },
+    {
+      "source": "/:cat(bathroom-remodeling|kitchen-remodeling|handyman-services)/quitman",
+      "destination": "/service-areas/faulkner-county#quitman",
+      "permanent": true
+    },
+    {
+      "source": "/:cat(bathroom-remodeling|kitchen-remodeling|handyman-services)/:sub/quitman",
+      "destination": "/service-areas/faulkner-county#quitman",
+      "permanent": true
+    },
+    {
       "source": "/kitchen-remodeling-1",
       "destination": "/kitchen-remodeling",
       "permanent": true

@@ -26,6 +26,6 @@ export function locationsSection({ full = false } = {}) {
     if (full) lines.push(`    - ${SUBS.map((s) => `[${s.name}](${SITE}/${s.cat.slug}/${s.slug}/${c.slug})`).join(', ')}`);
   }
   lines.push(`- County hubs: ${COUNTIES.map((c) => `[${c.name}](${SITE}/service-areas/${c.slug})`).join(', ')}`);
-  if (thin.length) lines.push(`- Smaller communities (served from their county hub): ${thin.map((c) => `[${c.name}, AR](${SITE}/service-areas/${c.slug}) (${c.county})`).join(', ')}`);
+  if (thin.length) lines.push(`- Smaller communities (covered on the Faulkner County hub): ${thin.map((c) => `[${c.name}, AR (${c.county})](${SITE}/service-areas/faulkner-county#${c.slug})`).join(', ')}`);
   return lines.join('\n');
 }
