@@ -13,7 +13,7 @@ const BASE = [
       "72034",
       "72035"
     ],
-    "description": "Conway is the headquarters and home base of All-Star Renovations. Homeowners here can count on bathroom remodeling, 1-2 day tub-to-shower conversions, and accessibility solutions, with kitchen and handyman help available too.",
+    "description": "Conway is the headquarters and home base of All-Star Renovations. Homeowners here can count on bathroom remodeling, tub-to-shower conversions that typically take 1-2 days (timing varies by project), and accessibility solutions, with kitchen and handyman help available too.",
     "services": [
       {
         "label": "Bathroom Remodeling",
@@ -120,7 +120,7 @@ const BASE = [
       "72117",
       "72118"
     ],
-    "description": "In North Little Rock our team delivers reliable 1-2 day bathroom makeovers, tub-to-shower conversions, and kitchen upgrades, part of our Little Rock metro coverage.",
+    "description": "In North Little Rock our team delivers bathroom makeovers that typically take 1-2 days (timing varies by project), tub-to-shower conversions, and kitchen upgrades, part of our Little Rock metro coverage.",
     "services": [
       {
         "label": "Bathroom Remodeling",
@@ -256,7 +256,7 @@ const BASE = [
     "zips": [
       "72022"
     ],
-    "description": "Bryant homeowners get quick 1-2 day tub-to-shower installations, stone-look acrylic surrounds, and kitchen countertops built for busy family homes.",
+    "description": "Bryant homeowners get quick tub-to-shower installations, typically 1-2 days (timing varies by project), stone-look acrylic surrounds, and kitchen countertops built for busy family homes.",
     "services": [
       {
         "label": "Bathroom Remodeling",

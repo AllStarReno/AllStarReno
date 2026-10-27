@@ -1,6 +1,6 @@
 # All-Star Renovations | Bathroom Remodeling Conway AR
 
-All-Star Renovations is a bathroom and kitchen remodeling contractor based in Conway, Arkansas. Founded in 2014. Specializes in the All-Star Shower System and Aging Safely Walk-In Tubs. Most installs completed in 1–2 days with lifetime material warranties.
+All-Star Renovations is a bathroom and kitchen remodeling contractor based in Conway, Arkansas. Founded in 2014. Specializes in the All-Star Shower System and Aging Safely Walk-In Tubs. Most installs completed in 1–2 days (timing varies by project and is confirmed in your written quote) with lifetime material warranties.
 
 ## Core Services
 - Bathroom remodeling (primary)
@@ -14,6 +14,8 @@ All-Star Renovations is a bathroom and kitchen remodeling contractor based in Co
 - Premier: $5,000 – $7,499
 - Signature: $7,500 – $9,999
 - Designer: $10,000 – $12,500+
+
+Estimated ranges; final price confirmed at your free in-home quote.
 
 ## Contact
 Phone: (501) 504-3398

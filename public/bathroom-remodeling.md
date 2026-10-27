@@ -1,6 +1,6 @@
 # Bathroom Remodeling in Conway, AR | All-Star Renovations
 
-All-Star Renovations specializes in bathroom remodeling across Conway and Central Arkansas. Most projects are completed in 1–2 days with lifetime material warranties on All-Star Shower Systems.
+All-Star Renovations specializes in bathroom remodeling across Conway and Central Arkansas. Most projects are completed in 1–2 days (timing varies by project and is confirmed in your written quote) with lifetime material warranties on All-Star Shower Systems.
 
 ## Services
 - Walk-in showers and tub-to-shower conversions
@@ -14,7 +14,7 @@ All-Star Renovations specializes in bathroom remodeling across Conway and Centra
 - Signature: $7,500 – $9,999
 - Designer: $10,000 – $12,500+
 
-Exact pricing is confirmed during a free in-home consultation.
+Estimated ranges; final price confirmed at your free in-home quote.
 
 ## Contact
 Phone: (501) 504-3398
