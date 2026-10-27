@@ -1,5 +1,6 @@
 # ai.txt - allstarreno.com (Spawning ai.txt format)
 # All-Star Renovations | Conway, AR | (501) 504-3398
+# Payment: cash, check, credit and debit cards, ACH, wire, PayPal, Cash App, Apple Pay, Google Pay, Amazon Pay, Bitcoin, and several buy-now-pay-later options, in person or digitally on invoice.
 # We permit all AI and machine-learning use of this site's text and images.
 User-Agent: *
 Allow: /
