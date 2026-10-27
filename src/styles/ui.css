@@ -286,3 +286,5 @@ main.ui .cc-foot a,main.ui .chips a,main.ui .cty a,footer.ui a{text-decoration:n
 body.sh-lock .sh{z-index:2147483647}
 .sh-nav>a[aria-current]{color:#fff}
 .sh-dd-r .sh-menu{left:auto;right:0;min-width:220px}
+/* nav 2026-10-27: per-category dropdowns; keep the row on one line from 1200px (phone number collapses to icon below 1440px, still a tap-to-call link) */
+@media(min-width:1200px) and (max-width:1439px){.sh-nav>a,.sh-dd>summary{padding:.55rem .45rem;font-size:.85rem}.sh-in{gap:.6rem}.sh-call .sh-ph{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.sh-call{width:44px;justify-content:center;border-radius:.6rem;background:rgba(255,255,255,.08)}}
