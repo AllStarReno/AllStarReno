@@ -95,7 +95,7 @@ const learnLinks = LEARN[slug] || [];
               <h2 id="spec-h"><span class="ms" aria-hidden="true" data-i="military_tech"></span>Service Summary &amp; Specs</h2>
               <dl>
                 <div><dt>Pricing</dt><dd class="ok">{SPEC.QUOTE}</dd></div>
-                <div><dt>Install timeline</dt><dd>{d.timeline}</dd></div>
+                <div><dt>Install timeline</dt><dd>{d.timeline}{/1-2 day/i.test(d.timeline) && <small style="display:block;opacity:.8">Timing varies by project and is confirmed in your written quote.</small>}</dd></div>
                 <div><dt>Category</dt><dd>{cat.name}</dd></div>
                 <div><dt>Financing</dt><dd class="am">{SPEC.FIN}</dd></div>
                 <div><dt>Warranty</dt><dd>5-year workmanship</dd></div>

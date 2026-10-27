@@ -31,7 +31,7 @@ export const ANGLES = {
   'tub-to-shower-conversions': { noun: 'tub-to-shower conversion', who: 'homeowners tired of stepping over a high tub wall',
     fit: (c, L) => `A lot of ${c.name} homes still have the original tub-shower combo. ${L.housing.split('. ').slice(-1)[0].replace(/\.$/, '')}.`,
     prep: 'Decide whether you want to keep a tub in another bathroom; it helps resale and guides the plan.',
-    faq: (c) => ({ q: `How long does a tub-to-shower conversion take in ${c.name}, AR?`, a: `Most of our tub-to-shower conversions in ${c.name} take 1-2 days once materials arrive.* Older plumbing or wall repairs found at demo can add time, and we tell you before any change.` }) },
+    faq: (c) => ({ q: `How long does a tub-to-shower conversion take in ${c.name}, AR?`, a: `Most of our tub-to-shower conversions in ${c.name} take 1-2 days once materials arrive; timing varies by project and is confirmed in your written quote. Older plumbing or wall repairs found at demo can add time, and we tell you before any change.` }) },
   'walk-in-tubs': { noun: 'walk-in tub', who: 'homeowners who still want to soak but need a safer, door-style entry',
     fit: (c, L) => `Walk-in tubs suit ${c.name} homeowners planning to stay put. ${L.housing.split('. ')[0]}, so we check the water heater and floor at every visit.`,
     prep: 'Check your water heater size and age; walk-in tubs need enough hot water to fill comfortably.',

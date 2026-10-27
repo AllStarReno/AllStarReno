@@ -106,7 +106,7 @@ import Reviews from '../Reviews.astro';
             <div class="sp-spec-b">
               <h2 id="spec-h"><span class="ms" aria-hidden="true" data-i="military_tech"></span>{sub.name}: {city.name} Specs</h2>
               <dl>
-                <div><dt>Typical timeline</dt><dd>{timeline}</dd></div>
+                <div><dt>Typical timeline</dt><dd>{timeline}{/1-2 day/i.test(d.timeline) && <small style="display:block;opacity:.8">Timing varies by project and is confirmed in your written quote.</small>}</dd></div>
                 <div><dt>Distance</dt><dd>{miles ? `About ${miles} mi from Conway` : 'Home base'}</dd></div>
                 <div><dt>ZIP codes</dt><dd>{ZIP}</dd></div>
                 <div><dt>Pricing</dt><dd class="ok">Free in-home quote</dd></div>
