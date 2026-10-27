@@ -6,7 +6,7 @@ import { CITIES } from '../../data/cities.mjs';
 import { BUSINESS } from '../../data/business.mjs';
 interface Props { current?: string }
 const { current = '' } = Astro.props;
-const TOP = ['conway','little-rock','north-little-rock','maumelle','cabot','benton','bryant','sherwood'].map((x) => CITIES.find((c) => c.slug === x)).filter(Boolean);
+const TOP = ['conway','little-rock','north-little-rock','maumelle','cabot','benton'].map((x) => CITIES.find((c) => c.slug === x)).filter(Boolean);
 const [bath, ...rest] = CATEGORIES;
 const Q = 'https://client.swivl.tech/all-star-renovate-318dbc/instant-quote?widget=instant-quote';
 const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'page' : undefined;
@@ -35,16 +35,12 @@ const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'pag
           <a href="/service-areas"><strong>All service areas &amp; map →</strong></a>
         </div>
       </details>
-      <details class="sh-dd">
-        <summary aria-current={['guides','financing','docs'].some((x) => cur(x)) ? 'page' : undefined}>Guides<span class="ms" aria-hidden="true">expand_more</span></summary>
+      <a href="/financing" aria-current={cur('financing')}>Financing</a>
+      <a href="/reviews" aria-current={cur('reviews')}>Reviews</a>
+      <details class="sh-dd sh-dd-r">
+        <summary aria-current={['about','portfolio','contact','guides'].some((x) => cur(x)) ? 'page' : undefined}>Company<span class="ms" aria-hidden="true">expand_more</span></summary>
         <div class="sh-menu">
-          <a href="/guides"><strong>All Guides</strong></a><a href="/financing">Financing</a><a href="/docs">Docs &amp; Help Center</a>
-        </div>
-      </details>
-      <details class="sh-dd">
-        <summary aria-current={['about','reviews','portfolio','contact'].some((x) => cur(x)) ? 'page' : undefined}>About<span class="ms" aria-hidden="true">expand_more</span></summary>
-        <div class="sh-menu">
-          <a href="/about">About Us</a><a href="/reviews">Reviews</a><a href="/portfolio">Gallery</a><a href="/contact">Contact</a>
+          <a href="/about">About Us</a><a href="/portfolio">Project Gallery</a><a href="/guides">Remodeling Guides</a><a href="/contact">Contact</a>
         </div>
       </details>
     </nav>
@@ -61,21 +57,21 @@ const cur = (p: string) => (current === p || current.startsWith(p + '/')) ? 'pag
         </div>
         <details class="mp-g">
           <summary>Services<span class="ms" aria-hidden="true">expand_more</span></summary>
-          <a href={`/${bath.slug}`}>Bathroom Remodeling</a>
+          <a href={`/${bath.slug}`}><strong>All Bathroom Remodeling</strong></a>
           {bath.subs.filter((s) => s.slug !== 'full-bathroom-remodel').map((s) => <a class="sub" href={`/${bath.slug}/${s.slug}`}>{s.name}</a>)}
-          {rest.map((c) => <a href={`/${c.slug}`}>{c.name}</a>)}
+          {rest.map((c) => <a href={`/${c.slug}`}>{c.name}{c.slug === 'handyman-services' ? ' & 24/7 Emergency' : ''}</a>)}
         </details>
         <details class="mp-g">
           <summary>Service Areas<span class="ms" aria-hidden="true">expand_more</span></summary>
           {TOP.map((c) => <a href={`/service-areas/${c.slug}`}>{c.name}, AR</a>)}
           <a href="/service-areas"><strong>All service areas &amp; map</strong></a>
         </details>
+        <a class="mp-l" href="/financing">Financing</a>
         <a class="mp-l" href="/reviews">Reviews</a>
         <details class="mp-g">
-          <summary>Guides &amp; About<span class="ms" aria-hidden="true">expand_more</span></summary>
-          <a href="/guides">Guides</a><a href="/financing">Financing</a><a href="/about">About Us</a><a href="/portfolio">Gallery</a><a href="/docs">Docs &amp; Help Center</a>
+          <summary>Company<span class="ms" aria-hidden="true">expand_more</span></summary>
+          <a href="/about">About Us</a><a href="/portfolio">Project Gallery</a><a href="/guides">Remodeling Guides</a><a href="/contact">Contact</a>
         </details>
-        <a class="mp-l" href="/contact">Contact</a>
         <button type="button" class="mp-x" data-close>Close menu</button>
       </nav>
     </details>

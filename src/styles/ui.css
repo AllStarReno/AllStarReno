@@ -282,3 +282,7 @@ main.ui .cc-foot a,main.ui .chips a,main.ui .cty a,footer.ui a{text-decoration:n
 @media(min-width:768px){.sp-proc{grid-template-columns:repeat(4,1fr)}}
 .sp-close{text-align:center;padding:1rem 0 2rem;font-weight:700}.sp-close a{display:inline-flex;align-items:center;min-height:48px;padding:0 .4rem;color:var(--amber)}
 .sh-mp{display:flex;flex-direction:column}.sh-mp .mp-act{order:99;position:sticky;bottom:0;background:var(--navy-950);padding:.75rem 0 max(.75rem,env(safe-area-inset-bottom));margin:auto 0 0}
+/* nav fix 2026-10-27: open mobile menu sits above chat/TrustedSite widgets; last dropdown opens right-aligned so it never clips */
+body.sh-lock .sh{z-index:2147483647}
+.sh-nav>a[aria-current]{color:#fff}
+.sh-dd-r .sh-menu{left:auto;right:0;min-width:220px}
