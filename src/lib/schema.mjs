@@ -5,10 +5,12 @@ import { CITIES } from '../data/cities.mjs';
 import { CATEGORIES } from '../data/services.mjs';
 import { photosFor, imageObject } from './project-photos.mjs';
 import { REVIEW_TOTAL } from '../data/review-summary.mjs';
+import { BUILD } from './lastmod.mjs';
 
 const BIZ = `${SITE}/#business`;
 const WEBSITE = `${SITE}/#website`;
-const LASTMOD = '2026-10-23';
+// dateModified for generated WebPage nodes = build date (America/Chicago).
+const LASTMOD = BUILD;
 const FOUNDER = `${SITE}/about#thomas-pedersen`;
 const ABOUT_URL = `${SITE}/about`;
 

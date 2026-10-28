@@ -11,7 +11,7 @@ const TOP = ['conway','little-rock','north-little-rock','maumelle','cabot','bent
 // Header = most important pages only; legal, docs, small towns and full city lists stay in the footer.
 const cat = (slug: string, overview: string, extra: [string, string][] = []) => {
   const c = CATEGORIES.find((x) => x.slug === slug)!;
-  return [[`/${c.slug}`, overview, true], ...extra.map(([h, n]) => [h, n, false]), ...c.subs.filter((s) => s.slug !== 'full-bathroom-remodel').map((s) => [`/${c.slug}/${s.slug}`, s.name, false])];
+  return [[`/${c.slug}`, overview, true], ...extra.map(([h, n]) => [h, n, false]), ...c.subs.map((s) => [`/${c.slug}/${s.slug}`, s.name, false])];
 };
 type Item = [string, string, boolean];
 const MENU: { label: string; href?: string; match: string[]; items?: Item[]; sub?: boolean; right?: boolean }[] = [

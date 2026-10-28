@@ -27,5 +27,6 @@ Service area: 50-mile radius of Conway (Faulkner, Pulaski, Saline, Lonoke counti
 - [Tub-to-Shower Conversions](https://www.allstarreno.com/bathroom-remodeling/tub-to-shower-conversions)
 - [Walk-in Tubs](https://www.allstarreno.com/bathroom-remodeling/walk-in-tubs)
 - [Aging-in-Place / ADA](https://www.allstarreno.com/bathroom-remodeling/aging-in-place-ada)
+- [Full & Partial Bathroom Remodel](https://www.allstarreno.com/bathroom-remodeling/full-bathroom-remodel)
 - [Services & Pricing](https://www.allstarreno.com/services-pricing)
 - [Contact](https://www.allstarreno.com/contact)
