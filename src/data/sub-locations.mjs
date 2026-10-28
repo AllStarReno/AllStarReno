@@ -33,7 +33,7 @@ export const ANGLES = {
     prep: 'Decide whether you want to keep a tub in another bathroom; it helps resale and guides the plan.',
     faq: (c) => ({ q: `How long does a tub-to-shower conversion take in ${c.name}, AR?`, a: `Most of our tub-to-shower conversions in ${c.name} take 1-2 days once materials arrive; timing varies by project and is confirmed in your written quote. Older plumbing or wall repairs found at demo can add time, and we tell you before any change.` }) },
   'walk-in-tubs': { noun: 'walk-in tub', who: 'homeowners who still want to soak but need a safer, door-style entry',
-    fit: (c, L) => `Walk-in tubs suit ${c.name} homeowners planning to stay put. ${L.housing.split('. ')[0]}, so we check the water heater and floor at every visit.`,
+    fit: (c, L) => `Walk-in tubs suit ${c.name} homeowners planning to stay put. ${L.housing.split('. ')[0]}, so we check the water heater and floor at every visit. ${c.milesFromHQ ? `${c.name} is about ${c.milesFromHQ} miles from our Conway shop in ${c.county}` : `${c.name} is home to our shop at 11 Arnett Ln`}, and most walk-in tubs install in 1-2 days (timing varies).`,
     prep: 'Check your water heater size and age; walk-in tubs need enough hot water to fill comfortably.',
     faq: (c) => ({ q: `Do walk-in tubs fit standard bathrooms in ${c.name} homes?`, a: `Most walk-in tubs are sized to replace a standard tub. At the free in-home quote in ${c.name} we measure the space, doorway and water heater before recommending a model.` }) },
   'aging-in-place-ada': { noun: 'aging-in-place bathroom', who: 'homeowners and families planning for safer bathing and mobility',

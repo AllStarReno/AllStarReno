@@ -9,7 +9,9 @@ import { SERVICE_PAGES } from '../data/service-pages.mjs';
 import { FAQS as AREA_FAQS } from '../data/service-areas-content.mjs';
 import { NOINDEX_SLUGS } from '../data/city-pages.mjs';
 import { loadPages } from './legacy.mjs';
-const LASTMOD = '2026-10-23T00:00:00-05:00';
+import { buildIsoChicago } from './lastmod.mjs';
+// date_modified = build time in America/Chicago.
+const LASTMOD = buildIsoChicago();
 const strip = (s = '') => String(s).replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&#8217;|&rsquo;/g, '’').replace(/&quot;/g, '"').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
 
 export function feedItems() {
@@ -18,7 +20,7 @@ export function feedItems() {
   for (const c of CATEGORIES) {
     const d = SERVICE_PAGES[c.slug];
     items.push({ id: `${SITE}/${c.slug}`, url: `${SITE}/${c.slug}`, title: `${c.name} in Conway, AR`, summary: strip(d?.lead || ''), tags: ['service', c.name] });
-    for (const s of c.subs.filter((s) => s.slug !== 'full-bathroom-remodel')) {
+    for (const s of c.subs) {
       const sd = SERVICE_PAGES[`${c.slug}/${s.slug}`];
       items.push({ id: `${SITE}/${c.slug}/${s.slug}`, url: `${SITE}/${c.slug}/${s.slug}`, title: `${s.name} in Conway, AR`, summary: strip(sd?.lead || `${s.name} by All-Star Renovations, Conway, AR.`), tags: ['service', c.name] });
     }
