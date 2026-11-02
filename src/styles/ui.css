@@ -98,7 +98,7 @@ body.sh-lock{overflow:hidden}
 .cc .chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.1rem}
 .cc .chips a{display:inline-flex;align-items:center;min-height:40px;padding:0 .8rem;border-radius:.6rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-size:.8rem;font-weight:600;color:#e8eef5;text-decoration:none}
 .cc .chips a:hover{background:rgba(245,165,36,.18);border-color:rgba(245,165,36,.45)}
-.cc-foot{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.06);font-size:.85rem}
+.cc-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.06);font-size:.85rem}
 .cc-foot span{color:#8ea1b8;font-family:ui-monospace,monospace}
 .cc-foot a{display:inline-flex;align-items:center;gap:.25rem;min-height:44px;font-weight:800;color:var(--amber);text-decoration:none}
 .cc-foot a:hover{color:#fff}

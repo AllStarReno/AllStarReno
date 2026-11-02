@@ -9,6 +9,8 @@ import '../styles/ui.css';
 import { loadPages } from '../lib/legacy.mjs';
 import { buildGraph } from '../lib/schema.mjs';
 import { CITIES } from '../data/cities.mjs';
+import { SUB_CITY_SLUGS } from '../data/sub-locations.mjs';
+import { CITY_PAGE_SLUGS } from '../data/city-pages.mjs';
 import { ANSWER, COUNTIES, FAQS, HOURS } from '../data/service-areas-content.mjs';
 import { SITE, BUSINESS, MAP_EMBED } from '../data/business.mjs';
 
@@ -39,6 +41,12 @@ base['@graph'] = base['@graph'].filter((n) => !(n['@type'] === 'FAQPage' && n['@
 base['@graph'].push(...countyNodes, ...cityNodes, { '@type': 'ItemList', '@id': `${SITE}/service-areas#cities`, name: 'All-Star Renovations city directory', numberOfItems: CITIES.length,
   itemListElement: CITIES.map((c, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE}/service-areas/${c.slug}`, name: `${c.name}, AR` })) });
 const tel = BUSINESS.tel;
+// AI Studio card anatomy: specific service chips, each deep-linking to a real city/service URL that exists in this build.
+const BUILT = new Set([...SUB_CITY_SLUGS, ...CITY_PAGE_SLUGS]);
+const SUBCHIPS = [['bathroom-remodeling/tub-to-shower-conversions', 'Tub to Shower'], ['bathroom-remodeling/walk-in-showers', 'Walk-In Showers'], ['bathroom-remodeling/walk-in-tubs', 'Walk-In Tubs'], ['bathroom-remodeling/aging-in-place-ada', 'ADA Accessibility']];
+const chipsFor = (c) => { const out = []; const bath = c.services.find((x) => x.href.startsWith('/bathroom-remodeling/'));
+  if (bath) out.push(bath); for (const [k, l] of SUBCHIPS) if (BUILT.has(`${k}/${c.slug}`)) out.push({ href: `/${k}/${c.slug}`, label: l });
+  return [...out, ...c.services.filter((x) => x !== bath)]; };
 ---
 <Layout page={page} graph={base}>
   <SiteHeader current="service-areas" />
@@ -83,7 +91,7 @@ const tel = BUSINESS.tel;
                 <div class="cc-top"><h3><span class="ms" aria-hidden="true" data-i="location_on"></span>{c.name}, AR</h3><span class="county">{c.county}</span></div>
                 <p>{c.description}</p>
                 <span class="lbl">Available local services</span>
-                <div class="chips">{c.services.map((s) => <a href={s.href}>{s.label}</a>)}</div>
+                <div class="chips">{chipsFor(c).map((s) => <a href={s.href}>{s.label}</a>)}</div>
               </div>
               <div class="cc-foot"><span>ZIP {c.zips.join(', ')}</span><a href={`/service-areas/${c.slug}`} >View City Hub<span class="sr-only"> for {c.name}</span> <span class="ms" aria-hidden="true">arrow_forward</span></a></div>
             </article>
