@@ -1445,23 +1445,23 @@
   "rewrites": [
     {
       "source": "/_mintlify/:path*",
-      "destination": "https://all-starrenovations.mintlify.site/_mintlify/:path*"
+      "destination": "https://info-allstarreno-com.mintlify.site/_mintlify/:path*"
     },
     {
       "source": "/mintlify-assets/:path+",
-      "destination": "https://all-starrenovations.mintlify.site/mintlify-assets/:path+"
+      "destination": "https://info-allstarreno-com.mintlify.site/mintlify-assets/:path+"
     },
     {
       "source": "/api/request",
-      "destination": "https://all-starrenovations.mintlify.site/_mintlify/api/request"
+      "destination": "https://info-allstarreno-com.mintlify.site/_mintlify/api/request"
     },
     {
       "source": "/docs",
-      "destination": "https://all-starrenovations.mintlify.site/docs"
+      "destination": "https://info-allstarreno-com.mintlify.site/docs"
     },
     {
       "source": "/docs/:path*",
-      "destination": "https://all-starrenovations.mintlify.site/docs/:path*"
+      "destination": "https://info-allstarreno-com.mintlify.site/docs/:path*"
     }
   ]
 }
