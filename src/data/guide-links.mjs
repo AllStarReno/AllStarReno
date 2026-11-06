@@ -1,5 +1,6 @@
 // Internal-linking map: guides <-> the services they support (descriptive anchors).
 export const GUIDES = [
+  { href: '/blog/wall-panels-vs-tile', title: 'Wall Panels vs. Tile Guide', subs: ['walk-in-showers', 'tub-to-shower-conversions', 'all-star-shower-systems', 'aging-in-place-ada'] },
   { href: '/blog/bathroom-remodeling-cost-guide', title: 'Bathroom Remodeling Cost Guide', subs: ['*'] },
   { href: '/blog/tub-to-shower-conversion-guide', title: 'Tub-to-Shower Conversion Guide', subs: ['tub-to-shower-conversions', 'walk-in-showers', 'all-star-shower-systems'] },
   { href: '/blog/aging-in-place-bathroom-design', title: 'Aging-in-Place Bathroom Design Guide', subs: ['aging-in-place-ada', 'walk-in-tubs', 'walk-in-showers'] },
