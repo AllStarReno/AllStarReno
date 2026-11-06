@@ -31,7 +31,7 @@ const legacyFaq = legacy.jsonld.flatMap((n) => (n['@graph'] || [n])).filter((n) 
 const faqs = [{ q: d.q, a: d.a }, ...(d.faq || legacyFaq), ...(d.extraFaq || [])].filter((f, i, arr) => f.a && arr.findIndex((g) => g.q.toLowerCase() === f.q.toLowerCase()) === i).slice(0, d.faq ? 10 : 8);
 // Hero photo: first real photo on the original page, if any.
 const img = (legacy.body.slice(legacy.body.indexOf('<main')).match(/<img\b[^>]*src="(\/assets\/img\/[^"]+)"[^>]*>/) || [])[1];
-const imgAlt = img ? ((legacy.body.match(new RegExp(`<img\\b[^>]*src="${img.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*>`)) || [''])[0].match(/alt="([^"]*)"/) || [])[1] || `${subName} by All-Star Renovations` : '';
+const imgAlt = img ? ((legacy.body.match(new RegExp(`<img\\b[^>]*src="${img.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"[^>]*>`)) || [''])[0].match(/alt="([^"]*)"/) || [])[1] || `${subName} in Conway, AR by All-Star Renovations` : '';
 const webp = img && /\.(jpe?g|png)$/.test(img) ? img.replace(/\.(jpe?g|png)$/, '.webp') : null;
 // City links: bathroom -> city hubs; kitchen/handyman -> /<category>/<city>.
 const cityHref = (c) => (isCat || slug.endsWith('/full-bathroom-remodel')) ? `/${d.cat}/${c.slug}` : `/${slug}/${c.slug}`;
