@@ -68,7 +68,7 @@ const learnLinks = LEARN[slug] || [];
 ---
 <Layout page={page} graph={g}>
   <SiteHeader current={d.cat} />
-  <main id="main" class="dk ui sp">
+  <main id="main" class="ui sp">
     <section class="sp-hero" aria-labelledby="hero-h">
       <div class="wrap">
         <nav class="crumbs" aria-label="Breadcrumb"><ol>{crumbs.map((c, i) => i < crumbs.length - 1 ? <li><a href={new URL(c.url).pathname}>{c.name}</a> <span aria-hidden="true">›</span></li> : <li aria-current="page">{c.name}</li>)}</ol></nav>
