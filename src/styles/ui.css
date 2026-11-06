@@ -291,3 +291,5 @@ body.sh-lock .sh{z-index:2147483647}
 /* Perf: skip rendering of off-screen sections until scrolled near (no visual change). */
 main > section ~ section ~ section{content-visibility:auto;contain-intrinsic-size:auto 800px}
 main > section#contact,main > section:target{content-visibility:visible}
+
+@import "./theme-balance.css";
