@@ -110,9 +110,9 @@ export const SERVICE_PAGES = {
     sections: [
       { id: 'scope', h: 'Full remodel or partial update?', html: '<div class="sp-tbl" tabindex="0" role="region" aria-label="Full bathroom remodel compared with a partial bathroom update"><table><thead><tr><th scope="col">Project</th><th scope="col">What changes</th><th scope="col">Typical timing</th><th scope="col">Pricing</th></tr></thead><tbody><tr><th scope="row">Partial update</th><td>The tub, shower or surround that is failing; the layout stays</td><td>Most shower installs take 1-2 days (timing varies)</td><td>All-Star Shower Systems tiers: Premier $5,000–$7,499, Signature $7,500–$9,999, Designer $10,000–$12,500+</td></tr><tr><th scope="row">Full remodel</th><td>Wet area plus flooring, vanity, fixtures, lighting and any layout or plumbing changes</td><td>Set in your written quote</td><td>Priced by scope at your free in-home quote</td></tr></tbody></table></div><p>Ranges are estimates, not a quote. Your final price is confirmed at your free in-home quote. See the <a class="underline underline-offset-2" href="/blog/bathroom-remodeling-cost-guide">bathroom remodel cost guide</a> for what shapes a quote.</p>' },
       { id: 'local', h: 'What we see in Conway and Central Arkansas bathrooms', html: '<p>Many Central Arkansas homes built in the 1970s–1990s still have the original alcove tub, tile with worn grout or a fiberglass surround, and greenboard drywall behind the tub that can soften after years of humidity. Homes on a crawlspace usually let us reach the drain from below; on a slab, moving or lowering a drain can mean opening the concrete. We check the walls, subfloor, drain and layout at the in-home quote so the written scope reflects what is actually there.</p>' },
-      { id: 'process', h: 'How a full bathroom remodel works with All-Star Renovations', html: '<ol class="sp-steps" style="margin:0;padding-left:1.25rem;line-height:1.7"><li><strong>Free in-home quote.</strong> We measure the room, check the floor, walls and plumbing, and talk through what you want to change.</li><li><strong>Written scope.</strong> You get a written quote that lists what is included, the materials and the schedule.</li><li><strong>Remodel.</strong> The All-Star Renovations team removes what is being replaced and builds the new bathroom, starting with the wet area.</li><li><strong>Final walkthrough.</strong> We walk through the finished room with you and explain your warranty.</li></ol><p style="margin-top:1rem">Planning around the shower? Compare <a class="underline underline-offset-2" href="/bathroom-remodeling/all-star-shower-systems">All-Star Shower Systems</a>, <a class="underline underline-offset-2" href="/bathroom-remodeling/tub-to-shower-conversions">tub-to-shower conversions</a>, <a class="underline underline-offset-2" href="/bathroom-remodeling/walk-in-showers">walk-in showers</a> and <a class="underline underline-offset-2" href="/bathroom-remodeling/aging-in-place-ada">aging-in-place bathrooms</a>, or see <a class="underline underline-offset-2" href="/bathroom-remodeling/conway">bathroom remodeling in Conway</a>.</p>' },
+      { id: 'process', h: 'How a full bathroom remodel works with All-Star Renovations', html: '<ol class="sp-steps" style="margin:0;padding-left:1.25rem;line-height:1.7"><li><strong>Free in-home quote.</strong> We measure the room, check the floor, walls and plumbing, and talk through what you want to change.</li><li><strong>Written scope.</strong> You get a written quote that lists what is included, the materials and the schedule.</li><li><strong>Remodel.</strong> The All-Star Renovations team removes what is being replaced and builds the new bathroom, starting with the wet area.</li><li><strong>Final walkthrough.</strong> We walk through the finished room with you and explain your warranty.</li></ol><p style="margin-top:1rem">Planning a vanity or storage update? See our Help Center guide on <a class="underline underline-offset-2" href="/docs/materials/choosing-a-vanity">choosing a bathroom vanity</a>. Planning around the shower? Compare <a class="underline underline-offset-2" href="/bathroom-remodeling/all-star-shower-systems">All-Star Shower Systems</a>, <a class="underline underline-offset-2" href="/bathroom-remodeling/tub-to-shower-conversions">tub-to-shower conversions</a>, <a class="underline underline-offset-2" href="/bathroom-remodeling/walk-in-showers">walk-in showers</a> and <a class="underline underline-offset-2" href="/bathroom-remodeling/aging-in-place-ada">aging-in-place bathrooms</a>, or see <a class="underline underline-offset-2" href="/bathroom-remodeling/conway">bathroom remodeling in Conway</a>.</p>' },
     ],
-    features: ['Free in-home quote that separates full and partial scopes', 'Layout, flooring, vanity, fixture and lighting updates', 'Grout-free All-Star Shower Systems wet areas', 'Accessibility options: low-threshold entry, grab bars, seating', 'Lifetime product warranty on All-Star Shower Systems materials + 5-year workmanship warranty', 'Financing through Acorn Finance, HFS Financial and RenoFi'],
+    features: ['Free in-home quote that separates full and partial scopes', 'Bathtub replacements and upgrades', 'Waterproofing and plumbing updates', 'Modern vanity and storage solutions', 'Layout, flooring, vanity, fixture and lighting updates', 'Grout-free All-Star Shower Systems wet areas', 'Accessibility options: low-threshold entry, grab bars, seating', 'Lifetime product warranty on All-Star Shower Systems materials + 5-year workmanship warranty', 'Financing through Acorn Finance, HFS Financial and RenoFi'],
     compare: cmpBase,
   },
   'bathroom-remodeling/aging-in-place-ada': {
@@ -130,7 +130,7 @@ export const SERVICE_PAGES = {
     lead: 'All-Star Renovations remodels kitchens for homeowners in Conway and across Central Arkansas, from a fresh backsplash to new cabinets and countertops. Describe your kitchen and our team will walk through the options with you.',
     q: 'Who does kitchen remodeling near Conway, AR?',
     a: 'All-Star Renovations in Conway, AR remodels kitchens within a 50-mile radius, including cabinet refacing, cabinet renovations, countertop replacement and backsplash installation. Choose one upgrade or combine several. Call (501) 504-3398 or request a free in-home quote online.',
-    features: ['Free in-home quote and measurements', 'Cabinet refacing or full cabinet renovation', 'Countertops fit around sink and range', 'Backsplash planned with the counter line', 'Upgrades can be combined into one project', '5-year workmanship warranty'],
+    features: ['Free in-home quote and measurements', 'Cabinet refacing or full cabinet renovation', 'Countertops fit around sink and range', 'Backsplash planned with the counter line', 'Fixture updates: lighting, faucets, hardware', 'Upgrades can be combined into one project', '5-year workmanship warranty'],
     compare: cmpBase,
     subs: { 'cabinet-renovations': 'Update or replace the cabinets that anchor your kitchen.', 'countertop-replacement': 'Replace worn countertops for a fresher, more usable kitchen.', 'backsplash-installation': 'Add or replace a backsplash to finish the room.', 'cabinet-refacing': 'Refresh the look of existing cabinets without a full tear-out.' },
   },
@@ -149,7 +149,7 @@ export const SERVICE_PAGES = {
     lead: 'Cabinet renovations update or replace the cabinets that anchor your kitchen, including layout changes when your storage no longer works for you.',
     q: 'Should I renovate or reface my kitchen cabinets?',
     a: 'Renovate or replace cabinets when the boxes are worn or the layout and storage need to change; reface when the boxes are solid and you only want a new look. All-Star Renovations reviews both options in your kitchen at a free in-home quote within 50 miles of Conway, AR.',
-    features: ['Update or replace cabinets', 'Layout and storage changes', 'Planned with counters and backsplash', 'In-home measurement', 'Installed by the All-Star crew', '5-year workmanship warranty'],
+    features: ['Cabinet installation — update or replace cabinets', 'Layout and storage changes', 'Planned with counters and backsplash', 'In-home measurement', 'Installed by the All-Star crew', '5-year workmanship warranty'],
     compare: cmpBase,
   },
   'kitchen-remodeling/countertop-replacement': {
@@ -158,7 +158,7 @@ export const SERVICE_PAGES = {
     lead: 'Countertop replacement swaps out worn or outdated kitchen countertops. Because the surface touches the sink, range and backsplash, it is best planned alongside those pieces.',
     q: 'What should I plan before replacing kitchen countertops?',
     a: 'Decide which fixtures stay (sink, faucet, cooktop), the edge profile and overhang, and whether the backsplash changes too, since the counter meets all of them. All-Star Renovations plans cutouts and edges at a free in-home quote for homeowners within 50 miles of Conway, AR.',
-    features: ['Old top removed, new top set', 'Cutouts planned for sink and range', 'Edge profile and overhang options', 'Coordinated with backsplash', 'Free in-home quote', '5-year workmanship warranty'],
+    features: ['Old top removed, new top set', 'Materials: granite, quartz, marble and laminate', 'Cutouts planned for sink and range', 'Edge profile and overhang options', 'Coordinated with backsplash', 'Free in-home quote', '5-year workmanship warranty'],
     compare: cmpBase,
   },
   'kitchen-remodeling/backsplash-installation': {
@@ -176,7 +176,7 @@ export const SERVICE_PAGES = {
     lead: 'From small fixes to installs and routine upkeep, the All-Star Renovations team handles handyman work for homeowners in Conway and across Central Arkansas.',
     q: 'Does All-Star Renovations do handyman work?',
     a: 'Yes. All-Star Renovations in Conway, AR handles repairs, installation and routine maintenance for homeowners within a 50-mile radius. Many handyman calls come from past remodeling customers, and several small jobs can often be grouped into one visit. Call (501) 504-3398 to describe the job.',
-    features: ['Repairs around the house', 'Fixture and home-item installation', 'Routine maintenance visits', 'Several small jobs grouped into one visit', 'Same crew as our remodels', '100% Customer Guarantee'],
+    features: ['24/7 Emergency Handyman', 'Repairs around the house', 'Fixture and home-item installation', 'Routine maintenance visits', 'Several small jobs grouped into one visit', 'Same crew as our remodels', '100% Customer Guarantee'],
     compare: cmpBase,
     subs: { repairs: 'Fix what is broken around the house.', installation: 'Get fixtures and home items installed correctly.', maintenance: 'Keep up with the small jobs before they grow.' },
   },
@@ -186,7 +186,7 @@ export const SERVICE_PAGES = {
     lead: 'When something at home breaks, a repair visit gets it working again. the All-Star Renovations team handles repairs for homeowners across Central Arkansas, from small fixes to the list of jobs that has built up.',
     q: 'Can one handyman visit cover several repairs?',
     a: 'Often, yes. Make a written list, add photos if you can, and share it when you request your quote so the visit can be planned. All-Star Renovations handles home repairs within 50 miles of Conway, AR. Call (501) 504-3398 and describe the problem.',
-    features: ['Describe the problem, we look in person', 'Bundle small jobs into one visit', 'Leaks and safety issues first', 'Honest advice if a repair points to a remodel', 'Free in-home quote', '100% Customer Guarantee'],
+    features: ['Interior repairs: drywall patching, painting, flooring installation, cabinet repairs, fixture replacements', 'Plumbing: leak repairs, faucet installs, toilet replacements, pipe snaking', 'Exterior: deck repairs, pressure washing, weatherproofing', 'Appliance repair, diagnostics and troubleshooting', 'Bundle small jobs into one visit', 'Free in-home quote', '100% Customer Guarantee'],
     compare: cmpBase,
   },
   'handyman-services/installation': {
@@ -195,7 +195,7 @@ export const SERVICE_PAGES = {
     lead: 'Installation covers getting fixtures and home items put in correctly. Bring the item and the space measurements and we plan the install around them.',
     q: 'What does a handyman installation visit need?',
     a: 'Know what is being installed and who supplies it, have the manufacturer instructions, and measure the space. Tell us if anything old must be removed first. All-Star Renovations installs fixtures and home items within 50 miles of Conway, AR, and can plan installs alongside a remodel.',
-    features: ['Fixtures and home items installed', 'Space and item dimensions checked first', 'Old item removal planned', 'Coordinated with bathroom or kitchen projects', 'Free in-home quote', '100% Customer Guarantee'],
+    features: ['Fence installation', 'Outlet installation, light fixture mounting, ceiling fan setup', 'Custom shelving, home organization and trim work', 'Door installation and furniture assembly', 'Appliance installation and removal', 'Space and item dimensions checked first', 'Free in-home quote', '100% Customer Guarantee'],
     compare: cmpBase,
   },
   'handyman-services/maintenance': {
@@ -204,7 +204,7 @@ export const SERVICE_PAGES = {
     lead: 'Maintenance is routine upkeep that keeps small issues from turning into bigger ones. A walk-through list from you is the best starting point for a visit.',
     q: 'How do I start a home maintenance visit?',
     a: 'Walk the house and list what looks worn, loose or leaky, then prioritize water and safety items before cosmetic ones. All-Star Renovations handles one-time or recurring maintenance within 50 miles of Conway, AR, and can group repairs into the same visit. Call (501) 504-3398.',
-    features: ['Routine upkeep around the house', 'Start from your walk-through list', 'Water and safety issues prioritized', 'Repairs grouped into the same visit', 'One-time or recurring', '100% Customer Guarantee'],
+    features: ['Preventative maintenance', 'Winterizing and weatherization', 'Routine upkeep around the house', 'Start from your walk-through list', 'Water and safety issues prioritized', 'Repairs grouped into the same visit', 'One-time or recurring', '100% Customer Guarantee'],
     compare: cmpBase,
   },
 };
