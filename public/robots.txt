@@ -198,4 +198,4 @@ Disallow: /search/
 Sitemap: https://allstarreno.com/sitemap-index.xml
 Sitemap: https://allstarreno.com/sitemap.xml
 Sitemap: https://allstarreno.com/docs/sitemap.xml
-# AI grounding documents: https://allstarreno.com/llms.txt and https://allstarreno.com/llms-full.txt
+# AI grounding documents: https://allstarreno.com/llms.txt, https://allstarreno.com/llms-full.txt, https://allstarreno.com/llms/*.txt and *.md page copies (e.g. /about.md). Not listed in the HTML sitemap.
