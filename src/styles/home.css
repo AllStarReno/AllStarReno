@@ -87,3 +87,32 @@ main.home #services .text-center h2::after,
 main.home #transformation .text-center h2::after,
 main.home #reviews .text-center h2::after,
 main.home #faq .text-center h2::after{margin-left:auto;margin-right:auto}
+
+
+/* Stronger Stitch mid-page rotation (visible in full-page shots) */
+main.home #services,
+main.home #transformation,
+main.home #financing,
+main.home #reviews,
+main.home #faq{background:#F4F7FB!important}
+main.home #calculator,
+main.home #portfolio,
+main.home #service-area{background:#0F2B48!important;border-bottom:4px solid #F5A524}
+/* Alternate pure-white bands for clearer rhythm */
+main.home #transformation{background:#ffffff!important}
+main.home #financing{background:#ffffff!important}
+main.home #services article h3,
+main.home #services article .font-serif{color:#0F2B48!important}
+main.home #services article p,
+main.home #services article .text-slate-300,
+main.home #services article .text-slate-400{color:#5A6B7D!important}
+main.home #calculator p,main.home #portfolio p,main.home #service-area p,
+main.home #calculator .text-slate-300,main.home #portfolio .text-slate-300,
+main.home #service-area .text-slate-300{color:#b9c6d6!important}
+main.home #calculator h2,main.home #portfolio h2,main.home #service-area h2{color:#fff!important}
+/* Contact (navy) headings stay white with amber accent word */
+main.home #contact h2,main.home #contact .lf-h{color:#fff!important}
+main.home #contact h2 em,main.home #contact .lf-h span{color:#F5A524!important}
+main.home #contact .text-slate-300,main.home #contact p{color:#b9c6d6!important}
+/* Orange CTA band on home (when injected) */
+main.home ~ .cta-band,body .cta-band{background:#F5A524;color:#1a1300}

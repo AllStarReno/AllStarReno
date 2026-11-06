@@ -290,7 +290,7 @@ body.sh-lock .sh{z-index:2147483647}
 @media(min-width:1200px) and (max-width:1439px){.sh-nav>a,.sh-dd>summary{padding:.55rem .45rem;font-size:.85rem}.sh-in{gap:.6rem}.sh-call .sh-ph{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.sh-call{width:44px;justify-content:center;border-radius:.6rem;background:rgba(255,255,255,.08)}}
 /* Perf: skip rendering of off-screen sections until scrolled near (no visual change). */
 main > section ~ section ~ section{content-visibility:auto;contain-intrinsic-size:auto 800px}
-main > section#contact,main > section:target{content-visibility:visible}
+main > section#contact,main > section.cta-band,main > section:target{content-visibility:visible;contain-intrinsic-size:auto none}
 
 /* Stitch-style color balance: rotate white / light / navy-bar / orange-accent.
    Layout, copy and typography case stay the same. Logo colors: navy #0F2B48, amber #F5A524. */
@@ -391,7 +391,7 @@ main.ui.lp > .sp-sec:nth-of-type(even){background:var(--surface-2)}
 .sf-bot{border-top-color:rgba(255,255,255,.1);color:#8ea1b8}.sf-bot a{color:#cbd6e2}
 
 /* Orange end CTA band */
-.cta-band{background:var(--amber);color:var(--ink);padding:1.75rem 0;border-top:1px solid rgba(15,43,72,.08);border-bottom:1px solid rgba(15,43,72,.08)}
+.cta-band{content-visibility:visible;contain-intrinsic-size:auto 120px;background:var(--amber);color:var(--ink);padding:1.75rem 0;border-top:1px solid rgba(15,43,72,.08);border-bottom:1px solid rgba(15,43,72,.08)}
 .cta-band .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem}
 .cta-band p{margin:0;font-weight:700;font-size:1.05rem;line-height:1.4;font-family:"Plus Jakarta Sans",system-ui,sans-serif;max-width:40rem}
 .cta-band .cta-actions{display:flex;flex-wrap:wrap;gap:.75rem}
@@ -416,6 +416,7 @@ main.ui.lp > .sp-sec:nth-of-type(even){background:var(--surface-2)}
 .ui .btn-amber{background:var(--amber);color:var(--ink)}.ui .btn-amber:hover{background:#ffb83d}
 
 /* Beat residual dark shell when .dk is absent; keep navy only on intentional bands */
+body:has(main.ui.sp),body:has(main.ui.lp),body:has(main.home){background:#ffffff!important;color:#0F2B48}
 main.ui.sp,main.ui.lp{background:#ffffff!important;color:#0F2B48!important}
 main.ui.sp .sp-sec,main.ui.lp .sp-sec{background:#ffffff;color:#0F2B48}
 main.ui.sp > .sp-sec:nth-of-type(even),main.ui.lp > .sp-sec:nth-of-type(even){background:#F4F7FB}
@@ -423,3 +424,28 @@ main.ui.sp .card:not(.sp-spec),main.ui.lp .card:not(.sp-spec){background:#ffffff
 main.ui.sp .sp-h2,main.ui.lp .sp-h2,main.ui.sp h2,main.ui.lp h2{color:#0F2B48}
 main.ui.sp .sp-hero,main.ui.lp .sp-hero,main.ui.sp .sp-hero .card,main.ui.lp .sp-hero .card{color:#e8eef5}
 main.ui.sp .sp-hero h1,main.ui.sp .sp-hero h2,main.ui.lp .sp-hero h1,main.ui.lp .sp-hero h2{color:#fff}
+/* Navy-block headings must stay white (override the light-page h2 rule above) */
+main.ui.sp .cb h2,main.ui.lp .cb h2,main.ui.sp .cb .lf-h,main.ui.lp .cb .lf-h,
+.ui .cb h2,.ui .cb .lf-h,.cb .lf-h,.lf-wrap .lf-h{color:#fff!important}
+main.ui.sp .cb h2 em,main.ui.lp .cb h2 em,.ui .cb h2 em{color:var(--amber)!important}
+main.ui.sp .cb,main.ui.lp .cb,.ui .cb{color:#e8eef5}
+main.ui.sp .cb .lead,.ui .cb .lead{color:#b9c6d6!important}
+main.ui.sp .sp-hero .sp-h2,main.ui.lp .sp-hero .sp-h2{color:#fff}
+main.ui.sp .sa-intro h1,main.ui.lp .sa-intro h1,.sa-intro h1,.sa-intro .h{color:#fff!important}
+main.ui.sp .ns h2,main.ui.lp .ns h2,.ns h2,.ns .h{color:#fff!important}
+/* Sticky header flush to viewport top; no stray body band above it */
+header.ui.sh{top:0!important;margin-top:0!important}
+
+/* LeadForm inside navy contact: force light text (beats light-page h2/h3 rules) */
+.ui .cb .lf-book-h,.ui .cb .lf-h,.lf-wrap .lf-book-h,.lf-bare .lf-book-h,
+main.ui.sp .lf-book-h,main.ui.lp .lf-book-h{color:#fff!important}
+.ui .cb .lf-note,.ui .cb .lf-help,.lf-bare .lf-note,.lf-bare .lf-help{color:#94a3b8!important}
+.ui .cb .lf-f label,.lf-bare .lf-f label{color:#e2e8f0!important}
+.ui .cb .lf-touch a,.lf-bare .lf-touch a{color:#fff!important}
+/* Comparison table: light page has light thead; keep navy text readable */
+.sp-tbl thead{background:#F4F7FB}
+.sp-tbl thead th{color:#0F2B48!important}
+.sp-tbl thead th:nth-child(3){color:#B45309!important}
+
+.ui .cb .lf-done h3,.lf-wrap .lf-done h3,main.ui.sp .lf-done h3{color:#fff!important}
+.lf-done p{color:#cbd5e1!important}

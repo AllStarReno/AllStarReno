@@ -212,7 +212,7 @@ const learnLinks = LEARN[slug] || [];
       </div>
     </section>
 
-    <EndCtaBand topic={isCat ? cat.name.toLowerCase() : (subName || "your home").toLowerCase()} />
+    <EndCtaBand topic={isCat ? (d.cat === 'bathroom-remodeling' ? 'your bathroom' : d.cat === 'kitchen-remodeling' ? 'your kitchen' : 'your home') : (subName || 'your home').toLowerCase()} />
     <p class="wrap sp-close"><a href="https://client.swivl.tech/all-star-renovate-318dbc/instant-quote?widget=instant-quote" data-swivl="quote">Get instant estimate</a> · <a href={`tel:${tel}`} data-contact="call">Call</a> · <a href={`sms:${tel}`} data-contact="sms">Text</a></p>
   </main>
   <SiteFooter />
