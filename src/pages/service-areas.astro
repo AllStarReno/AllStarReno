@@ -5,6 +5,7 @@ import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/global/SiteHeader.astro';
 import SiteFooter from '../components/global/SiteFooter.astro';
 import ContactBlock from '../components/global/ContactBlock.astro';
+import EndCtaBand from '../components/global/EndCtaBand.astro';
 import '../styles/ui.css';
 import { loadPages } from '../lib/legacy.mjs';
 import { buildGraph } from '../lib/schema.mjs';
@@ -42,7 +43,7 @@ const tel = BUSINESS.tel;
 ---
 <Layout page={page} graph={base}>
   <SiteHeader current="service-areas" />
-  <main id="main" class="dk ui" style="background:#0F2B48">
+  <main id="main" class="ui" style="background:var(--surface,#ffffff)">
     <section class="sa-intro" aria-labelledby="hero-h">
       <div class="wrap">
         <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a> <span aria-hidden="true">›</span></li><li aria-current="page">Service Areas</li></ol></nav>
@@ -93,7 +94,8 @@ const tel = BUSINESS.tel;
       </div>
     </section>
 
-    <section class="sec" aria-labelledby="cty-h" style="background:#0F2B48">
+    <ContactBlock slug="service-areas" source="service_areas_contact" />
+    <section class="sec" aria-labelledby="cty-h" style="background:var(--navy,#0F2B48);color:#e8eef5">
       <div class="wrap">
         <div class="sec-head"><span class="pill">Counties</span><h2 id="cty-h">Browse by County</h2></div>
         <div class="cty">{COUNTIES.map((c) => <a class="card" href={`/service-areas/${c.slug}`}><b><span class="ms" aria-hidden="true">home_work</span>{c.name}</b><span>{c.cities}</span></a>)}</div>
@@ -101,7 +103,7 @@ const tel = BUSINESS.tel;
       </div>
     </section>
 
-    <section class="sec" aria-labelledby="fq-h" style="background:#0a1e33">
+    <section class="sec" aria-labelledby="fq-h" style="background:var(--surface-2,#F4F7FB)">
       <div class="wrap">
         <div class="sec-head"><span class="pill">FAQ</span><h2 id="fq-h">Service Area Questions</h2></div>
         <div class="fq">{FAQS.map((f, i) => <details open={i === 0}><summary>{f.q}<span class="ms" aria-hidden="true">expand_more</span></summary><div class="a">{f.a}</div></details>)}</div>
@@ -116,7 +118,7 @@ const tel = BUSINESS.tel;
       </div>
     </section>
 
-    <ContactBlock slug="service-areas" source="service_areas_contact" />
+    <EndCtaBand topic="your home" />
   </main>
   <SiteFooter />
   <Fragment set:html={tail} />

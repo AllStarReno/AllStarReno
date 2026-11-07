@@ -1,8 +1,10 @@
-/* Stitch "Crafted Heritage" design tokens */
+/* Stitch "Crafted Heritage" design tokens + light surface palette */
 :root {
   --asr-navy: #0F2B48;
   --asr-amber: #F5A524;
   --asr-amber-ink: #1a1300;
+  --asr-surface: #ffffff;
+  --asr-surface-2: #F4F7FB;
   --asr-font-head: 'Plus Jakarta Sans', system-ui, sans-serif;
   --asr-font-body: 'Inter', system-ui, sans-serif;
 }

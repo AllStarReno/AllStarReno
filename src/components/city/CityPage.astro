@@ -6,6 +6,7 @@ import SiteHeader from '../global/SiteHeader.astro';
 import SiteFooter from '../global/SiteFooter.astro';
 import CallBar from '../CallBar.astro';
 import ContactBlock from '../global/ContactBlock.astro';
+import EndCtaBand from '../global/EndCtaBand.astro';
 import '../../styles/ui.css';
 import ProjectPhotos from '../beforeafter/ProjectPhotos.astro';
 import { loadPages } from '../../lib/legacy.mjs';
@@ -110,7 +111,7 @@ import Reviews from '../Reviews.astro';
 ---
 <Layout page={page} graph={g}>
   <SiteHeader current={cat ? cat.slug : 'service-areas'} />
-  <main id="main" class="dk ui sp lp" style="background:#0F2B48">
+  <main id="main" class="ui sp lp">
     <section class="sp-hero" aria-labelledby="hero-h">
       <div class="wrap">
         <nav class="crumbs" aria-label="Breadcrumb"><ol>{crumbs.map((c, i) => i < crumbs.length - 1 ? <li><a href={new URL(c.url).pathname}>{c.name}</a> <span aria-hidden="true">›</span></li> : <li aria-current="page">{c.name}</li>)}</ol></nav>
@@ -118,6 +119,7 @@ import Reviews from '../Reviews.astro';
           <div>
             <span class="pill"><span class="ms" aria-hidden="true">location_on</span>{city ? `${city.county} · ${dist}` : `Central Arkansas · ${dist}`}</span>
             <h1 id="hero-h">{h1[0]} <em>{h1[1]}</em></h1>
+            {city && <p class="sp-zip">Serving {city.name}, AR {ZIP}</p>}
             <p class="sp-lead">{lead}</p>
             <ul class="sp-badges">
               <li><span class="ms" aria-hidden="true">home_pin</span>Locally owned in Conway, AR</li>
@@ -176,6 +178,8 @@ import Reviews from '../Reviews.astro';
         ))}
       </div>
     </section>
+
+    <ContactBlock slug={slug} city={city ? city.name : undefined} source={`city_page:${slug}`} topic={topic} />
 
     {local && (
       <section class="wrap sp-sec" aria-labelledby="loc-h">
@@ -254,14 +258,14 @@ import Reviews from '../Reviews.astro';
     </section>
 
     {!county && <Reviews tags={cat ? [cat.slug] : ["bathroom-remodeling", "handyman-services"]} city={city ? city.slug : null} n={cat ? 3 : 2} title={city ? `What customers say about our work near ${city.name}` : undefined} />}
-    <section class="sec" aria-labelledby="fq-h" style="background:#0a1e33">
+    <section class="sec" aria-labelledby="fq-h" class="fq-band" style="background:var(--surface-2,#F4F7FB)">
       <div class="wrap">
         <div class="sec-head"><span class="pill">FAQs</span><h2 id="fq-h">Common Questions in {place}</h2></div>
         <div class="fq">{faqs.map((f, i) => <details open={i === 0}><summary>{f.q}<span class="ms" aria-hidden="true">expand_more</span></summary><div class="a">{f.a}</div></details>)}</div>
       </div>
     </section>
 
-    <ContactBlock slug={slug} city={city ? city.name : undefined} source={`city_page:${slug}`} topic={topic} />
+    <EndCtaBand topic={place ? place.toLowerCase() : "your home"} />
   </main>
   <SiteFooter />
   <CallBar />

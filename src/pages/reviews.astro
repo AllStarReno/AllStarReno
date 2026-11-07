@@ -6,6 +6,7 @@ import SiteHeader from '../components/global/SiteHeader.astro';
 import SiteFooter from '../components/global/SiteFooter.astro';
 import CallBar from '../components/CallBar.astro';
 import ContactBlock from '../components/global/ContactBlock.astro';
+import EndCtaBand from '../components/global/EndCtaBand.astro';
 import '../styles/ui.css';
 import { loadPages } from '../lib/legacy.mjs';
 import { buildGraph } from '../lib/schema.mjs';
@@ -31,7 +32,7 @@ const names = list.slice(0, -1).join(', ') + ' and ' + list.at(-1);
 ---
 <Layout page={page} graph={graph}>
   <SiteHeader current="reviews" />
-  <main id="main" class="dk ui" style="background:#0F2B48">
+  <main id="main" class="ui" style="background:var(--surface,#ffffff)">
     <section class="sa-intro" aria-labelledby="hero-h">
       <div class="wrap">
         <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a> <span aria-hidden="true">›</span></li><li aria-current="page">Reviews</li></ol></nav>
@@ -60,7 +61,8 @@ const names = list.slice(0, -1).join(', ') + ' and ' + list.at(-1);
       </div>
     </section>
 
-    <section class="sec" aria-labelledby="q-h" style="background:#0a1e33">
+    <ContactBlock slug="reviews" source="reviews_contact" />
+    <section class="sec" aria-labelledby="q-h" style="background:var(--surface-2,#F4F7FB)">
       <div class="wrap">
         <div class="sec-head"><h2 id="q-h">What customers say, word for word</h2><p>Each quote is copied exactly from a public review page and links to the original. Learn about <a class="underline underline-offset-2" href="/about">our team and story</a>, or <a class="underline underline-offset-2" href="/services-pricing">see our service packages</a>.</p></div>
         <div class="rvq">
@@ -86,7 +88,7 @@ const names = list.slice(0, -1).join(', ') + ' and ' + list.at(-1);
       </div>
     </section>
 
-    <section class="sec" aria-labelledby="lr-h" style="background:#0a1e33">
+    <section class="sec" aria-labelledby="lr-h" style="background:var(--surface-2,#F4F7FB)">
       <div class="wrap rvn">
         <h2 id="lr-h">Worked with us? Leave a review</h2>
         <p>Google reviews help Central Arkansas neighbors find a contractor they can trust. It takes about a minute.</p>
@@ -104,7 +106,7 @@ const names = list.slice(0, -1).join(', ') + ' and ' + list.at(-1);
       </div>
     </section>
 
-    <ContactBlock slug="reviews" source="reviews_contact" />
+    <EndCtaBand topic="your home" />
   </main>
   <SiteFooter />
   <CallBar />
