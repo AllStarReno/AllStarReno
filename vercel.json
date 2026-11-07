@@ -1398,6 +1398,24 @@
       ]
     },
     {
+      "source": "/llms/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
+    {
+      "source": "/((?!docs/).*)\\.md",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
+    {
       "source": "/(thank-you|checklist-thank-you|downloads/.*|api/.*)",
       "headers": [
         {
