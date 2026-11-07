@@ -1,0 +1,15 @@
+---
+// Short orange CTA band for the end of service/town pages (replaces the repeated bottom form).
+import { BUSINESS } from '../../data/business.mjs';
+interface Props { topic?: string }
+const topic = Astro.props.topic || 'your home';
+---
+<section class="ui cta-band" aria-label="Get a free quote">
+  <div class="wrap">
+    <p>Ready to transform {topic}? Call {BUSINESS.phone} or get a free in-home quote.</p>
+    <div class="cta-actions">
+      <a class="btn btn-navy" href={`tel:${BUSINESS.tel}`} data-contact="call"><span class="ms" aria-hidden="true">call</span>{BUSINESS.phone}</a>
+      <a class="btn btn-outline" href="#contact">Get a Free Quote</a>
+    </div>
+  </div>
+</section>

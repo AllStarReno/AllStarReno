@@ -290,4 +290,162 @@ body.sh-lock .sh{z-index:2147483647}
 @media(min-width:1200px) and (max-width:1439px){.sh-nav>a,.sh-dd>summary{padding:.55rem .45rem;font-size:.85rem}.sh-in{gap:.6rem}.sh-call .sh-ph{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.sh-call{width:44px;justify-content:center;border-radius:.6rem;background:rgba(255,255,255,.08)}}
 /* Perf: skip rendering of off-screen sections until scrolled near (no visual change). */
 main > section ~ section ~ section{content-visibility:auto;contain-intrinsic-size:auto 800px}
-main > section#contact,main > section:target{content-visibility:visible}
+main > section#contact,main > section.cta-band,main > section:target{content-visibility:visible;contain-intrinsic-size:auto none}
+
+/* Stitch-style color balance: rotate white / light / navy-bar / orange-accent.
+   Layout, copy and typography case stay the same. Logo colors: navy #0F2B48, amber #F5A524. */
+.ui{
+  --navy:#0F2B48;--navy-900:#0a1e33;--navy-950:#071626;--navy-800:#15375a;
+  --amber:#F5A524;--amber-600:#e0901a;--ink:#1a1300;
+  --surface:#ffffff;--surface-2:#F4F7FB;--surface-3:#E8EEF5;
+  --text:#0F2B48;--text-soft:#334155;--muted:#5A6B7D;
+  --line:rgba(15,43,72,.12);--line-strong:rgba(15,43,72,.22);
+  color:var(--text);
+}
+.ui h1,.ui h2,.ui h3,.ui .h{color:var(--text)}
+.ui .btn-ghost{background:transparent;border:1px solid var(--line-strong);color:var(--navy)}
+.ui .btn-ghost:hover{background:var(--surface-2);border-color:var(--navy)}
+.ui .pill{background:rgba(245,165,36,.14);border-color:rgba(245,165,36,.45);color:#9A5B00}
+.ui .sec{border-bottom-color:var(--line)}
+.ui .sec-head p{color:var(--muted)}
+.ui .card{background:var(--surface);border-color:var(--line);box-shadow:0 8px 24px rgba(15,43,72,.06)}
+
+/* Sticky header + mobile panel stay navy (navy-bar treatment) */
+.sh{background:rgba(15,43,72,.97);border-bottom-color:rgba(255,255,255,.1)}
+.sh-brand b,.sh-call,.sh-nav>a,.sh-dd>summary{color:#fff}
+.sh-brand small{color:var(--amber)}
+.sh-nav>a,.sh-dd>summary{color:#dbe4ee}
+.sh-nav>a:hover,.sh-dd>summary:hover,.sh-nav [aria-current],.sh-nav>a[aria-current]{color:#fff;background:rgba(255,255,255,.07)}
+.sh-menu{background:var(--navy-900);border-color:rgba(255,255,255,.1)}
+.sh-menu a{color:#dbe4ee}.sh-menu a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.sh-menu .lbl{color:var(--amber)}
+.sh-mob>summary{background:rgba(255,255,255,.08);color:#fff}
+.sh-mp{background:var(--navy-950);border-top-color:rgba(255,255,255,.1)}
+.sh-mp .mp-g>summary,.sh-mp .mp-l,.sh-mp .mp-x{color:#fff}
+.sh-mp .mp-g>a,.sh-mp .mp-more a{color:#dbe4ee}
+.sh-mp .mp-act{background:var(--navy-950)}
+.sh-mp .mp-q{background:#fff;color:var(--navy)}
+
+/* Page shell: white canvas; hero keeps navy */
+main.ui.sp,main.ui.lp{background:var(--surface)!important;color:var(--text)}
+.sp-hero{
+  background:radial-gradient(ellipse at top right,rgba(245,165,36,.14),transparent 55%),var(--navy);
+  color:#e8eef5;border-bottom:4px solid var(--amber);
+}
+.sp-hero h1,.sp-hero h2,.sp-hero .h{color:#fff}
+.sp-hero .sp-lead,.sp-hero .crumbs,.sp-hero .crumbs a{color:#b9c6d6}
+.sp-hero .crumbs [aria-current]{color:#fff}
+.sp-hero .sp-badges li{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);color:#dbe4ee}
+.sp-hero .sp-trust{color:#b8c4d2}
+.sp-hero .sp-tel{color:#fff}
+.sp-hero .card.sp-spec{background:rgba(10,30,51,.92);border-color:rgba(255,255,255,.12);color:#e8eef5}
+.sp-hero .sp-spec h2,.sp-hero .sp-spec dd{color:#fff}
+.sp-hero .sp-spec dt{color:#8ea1b8}
+.sp-hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.08)}
+
+/* Alternating content bands (white / light) */
+.sp-sec{background:var(--surface);color:var(--text)}
+main.ui.sp > .sp-sec:nth-of-type(even),
+main.ui.lp > .sp-sec:nth-of-type(even){background:var(--surface-2)}
+.sp-sec .sp-h2,.sp-sec h2,.sp-sec h3{color:var(--text)}
+.sp-learn,.sp-mat-lead,.sp-fin p{color:var(--muted)!important}
+.sp-feat li,.sp-mat li,.sp-subs a,.sp-subs .card,.lp-local,.sp-cmp,.sp-cities,.sp-fin,.cc,.cty a{color:var(--text)}
+.sp-subs p,.sp-mat p,.lp-local>p,.lp-cols ul,.lp-cols p,.cc p,.cty span{color:var(--muted)}
+.sp-subs .go,.cc-foot a,.ui .more a,.sp-close a{color:#B45309}
+.sp-cities a{background:var(--surface);border-color:var(--line);color:var(--text)}
+.sp-cities a:hover{background:rgba(245,165,36,.12);border-color:rgba(245,165,36,.45)}
+.sp-cities b{color:var(--text)}.sp-cities small{color:var(--muted)}
+.sp-rel a{background:var(--surface);border-color:var(--line);color:var(--navy)}
+.sp-rel a:hover{border-color:var(--amber)}
+.sp-tbl thead th{color:var(--navy)}.sp-tbl thead th:nth-child(2),.sp-tbl td{color:var(--muted)}
+.sp-tbl thead th:nth-child(3){color:#B45309}
+.sp-tbl tbody th{color:var(--text)}.sp-tbl td.as{color:#9A5B00}
+.sp-tbl th,.sp-tbl td{border-bottom-color:var(--line)}
+.sp-proc li{border-color:var(--line);color:var(--text)}
+.lp-tabs a{border-color:var(--line-strong);color:var(--navy)}
+.lp-tabs a[aria-current="page"]{background:var(--amber);color:var(--navy);border-color:var(--amber)}
+.lp-cols h3{color:var(--text)}
+.ans{background:var(--surface);border:1px solid rgba(245,165,36,.4);border-left:4px solid var(--amber);color:var(--text)}
+.ans h2{color:var(--text)}.ans p,.ans ul{color:var(--text-soft)}
+.ans .k{color:#9A5B00}
+
+/* FAQ band: light surface with navy accents (light variation) */
+.ui .sec.fq-band,.ui section.sec[aria-labelledby="fq-h"]{
+  background:var(--surface-2)!important;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.fq details{background:var(--surface);border-color:var(--line)}
+.fq summary{color:var(--navy)}.fq .a{color:var(--text-soft)}
+
+/* Contact block stays navy (navy form variation from the reference) */
+.ui .cb{background:var(--navy-950);color:#e8eef5}
+.ui .cb h2,.ui .cb li strong{color:#fff}
+.ui .cb .lead{color:#b9c6d6}
+.ui .cb li a,.ui .cb li div{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1)}
+.ui .cb li span{color:#ffd28a}.ui .cb li small{color:#8ea1b8}
+.ui .cb .pill{color:#ffd28a}
+
+/* Footer stays navy */
+.sf{background:var(--navy-950);border-top-color:rgba(255,255,255,.1);color:#b9c6d6}
+.sf h3{color:var(--amber)}.sf ul a{color:#cbd6e2}.sf ul a:hover{color:#fff}
+.sf .nap a{color:#fff}.sf .soc a{color:#dbe4ee;border-color:rgba(255,255,255,.1)}
+.sf-bot{border-top-color:rgba(255,255,255,.1);color:#8ea1b8}.sf-bot a{color:#cbd6e2}
+
+/* Orange end CTA band */
+.cta-band{content-visibility:visible;contain-intrinsic-size:auto 120px;background:var(--amber);color:var(--ink);padding:1.75rem 0;border-top:1px solid rgba(15,43,72,.08);border-bottom:1px solid rgba(15,43,72,.08)}
+.cta-band .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem}
+.cta-band p{margin:0;font-weight:700;font-size:1.05rem;line-height:1.4;font-family:"Plus Jakarta Sans",system-ui,sans-serif;max-width:40rem}
+.cta-band .cta-actions{display:flex;flex-wrap:wrap;gap:.75rem}
+.cta-band .btn-navy{background:var(--navy);color:#fff}.cta-band .btn-navy:hover{background:var(--navy-800)}
+.cta-band .btn-outline{background:#fff;color:var(--navy);border:1px solid var(--navy)}
+.cta-band .btn-outline:hover{background:var(--surface-2)}
+.sp-close{color:var(--muted)}.sp-close a{color:#B45309}
+
+/* Specs / city intro cards on light bands */
+.sa-intro{background:radial-gradient(ellipse at top,rgba(245,165,36,.10),transparent 60%),var(--navy);color:#e8eef5}
+.sa-intro h1{color:#fff}.sa-intro p{color:#b9c6d6}
+.cm{background:var(--surface-2)}.cm-search{background:var(--surface);border-color:var(--line)}
+.cm-search input{color:var(--text)}.cm-chips button{background:var(--surface);border-color:var(--line);color:var(--navy)}
+.cm-chips button[aria-pressed=true]{background:var(--amber);color:var(--ink);border-color:var(--amber)}
+.ns{background:var(--navy);color:#e8eef5}.ns .hrs{color:#b9c6d6}
+.ns h2,.ns .h{color:#fff}
+
+/* Fine print on location pages */
+.lp-fine p{color:var(--muted)!important}.lp-fine a{color:#B45309!important}
+
+/* Keep amber CTAs high-contrast on light and navy */
+.ui .btn-amber{background:var(--amber);color:var(--ink)}.ui .btn-amber:hover{background:#ffb83d}
+
+/* Beat residual dark shell when .dk is absent; keep navy only on intentional bands */
+body:has(main.ui.sp),body:has(main.ui.lp),body:has(main.home){background:#ffffff!important;color:#0F2B48}
+main.ui.sp,main.ui.lp{background:#ffffff!important;color:#0F2B48!important}
+main.ui.sp .sp-sec,main.ui.lp .sp-sec{background:#ffffff;color:#0F2B48}
+main.ui.sp > .sp-sec:nth-of-type(even),main.ui.lp > .sp-sec:nth-of-type(even){background:#F4F7FB}
+main.ui.sp .card:not(.sp-spec),main.ui.lp .card:not(.sp-spec){background:#ffffff;border-color:rgba(15,43,72,.12);color:#0F2B48}
+main.ui.sp .sp-h2,main.ui.lp .sp-h2,main.ui.sp h2,main.ui.lp h2{color:#0F2B48}
+main.ui.sp .sp-hero,main.ui.lp .sp-hero,main.ui.sp .sp-hero .card,main.ui.lp .sp-hero .card{color:#e8eef5}
+main.ui.sp .sp-hero h1,main.ui.sp .sp-hero h2,main.ui.lp .sp-hero h1,main.ui.lp .sp-hero h2{color:#fff}
+/* Navy-block headings must stay white (override the light-page h2 rule above) */
+main.ui.sp .cb h2,main.ui.lp .cb h2,main.ui.sp .cb .lf-h,main.ui.lp .cb .lf-h,
+.ui .cb h2,.ui .cb .lf-h,.cb .lf-h,.lf-wrap .lf-h{color:#fff!important}
+main.ui.sp .cb h2 em,main.ui.lp .cb h2 em,.ui .cb h2 em{color:var(--amber)!important}
+main.ui.sp .cb,main.ui.lp .cb,.ui .cb{color:#e8eef5}
+main.ui.sp .cb .lead,.ui .cb .lead{color:#b9c6d6!important}
+main.ui.sp .sp-hero .sp-h2,main.ui.lp .sp-hero .sp-h2{color:#fff}
+main.ui.sp .sa-intro h1,main.ui.lp .sa-intro h1,.sa-intro h1,.sa-intro .h{color:#fff!important}
+main.ui.sp .ns h2,main.ui.lp .ns h2,.ns h2,.ns .h{color:#fff!important}
+/* Sticky header flush to viewport top; no stray body band above it */
+header.ui.sh{top:0!important;margin-top:0!important}
+
+/* LeadForm inside navy contact: force light text (beats light-page h2/h3 rules) */
+.ui .cb .lf-book-h,.ui .cb .lf-h,.lf-wrap .lf-book-h,.lf-bare .lf-book-h,
+main.ui.sp .lf-book-h,main.ui.lp .lf-book-h{color:#fff!important}
+.ui .cb .lf-note,.ui .cb .lf-help,.lf-bare .lf-note,.lf-bare .lf-help{color:#94a3b8!important}
+.ui .cb .lf-f label,.lf-bare .lf-f label{color:#e2e8f0!important}
+.ui .cb .lf-touch a,.lf-bare .lf-touch a{color:#fff!important}
+/* Comparison table: light page has light thead; keep navy text readable */
+.sp-tbl thead{background:#F4F7FB}
+.sp-tbl thead th{color:#0F2B48!important}
+.sp-tbl thead th:nth-child(3){color:#B45309!important}
+
+.ui .cb .lf-done h3,.lf-wrap .lf-done h3,main.ui.sp .lf-done h3{color:#fff!important}
+.lf-done p{color:#cbd5e1!important}

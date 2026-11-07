@@ -8,6 +8,7 @@ import SiteHeader from '../global/SiteHeader.astro';
 import SiteFooter from '../global/SiteFooter.astro';
 import CallBar from '../CallBar.astro';
 import ContactBlock from '../global/ContactBlock.astro';
+import EndCtaBand from '../global/EndCtaBand.astro';
 import '../../styles/ui.css';
 import { loadPages } from '../../lib/legacy.mjs';
 import { buildGraph } from '../../lib/schema.mjs';
@@ -83,7 +84,7 @@ import Reviews from '../Reviews.astro';
 ---
 <Layout page={page} graph={g}>
   <SiteHeader current={cat.slug} />
-  <main id="main" class="dk ui sp lp" style="background:#0F2B48">
+  <main id="main" class="ui sp lp">
     <section class="sp-hero" aria-labelledby="hero-h">
       <div class="wrap">
         <nav class="crumbs" aria-label="Breadcrumb"><ol>{crumbs.map((c, i) => i < crumbs.length - 1 ? <li><a href={new URL(c.url).pathname}>{c.name}</a> <span aria-hidden="true">›</span></li> : <li aria-current="page">{c.name}</li>)}</ol></nav>
@@ -145,6 +146,8 @@ import Reviews from '../Reviews.astro';
       </div>
     </section>
 
+    <ContactBlock slug={slug} city={city.name} source={`location_page:${slug}`} topic={d.topic} />
+
     <section class="wrap sp-sec" aria-labelledby="feat-h">
       <h2 class="sp-h2" id="feat-h">Included With Every {sub.name.replace(/s$/, '')} Project</h2>
       <ul class="sp-feat">{d.features.map((f) => <li class="card"><span class="ms" aria-hidden="true">check_circle</span>{f}</li>)}</ul>
@@ -187,14 +190,14 @@ import Reviews from '../Reviews.astro';
     </section>
 
     <Reviews tags={[cat.slug, sub.slug]} city={city.slug} n={2} />
-    <section class="sec" aria-labelledby="fq-h" style="background:#0a1e33">
+    <section class="sec" aria-labelledby="fq-h" class="fq-band" style="background:var(--surface-2,#F4F7FB)">
       <div class="wrap">
         <div class="sec-head"><span class="pill">FAQs</span><h2 id="fq-h">{sub.name} Questions in {place}</h2></div>
         <div class="fq">{faqs.map((f, i) => <details open={i === 0}><summary>{f.q}<span class="ms" aria-hidden="true">expand_more</span></summary><div class="a">{f.a}</div></details>)}</div>
       </div>
     </section>
 
-    <ContactBlock slug={slug} city={city.name} source={`location_page:${slug}`} topic={d.topic} />
+    <EndCtaBand topic={`${sub.name} in ${city.name}`.toLowerCase()} />
 
     <section class="wrap lp-fine" aria-label="Fine print">
       <p>* Timelines, costs and results described on this page are typical and not guaranteed. Every home is different; your schedule, price and outcome depend on site conditions, material availability and the options you choose, and are confirmed in your written quote. Warranty terms are on our <a href="/warranty">warranty page</a>; financing is subject to lender approval.</p>

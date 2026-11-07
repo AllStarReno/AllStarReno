@@ -7,6 +7,7 @@ import SiteHeader from '../global/SiteHeader.astro';
 import SiteFooter from '../global/SiteFooter.astro';
 import CallBar from '../CallBar.astro';
 import ContactBlock from '../global/ContactBlock.astro';
+import EndCtaBand from '../global/EndCtaBand.astro';
 import Reviews from '../Reviews.astro';
 
 import '../../styles/ui.css';
@@ -67,7 +68,7 @@ const learnLinks = LEARN[slug] || [];
 ---
 <Layout page={page} graph={g}>
   <SiteHeader current={d.cat} />
-  <main id="main" class="dk ui sp" style="background:#0F2B48">
+  <main id="main" class="ui sp">
     <section class="sp-hero" aria-labelledby="hero-h">
       <div class="wrap">
         <nav class="crumbs" aria-label="Breadcrumb"><ol>{crumbs.map((c, i) => i < crumbs.length - 1 ? <li><a href={new URL(c.url).pathname}>{c.name}</a> <span aria-hidden="true">›</span></li> : <li aria-current="page">{c.name}</li>)}</ol></nav>
@@ -115,7 +116,7 @@ const learnLinks = LEARN[slug] || [];
         <p>{d.a}</p>
       </div>
       {(learnLinks.length > 0 || isCat) && (
-        <p class="sp-learn" style="margin:1rem 0 0;color:#cbd5e1">
+        <p class="sp-learn" style="margin:1rem 0 0">
           {learnLinks.length > 0 && <>From our Help Center: {learnLinks.map(([h, t], i) => <>{i > 0 && ' and '}<a class="underline underline-offset-2" href={h}>{t}</a></>)}.{' '}</>}
           {isCat && <>Learn about <a class="underline underline-offset-2" href="/about">our team and story</a>, or <a class="underline underline-offset-2" href="/services-pricing">see our service packages</a>.</>}
         </p>
@@ -123,6 +124,8 @@ const learnLinks = LEARN[slug] || [];
     </section>
 
     <ProjectPhotos slug={slug} />
+
+    <ContactBlock slug={slug} source={`service_page:${slug}`} topic={d.topic} />
 
     {isCat && (
       <section class="wrap sp-sec" aria-labelledby="subs-h">
@@ -143,7 +146,7 @@ const learnLinks = LEARN[slug] || [];
     {(d.sections || []).map((x) => (
       <section class="wrap sp-sec sp-prose" id={x.id} aria-labelledby={`${x.id}-h`}>
         <h2 class="sp-h2" id={`${x.id}-h`}>{x.h}</h2>
-        <div class="card" style="padding:1.25rem 1.5rem;color:#cbd5e1;line-height:1.65" set:html={x.html} />
+        <div class="card" style="padding:1.25rem 1.5rem;line-height:1.65" set:html={x.html} />
       </section>
     ))}
 
@@ -202,14 +205,14 @@ const learnLinks = LEARN[slug] || [];
     </section>
 
     <Reviews tags={isCat ? [d.cat] : [d.cat, slug.split('/').pop()]} />
-    <section class="sec" aria-labelledby="fq-h" style="background:#0a1e33">
+    <section class="sec" aria-labelledby="fq-h" class="fq-band" style="background:var(--surface-2,#F4F7FB)">
       <div class="wrap">
         <div class="sec-head"><span class="pill">Voice search FAQs</span><h2 id="fq-h">Common Questions About {isCat ? cat.name : subName}</h2></div>
         <div class="fq">{faqs.map((f, i) => <details open={i === 0}><summary>{f.q}<span class="ms" aria-hidden="true">expand_more</span></summary><div class="a">{f.a}</div></details>)}</div>
       </div>
     </section>
 
-    <ContactBlock slug={slug} source={`service_page:${slug}`} topic={d.topic} />
+    <EndCtaBand topic={isCat ? (d.cat === 'bathroom-remodeling' ? 'your bathroom' : d.cat === 'kitchen-remodeling' ? 'your kitchen' : 'your home') : (subName || 'your home').toLowerCase()} />
     <p class="wrap sp-close"><a href="https://client.swivl.tech/all-star-renovate-318dbc/instant-quote?widget=instant-quote" data-swivl="quote">Get instant estimate</a> · <a href={`tel:${tel}`} data-contact="call">Call</a> · <a href={`sms:${tel}`} data-contact="sms">Text</a></p>
   </main>
   <SiteFooter />
