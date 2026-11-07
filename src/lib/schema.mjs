@@ -93,7 +93,7 @@ export function buildGraph(page) {
     Object.assign(biz, {
       hasMap: BUSINESS.gbp, currenciesAccepted: 'USD', paymentAccepted: BUSINESS.paymentAccepted,
       openingHoursSpecification: BUSINESS.hours.map((h) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: h.days, opens: h.opens, closes: h.closes })),
-      areaServed: [...CITIES.map((c) => ({ '@type': 'City', name: `${c.name}, AR`, ...(c.county ? { containedInPlace: { '@type': 'AdministrativeArea', name: `${c.county}, Arkansas` } } : {}) })),
+      areaServed: [...CITIES.map((c) => ({ '@type': 'City', name: `${c.name}, AR`, ...(c.zips?.length ? { address: { '@type': 'PostalAddress', addressLocality: c.name, addressRegion: 'AR', postalCode: c.zips.join(', '), addressCountry: 'US' } } : {}), ...(c.county ? { containedInPlace: { '@type': 'AdministrativeArea', name: `${c.county}, Arkansas` } } : {}) })),
         { '@type': 'GeoCircle', geoMidpoint: { '@type': 'GeoCoordinates', ...BUSINESS.geo }, geoRadius: '80467' }],
       hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Remodeling services', itemListElement: CATEGORIES.map((c) => ({ '@type': 'OfferCatalog', name: c.name, url: `${SITE}/${c.slug}`,
         itemListElement: c.subs.map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.name, url: `${SITE}/${c.slug}/${s.slug}`, provider: { '@id': BIZ } } })) })) },

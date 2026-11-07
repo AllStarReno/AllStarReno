@@ -1,0 +1,47 @@
+/* WCAG AA contrast fixes (stitch style): navy text on light, white on navy, dark orange (#9A5B00) for orange text on light. */
+:root{--ink:#0F2B48;--ink-2:#334155;--amber-ink:#9A5B00}
+/* Contact block: always navy-950 bg, white heading, readable lead (also when not inside .ui) */
+.cb{background:var(--navy-950,#071626)}
+.cb h2,#cb-h,.cb li strong{color:#fff!important}
+.cb h2 em{color:#F5A524!important}
+.cb .lead,.cb p.lead{color:#c8d3e0!important}
+.cb .pill{color:#ffd28a!important;background:rgba(245,165,36,.14)!important}
+.ns .sec-head p{color:#c8d3e0!important}
+.ui .more a,.more a[href$="other-areas"]{color:var(--amber-ink)}
+.ns .more a,section[style*="0f2b48" i] .more a{color:#ffd28a!important}
+/* Pills on photo / dark mixed backgrounds */
+.ui .sec:not(.ns) .pill{color:var(--amber-ink)}
+/* Review cards rendered on light surfaces */
+.rv-c{background:#fff!important;color:var(--ink)!important;border:1px solid #dbe3ec}
+.rv-c figcaption,.rv-c figcaption strong{color:var(--ink-2)!important}
+.rv a,.rv-c a,.rvt a,.rvn a,.rvs a,.rvq a{color:var(--amber-ink)!important}
+.rvt,.rvt td,.rvt th,.rvn,.rvn li,.rvn p{color:var(--ink)!important}
+.rvt small,.rvs,.rvq figcaption{color:var(--ink-2)!important}
+.rvn h2,#lr-h{color:var(--ink)!important}
+.rvq figure{background:#fff!important;color:var(--ink)!important;border:1px solid #dbe3ec}
+.btn-amber,a.btn-amber{color:var(--ink)!important}
+#speakable-summary p{color:var(--ink-2)!important}
+/* Service-area county cards */
+.cc .county{color:var(--amber-ink)!important}
+.cc .lbl,.cc-foot span{color:#475569!important}
+.cc .chips a{color:var(--ink)!important;background:#F4F7FB!important;border-color:#dbe3ec!important}
+/* Legacy Tailwind dark-theme utilities inside the homepage light bands */
+main.home #services .text-orange-300,main.home #transformation .text-orange-300,main.home #financing .text-orange-300,main.home #reviews .text-orange-300,main.home #faq .text-orange-300,main.home #services .text-orange-400,main.home #transformation .text-orange-400,main.home #financing .text-orange-400,main.home #reviews .text-orange-400,main.home #faq .text-orange-400,main.home #services .text-orange-200,main.home #transformation .text-orange-200,main.home #financing .text-orange-200,main.home #reviews .text-orange-200,main.home #faq .text-orange-200{color:var(--amber-ink)!important}
+main.home #services .text-slate-100,main.home #transformation .text-slate-100,main.home #financing .text-slate-100,main.home #reviews .text-slate-100,main.home #faq .text-slate-100,main.home #services .text-slate-200,main.home #transformation .text-slate-200,main.home #financing .text-slate-200,main.home #reviews .text-slate-200,main.home #faq .text-slate-200,main.home #services .text-slate-300,main.home #transformation .text-slate-300,main.home #financing .text-slate-300,main.home #reviews .text-slate-300,main.home #faq .text-slate-300,main.home #services .text-slate-400,main.home #transformation .text-slate-400,main.home #financing .text-slate-400,main.home #reviews .text-slate-400,main.home #faq .text-slate-400,main.home #services p,main.home #transformation p,main.home #financing p,main.home #reviews p,main.home #faq p{color:#334155!important}
+main.home #services strong.text-white,main.home #transformation strong.text-white,main.home #financing strong.text-white,main.home #reviews strong.text-white,main.home #faq strong.text-white,main.home #services .text-white,main.home #transformation .text-white,main.home #financing .text-white,main.home #reviews .text-white,main.home #faq .text-white{color:var(--ink)!important}
+main.home #calculator .text-slate-300,main.home #calculator .text-slate-400,main.home #service-area .text-slate-300,main.home #service-area .text-slate-400,main.home #service-area p,main.home #portfolio p{color:#c8d3e0!important}
+main.home #service-area .text-slate-100,main.home #service-area strong,main.home #ccount{color:#fff!important}
+
+/* Chat widget label */
+.widget-chat-button-text{color:var(--ink)!important}
+/* Round 2 */
+a.border-\[\#0f2b48\].text-\[\#0f2b48\].bg-white{background:#fff!important;color:#0F2B48!important}
+.ui #service-area h2,.ui #service-area h3,#cov-h,#sp-name{color:#fff!important}
+section[style*="--navy"] .pill,section[style*="0F2B48"] .pill{color:#ffd28a!important}
+section[style*="--navy"] a:not(.btn),.cb .rvs a{color:#ffd28a!important}
+main.home #calculator strong{color:#fff!important}
+#main.home #services .bg-orange-600\/20,#main.home #transformation .bg-orange-600\/20,#main.home #financing .bg-orange-600\/20,#main.home #reviews .bg-orange-600\/20,#main.home #faq .bg-orange-600\/20{color:#7C2D12!important}
+#main.home #portfolio .text-orange-400{color:#FFB84D!important}
+#main.home section a[class*="bg-orange-7"],#main.home section a[class*="bg-orange-6"]{color:#fff!important}
+.sp-zip{margin:.25rem 0 .75rem;font-weight:700;font-size:.95rem;color:inherit;opacity:1}
+.ft-zip{font-size:.8em;opacity:1;white-space:normal}

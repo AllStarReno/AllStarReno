@@ -5,6 +5,7 @@ import Layout from '../layouts/Layout.astro';
 import SiteHeader from '../components/global/SiteHeader.astro';
 import SiteFooter from '../components/global/SiteFooter.astro';
 import ContactBlock from '../components/global/ContactBlock.astro';
+import EndCtaBand from '../components/global/EndCtaBand.astro';
 import '../styles/ui.css';
 import { loadPages } from '../lib/legacy.mjs';
 import { buildGraph } from '../lib/schema.mjs';
@@ -93,6 +94,7 @@ const tel = BUSINESS.tel;
       </div>
     </section>
 
+    <ContactBlock slug="service-areas" source="service_areas_contact" />
     <section class="sec" aria-labelledby="cty-h" style="background:var(--navy,#0F2B48);color:#e8eef5">
       <div class="wrap">
         <div class="sec-head"><span class="pill">Counties</span><h2 id="cty-h">Browse by County</h2></div>
@@ -116,7 +118,7 @@ const tel = BUSINESS.tel;
       </div>
     </section>
 
-    <ContactBlock slug="service-areas" source="service_areas_contact" />
+    <EndCtaBand topic="your home" />
   </main>
   <SiteFooter />
   <Fragment set:html={tail} />

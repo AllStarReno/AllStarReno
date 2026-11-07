@@ -8,11 +8,7 @@ const BASE = [
     "name": "Conway",
     "county": "Faulkner County",
     "countySlug": "faulkner-county",
-    "zips": [
-      "72032",
-      "72034",
-      "72035"
-    ],
+    "zips": ["72032", "72034"],
     "description": "Conway is the headquarters and home base of All-Star Renovations. Homeowners here can count on bathroom remodeling, tub-to-shower conversions that typically take 1-2 days (timing varies by project), and accessibility solutions, with kitchen and handyman help available too.",
     "services": [
       {
@@ -143,14 +139,7 @@ const BASE = [
     "name": "Little Rock",
     "county": "Pulaski County",
     "countySlug": "pulaski-county",
-    "zips": [
-      "72201",
-      "72205",
-      "72207",
-      "72211",
-      "72212",
-      "72223"
-    ],
+    "zips": ["72201", "72202", "72204", "72205", "72206", "72207", "72209", "72210", "72211", "72212", "72223", "72227"],
     "description": "We serve Little Rock homeowners with bathroom renovations, zero-threshold ADA showers for senior accessibility, and kitchen transformations.",
     "services": [
       {

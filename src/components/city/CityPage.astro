@@ -119,6 +119,7 @@ import Reviews from '../Reviews.astro';
           <div>
             <span class="pill"><span class="ms" aria-hidden="true">location_on</span>{city ? `${city.county} · ${dist}` : `Central Arkansas · ${dist}`}</span>
             <h1 id="hero-h">{h1[0]} <em>{h1[1]}</em></h1>
+            {city && <p class="sp-zip">Serving {city.name}, AR {ZIP}</p>}
             <p class="sp-lead">{lead}</p>
             <ul class="sp-badges">
               <li><span class="ms" aria-hidden="true">home_pin</span>Locally owned in Conway, AR</li>

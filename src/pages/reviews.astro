@@ -6,6 +6,7 @@ import SiteHeader from '../components/global/SiteHeader.astro';
 import SiteFooter from '../components/global/SiteFooter.astro';
 import CallBar from '../components/CallBar.astro';
 import ContactBlock from '../components/global/ContactBlock.astro';
+import EndCtaBand from '../components/global/EndCtaBand.astro';
 import '../styles/ui.css';
 import { loadPages } from '../lib/legacy.mjs';
 import { buildGraph } from '../lib/schema.mjs';
@@ -60,6 +61,7 @@ const names = list.slice(0, -1).join(', ') + ' and ' + list.at(-1);
       </div>
     </section>
 
+    <ContactBlock slug="reviews" source="reviews_contact" />
     <section class="sec" aria-labelledby="q-h" style="background:var(--surface-2,#F4F7FB)">
       <div class="wrap">
         <div class="sec-head"><h2 id="q-h">What customers say, word for word</h2><p>Each quote is copied exactly from a public review page and links to the original. Learn about <a class="underline underline-offset-2" href="/about">our team and story</a>, or <a class="underline underline-offset-2" href="/services-pricing">see our service packages</a>.</p></div>
@@ -104,7 +106,7 @@ const names = list.slice(0, -1).join(', ') + ' and ' + list.at(-1);
       </div>
     </section>
 
-    <ContactBlock slug="reviews" source="reviews_contact" />
+    <EndCtaBand topic="your home" />
   </main>
   <SiteFooter />
   <CallBar />
