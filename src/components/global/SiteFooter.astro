@@ -32,7 +32,7 @@ const SOCIAL = [['Google', 'https://g.page/r/CaWnV-VVVJEQEBM'], ['Facebook', 'ht
         {CATEGORIES[0].subs.map((s) => <li><a href={`/${CATEGORIES[0].slug}/${s.slug}`}>{s.name}</a></li>)}
       </ul></div>
       <div><h3>Service Areas</h3><ul>
-        {CITIES.filter((c) => !THIN_TOWNS.includes(c.slug)).map((c) => <li><a href={`/service-areas/${c.slug}`}>{c.name}, AR</a></li>)}
+        {CITIES.filter((c) => !THIN_TOWNS.includes(c.slug)).map((c) => <li><a href={`/service-areas/${c.slug}`}>{c.name}, AR <span class="ft-zip">{c.zips.join(', ')}</span></a></li>)}
         <li><a href="/service-areas/faulkner-county">Faulkner County (Guy, Enola, Quitman)</a></li>
         <li><a href="/service-areas/other-areas">Other nearby towns</a></li>
         <li><a href="/service-areas"><strong>All service areas →</strong></a></li>
