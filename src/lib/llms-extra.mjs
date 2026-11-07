@@ -19,14 +19,18 @@ export function locationsSection({ full = false } = {}) {
   const thin = CITIES.filter((c) => THIN_TOWNS.includes(c.slug));
   const lines = ['## Location pages',
     `Every service and sub-service has a local page for each town served. URL patterns: /{service}/{town} (e.g. ${SITE}/bathroom-remodeling/conway) and /{service}/{sub-service}/{town} (e.g. ${SITE}/bathroom-remodeling/walk-in-showers/cabot). Town hubs: /service-areas/{town}.`,
-    `- Services and sub-services: ${CATEGORIES.map((c) => `${c.name} (${c.subs.map((s) => s.name).join(', ')})`).join('; ')}.`,
-    '- Towns:'];
+    `Services and sub-services: ${CATEGORIES.map((c) => `${c.name} (${c.subs.map((s) => s.name).join(', ')})`).join('; ')}.`,
+    'Towns:'];
   for (const c of cities) {
     lines.push(`  - [${c.name}, AR](${SITE}/service-areas/${c.slug}) (${c.county}): ${CATEGORIES.map((k) => `[${k.name}](${SITE}/${k.slug}/${c.slug})`).join(', ')}`);
     if (full) lines.push(`    - ${SUBS.map((s) => `[${s.name}](${SITE}/${s.cat.slug}/${s.slug}/${c.slug})`).join(', ')}`);
   }
-  lines.push(`- County hubs: ${COUNTIES.map((c) => `[${c.name}](${SITE}/service-areas/${c.slug})`).join(', ')}`);
-  if (thin.length) lines.push(`- Smaller communities (covered on the Faulkner County hub): ${thin.map((c) => `[${c.name}, AR (${c.county})](${SITE}/service-areas/faulkner-county#${c.slug})`).join(', ')}`);
+  lines.push('County hubs:');
+  for (const c of COUNTIES) lines.push(`- [${c.name}](${SITE}/service-areas/${c.slug}): ${c.cities || 'Central Arkansas'}`);
+  if (thin.length) {
+    lines.push('Smaller communities (covered on the Faulkner County hub):');
+    for (const c of thin) lines.push(`- [${c.name}, AR (${c.county})](${SITE}/service-areas/faulkner-county#${c.slug}): covered on the Faulkner County hub`);
+  }
   return lines.join('\n');
 }
 
@@ -37,6 +41,6 @@ export function photosSection() {
   const where = (id) => Object.entries(PHOTO_PLACEMENT).filter(([, c]) => c.pairs === '*' || (Array.isArray(c.pairs) && c.pairs.includes(id))).map(([s]) => `${SITE}/${s}`)[0];
   return ['## Project photos (Central Arkansas)',
     'Real All-Star Renovations bathroom projects. Each pair shows the same bathroom before and after. Photo credit: All-Star Renovations.',
-    ...PAIRS.map((p) => `- ${p.title}, ${p.place} (${where(p.id) || SITE + '/portfolio'}): before ${SITE}${p.before.url} (${p.before.alt}); after ${SITE}${p.after.url} (${p.after.alt})`),
-    ...SINGLES.map((s) => `- ${s.caption} ${SITE}${s.url} (${s.alt})`)].join('\n');
+    ...PAIRS.map((p) => `- [${p.title}, ${p.place}](${where(p.id) || SITE + '/portfolio'}): before [${p.before.alt}](${SITE}${p.before.url}); after [${p.after.alt}](${SITE}${p.after.url})`),
+    ...SINGLES.map((s) => `- [${s.caption}](${SITE}${s.url}): ${s.alt}`)].join('\n');
 }

@@ -4,6 +4,7 @@ import NewoChat from '../components/NewoChat.astro';
 import '../styles/tokens.css';
 import '../styles/contrast.css';
 import { SITE } from '../data/business.mjs';
+import { MD_SLUGS } from '../lib/ai-formats.mjs';
 interface Props { page: any; graph: any }
 const { page, graph } = Astro.props;
 const { _hasArticle, ...ld } = graph;
@@ -40,6 +41,7 @@ const ogImage = page.ogImage || `${SITE}/assets/img/og-image.jpg`;
   <meta name="twitter:image" content={ogImage} />
   <meta name="twitter:image:alt" content={page.ogImageAlt || page.title} />
   <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM summary" />
+  {MD_SLUGS.has(page.slug) && <link rel="alternate" type="text/markdown" href={page.slug ? `/${page.slug}.md` : '/index.md'} title="Markdown copy" />}
   <link rel="alternate" type="application/feed+json" href="/feed.json" title="All-Star Renovations services, areas and guides" />
   <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
