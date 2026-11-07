@@ -45,3 +45,8 @@ main.home #calculator strong{color:#fff!important}
 #main.home section a[class*="bg-orange-7"],#main.home section a[class*="bg-orange-6"]{color:#fff!important}
 .sp-zip{margin:.25rem 0 .75rem;font-weight:700;font-size:.95rem;color:inherit;opacity:1}
 .ft-zip{font-size:.8em;opacity:1;white-space:normal}
+/* Navy hero backgrounds (gradient: axe can't evaluate): light text */
+.sp-hero .pill,.sa-intro .pill,.sp-hero .pill .ms,.sa-intro .pill .ms{color:#FFD28A!important}
+.sa-intro .crumbs,.sa-intro .crumbs a,.sa-intro .crumbs span,.sa-intro nav a,.sa-intro nav span{color:#c8d3e0!important}
+.sa-intro .crumbs [aria-current]{color:#fff!important}
+.sa-intro a.btn-ghost,.sa-intro a.btn-ghost .ms,.sp-hero a.btn-ghost,.sp-hero a.btn-ghost .ms{color:#fff!important;border-color:rgba(255,255,255,.4)!important}
