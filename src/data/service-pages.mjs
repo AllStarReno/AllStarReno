@@ -56,6 +56,10 @@ export const SERVICE_PAGES = {
     q: 'How long does a walk-in shower remodel take?',
     a: 'Most walk-in shower replacements by All-Star Renovations are installed in about 1-2 days; timing varies by project and is confirmed in your written quote. Our team visits first to measure your bathroom and walk through entry, wall-surface, fixture and glass options. We serve homeowners within 50 miles of Conway, AR; call (501) 504-3398 for a free in-home quote.',
     features: ['Low-threshold or no-step entry', 'Grout-free wall surfaces that are easier to clean', 'Choice of fixtures and glass', 'Grab-bar and bench planning on request', 'In-home measurement before any work', '100% Customer Guarantee on the finished work'],
+    extraFaq: [
+      { q: 'How much does a walk-in shower remodel cost in Conway, AR?', a: 'All-Star Renovations shower packages typically run Premier $5,000–$7,499, Signature $7,500–$9,999 and Designer $10,000–$12,500+. That is an estimated range; the final price is confirmed at your free in-home quote. Call (501) 504-3398.' },
+      { q: 'Do you install walk-in showers in Greenbrier and Vilonia?', a: 'Yes. We install walk-in showers and tub-to-shower conversions in Greenbrier (72058), Vilonia (72173) and nearby Faulkner County towns. Most take about 1–2 days; timing is confirmed in writing. Free in-home quote: call (501) 504-3398.' },
+    ],
     compare: showerCmp,
   },
   'bathroom-remodeling/tub-to-shower-conversions': {
@@ -187,6 +191,9 @@ export const SERVICE_PAGES = {
     q: 'Can one handyman visit cover several repairs?',
     a: 'Often, yes. Make a written list, add photos if you can, and share it when you request your quote so the visit can be planned. All-Star Renovations handles home repairs within 50 miles of Conway, AR. Call (501) 504-3398 and describe the problem.',
     features: ['Interior repairs: drywall patching, painting, flooring installation, cabinet repairs, fixture replacements', 'Plumbing: leak repairs, faucet installs, toilet replacements, pipe snaking', 'Exterior: deck repairs, pressure washing, weatherproofing', 'Appliance repair, diagnostics and troubleshooting', 'Bundle small jobs into one visit', 'Free in-home quote', '100% Customer Guarantee'],
+    extraFaq: [
+      { q: 'Do you offer 24/7 emergency handyman service in Conway?', a: 'Yes. All-Star Renovations offers 24/7 emergency handyman repairs for Conway (72032, 72034) and surrounding towns, including leaks, fixture problems and other urgent home fixes. Call (501) 504-3398 anytime. Our in-house crew is licensed, insured and covered by workers\' comp.' },
+    ],
     compare: cmpBase,
   },
   'handyman-services/installation': {
