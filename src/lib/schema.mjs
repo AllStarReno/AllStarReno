@@ -3,7 +3,7 @@
 import { SITE, BUSINESS } from '../data/business.mjs';
 import { CITIES } from '../data/cities.mjs';
 import { CATEGORIES } from '../data/services.mjs';
-import { photosFor, imageObject } from './project-photos.mjs';
+import { photosFor, imageObject, imageRights } from './project-photos.mjs';
 import { REVIEW_TOTAL } from '../data/review-summary.mjs';
 import { BUILD } from './lastmod.mjs';
 
@@ -71,9 +71,9 @@ export function buildGraph(page) {
   if (!seen.has(BIZ)) add({ '@type': ['HomeAndConstructionBusiness', 'LocalBusiness'], '@id': BIZ, name: BUSINESS.name, url: `${SITE}/`,
     telephone: BUSINESS.telSchema, email: BUSINESS.email, address: { '@type': 'PostalAddress', ...BUSINESS.address },
     geo: { '@type': 'GeoCoordinates', ...BUSINESS.geo }, foundingDate: '2014', image: `${SITE}/assets/img/og-image.jpg` });
-  if (page.ogImage) add({ '@type': 'ImageObject', '@id': `${page.url}#primaryimage`, url: page.ogImage, contentUrl: page.ogImage, caption: page.ogImageAlt || page.title, width: 1200, height: 630 });
+  if (page.ogImage) add({ '@type': 'ImageObject', '@id': `${page.url}#primaryimage`, url: page.ogImage, contentUrl: page.ogImage, caption: page.ogImageAlt || page.title, width: 1200, height: 630, ...imageRights() });
   add({ '@type': 'BreadcrumbList', '@id': `${page.url}#breadcrumb`, itemListElement: breadcrumbTrail(page).map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: c.url })) });
-  const LOGO = { '@type': 'ImageObject', '@id': `${SITE}/#logo`, url: `${SITE}/images/logo.png`, contentUrl: `${SITE}/images/logo.png`, width: 512, height: 512, caption: BUSINESS.name };
+  const LOGO = { '@type': 'ImageObject', '@id': `${SITE}/#logo`, url: `${SITE}/images/logo.png`, contentUrl: `${SITE}/images/logo.png`, width: 512, height: 512, caption: BUSINESS.name, ...imageRights() };
   for (const n of graph) if (n['@id'] === BIZ || n.logo) n.logo = LOGO;
   const biz = graph.find((n) => n['@id'] === BIZ);
   if (biz) {
