@@ -205,7 +205,7 @@ const learnLinks = LEARN[slug] || [];
     </section>
 
     <Reviews tags={isCat ? [d.cat] : [d.cat, slug.split('/').pop()]} />
-    <section class="sec" aria-labelledby="fq-h" class="fq-band" style="background:var(--surface-2,#F4F7FB)">
+    <section class="sec fq-band" aria-labelledby="fq-h" style="background:var(--surface-2,#F4F7FB)">
       <div class="wrap">
         <div class="sec-head"><span class="pill">Voice search FAQs</span><h2 id="fq-h">Common Questions About {isCat ? cat.name : subName}</h2></div>
         <div class="fq">{faqs.map((f, i) => <details open={i === 0}><summary>{f.q}<span class="ms" aria-hidden="true">expand_more</span></summary><div class="a">{f.a}</div></details>)}</div>

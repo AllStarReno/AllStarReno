@@ -279,7 +279,7 @@ import Reviews from '../Reviews.astro';
     </section>
 
     {!county && <Reviews tags={cat ? [cat.slug] : ["bathroom-remodeling", "handyman-services"]} city={city ? city.slug : null} n={cat ? 3 : 2} title={city ? `What customers say about our work near ${city.name}` : undefined} />}
-    <section class="sec" aria-labelledby="fq-h" class="fq-band" style="background:var(--surface-2,#F4F7FB)">
+    <section class="sec fq-band" aria-labelledby="fq-h" style="background:var(--surface-2,#F4F7FB)">
       <div class="wrap">
         <div class="sec-head"><span class="pill">FAQs</span><h2 id="fq-h">Common Questions in {place}</h2></div>
         <div class="fq">{faqs.map((f, i) => <details open={i === 0}><summary>{f.q}<span class="ms" aria-hidden="true">expand_more</span></summary><div class="a">{f.a}</div></details>)}</div>
