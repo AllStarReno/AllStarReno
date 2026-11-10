@@ -41,10 +41,14 @@ const subs = cat ? cat.subs.filter((s) => s.slug !== 'full-bathroom-remodel') : 
 const subBlurb = cat ? (SERVICE_PAGES[cat.slug]?.subs || {}) : {};
 const catHref = (c, s) => `/${c}/${s}`;
 const ZIP = city ? city.zips.join(', ') : countyCities.flatMap((c) => c.zips).join(', ');
+const housingText = !local ? '' : (cat?.slug === 'kitchen-remodeling' && local.housingKitchen) ? local.housingKitchen
+  : (cat?.slug === 'handyman-services' && local.housingHandyman) ? local.housingHandyman
+  : local.housing;
 
 // Copy
 const h1 = county ? ['Remodeling & Handyman Services in', `${county.name}, AR`] : cat ? [`${cat.name} in`, place] : ['Home Remodeling in', place];
 const title0 = county ? `${county.name}, AR Remodeling & Handyman | All-Star Renovations`
+  : (cat?.slug === 'bathroom-remodeling' && city?.slug === 'conway') ? 'Bathroom Remodeling Conway AR | All-Star Renovations'
   : cat ? ((t) => t.length > 60 ? `${cat.name} in ${place} | All-Star` : t)(`${cat.name} in ${place} | All-Star Renovations`) : `${place} Bathroom & Kitchen Remodeling | All-Star Renovations`;
 const fit60 = (t) => [t, t.replace(' | All-Star Renovations', ' | All-Star'), t.replace(' | All-Star Renovations', ' | All-Star').replace('Bathroom & Kitchen', 'Bath & Kitchen'), t.replace(' | All-Star Renovations', ' | All-Star').replace(', AR', ' AR')].find((x) => x.length <= 60) || t.replace(' | All-Star Renovations', ' | All-Star');
 const title = fit60(title0);
@@ -52,13 +56,17 @@ const what = cat ? cat.name.toLowerCase() : 'bathroom remodeling, kitchen remode
 const q = county ? `Does All-Star Renovations serve ${county.name}, Arkansas?` : `Does All-Star Renovations offer ${what} in ${city.name}, AR?`;
 const a = county
   ? `Yes. All-Star Renovations serves ${county.name} from our Conway office, including ${countyCities.map((c) => c.name).join(', ')}. We offer bathroom remodeling, kitchen remodeling and handyman services with free in-home estimates. Call ${BUSINESS.phone}.`
-  : `Yes. All-Star Renovations provides ${what} in ${city.name}, ${city.county}${miles ? `, about ${miles} miles from our Conway office` : ', where our office is based'}. We serve ZIP ${ZIP} with free in-home estimates, a 100% Customer Guarantee and a 5-year workmanship warranty. Call ${BUSINESS.phone}.`;
+  : cat?.slug === 'bathroom-remodeling' && city?.slug === 'conway'
+    ? `Yes. All-Star Renovations provides bathroom remodeling in Conway, Faulkner County, where our office is based. We serve ZIP ${ZIP}. A typical bathroom remodel runs $6,500–$18,000; final price confirmed at your free in-home quote. Licensed, insured, and workers' comp. 100% Customer Guarantee and a 5-year workmanship warranty. Call ${BUSINESS.phone}.`
+    : `Yes. All-Star Renovations provides ${what} in ${city.name}, ${city.county}${miles ? `, about ${miles} miles from our Conway office` : ', where our office is based'}. We serve ZIP ${ZIP} with free in-home estimates, a 100% Customer Guarantee and a 5-year workmanship warranty. Call ${BUSINESS.phone}.`;
 const lead = county ? `${county.note} Pick your city below for local details, or request a free in-home quote.`
-  : cat ? `${city.name} homeowners in ${city.county} can book ${cat.name.toLowerCase()} from All-Star Renovations, a locally owned Conway, AR company. ${local.housing.split('. ')[0]}.`
+  : cat ? `${city.name} homeowners in ${city.county} can book ${cat.name.toLowerCase()} from All-Star Renovations, a locally owned Conway, AR company. ${housingText.split('. ')[0]}.`
   : `${city.description} ${local.route}`;
 const description = (legacy && kind !== 'hub') ? legacy.description
   : county ? `Bathroom remodeling, kitchen remodeling and handyman services in ${county.name}, AR from All-Star Renovations of Conway. Free in-home quotes. Call ${BUSINESS.phone}.`
-  : `${cat ? cat.name : 'Bathroom, kitchen and handyman services'} in ${place} from All-Star Renovations of Conway, ${miles ? `about ${miles} miles away` : 'our home base'}. Free in-home quote. Call ${BUSINESS.phone}.`;
+  : cat?.slug === 'bathroom-remodeling' && city?.slug === 'conway'
+    ? `Bathroom remodeling Conway AR (ZIP ${ZIP}). Typical remodel $6,500–$18,000, built to last. Free in-home quote: ${BUSINESS.phone}.`
+  : `${cat ? cat.name : 'Bathroom, kitchen and handyman services'} in ${place}${city ? ` (ZIP ${ZIP})` : ''} from All-Star Renovations of Conway, ${miles ? `about ${miles} miles away` : 'our home base'}. Free in-home quote. Call ${BUSINESS.phone}.`;
 
 // FAQs: existing page FAQs + local, de-duplicated.
 const legacyFaq = (legacy?.jsonld || []).flatMap((n) => (n['@graph'] || [n])).filter((n) => [].concat(n['@type']).includes('FAQPage'))
@@ -70,9 +78,14 @@ const localFaq = county ? [
 ] : [
   { q: `How far is ${city.name} from your office?`, a: miles ? `${city.name} is about ${miles} miles from our Conway office. ${local.route}` : 'Our office is in Conway, so Conway homeowners are right in our backyard.' },
   { q: `Which ZIP codes in ${city.name} do you serve?`, a: `We serve ZIP ${ZIP} and the surrounding ${city.county} area. If you are just outside town, call ${BUSINESS.phone} to confirm.` },
-  { q: `What kinds of homes do you work on in ${city.name}?`, a: local.housing },
+  { q: `What kinds of homes do you work on in ${city.name}?`, a: housingText },
   ...(cat ? [{ q: `What ${cat.name.toLowerCase()} services can I get in ${city.name}?`, a: `${subs.map((s) => s.name).join(', ')}. Every project starts with a free in-home quote.` }]
     : [{ q: `What services do you offer in ${city.name}?`, a: 'Bathroom remodeling, kitchen remodeling and handyman services. Use the links on this page to see each service for your city.' }]),
+  ...(cat?.slug === 'bathroom-remodeling' ? [{ q: `How much does bathroom remodeling cost in ${city.name}, AR?`, a: `A typical bathroom remodel with All-Star Renovations runs $6,500–$18,000, depending on scope and materials. Final price is confirmed at your free in-home quote. Our work is built to last, backed by a lifetime product warranty on All-Star Shower Systems materials and a 5-year workmanship warranty. Call ${BUSINESS.phone}.` }] : []),
+  ...(cat?.slug === 'kitchen-remodeling' && city ? [
+    { q: `Which ${city.name} neighborhoods do you serve for kitchen remodeling?`, a: `We serve kitchens across ${city.name}, including ${local.areas.join(', ')} (ZIP ${ZIP}). Call ${BUSINESS.phone} to schedule a free in-home quote.` },
+    { q: `Can I combine kitchen and bathroom work in ${city.name}?`, a: `Yes. Bathroom remodeling is our primary service, with kitchen remodeling also available, so related projects in ${city.name} can be discussed in one in-home quote. See bathroom remodeling in ${city.name} for wet-area options.` },
+  ] : []),
   { q: 'Do you offer financing?', a: 'Yes. Financing is available through Acorn Finance, HFS Financial and RenoFi. Rates, terms and approval are set by each lender.' },
 ];
 const faqs = [{ q, a }, ...localFaq, ...legacyFaq].filter((f, i, arr) => f.a && arr.findIndex((g) => g.q.toLowerCase() === f.q.toLowerCase()) === i).slice(0, 8);
@@ -184,13 +197,21 @@ import Reviews from '../Reviews.astro';
     {local && (
       <section class="wrap sp-sec" aria-labelledby="loc-h">
         <div class="card lp-local">
-          <h2 class="sp-h2" id="loc-h">{city.slug === 'conway' ? 'Our Hometown: Conway' : `Remodeling in ${city.name}: Local Guide`}</h2>
-          <p>{local.housing}</p>
+          <h2 class="sp-h2" id="loc-h">{city.slug === 'conway' ? (cat?.slug === 'kitchen-remodeling' ? 'Kitchen Remodeling in Our Hometown: Conway' : cat?.slug === 'bathroom-remodeling' ? 'Bathroom Remodeling in Our Hometown: Conway' : 'Our Hometown: Conway') : `Remodeling in ${city.name}: Local Guide`}</h2>
+          <p>{housingText}</p>
           <div class="lp-cols">
             <div><h3><span class="ms" aria-hidden="true" data-i="holiday_village"></span>Neighborhoods &amp; areas we serve</h3><ul>{local.areas.map((x) => <li>{x}</li>)}</ul></div>
             <div><h3><span class="ms" aria-hidden="true" data-i="pin_drop"></span>Local landmarks</h3><ul>{local.landmarks.map((x) => <li>{x}</li>)}</ul></div>
             <div><h3><span class="ms" aria-hidden="true" data-i="directions_car"></span>Getting there from Conway</h3><p>{local.route}</p></div>
           </div>
+          {cat && city && (
+            <p style="margin:1rem 0 0">Also see{' '}
+              {cat.slug !== 'bathroom-remodeling' && <><a href={`/bathroom-remodeling/${city.slug}`}>bathroom remodeling in {city.name}</a>{' · '}</>}
+              {cat.slug !== 'kitchen-remodeling' && <><a href={`/kitchen-remodeling/${city.slug}`}>kitchen remodeling in {city.name}</a>{' · '}</>}
+              <a href={`/service-areas/${city.slug}`}>{city.name} service area hub</a>
+              {' · '}<a href="/service-areas">all service areas</a>.
+            </p>
+          )}
         </div>
       </section>
     )}
@@ -225,7 +246,7 @@ import Reviews from '../Reviews.astro';
       <ol class="sp-feat lp-steps">
         <li class="card"><span class="ms" aria-hidden="true">call</span><span><b>Call or request a quote.</b> Tell us about your project{city ? ` in ${city.name}` : ''}.</span></li>
         <li class="card"><span class="ms" aria-hidden="true">straighten</span><span><b>Free in-home estimate.</b> We measure, review options and give you a written quote.</span></li>
-        <li class="card"><span class="ms" aria-hidden="true">construction</span><span><b>Our crew does the work.</b> Most shower replacements and conversions take 1-2 days; timing varies by project.</span></li>
+        <li class="card"><span class="ms" aria-hidden="true">construction</span><span><b>Our crew does the work.</b> {cat?.slug === 'kitchen-remodeling' ? 'Cabinet, countertop and backsplash work is scheduled around your home; timing varies by project.' : cat?.slug === 'handyman-services' ? 'Most repairs and installs are scheduled promptly; timing varies by project.' : 'Most shower replacements and conversions take 1-2 days; timing varies by project.'}</span></li>
         <li class="card"><span class="ms" aria-hidden="true">verified</span><span><b>Backed by our guarantee.</b> 100% Customer Guarantee and a 5-year workmanship warranty.</span></li>
       </ol>
     </section>
