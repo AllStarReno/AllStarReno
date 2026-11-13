@@ -21,12 +21,25 @@ export const ALL_PHOTOS = [...PAIRS.flatMap((p) => [{ ...p.before, title: `${p.t
 export const pairsFor = (service) => PAIRS.filter((p) => !service || p.service === service);
 const place = (slug) => { const c = TOWN[slug] || TOWN.conway; return { '@type': 'Place', name: `${c.name}, Arkansas`, address: { '@type': 'PostalAddress', addressLocality: c.name, addressRegion: 'AR', addressCountry: 'US' },
   geo: { '@type': 'GeoCoordinates', latitude: c.geo.latitude, longitude: c.geo.longitude } }; };
+// Image license/credit fields for Search Console Image Metadata (creator as a
+// named Organization, plus copyright, credit, license and acquireLicensePage).
+// license points at the existing Terms page; acquireLicensePage at Contact.
+export function imageRights() {
+  const org = { '@type': 'Organization', name: BUSINESS.name, url: SITE };
+  return {
+    creator: org,
+    copyrightHolder: { '@type': 'Organization', name: BUSINESS.name, url: SITE },
+    creditText: BUSINESS.name,
+    copyrightNotice: `© ${new Date().getFullYear()} ${BUSINESS.name}`,
+    license: `${SITE}/terms-and-conditions`,
+    acquireLicensePage: `${SITE}/contact`,
+  };
+}
 export function imageObject(it, pageUrl) {
   const u = SITE + it.url;
   return { '@type': 'ImageObject', '@id': `${u}#image`, url: u, contentUrl: u, name: it.title || it.caption, caption: it.caption, description: it.alt,
     width: it.width, height: it.height, encodingFormat: 'image/jpeg', representativeOfPage: false,
-    creator: { '@id': `${SITE}/#business` }, copyrightHolder: { '@id': `${SITE}/#business` }, creditText: BUSINESS.name,
-    copyrightNotice: `© ${new Date().getFullYear()} ${BUSINESS.name}`, contentLocation: place(it.town), ...(pageUrl ? { isPartOf: { '@id': `${pageUrl}#webpage` } } : {}) };
+    ...imageRights(), contentLocation: place(it.town), ...(pageUrl ? { isPartOf: { '@id': `${pageUrl}#webpage` } } : {}) };
 }
 import { PHOTO_PLACEMENT } from '../data/photo-placement.mjs';
 // Photos shown on a page (per PHOTO_PLACEMENT): { cfg, pairs, singles, images } or null.

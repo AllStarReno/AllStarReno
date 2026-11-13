@@ -191,7 +191,7 @@ import Reviews from '../Reviews.astro';
     </section>
 
     <Reviews tags={[cat.slug, sub.slug]} city={city.slug} n={2} />
-    <section class="sec" aria-labelledby="fq-h" class="fq-band" style="background:var(--surface-2,#F4F7FB)">
+    <section class="sec fq-band" aria-labelledby="fq-h" style="background:var(--surface-2,#F4F7FB)">
       <div class="wrap">
         <div class="sec-head"><span class="pill">FAQs</span><h2 id="fq-h">{sub.name} Questions in {place}</h2></div>
         <div class="fq">{faqs.map((f, i) => <details open={i === 0}><summary>{f.q}<span class="ms" aria-hidden="true">expand_more</span></summary><div class="a">{f.a}</div></details>)}</div>
