@@ -39,10 +39,10 @@ const SHOWER = [
 export const MD_PAGES = [
   {
     slug: 'index',
-    title: 'All-Star Renovations | Bathroom Remodeling Conway AR',
+    title: 'All-Star Renovations | Bathroom Remodeler in Conway, AR',
     description: 'Bathroom remodeling contractor in Conway, AR. All-Star Shower Systems, walk-in tubs, kitchen remodeling and handyman services across Central Arkansas.',
     crumbs: ['Home'],
-    body: `# All-Star Renovations | Bathroom Remodeling Conway AR
+    body: `# All-Star Renovations | Bathroom Remodeler in Conway, AR
 
 What does All-Star Renovations do? Bathroom remodeling (primary), plus kitchen remodeling and handyman services in Conway and Central Arkansas.
 
