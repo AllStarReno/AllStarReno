@@ -52,6 +52,7 @@
   var cur = 1, started = false, TOTAL = 5, t0 = Date.now();
 
   function show(n, focus) {
+    var stepped = n !== cur;
     cur = n;
     steps.forEach(function (s) { s.classList.toggle('is-active', +s.getAttribute('data-step') === n); });
     bar.style.width = (Math.min(n, TOTAL) / TOTAL * 100) + '%';
@@ -60,8 +61,11 @@
     nav.hidden = n > TOTAL;
     if (n === 5) recap();
     if (focus) { var f = $('[data-step="' + n + '"] input:not([type=hidden]), [data-step="' + n + '"]', form); if (f && window.innerWidth > 640) f.focus({ preventScroll: true }); }
-    var head = $('.quiz-head', card);
-    if (head) head.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Only scroll after a step change so the hero headline stays visible on first load.
+    if (stepped) {
+      var head = $('.quiz-head', card);
+      if (head) head.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
   function val(name) { var el = form.elements[name]; if (!el) return ''; if (el.length !== undefined && !el.tagName) { var c = Array.prototype.filter.call(el, function (i) { return i.checked; })[0]; return c ? c.value : ''; } if (el.type === 'checkbox') return el.checked ? el.value : ''; return (el.value || '').trim(); }
 
