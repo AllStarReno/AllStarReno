@@ -39,10 +39,10 @@ const SHOWER = [
 export const MD_PAGES = [
   {
     slug: 'index',
-    title: 'All-Star Renovations | Bathroom Remodeling Conway AR',
+    title: 'All-Star Renovations | Bathroom Remodeler in Conway, AR',
     description: 'Bathroom remodeling contractor in Conway, AR. All-Star Shower Systems, walk-in tubs, kitchen remodeling and handyman services across Central Arkansas.',
     crumbs: ['Home'],
-    body: `# All-Star Renovations | Bathroom Remodeling Conway AR
+    body: `# All-Star Renovations | Bathroom Remodeler in Conway, AR
 
 What does All-Star Renovations do? Bathroom remodeling (primary), plus kitchen remodeling and handyman services in Conway and Central Arkansas.
 
@@ -277,7 +277,7 @@ Do you convert tubs to showers? Yes. Most tub-to-shower conversions take 1-2 day
     crumbs: ['Home', 'Bathroom Remodeling', 'Walk-In Tubs'],
     body: `# Walk-In Tubs
 
-Does All-Star Renovations install walk-in tubs? Yes, across Central Arkansas. National 2026 guides put installed walk-in tubs at about $4,000–$15,000 (Angi); final price confirmed at your free in-home quote.
+Does All-Star Renovations install walk-in tubs? Yes, across Central Arkansas. Installed walk-in tubs typically run $5,500–$11,000; final price confirmed at your free in-home quote.
 
 - [HTML page](${SITE}/bathroom-remodeling/walk-in-tubs)
 - [Contact](${SITE}/contact)
