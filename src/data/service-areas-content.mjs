@@ -15,5 +15,6 @@ export const FAQS = [
   { q: 'Is my town covered?', a: 'Check the interactive map or search by city or ZIP. If your town is not listed, call (501) 504-3398 and we will confirm.' },
   { q: 'Do you work in more than one county?', a: 'Yes. We cover Faulkner, Pulaski, Saline and Lonoke counties plus nearby White, Conway and Perry county communities.' },
   { q: 'Do you charge extra to travel outside Conway?', a: 'In-home estimates are free anywhere in our 50-mile service area. Your written quote includes everything, with no surprise trip charges.' },
+  { q: 'Do you serve Cabot, Sherwood, and North Little Rock?', a: 'Yes. We serve Cabot (72023), Sherwood (72120), and North Little Rock (72114, 72116, 72117, 72118), plus Jacksonville, Little Rock, and other towns within about 50 miles of Conway. We offer bathroom remodels, kitchen remodeling, and 24/7 emergency handyman repairs. Free in-home quote: (501) 504-3398.' },
 ];
 export const HOURS = 'Mon–Fri 7:30 AM–5:00 PM, Sat 7:00 AM–7:00 PM, Sun 9:00 AM–3:00 PM';

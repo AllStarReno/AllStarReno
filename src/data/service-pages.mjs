@@ -137,6 +137,9 @@ export const SERVICE_PAGES = {
     features: ['Free in-home quote and measurements', 'Cabinet refacing or full cabinet renovation', 'Countertops fit around sink and range', 'Backsplash planned with the counter line', 'Fixture updates: lighting, faucets, hardware', 'Upgrades can be combined into one project', '5-year workmanship warranty'],
     compare: cmpBase,
     subs: { 'cabinet-renovations': 'Update or replace the cabinets that anchor your kitchen.', 'countertop-replacement': 'Replace worn countertops for a fresher, more usable kitchen.', 'backsplash-installation': 'Add or replace a backsplash to finish the room.', 'cabinet-refacing': 'Refresh the look of existing cabinets without a full tear-out.' },
+    extraFaq: [
+      { q: 'Are you licensed and insured for kitchen remodeling in Arkansas?', a: "Yes. All-Star Renovations is licensed, insured, and workers' comp covered. We're veteran-owned and Conway-based since 2014, with an in-house crew of certified pros and 500+ remodels completed. Free in-home quotes: (501) 504-3398." },
+    ],
   },
   'kitchen-remodeling/cabinet-refacing': {
     kind: 'sub', cat: 'kitchen-remodeling', short: 'Cabinet Refacing', badge: 'Kitchen remodeling · Cabinet refacing',
