@@ -19,6 +19,7 @@ import { SITE, BUSINESS } from '../../data/business.mjs';
 import { SUBS, ANGLES, parseSubCity, visitLine, SUB_CITY_NOINDEX } from '../../data/sub-locations.mjs';
 import { THIN_TOWNS } from '../../data/city-pages.mjs';
 import { guidesFor } from '../../data/guide-links.mjs';
+import { subLocal, catKey, townFor } from '../../data/hyperlocal.mjs';
 interface Props { slug: string }
 const { slug } = Astro.props;
 const { sub, city } = parseSubCity(slug);
@@ -37,16 +38,37 @@ const title = [`${sub.name} in ${place} | All-Star Renovations`, `${sub.name} in
 const description = `${sub.name} in ${city.name}, ${city.county} from All-Star Renovations of Conway${miles ? `, about ${miles} miles away` : ''}. Free in-home quote, lifetime product + 5-year workmanship warranty. Call ${BUSINESS.phone}.`;
 const q = `Who offers ${sub.name.toLowerCase()} in ${city.name}, AR?`;
 const a = `All-Star Renovations of Conway, AR provides ${sub.name.toLowerCase()} in ${city.name}, ${city.county}${miles ? `, about ${miles} miles from our office` : ''}. We bring 20 years of experience, have been in business since 2014 and back every job with a lifetime product warranty + 5-year workmanship warranty. Call ${BUSINESS.phone} for a free in-home quote.`;
-const lead = `${A.fit(city, L)} We help ${A.who}, with free in-home quotes across ${L.areas.slice(0, 2).join(' and ')}.`;
+const HL = subLocal(sub.slug, city); // hyper-local copy (verified public facts only); null for thin towns
+const qa = HL && HL.paras[1] ? `All-Star Renovations of Conway, AR provides ${sub.name.toLowerCase()} in ${city.name}, ${city.county}${miles ? `, about ${miles} miles from our office` : ''}. ${HL.paras[1]} Call ${BUSINESS.phone} for a free in-home quote.` : a;
+const TT = townFor(city.slug);
+const lead = HL && TT ? `${HL.paras[0]} We help ${A.who} across ${city.name}, ${TT.tag}.`
+  : `${A.fit(city, L)} We help ${A.who}, with free in-home quotes across ${L.areas.slice(0, 2).join(' and ')}.`;
 
-const faqs = [
+const faqsBase = [
   { q, a },
   A.faq(city),
+  ...(HL ? [HL.faq] : []),
   { q: `Which ${city.name} ZIP codes do you serve for ${sub.name.toLowerCase()}?`, a: `We serve ZIP ${ZIP} and nearby ${city.county} addresses${L.areas.length ? `, including ${L.areas.slice(0, 3).join(', ')}` : ''}. Just outside town? Call ${BUSINESS.phone} to confirm.` },
   { q: `How do I get a quote for a ${A.noun} in ${city.name}?`, a: `Request a quote on this page or call ${BUSINESS.phone}. ${visitLine(city)} We measure, review options and give you a written quote at no cost.` },
   { q: 'What warranty comes with the work?', a: 'A lifetime product warranty + 5-year workmanship warranty, plus our 100% Customer Guarantee. See the warranty page for details.' },
   { q: 'Do you offer financing?', a: 'Yes. Financing is available through Acorn Finance, HFS Financial and RenoFi. Rates, terms and approval are set by each lender.' },
 ];
+const ck = catKey(cat.slug);
+const townFaq = TT ? (TT.faq[ck] || []).map((f) => ({ q: f.q, a: f.a.replace(/\{mi\}/g, String(miles)) })) : [];
+// Hyper-local towns: lead with town-fact FAQs; generic warranty/financing answers live on the hub, warranty and financing pages.
+// Rotate town FAQs and town context by sub-service index so sibling pages in one town don't repeat each other.
+const pick = (arr, n) => (arr && arr.length ? arr[n % arr.length] : null);
+const hubFaq = TT ? (TT.faq.hub || []).map((f) => ({ q: f.q, a: f.a.replace(/\{mi\}/g, String(miles)) })) : [];
+const faqs = HL ? [
+  { q, a: qa },
+  HL.faq,
+  pick(townFaq, HL.i),
+  pick(hubFaq, HL.i),
+].filter(Boolean) : faqsBase;
+const storyMid = TT && TT.story.split('. ').length > 2 ? TT.story.split('. ').slice(1, -1).join('. ') + '.' : null;
+const sents = TT ? TT.story.split('. ').map((t) => t.replace(/\.$/, '') + '.') : [];
+const pool = HL && TT ? [TT.homes, sents[0], TT.water, sents.slice(1).join(' ') || null, TT.permit.text].filter(Boolean) : [];
+const extras = pool.length ? pool.map((_, k) => pool[(HL.i + k) % pool.length]).filter((t) => !HL.paras.some((x) => x.replace(/\.$/, '') === t.replace(/\.$/, ''))).slice(0, 2) : [];
 
 const crumbs = [
   { name: 'Home', url: `${SITE}/` },
@@ -58,7 +80,7 @@ const crumbs = [
 const pages = loadPages();
 const shell = pages.find((p) => p.slug === 'service-areas/conway');
 const site = shell.jsonld.flatMap((n) => (n['@graph'] || [n])).filter((n) => /\/#/.test(n['@id'] || ''));
-const page = { ...shell, slug, url, title, description, body: 'id="main"', robots: '', indexable,
+const page = { ...shell, assets: shell.assets.filter((t) => !/rel="preload" as="image"/.test(t)), slug, url, title, description, body: 'id="main"', robots: '', indexable,
   jsonld: [{ '@context': 'https://schema.org', '@graph': site }, { '@type': 'BreadcrumbList', itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: c.url })) }] };
 const g = buildGraph(page);
 const SVC = `${url}#service`, FAQ = `${url}#faq`, PAGE = `${url}#webpage`;
@@ -130,11 +152,21 @@ import Reviews from '../Reviews.astro';
       <div class="ans" id="speakable-summary" data-quick-answer style="max-width:none;margin:0">
         <span class="k"><span class="ms" aria-hidden="true">help</span>Quick answer: {sub.name} in {city.name}</span>
         <h2 id="ans-q">{q}</h2>
-        <p>{a}</p>
+        <p>{qa}</p>
       </div>
     </section>
 
-    <section class="wrap sp-sec" aria-labelledby="loc-h">
+    {HL ? (
+      <section class="wrap sp-sec" aria-labelledby="loc-h">
+        <div class="card lp-local">
+          <h2 class="sp-h2" id="loc-h">{HL.h}</h2>
+          {HL.paras.slice(2).map((t) => <p>{t}</p>)}
+          {extras.map((t) => <p>{t}</p>)}
+          <p><b>Before your visit:</b> {A.prep} {visitLine(city)} For neighborhoods, landmarks, water and permit details, see the <a href={`/service-areas/${city.slug}`}>{city.name} area guide</a>.</p>
+        </div>
+      </section>
+    ) : (
+      <section class="wrap sp-sec" aria-labelledby="loc-h">
       <div class="card lp-local">
         <h2 class="sp-h2" id="loc-h">{sub.name} for {city.name} Homes</h2>
         <p>{L.housing}</p>
@@ -146,6 +178,7 @@ import Reviews from '../Reviews.astro';
         </div>
       </div>
     </section>
+    )}
 
     <ContactBlock slug={slug} city={city.name} source={`location_page:${slug}`} topic={d.topic} />
 
@@ -180,7 +213,7 @@ import Reviews from '../Reviews.astro';
       <div class="card sp-cities">
         <div class="sec-head" style="margin-bottom:1.5rem"><span class="pill">Nearby</span><h2 id="near-h">{sub.name} Near {city.name}</h2></div>
         <ul>{near.map((c) => <li><a href={`/${cat.slug}/${sub.slug}/${c.slug}`}><b>{c.name}, AR</b><small>{c.county}</small></a></li>)}</ul>
-        <p class="more"><a href={`/${cat.slug}/${sub.slug}`}>{sub.name} across Central Arkansas →</a> · <a href={`/service-areas/${city.slug}`}>All services in {city.name} →</a></p>
+        <p class="more"><a href={`/${cat.slug}/${sub.slug}`}>{sub.name} across Central Arkansas →</a> · <a href={`/${cat.slug}/${city.slug}`}>{cat.name} in {city.name}, AR →</a> · <a href={`/service-areas/${city.slug}`}>All services in {city.name} →</a></p>
       </div>
     </section>
 
@@ -193,7 +226,7 @@ import Reviews from '../Reviews.astro';
     <Reviews tags={[cat.slug, sub.slug]} city={city.slug} n={2} />
     <section class="sec fq-band" aria-labelledby="fq-h" style="background:var(--surface-2,#F4F7FB)">
       <div class="wrap">
-        <div class="sec-head"><span class="pill">FAQs</span><h2 id="fq-h">{sub.name} Questions in {place}</h2></div>
+        <div class="sec-head"><span class="pill">FAQs</span><h2 id="fq-h">{city.name} {sub.name} FAQs</h2></div>
         <div class="fq">{faqs.map((f, i) => <details open={i === 0}><summary>{f.q}<span class="ms" aria-hidden="true">expand_more</span></summary><div class="a">{f.a}</div></details>)}</div>
       </div>
     </section>

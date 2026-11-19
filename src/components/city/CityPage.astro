@@ -19,6 +19,8 @@ import { SITE, BUSINESS } from '../../data/business.mjs';
 interface Props { slug: string }
 const { slug } = Astro.props;
 import { NOINDEX_SLUGS, THIN_TOWNS } from '../../data/city-pages.mjs';
+import { townFor, glanceRows, townFaqs, catKey, townSubLine, catFacts, CONWAY_BATH_FAQ } from '../../data/hyperlocal.mjs';
+import TownGlance from '../location/TownGlance.astro';
 const [first, key] = slug.split('/');
 const pages = loadPages();
 const legacy = pages.find((p) => p.slug === slug);
@@ -30,6 +32,9 @@ const kind = county ? 'county' : cat ? 'cat' : 'hub';
 const url = `${SITE}/${slug}`;
 const tel = BUSINESS.tel;
 const local = city ? LOCAL[city.slug] : null;
+const T = city ? townFor(city.slug) : null; // hyper-local town copy (verified public facts only)
+const ck = cat ? catKey(cat.slug) : 'hub';
+const CF = cat && T ? catFacts(city.slug, ck, city) : null;
 const countyCities = county ? CITIES.filter((c) => c.countySlug === county.slug) : [];
 const towns = county ? countyCities.filter((c) => THIN_TOWNS.includes(c.slug)).map((c) => ({ ...c, local: LOCAL[c.slug] })) : [];
 const hubHref = (c) => THIN_TOWNS.includes(c.slug) ? `/service-areas/${c.countySlug}#${c.slug}` : `/service-areas/${c.slug}`;
@@ -49,8 +54,8 @@ const housingText = !local ? '' : (cat?.slug === 'kitchen-remodeling' && local.h
 const h1 = county ? ['Remodeling & Handyman Services in', `${county.name}, AR`] : cat ? [`${cat.name} in`, place] : ['Home Remodeling in', place];
 const title0 = county ? `${county.name}, AR Remodeling & Handyman | All-Star Renovations`
   : (cat?.slug === 'bathroom-remodeling' && city?.slug === 'conway') ? 'Bathroom Remodeling Conway AR | All-Star Renovations'
-  : cat ? ((t) => t.length > 60 ? `${cat.name} in ${place} | All-Star` : t)(`${cat.name} in ${place} | All-Star Renovations`) : `${place} Bathroom & Kitchen Remodeling | All-Star Renovations`;
-const fit60 = (t) => [t, t.replace(' | All-Star Renovations', ' | All-Star'), t.replace(' | All-Star Renovations', ' | All-Star').replace('Bathroom & Kitchen', 'Bath & Kitchen'), t.replace(' | All-Star Renovations', ' | All-Star').replace(', AR', ' AR')].find((x) => x.length <= 60) || t.replace(' | All-Star Renovations', ' | All-Star');
+  : cat ? ((t) => t.length > 60 ? `${cat.name} in ${place} | All-Star` : t)(`${cat.name} in ${place} | All-Star Renovations`) : `${place} Home Remodeling & Handyman | All-Star Renovations`;
+const fit60 = (t) => [t, t.replace(' | All-Star Renovations', ' | All-Star'), t.replace(' | All-Star Renovations', ' | All-Star').replace('Home Remodeling & Handyman', 'Remodeling & Handyman'), t.replace(' | All-Star Renovations', ' | All-Star').replace(', AR', ' AR')].find((x) => x.length <= 60) || t.replace(' | All-Star Renovations', ' | All-Star');
 const title = fit60(title0);
 const what = cat ? cat.name.toLowerCase() : 'bathroom remodeling, kitchen remodeling and handyman services';
 const q = county ? `Does All-Star Renovations serve ${county.name}, Arkansas?` : `Does All-Star Renovations offer ${what} in ${city.name}, AR?`;
@@ -60,6 +65,7 @@ const a = county
     ? `Yes. All-Star Renovations provides bathroom remodeling in Conway, Faulkner County, where our office is based. We serve ZIP ${ZIP}. A typical bathroom remodel runs $6,500–$18,000; final price confirmed at your free in-home quote. Licensed, insured, and workers' comp. 100% Customer Guarantee and a 5-year workmanship warranty. Call ${BUSINESS.phone}.`
     : `Yes. All-Star Renovations provides ${what} in ${city.name}, ${city.county}${miles ? `, about ${miles} miles from our Conway office` : ', where our office is based'}. We serve ZIP ${ZIP} with free in-home estimates, a 100% Customer Guarantee and a 5-year workmanship warranty. Call ${BUSINESS.phone}.`;
 const lead = county ? `${county.note} Pick your city below for local details, or request a free in-home quote.`
+  : cat && T ? `Serving ${city.name}, ${T.tag}, with ${cat.name.toLowerCase()} from All-Star Renovations, a locally owned company based in Conway, AR${miles ? `, about ${miles} miles away` : ''}. ${T.homes.split(': ')[0].split('. ')[0].replace(/\.$/, '')}.`
   : cat ? `${city.name} homeowners in ${city.county} can book ${cat.name.toLowerCase()} from All-Star Renovations, a locally owned Conway, AR company. ${housingText.split('. ')[0]}.`
   : `${city.description} ${local.route}`;
 const description = (legacy && kind !== 'hub') ? legacy.description
@@ -75,6 +81,20 @@ const localFaq = county ? [
   { q: `Which ${county.name} cities do you serve?`, a: `${countyCities.map((c) => `${c.name} (ZIP ${c.zips.join(', ')})`).join('; ')}. Nearby communities are usually covered too; call ${BUSINESS.phone} to confirm.` },
   ...(towns.length ? [{ q: `Do you serve ${towns.map((t) => t.name).join(', ').replace(/, ([^,]*)$/, ' and $1')} in ${county.name}?`, a: `Yes. ${towns.map((t) => `${t.name} (ZIP ${t.zips.join(', ')}) is about ${t.milesFromHQ} miles from our Conway office`).join('; ')}. We offer the same bathroom, kitchen and handyman services there, with free in-home quotes. Call ${BUSINESS.phone} to schedule.` }] : []),
   { q: `What services do you offer in ${county.name}?`, a: 'Bathroom remodeling (walk-in showers, tub-to-shower conversions, walk-in tubs, aging-in-place updates), kitchen remodeling (cabinets, countertops, backsplashes) and handyman repairs, installation and maintenance.' },
+] : T ? [
+  ...townFaqs(city.slug, ck, city),
+  ...(!cat ? [
+    { q: `How far is ${city.name} from your office?`, a: miles ? `${city.name} is about ${miles} miles from our Conway office. ${local.route}` : 'Our office is in Conway, so Conway homeowners are right in our backyard.' },
+    { q: `What are homes like in ${city.name}?`, a: T.homes },
+    { q: `Who issues building permits in ${city.name}?`, a: `${T.permit.office}. ${T.permit.text}` },
+  ] : []),
+  ...(CF ? [CF.faq] : []),
+  ...(cat?.slug === 'bathroom-remodeling' && city.slug === 'conway' ? CONWAY_BATH_FAQ : []),
+  { q: `Which ZIP codes in ${city.name} do you serve?`, a: `We serve ZIP ${ZIP} and the surrounding ${city.county} area. If you are just outside town, call ${BUSINESS.phone} to confirm.` },
+  ...(cat ? [] : [{ q: `What services do you offer in ${city.name}?`, a: 'Bathroom remodeling, kitchen remodeling and handyman services. Use the links on this page to see each service for your city.' }]),
+  ...(cat?.slug === 'bathroom-remodeling' ? [{ q: `How much does bathroom remodeling cost in ${city.name}, AR?`, a: `A typical bathroom remodel with All-Star Renovations runs $6,500–$18,000, depending on scope and materials. Final price is confirmed at your free in-home quote. Our work is built to last, backed by a lifetime product warranty on All-Star Shower Systems materials and a 5-year workmanship warranty. Call ${BUSINESS.phone}.` }] : []),
+  ...(cat?.slug === 'kitchen-remodeling' ? [{ q: `Can I combine kitchen and bathroom work in ${city.name}?`, a: `Yes. Bathroom remodeling is our primary service, with kitchen remodeling also available, so related projects in ${city.name} can be discussed in one in-home quote.` }] : []),
+  ...(cat ? [] : [{ q: 'Do you offer financing?', a: 'Yes. Financing is available through Acorn Finance, HFS Financial and RenoFi. Rates, terms and approval are set by each lender.' }]),
 ] : [
   { q: `How far is ${city.name} from your office?`, a: miles ? `${city.name} is about ${miles} miles from our Conway office. ${local.route}` : 'Our office is in Conway, so Conway homeowners are right in our backyard.' },
   { q: `Which ZIP codes in ${city.name} do you serve?`, a: `We serve ZIP ${ZIP} and the surrounding ${city.county} area. If you are just outside town, call ${BUSINESS.phone} to confirm.` },
@@ -88,7 +108,7 @@ const localFaq = county ? [
   ] : []),
   { q: 'Do you offer financing?', a: 'Yes. Financing is available through Acorn Finance, HFS Financial and RenoFi. Rates, terms and approval are set by each lender.' },
 ];
-const faqs = [{ q, a }, ...localFaq, ...legacyFaq].filter((f, i, arr) => f.a && arr.findIndex((g) => g.q.toLowerCase() === f.q.toLowerCase()) === i).slice(0, 8);
+const faqs = [{ q, a }, ...localFaq, ...legacyFaq].filter((f, i, arr) => f.a && arr.findIndex((g) => g.q.toLowerCase() === f.q.toLowerCase()) === i).slice(0, cat?.slug === 'bathroom-remodeling' && city?.slug === 'conway' ? 12 : 8);
 
 // Breadcrumbs
 const crumbs = [{ name: 'Home', url: `${SITE}/` }];
@@ -99,7 +119,7 @@ crumbs.push({ name: place, url });
 
 // Page + JSON-LD (sitewide nodes reused from the existing site; page nodes built here).
 const site = shell.jsonld.flatMap((n) => (n['@graph'] || [n])).filter((n) => /\/#/.test(n['@id'] || ''));
-const page = { ...shell, slug, url, title: legacy?.title && kind === 'cat' ? legacy.title : title, description, body: 'id="main"', robots: '', indexable: !NOINDEX_SLUGS.has(slug),
+const page = { ...shell, assets: shell.assets.filter((t) => !/rel="preload" as="image"/.test(t)), slug, url, title: legacy?.title && kind === 'cat' ? legacy.title : title, description, body: 'id="main"', robots: '', indexable: !NOINDEX_SLUGS.has(slug),
   jsonld: [{ '@context': 'https://schema.org', '@graph': site }, { '@type': 'BreadcrumbList', itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: c.url })) }] };
 const g = buildGraph(page);
 const SVC = `${url}#service`, FAQ = `${url}#faq`, PAGE = `${url}#webpage`;
@@ -183,7 +203,7 @@ import Reviews from '../Reviews.astro';
       <div class="sec-head"><span class="pill">{cat ? cat.name : 'Services'}</span><h2 id="svc-h">{cat ? `${cat.name.replace(' Services', '')} Services in ${place}` : `Services Available in ${place}`}</h2><p>Pick the project that fits, or call {BUSINESS.phone} and describe it.</p></div>
       <div class="sp-subs">
         {cat ? subs.map((s) => (
-          <a class="card" href={`/${cat.slug}/${s.slug}/${city.slug}`}><h3>{s.name} in {city.name}</h3><p>{subBlurb[s.slug] || `${s.name} for ${city.name} homes.`}</p>{s.slug === 'all-star-shower-systems' && <small class="sp-tiers">Premier $5,000–$7,499 · Signature $7,500–$9,999 · Designer $10,000–$12,500+ · Final price confirmed at your free in-home quote.</small>}<span class="go">See {s.name.toLowerCase()} in {city.name} <span class="ms" aria-hidden="true">arrow_forward</span></span></a>
+          <a class="card" href={`/${cat.slug}/${s.slug}/${city.slug}`}><h3>{s.name} in {city.name}</h3><p>{(T && townSubLine(city.slug, s.slug)) || subBlurb[s.slug] || `${s.name} for ${city.name} homes.`}</p>{s.slug === 'all-star-shower-systems' && <small class="sp-tiers">Premier $5,000–$7,499 · Signature $7,500–$9,999 · Designer $10,000–$12,500+ · Final price confirmed at your free in-home quote.</small>}<span class="go">See {s.name.toLowerCase()} in {city.name} <span class="ms" aria-hidden="true">arrow_forward</span></span></a>
         )) : city ? CATEGORIES.map((c) => (
           <div class="card"><h3><a href={catHref(c.slug, city.slug)}>{c.name} in {city.name}</a></h3><ul class="sp-svc-links">{c.subs.filter((s) => s.slug !== 'full-bathroom-remodel').map((s) => <li><a href={`/${c.slug}/${s.slug}/${city.slug}`}>{s.name} in {city.name}</a>{s.slug === 'all-star-shower-systems' && <small class="sp-tiers">Premier $5,000–$7,499 · Signature $7,500–$9,999 · Designer $10,000–$12,500+ · Final price confirmed at your free in-home quote.</small>}</li>)}</ul><a class="go" href={catHref(c.slug, city.slug)}>See all {c.name.split(' ')[0].toLowerCase()} services in {city.name} <span class="ms" aria-hidden="true">arrow_forward</span></a></div>
         )) : CATEGORIES.map((c) => (
@@ -194,7 +214,39 @@ import Reviews from '../Reviews.astro';
 
     <ContactBlock slug={slug} city={city ? city.name : undefined} source={`city_page:${slug}`} topic={topic} />
 
-    {local && (
+    {local && T && !cat && (
+      <section class="wrap sp-sec" aria-labelledby="loc-h">
+        <div class="card lp-local">
+          <h2 class="sp-h2" id="loc-h">{T.hubH}</h2>
+          <p>{T.story}</p>
+          <p>{T.homes}</p>
+          {T.water && <p>{T.water}</p>}
+          <p>{T.permit.text} <a href={T.permit.url} rel="noopener" target="_blank">{T.permit.office}</a>.</p>
+          <TownGlance rows={glanceRows(city.slug, city, 'hub')} title={`${city.name} at a glance`} id="gl-h" />
+          <div class="lp-cols">
+            <div><h3><span class="ms" aria-hidden="true" data-i="holiday_village"></span>Neighborhoods &amp; areas we serve</h3><ul>{local.areas.map((x) => <li>{x}</li>)}</ul></div>
+            <div><h3><span class="ms" aria-hidden="true" data-i="pin_drop"></span>Local landmarks</h3><ul>{local.landmarks.map((x) => <li>{x}</li>)}</ul></div>
+            <div><h3><span class="ms" aria-hidden="true" data-i="directions_car"></span>Getting there from Conway</h3><p>{local.route}</p></div>
+          </div>
+        </div>
+      </section>
+    )}
+    {local && T && cat && (
+      <section class="wrap sp-sec" aria-labelledby="loc-h">
+        <div class="card lp-local">
+          <h2 class="sp-h2" id="loc-h">{T[ck + 'H']}</h2>
+          <p>{CF.p}</p>
+          <p>{T.permit.text} Details: <a href={T.permit.url} rel="noopener" target="_blank">{T.permit.office}</a>.</p>
+          <p class="hl-src" style="font-size:.85rem;color:var(--muted)">Housing figures: U.S. Census Bureau, American Community Survey 2020–2024 5-year estimates.</p>
+          <p style="margin:1rem 0 0">Neighborhoods, landmarks, water and directions: <a href={`/service-areas/${city.slug}`}>{city.name} area guide</a>.
+            {cat.slug !== 'bathroom-remodeling' && <> See also <a href={`/bathroom-remodeling/${city.slug}`}>bathroom remodeling in {city.name}</a>.</>}
+            {cat.slug === 'bathroom-remodeling' && <> See also <a href={`/kitchen-remodeling/${city.slug}`}>kitchen remodeling in {city.name}</a>.</>}
+            {' '}<a href="/service-areas">All service areas</a>.
+          </p>
+        </div>
+      </section>
+    )}
+    {local && !T && (
       <section class="wrap sp-sec" aria-labelledby="loc-h">
         <div class="card lp-local">
           <h2 class="sp-h2" id="loc-h">{city.slug === 'conway' ? (cat?.slug === 'kitchen-remodeling' ? 'Kitchen Remodeling in Our Hometown: Conway' : cat?.slug === 'bathroom-remodeling' ? 'Bathroom Remodeling in Our Hometown: Conway' : 'Our Hometown: Conway') : `Remodeling in ${city.name}: Local Guide`}</h2>
@@ -281,7 +333,7 @@ import Reviews from '../Reviews.astro';
     {!county && <Reviews tags={cat ? [cat.slug] : ["bathroom-remodeling", "handyman-services"]} city={city ? city.slug : null} n={cat ? 3 : 2} title={city ? `What customers say about our work near ${city.name}` : undefined} />}
     <section class="sec fq-band" aria-labelledby="fq-h" style="background:var(--surface-2,#F4F7FB)">
       <div class="wrap">
-        <div class="sec-head"><span class="pill">FAQs</span><h2 id="fq-h">Common Questions in {place}</h2></div>
+        <div class="sec-head"><span class="pill">FAQs</span><h2 id="fq-h">{city ? city.name : place.replace(/, AR$/, '')}{cat ? ` ${cat.name.split(' ')[0]}` : ''} FAQs</h2></div>
         <div class="fq">{faqs.map((f, i) => <details open={i === 0}><summary>{f.q}<span class="ms" aria-hidden="true">expand_more</span></summary><div class="a">{f.a}</div></details>)}</div>
       </div>
     </section>
