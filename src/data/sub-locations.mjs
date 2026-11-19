@@ -14,8 +14,8 @@ export const parseSubCity = (slug) => { const [c, s, t] = slug.split('/'); const
 const band = (m) => (m === 0 ? 'home' : m <= 15 ? 'near' : m <= 30 ? 'mid' : 'far');
 const visit = { home: 'Conway is our home base, so estimate visits and follow-ups are quick to schedule.',
   near: 'is a short drive from our Conway office, so estimate visits are easy to fit into the week.',
-  mid: 'is within our regular service loop, and we group visits so travel never holds up your project.',
-  far: 'sits toward the edge of our 50-mile radius; we plan the visit and crew days together so the job stays on schedule.' };
+  mid: 'is within our regular service loop, and we group visits to keep travel time down.',
+  far: 'sits toward the edge of our 50-mile radius; we plan the estimate visit and crew days together.' };
 export const visitLine = (city) => { const b = band(city.milesFromHQ); return b === 'home' ? visit.home : `${city.name} ${visit[b]}`; };
 
 // Per sub-service: who it fits, a local-fit sentence built from the city's housing notes, prep tips and FAQ angles.

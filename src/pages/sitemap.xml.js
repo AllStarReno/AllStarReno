@@ -7,8 +7,8 @@ import { photosFor } from '../lib/project-photos.mjs';
 import { lastmodFor } from '../lib/lastmod.mjs';
 const D = 'src/data/', C = 'src/components/';
 const SHARED = { service: [C + 'service/ServicePage.astro', D + 'service-pages.mjs', D + 'reviews.mjs'],
-  city: [C + 'city/CityPage.astro', D + 'city-pages.mjs', D + 'service-areas-content.mjs', D + 'reviews.mjs'],
-  sub: [C + 'location/SubCityPage.astro', D + 'sub-locations.mjs', D + 'service-pages.mjs', D + 'reviews.mjs'] };
+  city: [C + 'city/CityPage.astro', D + 'city-pages.mjs', D + 'service-areas-content.mjs', D + 'reviews.mjs', D + 'hyperlocal.mjs', C + 'location/TownGlance.astro'],
+  sub: [C + 'location/SubCityPage.astro', D + 'sub-locations.mjs', D + 'service-pages.mjs', D + 'reviews.mjs', D + 'hyperlocal.mjs'] };
 const SUBSET = new Set(SUB_CITY_SLUGS), CITYSET = new Set(CITY_PAGE_SLUGS);
 const sources = (p) => [p.file, ...(p.slug === 'reviews' ? [D + 'review-summary.mjs', D + 'reviews.mjs'] : []), ...(SUBSET.has(p.slug) ? SHARED.sub : SERVICE_PAGES[p.slug] ? SHARED.service : CITYSET.has(p.slug) || p.slug.startsWith('service-areas/') ? SHARED.city : [])].filter(Boolean);
 const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
