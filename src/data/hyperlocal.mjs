@@ -505,7 +505,7 @@ export const TOWN = {
   },
   ward: {
     pop: '6,052', tag: 'Lonoke County’s second-largest city',
-    story: 'Ward is the second most populous city in Lonoke County. Its downtown runs along the railroad beside Highway 367, the former path of US-67, and newer development has spread south along Peyton Street toward Old Austin. The city runs its own water and wastewater utility.',
+    story: 'Ward is the second most populous city in Lonoke County. Its downtown runs along the railroad beside Highway 367, the former path of US-67, and newer development has spread south along Peyton Street toward Old Austin.',
     homes: 'Ward is one of the newest housing markets we serve: the median home was built in 2006, about 71% of homes date from 2000 or later, and about 34% from 2010 or later. Only about 9% predate 1980.',
     water: 'The City of Ward operates its own water and wastewater utility.',
     permit: { office: 'City of Ward permitting office', url: 'https://wardarkansas.org/license-permits', text: 'Ward takes building permit applications online, including for plumbing, HVAC, electrical and roofing modifications.' },

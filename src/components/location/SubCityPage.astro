@@ -68,7 +68,7 @@ const faqs = HL ? [
 const storyMid = TT && TT.story.split('. ').length > 2 ? TT.story.split('. ').slice(1, -1).join('. ') + '.' : null;
 const sents = TT ? TT.story.split('. ').map((t) => t.replace(/\.$/, '') + '.') : [];
 const pool = HL && TT ? [TT.homes, sents[0], TT.water, sents.slice(1).join(' ') || null, TT.permit.text].filter(Boolean) : [];
-const extras = pool.length ? [pick(pool, HL.i), pick(pool, HL.i + 3)].filter((t, k, arr) => t && arr.indexOf(t) === k && !HL.paras.some((x) => x.replace(/\.$/, '') === t.replace(/\.$/, ''))) : [];
+const extras = pool.length ? pool.map((_, k) => pool[(HL.i + k) % pool.length]).filter((t) => !HL.paras.some((x) => x.replace(/\.$/, '') === t.replace(/\.$/, ''))).slice(0, 2) : [];
 
 const crumbs = [
   { name: 'Home', url: `${SITE}/` },

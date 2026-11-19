@@ -7,7 +7,7 @@ const { rows, title, id } = Astro.props;
 ---
 {rows.length > 0 && (
   <div class="hl-glance-wrap" aria-labelledby={id}>
-    <h3 id={id} class="hl-glance-h"><span class="ms" aria-hidden="true" data-i="query_stats"></span>{title}</h3>
+    <h3 id={id} class="hl-glance-h"><span class="ms" aria-hidden="true" data-i="map"></span>{title}</h3>
     <dl class="hl-glance">
       {rows.map(([k, v]) => <div><dt>{k}</dt><dd>{typeof v === 'object' ? <a href={v.href} rel="noopener" target="_blank">{v.text}</a> : v}</dd></div>)}
     </dl>
