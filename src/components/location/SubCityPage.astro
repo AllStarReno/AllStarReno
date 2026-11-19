@@ -180,7 +180,7 @@ import Reviews from '../Reviews.astro';
       <div class="card sp-cities">
         <div class="sec-head" style="margin-bottom:1.5rem"><span class="pill">Nearby</span><h2 id="near-h">{sub.name} Near {city.name}</h2></div>
         <ul>{near.map((c) => <li><a href={`/${cat.slug}/${sub.slug}/${c.slug}`}><b>{c.name}, AR</b><small>{c.county}</small></a></li>)}</ul>
-        <p class="more"><a href={`/${cat.slug}/${sub.slug}`}>{sub.name} across Central Arkansas →</a> · <a href={`/service-areas/${city.slug}`}>All services in {city.name} →</a></p>
+        <p class="more"><a href={`/${cat.slug}/${sub.slug}`}>{sub.name} across Central Arkansas →</a> · <a href={`/${cat.slug}/${city.slug}`}>{cat.name} in {city.name}, AR →</a> · <a href={`/service-areas/${city.slug}`}>All services in {city.name} →</a></p>
       </div>
     </section>
 
