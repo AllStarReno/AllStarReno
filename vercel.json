@@ -230,12 +230,12 @@
     },
     {
       "source": "/conway-ar",
-      "destination": "/service-areas/conway",
+      "destination": "/bathroom-remodeling/conway",
       "permanent": true
     },
     {
       "source": "/locations/conway-ar",
-      "destination": "/service-areas/conway",
+      "destination": "/bathroom-remodeling/conway",
       "permanent": true
     },
     {

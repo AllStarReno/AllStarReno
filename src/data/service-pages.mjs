@@ -73,7 +73,7 @@ export const SERVICE_PAGES = {
   },
   'bathroom-remodeling/walk-in-tubs': {
     kind: 'sub', cat: 'bathroom-remodeling', short: 'Walk-In Tub', badge: 'Bathroom remodeling · Walk-in tubs · Conway, AR',
-    h1: ['Walk-In Tub Installation in', 'Conway, AR & Central Arkansas'], timeline: 'Most 1-2 days (timing varies)', topic: 'Bathroom',
+    h1: ['Walk-In Tub Installation in', 'Central Arkansas'], timeline: 'Most 1-2 days (timing varies)', topic: 'Bathroom',
     lead: 'A walk-in tub has a watertight low-entry door and a built-in seat instead of a tall tub wall, so you can keep soaking without climbing over the side. All-Star Renovations of Conway, Arkansas removes your old tub and installs a walk-in tub across Central Arkansas, with grab-bar and safety planning by our own crew.',
     q: 'How much does a walk-in tub cost in Conway, AR?',
     a: 'National 2026 cost guides put a professionally installed walk-in tub at about $4,000–$15,000, with an average near $8,000 (Angi). Basic soaker models sit at the low end; hydrotherapy, bariatric and wheelchair-accessible models cost more, and plumbing or water heater upgrades can add to it. Your final price is confirmed at your free in-home quote from All-Star Renovations in Conway, AR: call (501) 504-3398.',
@@ -98,7 +98,7 @@ export const SERVICE_PAGES = {
   },
   'bathroom-remodeling/full-bathroom-remodel': {
     kind: 'sub', cat: 'bathroom-remodeling', short: 'Full Bathroom Remodel', badge: 'Bathroom remodeling · Full & partial remodels · Conway, AR',
-    h1: ['Full & Partial Bathroom Remodels in', 'Conway, AR & Central Arkansas'], timeline: 'Set in your written quote', topic: 'Bathroom',
+    h1: ['Full & Partial Bathroom Remodels in', 'Central Arkansas'], timeline: 'Set in your written quote', topic: 'Bathroom',
     lead: 'Some bathrooms only need the tub or shower replaced. Others need the whole room rethought: the layout, flooring, vanity, fixtures and lighting together. All-Star Renovations of Conway, Arkansas plans both, and tells you at the free in-home quote which one your bathroom actually needs.',
     q: 'What is the difference between a full and a partial bathroom remodel?',
     a: 'A partial bathroom remodel keeps the layout and replaces the part that is failing, usually the tub, shower or surround; most shower replacements and tub-to-shower conversions take 1-2 days (timing varies). A full bathroom remodel updates the whole room together, such as the wet area, flooring, vanity, fixtures, lighting and any layout or plumbing changes, and is priced by scope at your free in-home quote. All-Star Renovations serves a 50-mile radius of Conway, AR: call (501) 504-3398.',
