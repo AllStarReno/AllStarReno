@@ -1,4 +1,5 @@
-/* All-Star Renovations: Microsoft Ads bathroom quote funnel for /lp/microsoft/bathroom-remodel.
+/* All-Star Renovations: Microsoft Ads quote funnel for
+   /lp/microsoft/{bathroom-remodel,tub-to-shower,walk-in-tub}.
    Submits to /api/lead with the same field names as lead-form.js, including the TrustedForm cert.
    Custom events go to dataLayer and to window.uetq when it exists. generate_lead is pushed once on success. */
 (function () {
@@ -25,6 +26,13 @@
   if (fresh) { st = {}; ATTR.forEach(function (k) { if (q.get(k)) st[k] = q.get(k).slice(0, 200); }); st.landing = location.pathname; }
   try { sessionStorage.setItem('asr-attr', JSON.stringify(st)); } catch (e) {}
   if (!st.landing) st.landing = location.pathname;
+
+  var VARIANT = document.body.getAttribute('data-variant') || 'main';
+  var SOURCE = ({
+    'main': 'lp_microsoft_bathroom-remodel',
+    'tub-to-shower': 'lp_microsoft_tub-to-shower',
+    'walk-in-tub': 'lp_microsoft_walk-in-tub'
+  })[VARIANT] || 'lp_microsoft_bathroom-remodel';
 
   // ---------- service area ----------
   // Service area: 50 mi for the business; the Microsoft Ads target is ~25 mi (ZIP tiers in the campaign plan).
@@ -108,7 +116,7 @@
   function score() {
     var s = 0, tl = val('timeline'), rs = val('reason');
     if (within30()) s += 3; else if (tl === '1 to 3 Months') s += 1;
-    if (/^Yes/.test(val('owner'))) s += 2;
+    if (isOwner()) s += 2;
     if (/Safety|Leaks/.test(rs)) s += 1;
     var a = area(zipEl.value);
     if (a.tier) s += (a.tier === 'core' ? 2 : 1); else if (a.ok) s += 0;
@@ -116,7 +124,9 @@
   }
   function within30() { var tl = val('timeline'); return tl === 'Immediate (1-2 Weeks)' || tl === 'Within 1 Month'; }
   // The lead Microsoft Ads should optimize toward: homeowner, starting within 30 days, inside the ~25-mile ad area.
-  function qualified() { return within30() && /^Yes/.test(val('owner')) && !!area(zipEl.value).tier; }
+  function qualified() { return within30() && isOwner() && !!area(zipEl.value).tier; }
+  // Homeowner, or an adult child helping the parent who owns the home (walk-in tub page).
+  function isOwner() { return /^Yes|^A family member owns/.test(val('owner')); }
 
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
@@ -130,8 +140,8 @@
       firstName: val('firstName'), lastName: val('lastName'), email: val('email'), phone: val('phone'),
       service: val('category') || 'Bathroom Remodeling', category: 'Bathroom Remodeling',
       city: a.city || ('ZIP ' + zipEl.value), timeline: val('timeline'),
-      message: '[Microsoft Ads funnel | Lead score: ' + lvl + '] Project: ' + val('category') + ' | Reason: ' + val('reason') + ' | Timeline: ' + val('timeline') + ' | ZIP: ' + zipEl.value + (a.ok ? '' : ' (verify radius)') + ' | Ad area: ' + (a.tier || 'outside 25 mi') + ' | Homeowner: ' + val('owner') + ' | 30-day qualified: ' + (qualified() ? 'YES' : 'no'),
-      company: val('company'), t: String(t0), source: 'lp_microsoft_bathroom-remodel', page: location.pathname, smsConsent: val('smsConsent'),
+      message: '[Microsoft Ads funnel' + (VARIANT !== 'main' ? ': ' + VARIANT : '') + ' | Lead score: ' + lvl + '] Project: ' + val('category') + (val('detail') ? ' | Detail: ' + val('detail') : '') + ' | Reason: ' + val('reason') + ' | Timeline: ' + val('timeline') + ' | ZIP: ' + zipEl.value + (a.ok ? '' : ' (verify radius)') + ' | Ad area: ' + (a.tier || 'outside 25 mi') + ' | Homeowner: ' + val('owner') + ' | 30-day qualified: ' + (qualified() ? 'YES' : 'no'),
+      company: val('company'), t: String(t0), source: SOURCE, page: location.pathname, smsConsent: val('smsConsent'),
       xxTrustedFormCertUrl: val('xxTrustedFormCertUrl')
     };
     ATTR.concat(['landing']).forEach(function (k) { data['a_' + k] = st[k] || ''; });
@@ -166,11 +176,11 @@
   });
   $('[data-book]', form).addEventListener('click', function () { track('booking_open', val('category')); });
 
-  // open quiz from anywhere (optionally preselect project)
+  // open quiz from anywhere (optionally preselect project or a variant detail)
   function openQuiz(cat) {
     if (cat && cur <= TOTAL) {
-      var r = $$('[name=category]', form).filter(function (i) { return i.value === cat; })[0];
-      if (r) { r.checked = true; if (!started) { started = true; track('quiz_start', cat); } show(2); }
+      var r = $$('[name=category],[name=detail]', form).filter(function (i) { return i.value === cat; })[0];
+      if (r) { r.checked = true; if (!started) { started = true; track('quiz_start', val('category')); } show(2); }
     }
     card.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }

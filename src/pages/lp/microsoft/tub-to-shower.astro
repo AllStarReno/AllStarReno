@@ -1,0 +1,404 @@
+---
+// Microsoft Ads tub-to-shower quote page. Keeps /lp/microsoft/tub-to-shower so existing ads keep working.
+// noindex, not in the sitemap. Tracking matches other /lp pages (GTM, AdTags, TrustedForm, mobile-contact.js).
+import AdTags from '../../../components/lp/AdTags.astro';
+import { SITE, BUSINESS } from '../../../data/business.mjs';
+const title = 'Tub-to-Shower Conversion in 1–2 Days | Conway, AR | All-Star Renovations';
+const desc = 'Swap the tub you step over for a low-threshold walk-in shower, installed in 1–2 days by our own Conway crew. Shower systems from $5,000. Free in-home quote. Call (501) 504-3398.';
+const url = `${SITE}/lp/microsoft/tub-to-shower`;
+const A = BUSINESS.address;
+const graph = { '@context': 'https://schema.org', '@graph': [
+  { '@type': 'HomeAndConstructionBusiness', '@id': `${SITE}/#business`, name: BUSINESS.name, url: `${SITE}/`, telephone: BUSINESS.telSchema, email: BUSINESS.email,
+    address: { '@type': 'PostalAddress', ...A }, disambiguatingDescription: BUSINESS.identity },
+  { '@type': 'WebPage', '@id': `${url}#webpage`, url, name: title, about: { '@id': `${SITE}/#business` }, breadcrumb: { '@id': `${url}#breadcrumb` } },
+  { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` }, { '@type': 'ListItem', position: 2, name: 'Tub-to-Shower Quote', item: url }] },
+] };
+---
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <!-- Google Tag Manager -->
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-5MV7NF63');
+  </script>
+  <!-- End Google Tag Manager -->
+  <title>{title}</title>
+  <meta name="description" content={desc} />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#0F2B48" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={desc} />
+  <meta property="og:image" content={`${SITE}/assets/img/og-image.jpg`} />
+  <meta property="og:url" content={url} />
+  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/assets/fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/css/lp-microsoft-bathroom.css" />
+  <script type="application/ld+json" set:html={JSON.stringify(graph)} />
+  <AdTags />
+</head>
+<body data-variant="tub-to-shower">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MV7NF63" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <span>Veteran-owned &middot; Conway-based crew &middot; Licensed, insured &amp; workers&rsquo; comp covered</span>
+    <a href="tel:+15015043398" data-call data-contact="call">Call or text (501) 504-3398</a>
+  </div>
+</div>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="#top" aria-label="All-Star Renovations home">
+      <img src="/icon-192.png" alt="" width="44" height="44">
+      <span><b>ALL-STAR RENOVATIONS</b><small>Central Arkansas &middot; Conway</small></span>
+    </a>
+    <div class="hdr-cta">
+      <a class="btn-ghost hide-sm" href="tel:+15015043398" data-call data-contact="call">(501) 504-3398</a>
+      <a class="btn-gold" href="#quote" data-open-quiz>Free Quote</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO + QUIZ -->
+<section class="hero">
+  <img class="hero-bg" src="/assets/img/ref-sliding-glass.webp" alt="" width="1000" height="668">
+  <div class="hero-scrim"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy reveal">
+      <p class="kicker">Conway &middot; Vilonia &middot; Greenbrier &middot; Maumelle &middot; Mayflower</p>
+      <h1>Ditch the tub you step over.<br><em>Walk into a new shower in 1&ndash;2 days.</em></h1>
+      <p class="lede">We pull out the old tub, set a low-threshold base and finish the walls with grout-free All-Star Shower System panels, custom-cut for your space. Installed by our own crew, not subcontractors. 500+ bathrooms remodeled since 2014.</p>
+      <ul class="checks">
+        <li>Thresholds as low as 2 inches, or a curbless roll-in entry</li>
+        <li>Shower systems from $5,000 &middot; lifetime product warranty + 5-year workmanship</li>
+        <li>Pick your appointment time online in under 60 seconds</li>
+      </ul>
+      <div class="hero-proof">
+        <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span><b>5.0 on Google</b> &middot; 10 reviews</span>
+      </div>
+    </div>
+
+    <div class="quiz-card reveal" id="quote" data-quiz>
+      <div class="quiz-head">
+        <p class="quiz-title">Get your free tub-to-shower quote</p>
+        <div class="progress" aria-hidden="true"><span data-bar></span></div>
+        <p class="quiz-step-label" data-steplabel>Step 1 of 5</p>
+      </div>
+
+      <form data-quiz-form novalidate>
+        <!-- STEP 1 -->
+        <fieldset class="step is-active" data-step="1">
+          <input type="hidden" name="category" value="Tub-to-Shower Conversions">
+          <legend>What&rsquo;s there now?</legend>
+          <div class="opts opts-2">
+            <label class="opt"><input type="radio" name="detail" value="Tub/shower combo" required><span>A tub/shower combo</span></label>
+            <label class="opt"><input type="radio" name="detail" value="Garden or soaking tub"><span>A garden or soaking tub</span></label>
+            <label class="opt"><input type="radio" name="detail" value="Tub nobody uses (home has another tub)"><span>A tub nobody uses</span></label>
+            <label class="opt"><input type="radio" name="detail" value="Not sure, come take a look"><span>Not sure, come look</span></label>
+          </div>
+        </fieldset>
+
+        <!-- STEP 2 -->
+        <fieldset class="step" data-step="2">
+          <legend>What&rsquo;s the main reason?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="reason" value="Safety: stepping over the tub is getting hard"><span>Stepping over the tub is getting hard</span></label>
+            <label class="opt"><input type="radio" name="reason" value="Rarely or never use the tub"><span>We rarely use the tub anyway</span></label>
+            <label class="opt"><input type="radio" name="reason" value="Old, dated or hard to clean"><span>It&rsquo;s old, dated or hard to clean</span></label>
+            <label class="opt"><input type="radio" name="reason" value="Leaks, mold or damage"><span>Leaks, mold or damage</span></label>
+          </div>
+        </fieldset>
+
+        <!-- STEP 3 -->
+        <fieldset class="step" data-step="3">
+          <legend>When would you like it done?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="timeline" value="Immediate (1-2 Weeks)"><span>As soon as possible (1&ndash;2 weeks)</span></label>
+            <label class="opt"><input type="radio" name="timeline" value="Within 1 Month"><span>Within the next 30 days</span></label>
+            <label class="opt"><input type="radio" name="timeline" value="1 to 3 Months"><span>In 1&ndash;3 months</span></label>
+            <label class="opt"><input type="radio" name="timeline" value="Planning / Flexible"><span>Just planning for now</span></label>
+          </div>
+        </fieldset>
+
+        <!-- STEP 4 -->
+        <fieldset class="step" data-step="4">
+          <legend>Where is the home?</legend>
+          <div class="field">
+            <label for="q-zip">ZIP code</label>
+            <input id="q-zip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="72032">
+            <p class="err" data-err="zip"></p>
+            <p class="zip-note" data-zipnote></p>
+          </div>
+          <p class="mini-legend">Do you own the home?</p>
+          <div class="opts opts-2">
+            <label class="opt"><input type="radio" name="owner" value="Yes, I own it"><span>Yes, I own it</span></label>
+            <label class="opt"><input type="radio" name="owner" value="No, I rent / buying for someone else"><span>No / buying for a family member</span></label>
+          </div>
+          <p class="err" data-err="owner"></p>
+          <button type="button" class="btn-orange btn-block" data-next>Continue</button>
+        </fieldset>
+
+        <!-- STEP 5 -->
+        <fieldset class="step" data-step="5">
+          <legend>Where should we send your quote?</legend>
+          <p class="step-sub" data-recap></p>
+          <div class="grid-2">
+            <div class="field"><label for="q-first">First name</label><input id="q-first" name="firstName" autocomplete="given-name" maxlength="80"><p class="err" data-err="firstName"></p></div>
+            <div class="field"><label for="q-last">Last name</label><input id="q-last" name="lastName" autocomplete="family-name" maxlength="80"><p class="err" data-err="lastName"></p></div>
+          </div>
+          <div class="field"><label for="q-phone">Mobile phone</label><input id="q-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" maxlength="40" placeholder="(501) 555-1234"><p class="err" data-err="phone"></p></div>
+          <div class="field"><label for="q-email">Email</label><input id="q-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="160" placeholder="you@example.com"><p class="err" data-err="email"></p></div>
+          <label class="consent"><input type="checkbox" name="smsConsent" value="yes"><span>I agree to receive text messages from All-Star Renovations about my project, appointments and offers. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out. Consent is not a condition of purchase. (optional)</span></label>
+          <input type="hidden" name="xxTrustedFormCertUrl" id="xxTrustedFormCertUrl_0">
+          <div class="hp" aria-hidden="true"><label for="q-company">Company</label><input id="q-company" name="company" tabindex="-1" autocomplete="off"></div>
+          <button type="submit" class="btn-orange btn-block" data-submit>Get my free quote &rarr;</button>
+          <p class="fine">100% free, no obligation. We never sell your information.</p>
+        </fieldset>
+
+        <!-- STEP 6: BOOK -->
+        <div class="step step-done" data-step="6" tabindex="-1">
+          <p class="done-badge">Request received</p>
+          <h2 class="done-h">Thanks, <span data-fname>neighbor</span>. Pick a time for your free in-home visit.</h2>
+          <p class="step-sub">Choosing a time now gets you on the schedule fastest. We&rsquo;ll bring samples, measure and give you a written price.</p>
+          <a class="btn-orange btn-block" data-book target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0ZRx4CfMx9hmkVVcZm7KSoe_jVz0t6PvVOoKPgbogD28yX4PjouFRxs54v6qmA-gPzzc3hVSfi?gv=true">Choose my appointment time &rarr;</a>
+          <a class="btn-line btn-block" href="tel:+15015043398" data-call data-contact="call">Rather talk? Call (501) 504-3398</a>
+          <div class="fb" data-fb hidden>
+            <p data-fb-msg></p>
+            <a class="btn-line" data-fb-sms data-contact="sms" href="#">Text it to us</a>
+          </div>
+        </div>
+
+        <div class="quiz-nav" data-nav>
+          <button type="button" class="back" data-back hidden>&larr; Back</button>
+          <span class="secure">Takes about 60 seconds</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section class="trust">
+  <div class="wrap trust-in">
+    <div class="trust-stats">
+      <div><b>500+</b><span>bathrooms remodeled</span></div>
+      <div><b>Since 2014</b><span>Conway-based crew</span></div>
+      <div><b>1&ndash;2 days</b><span>typical conversion</span></div>
+      <div><b>Lifetime</b><span>product warranty</span></div>
+    </div>
+    <div class="badges">
+      <img src="/badges/google-reviews.webp" alt="Google reviews" width="218" height="104">
+      <img src="/badges/facebook-5-rating.webp" alt="Facebook 5-star rating" width="218" height="92">
+      <img src="/badges/yelp-5-star.webp" alt="Yelp 5 stars" width="163" height="112">
+      <img src="/badges/houzz.webp" alt="Houzz" width="101" height="112">
+      <img src="/badges/nextdoor-fave-2026.webp" alt="Nextdoor Neighborhood Fave 2026" width="112" height="112">
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section class="sec">
+  <div class="wrap ba-grid">
+    <div class="reveal">
+      <p class="eyebrow">A real Conway conversion</p>
+      <h2>Same bathroom.<br><em>No more climbing in.</em></h2>
+      <p>This Conway homeowner had a dark tiled tub under a sloped ceiling. We removed the tub, set a low-threshold base and installed marble-look wall panels with a built-in bench and sliding glass door. Drag the slider to see the difference. Traditional tile takes 2&ndash;3 weeks; most of our conversions are done in 1&ndash;2 days.</p>
+      <ul class="checks dark">
+        <li>Grout-free Rigid Core Board wall panels that wipe clean</li>
+        <li>Glass door or curtain, built-in bench or fold-down seat</li>
+        <li>Grab bars anchored to in-wall wood backing rated up to 500 lbs</li>
+      </ul>
+      <a class="btn-orange" href="#quote" data-open-quiz>Get my conversion price</a>
+    </div>
+    <div class="ba ba-tall reveal" data-ba>
+      <img src="/assets/img/lp/microsoft/tub-to-shower-conversion-after-conway-ar-640.webp" alt="After: marble-look walk-in shower with bench and sliding glass door in a Conway, AR home" width="640" height="852">
+      <div class="ba-before" data-ba-before><img src="/assets/img/lp/microsoft/tub-to-shower-conversion-before-conway-ar-640.webp" alt="Before: black tiled bathtub with striped wallpaper in the same Conway, AR bathroom" width="640" height="849"></div>
+      <span class="ba-tag l">Before</span><span class="ba-tag r">After</span>
+      <input type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after" data-ba-range>
+      <span class="ba-handle" data-ba-handle aria-hidden="true"></span>
+    </div>
+  </div>
+  <p class="wrap repnote">Real All-Star Renovations project, Conway, AR.</p>
+</section>
+
+<!-- INCLUDED + TIERS -->
+<section class="sec sec-tint">
+  <div class="wrap proj-grid">
+    <div class="reveal">
+      <p class="eyebrow">What&rsquo;s included</p>
+      <h2>One crew, one price, <em>start to finish.</em></h2>
+      <ul class="incl">
+        <li><b>Tub removal and haul-away</b>The old tub and surround leave with us.</li>
+        <li><b>Low-threshold shower base</b>As low as 2 inches, or curbless for walkers and wheelchairs.</li>
+        <li><b>Grout-free wall panel system</b>Rigid Core Board panels, custom-cut off-site for a tight fit.</li>
+        <li><b>Glass door or curtain</b>Sliding glass, hinged glass or a simple curtain rod.</li>
+        <li><b>Grab-bar and seat planning</b>Backing goes in the wall now, so bars can go where you need them.</li>
+      </ul>
+      <a class="btn-orange" href="#quote" data-open-quiz>Start my free quote</a>
+    </div>
+    <div class="reveal">
+      <div class="tiers" style="grid-template-columns:1fr">
+        <button class="tier" data-open-quiz><small>Premier</small><b>$5,000&ndash;$7,499</b><span>Our entry All-Star Shower System tier.</span><i>Get my price &rarr;</i></button>
+        <button class="tier feat" data-open-quiz><small>Signature</small><b>$7,500&ndash;$9,999</b><span>Our mid-range shower system tier.</span><i>Get my price &rarr;</i></button>
+        <button class="tier" data-open-quiz><small>Designer</small><b>$10,000&ndash;$12,500+</b><span>Our top shower system tier.</span><i>Get my price &rarr;</i></button>
+      </div>
+      <p class="srcnote">All-Star Shower System pricing tiers. Your final price and tier are confirmed in writing at the free in-home quote.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec">
+  <div class="wrap how-grid">
+    <figure class="how-img reveal"><img src="/assets/img/ref-shower.webp" alt="Walk-in shower with black fixtures and glass panel" width="640" height="360" loading="lazy"></figure>
+    <div>
+      <p class="eyebrow">How it works</p>
+      <h2>From tub to shower <em>in three steps.</em></h2>
+      <ol class="steps">
+        <li class="reveal"><b>Answer 5 quick questions</b><span>Tell us about your bathroom and pick a visit time online. It takes about a minute.</span></li>
+        <li class="reveal"><b>Free in-home measure</b><span>We measure the tub alcove, check the plumbing and walls, bring panel and base samples, and give you a written quote. No pressure.</span></li>
+        <li class="reveal"><b>Converted in 1&ndash;2 days</b><span>Our own crew removes and hauls away the tub, then installs the base, panels, glass and any grab bars. If we find hidden rot, we stop and walk you through options before going further.</span></li>
+      </ol>
+      <div class="dual">
+        <a class="btn-orange" href="#quote" data-open-quiz>Start my free quote</a>
+        <a class="btn-line-dark" href="tel:+15015043398" data-call data-contact="call">Call (501) 504-3398</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec sec-navy">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow light">Neighbors on Google &middot; 5.0 average</p>
+      <h2>&ldquo;In just under 2 days <em>it was done.&rdquo;</em></h2>
+    </div>
+    <div class="reviews">
+      <blockquote class="rev reveal">
+        <span class="stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p>We got our shower remodeled in our Conway house and after numerous estimates, we decided to move forward with Thomas&rsquo;s. It wasn&rsquo;t just the price, but the quality (&amp; warranty) of materials that was being used that really sold me on going with All-Star Renovations. They were very detail oriented and in just under 2 days it was done. Very happy!</p>
+        <cite>Google reviewer &middot; Conway, AR</cite>
+      </blockquote>
+      <blockquote class="rev reveal">
+        <span class="stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p>Amazing work and customer service. He finished the jobs in no time and explained in detail the work that he was doing and is super affordable. I recommend calling Thomas for any home repairs/renovations!</p>
+        <cite>Kesha Burkett-Williams &middot; Central Arkansas homeowner</cite>
+      </blockquote>
+      <blockquote class="rev reveal">
+        <span class="stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p>Thomas gave us a good estimate and did a great job refinishing our wall. I highly recommend All Star Renovations.</p>
+        <cite>Paul Duckett &middot; Google review</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE + FINANCING + WARRANTY -->
+<section class="sec">
+  <div class="wrap price-grid">
+    <div class="price-card reveal">
+      <p class="eyebrow">Straight talk on price</p>
+      <p class="price-big">From $5,000</p>
+      <p>All-Star Shower System conversions start at $5,000 (Premier tier). Your exact price depends on size, base, glass and safety options, and it&rsquo;s confirmed in writing at your free visit. No surprise add-ons.</p>
+      <a class="btn-orange" href="#quote" data-open-quiz>Get my exact price</a>
+    </div>
+    <div class="fin reveal">
+      <h3>Remodel now, pay over time</h3>
+      <ul class="checks dark">
+        <li>Plans through Acorn Finance, HFS Financial and RenoFi</li>
+        <li>Check monthly payments with a soft credit pull</li>
+        <li>Fixed-rate plans for projects of any size</li>
+      </ul>
+      <p class="fine dark">*Financing is offered by third-party lenders, subject to credit approval. Rates and terms are set by the lender and may change. All-Star Renovations is not a lender.</p>
+    </div>
+    <figure class="warranty reveal">
+      <img src="/assets/img/ref-hardware.webp" alt="Brushed nickel shower hardware" width="1000" height="747" loading="lazy">
+      <figcaption><b>Worry-free warranty</b><span>Lifetime product warranty on All-Star Shower Systems materials and 5-year workmanship warranty.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec-tint">
+  <div class="wrap faq-wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Questions homeowners ask</p>
+      <h2>Tub-to-shower <em>questions.</em></h2>
+    </div>
+    <div class="faq">
+      <details><summary>Is the in-home quote really free?</summary><p>Yes. The visit and the written quote are free with no obligation. We bring samples and measure your space so the price you get is the price you pay.</p></details>
+      <details><summary>How long will I be without a shower?</summary><p>Most conversions take 1&ndash;2 days on site, compared with 2&ndash;3 weeks for a traditional tile job. Your exact timing is confirmed in your written quote.</p></details>
+      <details><summary>Will removing my tub hurt resale value?</summary><p>Not if the home keeps at least one tub, usually in a hall or secondary bath. Many buyers prefer a walk-in shower in the main bath. We&rsquo;ll talk it through at the visit.</p></details>
+      <details><summary>What if you find rot under the old tub?</summary><p>We stop and show you what we found, explain your options and the cost, and only continue once you approve. We don&rsquo;t glue new panels over a rotten subfloor.</p></details>
+      <details><summary>Do you serve my town?</summary><p>We cover a 50-mile radius of our Conway office, including Greenbrier, Vilonia, Mayflower, Maumelle, Sherwood, Cabot, North Little Rock, Little Rock, Benton, Bryant, Searcy, Morrilton, Beebe and Heber Springs.</p></details>
+      <details><summary>Can the new shower be safer for a parent?</summary><p>Yes. Options include an ultra-low 2-inch threshold or a curbless roll-in entry, grab bars on solid wood backing rated up to 500 lbs, a fold-down teak bench and a thermostatic anti-scald valve.</p></details>
+      <details><summary>Are you licensed and insured?</summary><p>Yes. We&rsquo;re licensed, insured and workers&rsquo; comp covered, with a 100% customer guarantee.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSER -->
+<section class="closer">
+  <img src="/assets/img/ref-transform.webp" alt="" width="1000" height="747" loading="lazy">
+  <div class="closer-scrim"></div>
+  <div class="wrap closer-in reveal">
+    <h2>Your walk-in shower is<br><em>one free visit away.</em></h2>
+    <p>Pick a time for your free in-home quote. It takes about 60 seconds.</p>
+    <div class="dual center">
+      <a class="btn-orange" href="#quote" data-open-quiz>Get my free quote</a>
+      <a class="btn-line" href="tel:+15015043398" data-call data-contact="call">Call (501) 504-3398</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ftr">
+  <div class="wrap ftr-in">
+    <img src="/assets/img/lp/microsoft-bathroom/logo-card.png" alt="All-Star Renovations, Creating Perfection" width="430" height="516" class="ftr-logo">
+    <div>
+      <b>All-Star Renovations</b>
+      <p>11 Arnett Ln, Conway, AR 72032<br>Serving a 50-mile radius of Conway</p>
+      <p><a href="tel:+15015043398" data-call data-contact="call">(501) 504-3398</a> &middot; <a href="mailto:info@allstarreno.com">info@allstarreno.com</a></p>
+    </div>
+    <div>
+      <b>Hours</b>
+      <p>Mon&ndash;Fri 7:30 AM &ndash; 5:00 PM<br>Saturday 7:00 AM &ndash; 7:00 PM<br>Sunday 9:00 AM &ndash; 3:00 PM</p>
+    </div>
+    <div>
+      <b>Credentials</b>
+      <p>Veteran-owned &amp; locally owned<br>Licensed, insured &amp; workers&rsquo; comp covered<br>100% customer guarantee &middot; Serving Central Arkansas since 2014</p>
+      <p><a href="/privacy-policy">Privacy</a> &middot; <a href="/terms-and-conditions">Terms</a> &middot; <a href="/terms-and-conditions#sms-terms">SMS Terms</a></p>
+    </div>
+  </div>
+  <p class="wrap ftr-small">&copy; 2026 All-Star Renovations. Images are representative of our work.</p>
+</footer>
+
+<div class="dock" data-dock>
+  <a href="tel:+15015043398" class="dock-call" data-call data-contact="call">Call now</a>
+  <a href="#quote" class="dock-quote" data-open-quiz>Free quote</a>
+</div>
+
+  <script is:inline defer src="/assets/js/lp-microsoft-bathroom.js"></script>
+  <script is:inline defer src="/assets/js/mobile-contact.js"></script>
+  <script is:inline type="text/javascript">(function(){var tf=document.createElement('script');tf.type='text/javascript';tf.async=true;tf.src='https://cdn.trustedform.com/bootstrap.js?field=xxTrustedFormCertUrl&use_tagged_consent=true&l='+new Date().getTime()+Math.random();var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(tf,s)})();</script>
+  <noscript><img src="https://api.trustedform.com/ns.gif" alt="" /></noscript>
+  <!-- Vercel Web Analytics + Speed Insights (cookie-free; replaces stale PRs #1/#2) -->
+  <script is:inline>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>
+  <script is:inline defer src="/_vercel/insights/script.js"></script>
+  <script is:inline defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
