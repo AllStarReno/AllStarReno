@@ -49,8 +49,8 @@ const housingText = !local ? '' : (cat?.slug === 'kitchen-remodeling' && local.h
 const h1 = county ? ['Remodeling & Handyman Services in', `${county.name}, AR`] : cat ? [`${cat.name} in`, place] : ['Home Remodeling in', place];
 const title0 = county ? `${county.name}, AR Remodeling & Handyman | All-Star Renovations`
   : (cat?.slug === 'bathroom-remodeling' && city?.slug === 'conway') ? 'Bathroom Remodeling Conway AR | All-Star Renovations'
-  : cat ? ((t) => t.length > 60 ? `${cat.name} in ${place} | All-Star` : t)(`${cat.name} in ${place} | All-Star Renovations`) : `${place} Bathroom & Kitchen Remodeling | All-Star Renovations`;
-const fit60 = (t) => [t, t.replace(' | All-Star Renovations', ' | All-Star'), t.replace(' | All-Star Renovations', ' | All-Star').replace('Bathroom & Kitchen', 'Bath & Kitchen'), t.replace(' | All-Star Renovations', ' | All-Star').replace(', AR', ' AR')].find((x) => x.length <= 60) || t.replace(' | All-Star Renovations', ' | All-Star');
+  : cat ? ((t) => t.length > 60 ? `${cat.name} in ${place} | All-Star` : t)(`${cat.name} in ${place} | All-Star Renovations`) : `${place} Home Remodeling & Handyman | All-Star Renovations`;
+const fit60 = (t) => [t, t.replace(' | All-Star Renovations', ' | All-Star'), t.replace(' | All-Star Renovations', ' | All-Star').replace('Home Remodeling & Handyman', 'Remodeling & Handyman'), t.replace(' | All-Star Renovations', ' | All-Star').replace(', AR', ' AR')].find((x) => x.length <= 60) || t.replace(' | All-Star Renovations', ' | All-Star');
 const title = fit60(title0);
 const what = cat ? cat.name.toLowerCase() : 'bathroom remodeling, kitchen remodeling and handyman services';
 const q = county ? `Does All-Star Renovations serve ${county.name}, Arkansas?` : `Does All-Star Renovations offer ${what} in ${city.name}, AR?`;
