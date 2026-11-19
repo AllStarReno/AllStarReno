@@ -1,0 +1,416 @@
+---
+// Microsoft Ads walk-in-tub quote page. Keeps /lp/microsoft/walk-in-tub so existing ads keep working.
+// noindex, not in the sitemap. Tracking matches other /lp pages (GTM, AdTags, TrustedForm, mobile-contact.js).
+import AdTags from '../../../components/lp/AdTags.astro';
+import { SITE, BUSINESS } from '../../../data/business.mjs';
+const title = 'Walk-In Tub Installation | Conway, AR | All-Star Renovations';
+const desc = 'Walk-in tubs with a low-entry, leak-tested door, built-in seat and anti-slip floor, installed by our own Conway crew in 1–2 days. Free in-home safety visit. Call (501) 504-3398.';
+const url = `${SITE}/lp/microsoft/walk-in-tub`;
+const A = BUSINESS.address;
+const graph = { '@context': 'https://schema.org', '@graph': [
+  { '@type': 'HomeAndConstructionBusiness', '@id': `${SITE}/#business`, name: BUSINESS.name, url: `${SITE}/`, telephone: BUSINESS.telSchema, email: BUSINESS.email,
+    address: { '@type': 'PostalAddress', ...A }, disambiguatingDescription: BUSINESS.identity },
+  { '@type': 'WebPage', '@id': `${url}#webpage`, url, name: title, about: { '@id': `${SITE}/#business` }, breadcrumb: { '@id': `${url}#breadcrumb` } },
+  { '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` }, { '@type': 'ListItem', position: 2, name: 'Walk-In Tub Quote', item: url }] },
+] };
+---
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <!-- Google Tag Manager -->
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-5MV7NF63');
+  </script>
+  <!-- End Google Tag Manager -->
+  <title>{title}</title>
+  <meta name="description" content={desc} />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#0F2B48" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={desc} />
+  <meta property="og:image" content={`${SITE}/assets/img/og-image.jpg`} />
+  <meta property="og:url" content={url} />
+  <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/assets/fonts/cormorant-garamond-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/css/lp-microsoft-bathroom.css" />
+  <script type="application/ld+json" set:html={JSON.stringify(graph)} />
+  <AdTags />
+</head>
+<body data-variant="walk-in-tub">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5MV7NF63" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <span>Veteran-owned &middot; Conway-based crew &middot; Licensed, insured &amp; workers&rsquo; comp covered</span>
+    <a href="tel:+15015043398" data-call data-contact="call">Call or text (501) 504-3398</a>
+  </div>
+</div>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="#top" aria-label="All-Star Renovations home">
+      <img src="/icon-192.png" alt="" width="44" height="44">
+      <span><b>ALL-STAR RENOVATIONS</b><small>Central Arkansas &middot; Conway</small></span>
+    </a>
+    <div class="hdr-cta">
+      <a class="btn-ghost hide-sm" href="tel:+15015043398" data-call data-contact="call">(501) 504-3398</a>
+      <a class="btn-gold" href="#quote" data-open-quiz>Free Quote</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO + QUIZ -->
+<section class="hero">
+  <img class="hero-bg" src="/assets/img/ref-walkin-tub.webp" alt="" width="1000" height="747">
+  <div class="hero-scrim"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy reveal">
+      <p class="kicker">Conway &middot; Vilonia &middot; Greenbrier &middot; Maumelle &middot; Mayflower</p>
+      <h1>Keep the soak.<br><em>Lose the climb.</em></h1>
+      <p class="lede">Walk-in tubs with a hinged, leak-tested door, a built-in seat and a textured anti-slip floor, installed by our own Conway crew. At the free safety visit we measure your doorways and check your water heater before recommending a model.</p>
+      <ul class="checks">
+        <li>Soaker, hydrotherapy, air-jet, bariatric and wheelchair-accessible models</li>
+        <li>Most installs take 1&ndash;2 days &middot; 5-year workmanship warranty</li>
+        <li>Pick your appointment time online in under 60 seconds</li>
+      </ul>
+      <div class="hero-proof">
+        <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span><b>5.0 on Google</b> &middot; 10 reviews</span>
+      </div>
+    </div>
+
+    <div class="quiz-card reveal" id="quote" data-quiz>
+      <div class="quiz-head">
+        <p class="quiz-title">Get your free walk-in tub quote</p>
+        <div class="progress" aria-hidden="true"><span data-bar></span></div>
+        <p class="quiz-step-label" data-steplabel>Step 1 of 5</p>
+      </div>
+
+      <form data-quiz-form novalidate>
+        <!-- STEP 1 -->
+        <fieldset class="step is-active" data-step="1">
+          <input type="hidden" name="category" value="Walk-In Tubs">
+          <legend>Who will be using the tub?</legend>
+          <div class="opts opts-2">
+            <label class="opt"><input type="radio" name="detail" value="Me or my spouse" required><span>Me or my spouse</span></label>
+            <label class="opt"><input type="radio" name="detail" value="A parent or family member"><span>A parent or family member</span></label>
+            <label class="opt"><input type="radio" name="detail" value="Someone who uses a walker or wheelchair"><span>Someone with a walker or wheelchair</span></label>
+            <label class="opt"><input type="radio" name="detail" value="Planning ahead for later"><span>Planning ahead for later</span></label>
+          </div>
+        </fieldset>
+
+        <!-- STEP 2 -->
+        <fieldset class="step" data-step="2">
+          <legend>What matters most?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="reason" value="Safety: stepping over the tub wall feels risky"><span>Stepping over the tub wall feels risky</span></label>
+            <label class="opt"><input type="radio" name="reason" value="Being able to sit while bathing"><span>Being able to sit while bathing</span></label>
+            <label class="opt"><input type="radio" name="reason" value="Therapy jets for sore joints and muscles"><span>Therapy jets for sore joints</span></label>
+            <label class="opt"><input type="radio" name="reason" value="Safety: walker or wheelchair transfers"><span>Easier walker or wheelchair transfers</span></label>
+          </div>
+        </fieldset>
+
+        <!-- STEP 3 -->
+        <fieldset class="step" data-step="3">
+          <legend>When would you like it done?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="timeline" value="Immediate (1-2 Weeks)"><span>As soon as possible (1&ndash;2 weeks)</span></label>
+            <label class="opt"><input type="radio" name="timeline" value="Within 1 Month"><span>Within the next 30 days</span></label>
+            <label class="opt"><input type="radio" name="timeline" value="1 to 3 Months"><span>In 1&ndash;3 months</span></label>
+            <label class="opt"><input type="radio" name="timeline" value="Planning / Flexible"><span>Just planning for now</span></label>
+          </div>
+        </fieldset>
+
+        <!-- STEP 4 -->
+        <fieldset class="step" data-step="4">
+          <legend>Where is the home?</legend>
+          <div class="field">
+            <label for="q-zip">ZIP code</label>
+            <input id="q-zip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="72032">
+            <p class="err" data-err="zip"></p>
+            <p class="zip-note" data-zipnote></p>
+          </div>
+          <p class="mini-legend">Who owns the home?</p>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="owner" value="Yes, I own it"><span>I do</span></label>
+            <label class="opt"><input type="radio" name="owner" value="A family member owns it (I'm helping)"><span>A parent or family member (I&rsquo;m helping)</span></label>
+            <label class="opt"><input type="radio" name="owner" value="No, I rent"><span>It&rsquo;s a rental</span></label>
+          </div>
+          <p class="err" data-err="owner"></p>
+          <button type="button" class="btn-orange btn-block" data-next>Continue</button>
+        </fieldset>
+
+        <!-- STEP 5 -->
+        <fieldset class="step" data-step="5">
+          <legend>Where should we send your quote?</legend>
+          <p class="step-sub" data-recap></p>
+          <div class="grid-2">
+            <div class="field"><label for="q-first">First name</label><input id="q-first" name="firstName" autocomplete="given-name" maxlength="80"><p class="err" data-err="firstName"></p></div>
+            <div class="field"><label for="q-last">Last name</label><input id="q-last" name="lastName" autocomplete="family-name" maxlength="80"><p class="err" data-err="lastName"></p></div>
+          </div>
+          <div class="field"><label for="q-phone">Mobile phone</label><input id="q-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel-national" maxlength="40" placeholder="(501) 555-1234"><p class="err" data-err="phone"></p></div>
+          <div class="field"><label for="q-email">Email</label><input id="q-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="160" placeholder="you@example.com"><p class="err" data-err="email"></p></div>
+          <label class="consent"><input type="checkbox" name="smsConsent" value="yes"><span>I agree to receive text messages from All-Star Renovations about my project, appointments and offers. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out. Consent is not a condition of purchase. (optional)</span></label>
+          <input type="hidden" name="xxTrustedFormCertUrl" id="xxTrustedFormCertUrl_0">
+          <div class="hp" aria-hidden="true"><label for="q-company">Company</label><input id="q-company" name="company" tabindex="-1" autocomplete="off"></div>
+          <button type="submit" class="btn-orange btn-block" data-submit>Get my free quote &rarr;</button>
+          <p class="fine">100% free, no obligation. We never sell your information.</p>
+        </fieldset>
+
+        <!-- STEP 6: BOOK -->
+        <div class="step step-done" data-step="6" tabindex="-1">
+          <p class="done-badge">Request received</p>
+          <h2 class="done-h">Thanks, <span data-fname>neighbor</span>. Pick a time for your free in-home visit.</h2>
+          <p class="step-sub">Choosing a time now gets you on the schedule fastest. We&rsquo;ll bring samples, measure and give you a written price.</p>
+          <a class="btn-orange btn-block" data-book target="_blank" rel="noopener" href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0ZRx4CfMx9hmkVVcZm7KSoe_jVz0t6PvVOoKPgbogD28yX4PjouFRxs54v6qmA-gPzzc3hVSfi?gv=true">Choose my appointment time &rarr;</a>
+          <a class="btn-line btn-block" href="tel:+15015043398" data-call data-contact="call">Rather talk? Call (501) 504-3398</a>
+          <div class="fb" data-fb hidden>
+            <p data-fb-msg></p>
+            <a class="btn-line" data-fb-sms data-contact="sms" href="#">Text it to us</a>
+          </div>
+        </div>
+
+        <div class="quiz-nav" data-nav>
+          <button type="button" class="back" data-back hidden>&larr; Back</button>
+          <span class="secure">Takes about 60 seconds</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section class="trust">
+  <div class="wrap trust-in">
+    <div class="trust-stats">
+      <div><b>500+</b><span>bathrooms remodeled</span></div>
+      <div><b>Since 2014</b><span>Conway-based crew</span></div>
+      <div><b>1&ndash;2 days</b><span>typical tub install</span></div>
+      <div><b>5-year</b><span>workmanship warranty</span></div>
+    </div>
+    <div class="badges">
+      <img src="/badges/google-reviews.webp" alt="Google reviews" width="218" height="104">
+      <img src="/badges/facebook-5-rating.webp" alt="Facebook 5-star rating" width="218" height="92">
+      <img src="/badges/yelp-5-star.webp" alt="Yelp 5 stars" width="163" height="112">
+      <img src="/badges/houzz.webp" alt="Houzz" width="101" height="112">
+      <img src="/badges/nextdoor-fave-2026.webp" alt="Nextdoor Neighborhood Fave 2026" width="112" height="112">
+    </div>
+  </div>
+</section>
+
+<!-- WHY A WALK-IN TUB -->
+<section class="sec">
+  <div class="wrap ba-grid">
+    <div class="reveal">
+      <p class="eyebrow">Built for safe soaking</p>
+      <h2>The tub wall is the hard part.<br><em>So we put a door in it.</em></h2>
+      <div class="stat"><b>1 in 4</b><span>adults 65 and older reports a fall each year, according to the <a href="https://www.cdc.gov/falls/data-research/index.html" target="_blank" rel="noopener">CDC</a>. Stepping over a tub wall on a wet floor is one of the riskiest moves in the house.</span></div>
+      <ul class="checks dark">
+        <li>Low-entry, hinged door that&rsquo;s leak-tested before we leave</li>
+        <li>Built-in seat at chair height and a textured anti-slip floor</li>
+        <li>Anti-scald valve, fast-drain, heated backrest and jet options</li>
+        <li>Grab bars and lighting planned around the tub</li>
+      </ul>
+      <a class="btn-orange" href="#quote" data-open-quiz>Book my free safety visit</a>
+    </div>
+    <figure class="how-img reveal" style="aspect-ratio:1000/667"><img src="/assets/img/ref-aging.webp" alt="Accessible bathroom with grab bars and a seat" width="1000" height="667" loading="lazy"></figure>
+  </div>
+  <p class="wrap repnote">Representative images.</p>
+</section>
+
+<!-- MODELS -->
+<section class="sec sec-tint">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Models we install</p>
+      <h2>Five kinds of walk-in tub. <em>We&rsquo;ll help you pick one.</em></h2>
+    </div>
+    <div class="types">
+      <button class="tier reveal" data-open-quiz><small>Soaker</small><b>$5,500&ndash;$11,000</b><span>Deep, still-water soak with a seat and door. The simplest option.</span><i>Get my price &rarr;</i></button>
+      <button class="tier reveal" data-open-quiz><small>Hydrotherapy</small><b>$5,500&ndash;$11,000</b><span>Water jets aimed at the back, hips and legs.</span><i>Get my price &rarr;</i></button>
+      <button class="tier reveal" data-open-quiz><small>Air bath</small><b>$5,500&ndash;$11,000</b><span>Gentle air bubbles across the whole body.</span><i>Get my price &rarr;</i></button>
+      <button class="tier reveal" data-open-quiz><small>Bariatric</small><b>$5,500&ndash;$11,000</b><span>Wider seat and door, higher weight capacity.</span><i>Get my price &rarr;</i></button>
+      <button class="tier reveal" data-open-quiz><small>Wheelchair</small><b>$5,500&ndash;$11,000</b><span>Wide door for side transfers from a wheelchair.</span><i>Get my price &rarr;</i></button>
+    </div>
+    <p class="srcnote">Walk-in tubs typically run $5,500&ndash;$11,000. Your exact price is confirmed in writing after we check your space, plumbing and water heater.</p>
+  </div>
+</section>
+
+<!-- TUB VS SHOWER -->
+<section class="sec sec-navy">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow light">Straight talk</p>
+      <h2>Walk-in tub or walk-in shower? <em>We install both.</em></h2>
+      <p style="color:#cbd5e1">So we&rsquo;ll tell you which one fits. Here&rsquo;s how they compare.</p>
+    </div>
+    <div class="cmp-wrap reveal">
+      <table class="cmp">
+        <thead><tr><th scope="col"></th><th scope="col">Walk-in tub</th><th scope="col">Low-threshold walk-in shower</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Best for</th><td>People who love to soak, or want jets for sore joints</td><td>Quick daily showers, and caregivers helping with bathing</td></tr>
+          <tr><th scope="row">Getting in</th><td>Step through a low door and sit on a built-in seat</td><td>Step over a 2-inch threshold, or roll in with no curb</td></tr>
+          <tr><th scope="row">Fill and drain</th><td>You sit while it fills and drains; fast-drain helps</td><td>No waiting</td></tr>
+          <tr><th scope="row">Hot water</th><td>Uses more; we check your water heater</td><td>Uses about the same as today</td></tr>
+          <tr><th scope="row">Typical install</th><td>1&ndash;2 days</td><td>1&ndash;2 days</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec">
+  <div class="wrap how-grid">
+    <figure class="how-img reveal"><img src="/assets/img/ref-accessible.webp" alt="Accessible bathroom with grab bars" width="1000" height="667" loading="lazy"></figure>
+    <div>
+      <p class="eyebrow">How it works</p>
+      <h2>A safer bath <em>in three steps.</em></h2>
+      <ol class="steps">
+        <li class="reveal"><b>Answer 5 quick questions</b><span>Tell us about your bathroom and pick a visit time online. It takes about a minute.</span></li>
+        <li class="reveal"><b>Free in-home safety visit</b><span>We measure the alcove and doorways, check plumbing and your water heater, then help you pick the tub, door side and seat height. You get a written quote. No pressure.</span></li>
+        <li class="reveal"><b>Installed and water-tested</b><span>Our crew removes the old tub, installs the new one and water-tests the door seal, most in 1&ndash;2 days. We finish with grab bars and lighting, and show you how to use it.</span></li>
+      </ol>
+      <div class="dual">
+        <a class="btn-orange" href="#quote" data-open-quiz>Start my free quote</a>
+        <a class="btn-line-dark" href="tel:+15015043398" data-call data-contact="call">Call (501) 504-3398</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec sec-navy">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow light">Neighbors on Google &middot; 5.0 average</p>
+      <h2>&ldquo;In just under 2 days <em>it was done.&rdquo;</em></h2>
+    </div>
+    <div class="reviews">
+      <blockquote class="rev reveal">
+        <span class="stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p>We got our shower remodeled in our Conway house and after numerous estimates, we decided to move forward with Thomas&rsquo;s. It wasn&rsquo;t just the price, but the quality (&amp; warranty) of materials that was being used that really sold me on going with All-Star Renovations. They were very detail oriented and in just under 2 days it was done. Very happy!</p>
+        <cite>Google reviewer &middot; Conway, AR</cite>
+      </blockquote>
+      <blockquote class="rev reveal">
+        <span class="stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p>Amazing work and customer service. He finished the jobs in no time and explained in detail the work that he was doing and is super affordable. I recommend calling Thomas for any home repairs/renovations!</p>
+        <cite>Kesha Burkett-Williams &middot; Central Arkansas homeowner</cite>
+      </blockquote>
+      <blockquote class="rev reveal">
+        <span class="stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p>Thomas gave us a good estimate and did a great job refinishing our wall. I highly recommend All Star Renovations.</p>
+        <cite>Paul Duckett &middot; Google review</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE + FINANCING + WARRANTY -->
+<section class="sec">
+  <div class="wrap price-grid">
+    <div class="price-card reveal">
+      <p class="eyebrow">Straight talk on price</p>
+      <p class="price-big">Price in writing</p>
+      <p>Your price depends on the model, door and jet options, plumbing, any electrical for jets or heat, and whether the water heater needs an upgrade. We check all of it at the free visit and put the full price in writing. No surprise add-ons.</p>
+      <a class="btn-orange" href="#quote" data-open-quiz>Get my exact price</a>
+    </div>
+    <div class="fin reveal">
+      <h3>Remodel now, pay over time</h3>
+      <ul class="checks dark">
+        <li>Plans through Acorn Finance, HFS Financial and RenoFi</li>
+        <li>Check monthly payments with a soft credit pull</li>
+        <li>Fixed-rate plans for projects of any size</li>
+      </ul>
+      <p class="fine dark">*Financing is offered by third-party lenders, subject to credit approval. Rates and terms are set by the lender and may change. All-Star Renovations is not a lender.</p>
+    </div>
+    <figure class="warranty reveal">
+      <img src="/assets/img/ref-hardware.webp" alt="Brushed nickel shower hardware" width="1000" height="747" loading="lazy">
+      <figcaption><b>Worry-free install</b><span>5-year workmanship warranty and our 100% Customer Guarantee, installed by the All-Star crew, not subcontractors.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec-tint">
+  <div class="wrap faq-wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Questions homeowners ask</p>
+      <h2>Walk-in tub <em>questions.</em></h2>
+    </div>
+    <div class="faq">
+      <details><summary>Is the in-home quote really free?</summary><p>Yes. The visit and the written quote are free with no obligation. We bring samples and measure your space so the price you get is the price you pay.</p></details>
+      <details><summary>Will a walk-in tub fit my bathroom?</summary><p>Most models are built to fit a standard tub alcove. At the visit we measure the alcove and every doorway on the way in, so there are no surprises on install day.</p></details>
+      <details><summary>Is my water heater big enough?</summary><p>Walk-in tubs use more hot water than a standard tub. We check your water heater at the visit and tell you up front if it needs an upgrade.</p></details>
+      <details><summary>Do I have to sit in the tub while it fills and drains?</summary><p>Yes, the door seals while you&rsquo;re seated. A fast-drain option and a heated backrest make the wait shorter and more comfortable. If that&rsquo;s a dealbreaker, a low-threshold walk-in shower may suit you better, and we install both.</p></details>
+      <details><summary>How long does the install take?</summary><p>Most walk-in tub installs take 1&ndash;2 days. Your exact timing is confirmed in your written quote.</p></details>
+      <details><summary>Do you serve my town?</summary><p>We cover a 50-mile radius of our Conway office, including Greenbrier, Vilonia, Mayflower, Maumelle, Sherwood, Cabot, North Little Rock, Little Rock, Benton, Bryant, Searcy, Morrilton, Beebe and Heber Springs.</p></details>
+      <details><summary>I&rsquo;m shopping for my mom or dad. Can I be at the visit?</summary><p>Please do. Many of our walk-in tub clients are adult children helping a parent. We&rsquo;re glad to schedule around both of you, and we can plan grab bars and lighting for the rest of the bathroom at the same visit.</p></details>
+      <details><summary>Are you licensed and insured?</summary><p>Yes. We&rsquo;re licensed, insured and workers&rsquo; comp covered, with a 100% customer guarantee.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSER -->
+<section class="closer">
+  <img src="/assets/img/ref-sliding-glass.webp" alt="" width="1000" height="668" loading="lazy">
+  <div class="closer-scrim"></div>
+  <div class="wrap closer-in reveal">
+    <h2>A safer bath is<br><em>one free visit away.</em></h2>
+    <p>Pick a time for your free in-home safety visit. It takes about 60 seconds.</p>
+    <div class="dual center">
+      <a class="btn-orange" href="#quote" data-open-quiz>Get my free quote</a>
+      <a class="btn-line" href="tel:+15015043398" data-call data-contact="call">Call (501) 504-3398</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ftr">
+  <div class="wrap ftr-in">
+    <img src="/assets/img/lp/microsoft-bathroom/logo-card.png" alt="All-Star Renovations, Creating Perfection" width="430" height="516" class="ftr-logo">
+    <div>
+      <b>All-Star Renovations</b>
+      <p>11 Arnett Ln, Conway, AR 72032<br>Serving a 50-mile radius of Conway</p>
+      <p><a href="tel:+15015043398" data-call data-contact="call">(501) 504-3398</a> &middot; <a href="mailto:info@allstarreno.com">info@allstarreno.com</a></p>
+    </div>
+    <div>
+      <b>Hours</b>
+      <p>Mon&ndash;Fri 7:30 AM &ndash; 5:00 PM<br>Saturday 7:00 AM &ndash; 7:00 PM<br>Sunday 9:00 AM &ndash; 3:00 PM</p>
+    </div>
+    <div>
+      <b>Credentials</b>
+      <p>Veteran-owned &amp; locally owned<br>Licensed, insured &amp; workers&rsquo; comp covered<br>100% customer guarantee &middot; Serving Central Arkansas since 2014</p>
+      <p><a href="/privacy-policy">Privacy</a> &middot; <a href="/terms-and-conditions">Terms</a> &middot; <a href="/terms-and-conditions#sms-terms">SMS Terms</a></p>
+    </div>
+  </div>
+  <p class="wrap ftr-small">&copy; 2026 All-Star Renovations. Images are representative of our work.</p>
+</footer>
+
+<div class="dock" data-dock>
+  <a href="tel:+15015043398" class="dock-call" data-call data-contact="call">Call now</a>
+  <a href="#quote" class="dock-quote" data-open-quiz>Free quote</a>
+</div>
+
+  <script is:inline defer src="/assets/js/lp-microsoft-bathroom.js"></script>
+  <script is:inline defer src="/assets/js/mobile-contact.js"></script>
+  <script is:inline type="text/javascript">(function(){var tf=document.createElement('script');tf.type='text/javascript';tf.async=true;tf.src='https://cdn.trustedform.com/bootstrap.js?field=xxTrustedFormCertUrl&use_tagged_consent=true&l='+new Date().getTime()+Math.random();var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(tf,s)})();</script>
+  <noscript><img src="https://api.trustedform.com/ns.gif" alt="" /></noscript>
+  <!-- Vercel Web Analytics + Speed Insights (cookie-free; replaces stale PRs #1/#2) -->
+  <script is:inline>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>
+  <script is:inline defer src="/_vercel/insights/script.js"></script>
+  <script is:inline defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
