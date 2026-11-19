@@ -86,9 +86,10 @@
       try { localStorage.removeItem('calculator_estimate_prefill'); localStorage.setItem('asr-last-lead', text); } catch (e) {}
       if (j.ok) { try { document.dispatchEvent(new CustomEvent('asr:lead', { detail: { service: data.service, source: data.source } })); } catch (e) {} }
       form.hidden = true; done.hidden = false; done.focus();
+      // One generate_lead only: GTM (and the GTM gtag() helper) already listen on dataLayer.
+      // Calling gtag('event','generate_lead') as well would push a second copy of the same event.
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: 'generate_lead', lead_source: data.source, service: data.service, city: data.city, form_location: location.pathname });
-      if (typeof window.gtag === 'function') window.gtag('event', 'generate_lead', { lead_source: data.source, service: data.service, city: data.city });
     }
     $('[data-again]', done).addEventListener('click', function () {
       ['firstName', 'lastName', 'email', 'phone', 'message'].forEach(function (n) { if (form.elements[n]) form.elements[n].value = ''; });
