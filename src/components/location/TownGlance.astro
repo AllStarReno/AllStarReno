@@ -1,0 +1,29 @@
+---
+// Hyper-local "at a glance" facts for a town (Census/ACS housing figures, water utility, permit office).
+// Data: src/data/hyperlocal.mjs. Facts only; no prices, ratings or project claims.
+import { ACS_NOTE } from '../../data/hyperlocal.mjs';
+interface Props { rows: [string, any][]; title: string; id: string }
+const { rows, title, id } = Astro.props;
+---
+{rows.length > 0 && (
+  <div class="hl-glance-wrap" aria-labelledby={id}>
+    <h3 id={id} class="hl-glance-h"><span class="ms" aria-hidden="true" data-i="map"></span>{title}</h3>
+    <dl class="hl-glance">
+      {rows.map(([k, v]) => <div><dt>{k}</dt><dd>{typeof v === 'object' ? <a href={v.href} rel="noopener" target="_blank">{v.text}</a> : v}</dd></div>)}
+    </dl>
+    <p class="hl-src">{ACS_NOTE} Water and permit details are from each utility’s and city’s public pages; confirm current rules with the office before you start.</p>
+  </div>
+)}
+<style is:global>
+.hl-glance-wrap{margin:1.25rem 0 1.25rem}
+.hl-glance-h{display:flex;gap:.4rem;align-items:center;font-size:1rem;font-weight:800;margin:0 0 .6rem;color:var(--text)}
+.hl-glance-h .ms{color:var(--amber)}
+.hl-glance{display:grid;grid-template-columns:1fr;gap:.5rem 1.25rem;margin:0}
+@media(min-width:600px){.hl-glance{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1000px){.hl-glance{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.hl-glance>div{border-top:1px solid var(--line,#e2e8f0);padding-top:.45rem;min-width:0}
+.hl-glance dt{font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.hl-glance dd{margin:.1rem 0 0;font-weight:700;color:var(--text);overflow-wrap:anywhere}
+.hl-glance dd a{text-decoration:underline;text-underline-offset:2px}
+.hl-src{font-size:.78rem;line-height:1.5;margin:.75rem 0 0;color:var(--muted)}
+</style>
