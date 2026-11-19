@@ -1453,6 +1453,15 @@
           "value": "public, max-age=3600"
         }
       ]
+    },
+    {
+      "source": "/((?!docs|_mintlify|mintlify-assets).*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+        }
+      ]
     }
   ],
   "functions": {
