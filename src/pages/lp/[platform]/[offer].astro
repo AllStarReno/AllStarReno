@@ -9,7 +9,8 @@ import { PLATFORMS, OFFERS, OFFER_REVIEW_TAGS } from '../../../data/landing-page
 import { reviewsFor } from '../../../data/reviews.mjs';
 import { SITE, BUSINESS } from '../../../data/business.mjs';
 export function getStaticPaths() {
-  return PLATFORMS.flatMap((p) => OFFERS.map((o) => ({ params: { platform: p.slug, offer: o.slug }, props: { p, o } })));
+  // /lp/microsoft/bathroom-remodel is a dedicated page (quiz landing). Keep the other 17 /lp routes here.
+  return PLATFORMS.flatMap((p) => OFFERS.filter((o) => !(p.slug === 'microsoft' && o.slug === 'bathroom-remodel')).map((o) => ({ params: { platform: p.slug, offer: o.slug }, props: { p, o } })));
 }
 const { p, o } = Astro.props;
 const meta = p.short;
