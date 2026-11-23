@@ -298,7 +298,7 @@ import Reviews from '../Reviews.astro';
 
     {CW && (
       <section class="wrap sp-sec" aria-labelledby="cost-h">
-        <div class="card">
+        <div class="card lp-local">
           <h2 class="sp-h2" id="cost-h" style="margin:0 0 .6rem">{CW.costH}</h2>
           <Fragment set:html={CW.costHtml} />
         </div>
@@ -322,7 +322,7 @@ import Reviews from '../Reviews.astro';
     )}
     {CW && (
       <section class="wrap sp-sec" aria-labelledby="pl-h">
-        <div class="card">
+        <div class="card lp-local">
           <h2 class="sp-h2" id="pl-h" style="margin:0 0 .6rem">{CW.linksH}</h2>
           <div class="lp-cols">{CW.links.map(([h, ls]) => <div><h3>{h}</h3><ul class="sp-svc-links">{ls.map(([href, t]) => <li><a href={href}>{t}</a></li>)}</ul></div>)}</div>
         </div>

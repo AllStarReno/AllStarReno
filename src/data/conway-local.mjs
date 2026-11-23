@@ -19,7 +19,7 @@ export const CONWAY = {
       + `<tr><th scope="row">Walk-in tub</th><td>A walk-in tub with a sealed door and seat, plus the surround and plumbing work it needs</td><td>$5,500–$11,000</td><td>Set in your written quote</td></tr>`
       + `<tr><th scope="row">Bathroom remodel</th><td>The wet area plus the flooring, vanity, fixtures and lighting in your scope</td><td>$6,500–$18,000</td><td>Set in your written quote</td></tr>`
       + `</tbody></table></div>`
-      + `<p>These ranges are estimates, not a quote. In Conway the price usually moves with four things: the tub or shower being replaced, what turns up behind the old walls (older supply lines or a soft subfloor are more likely in the roughly 19% of Conway homes built before 1980), any plumbing that has to move, and the finish level you choose. Your final price is confirmed in writing at the free in-home quote. Financing is available through Acorn Finance, HFS Financial and RenoFi. More detail: <a href="/blog/bathroom-remodeling-cost-guide">bathroom remodeling cost guide</a> and <a href="/services-pricing">pricing &amp; shower packages</a>.</p>`,
+      + `<p>These ranges are estimates, not a quote. In Conway the price usually moves with four things: the tub or shower being replaced, what turns up behind the old walls (older supply lines or a soft subfloor are more likely in the roughly 19% of Conway homes built before 1980), any plumbing that has to move, and the finish level you choose. Your final price is confirmed in writing at the free in-home quote. Financing is available through Acorn Finance, HFS Financial and RenoFi. More detail: <a style="text-decoration:underline;text-underline-offset:2px" href="/blog/bathroom-remodeling-cost-guide">bathroom remodeling cost guide</a> and <a style="text-decoration:underline;text-underline-offset:2px" href="/services-pricing">pricing &amp; shower packages</a>.</p>`,
     stepsH: 'Bathroom remodel timeline in Conway, step by step',
     steps: [
       ['Call or request a quote.', `Call ${P} or use the form, and tell us about the bathroom and who uses it.`],
@@ -57,7 +57,7 @@ export const CONWAY = {
       + `<li><strong>Backsplash.</strong> How much wall it covers and the material.</li>`
       + `<li><strong>Plumbing or electrical changes.</strong> Moving a sink or adding circuits adds work, and in Conway plumbing and electrical work each need their own permit.</li>`
       + `<li><strong>What is behind the old surfaces.</strong> Anything found once old counters or cabinets come off is reviewed with you in writing before work continues.</li>`
-      + `</ul><p>Financing is available through Acorn Finance, HFS Financial and RenoFi. Planning a bathroom too? Both can be covered in one in-home quote; see <a href="/bathroom-remodeling/conway">bathroom remodeling in Conway</a>.</p>`,
+      + `</ul><p>Financing is available through Acorn Finance, HFS Financial and RenoFi. Planning a bathroom too? Both can be covered in one in-home quote; see <a style="text-decoration:underline;text-underline-offset:2px" href="/bathroom-remodeling/conway">bathroom remodeling in Conway</a>.</p>`,
     stepsH: 'How a Conway kitchen remodel works',
     steps: [
       ['Call or request a quote.', `Call ${P} or use the form, and tell us what is not working in your kitchen.`],
